@@ -1,0 +1,28 @@
+{
+  "requirement_id": "DR-7.2",
+  "category_id": "7.2",
+  "required_documents": [
+    "- Dokumen Prosedur Tinjauan Manajemen K3LL / HSSE tertulis yang disahkan manajemen puncak.<br>- Laporan / Minutes of Meeting (MoM) Pelaksanaan Rapat Tinjauan Manajemen (RTM) K3LL / HSSE (Formulir Standard",
+    "misal: Form No. ABC-01",
+    "mencantumkan tanggal",
+    "agenda lengkap",
+    "daftar hadir bertandatangan",
+    "dan pengesahan Direktur).<br>- Daftar Tindak Lanjut / Action Plan Temuan Audit K3LL / HSSE (Tabel ringkasan/form tindak lanjut yang mencantumkan seluruh temuan audit",
+    "status penutupan",
+    "bukti verifikasi",
+    "PIC",
+    "dan target tanggal penyelesaian).<br>- Evidence Penutupan Temuan Audit K3LL / HSSE (Foto",
+    "memo",
+    "atau dokumen pendukung yang membuktikan status penutupan temuan)\n."
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

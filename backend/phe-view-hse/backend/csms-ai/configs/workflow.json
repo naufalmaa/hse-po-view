@@ -1,0 +1,11 @@
+{
+  "type": "sequential",
+  "steps": [
+    "ingestion",
+    "extraction",
+    "validation",
+    "scoring",
+    "consensus",
+    "reviewer_summary"
+  ]
+}

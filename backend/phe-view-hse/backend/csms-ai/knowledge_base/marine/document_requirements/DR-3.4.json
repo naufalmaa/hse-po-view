@@ -1,0 +1,37 @@
+{
+  "requirement_id": "DR-3.4",
+  "category_id": "3.4",
+  "required_documents": [
+    "- Matriks Analisis Kebutuhan Pelatihan (TNA/Training Need Analysis) formal khusus untuk Awak Kapal (Vessel Crew) (K3LL + Teknis): memuat nama crew",
+    "jabatan",
+    "jenis sertifikasi/pelatihan wajib (e.g.",
+    "BST",
+    "AFF",
+    "MFA",
+    "GMDSS",
+    "COC/COP sesuai Safe Manning)",
+    "target tanggal",
+    "status validitas",
+    "dan % compliance.<br>- Sertifikat Pelatihan K3LL formal per individu awak kapal (e.g.",
+    "BST",
+    "AFF",
+    "MFA) yang diterbitkan oleh lembaga resmi terakreditasi/pemerintah (bukan briefing internal/sosialisasi).<br>- Sertifikat Pelatihan/Keahlian Teknis (COC/COP",
+    "GMDSS",
+    "SIKA",
+    "Rigger",
+    "Operator) formal per individu awak kapal sesuai persyaratan jabatan dan regulasi maritim (STCW)\n.<br>- Sertifikat Medical Check-Up (MCU) pelaut yang sah dan masih berlaku (maksimal 1 tahun masa berlaku sejak penerbitan)\n.<br>- Profil Kompetensi Individu (Competency Profile / Form Evaluasi Gap Kompetensi): memuat gap assessment kualifikasi aktual individu vs persyaratan standar jabatan maritim yang disetujui oleh manajemen dan pekerja\n.<br>- Bukti rencana & realisasi tindak lanjut atas gap kompetensi (e.g.",
+    "surat pendaftaran diklat",
+    "bukti keikutsertaan refreshment training",
+    "realisasi sertifikasi ulang)\n.<br>- Sertifikat pengembangan kompetensi sukarela/di luar TNA (sebagai syarat tambahan Skor 10)."
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

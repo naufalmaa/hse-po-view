@@ -1,0 +1,14 @@
+{
+  "riskCreated": "Assessment risiko berhasil dibuat",
+  "riskCreateFailed": "Gagal membuat assessment risiko",
+  "riskDeleted": "Assessment risiko berhasil dihapus",
+  "riskDeleteFailed": "Gagal menghapus assessment risiko",
+  "riskNotFound": "Assessment risiko tidak ditemukan",
+  "riskUpdated": "Assessment risiko berhasil diperbarui",
+  "riskUpdateFailed": "Gagal memperbarui assessment risiko",
+  "risksListed": "Daftar assessment risiko berhasil diambil",
+  "riskRetrieved": "Detail assessment risiko berhasil diambil",
+  "unauthorized": "Tidak diotorisasi",
+  "insufficientPermission": "Hanya kontraktor yang dapat membuat assessment risiko",
+  "filesDeleted": "File berhasil dihapus"
+}

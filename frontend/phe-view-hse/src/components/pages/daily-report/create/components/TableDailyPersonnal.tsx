@@ -1,0 +1,127 @@
+// import { Button } from "@/components/ui/button";
+import { DataTable, useDataTable } from "@/components/custom/table";
+import React, { useCallback, useEffect, useMemo } from "react";
+// import { CiEdit, CiTrash } from "react-icons/ci";
+// import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+// import { FiUserPlus } from "react-icons/fi";
+// import FormOverstayPersonnel from "./FormOverstayPersonnel";
+import { createRowNumberColumn } from "@/components/custom/table/data-table";
+
+type Props = {
+  data: any[],
+  onDataUpdated: (data: Record<any, any>[]) => void,
+  tableComponent: React.ReactNode,
+}
+
+const TableDailyPersonnal = ({ data, onDataUpdated, tableComponent }: Props) => {
+  const [tableData, setTableData] = React.useState(data?.filter((item: any) => Number(item?.dob) >= 21) || []);
+  const [createModalOpen, setCreateModalOpen] = React.useState(false);
+
+  useEffect(() => {
+    setTableData(data?.filter((item: any) => Number(item?.dob) >= 21) || []);
+  }, [data]);
+
+  const onEditClicked = useCallback((item: any, index: number) => {
+    const newData = tableData.map((data, i) => i === index ? item : data);
+    setTableData(newData);
+    onDataUpdated(newData);
+  }, [tableData]);
+
+  const onDeleteClicked = useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>, index: number) => {
+    event.preventDefault();
+    const newData = tableData.filter((_, i) => i !== index);
+
+    setTableData(newData);
+    onDataUpdated(newData);
+  }, [tableData, onDataUpdated]);
+
+  const onCreateClicked = (item: any) => {
+    const newData = [...tableData, item];
+
+    setTableData(newData);
+    onDataUpdated(newData);
+    setCreateModalOpen(false);
+  }
+
+  const columns = useMemo(() => [
+    createRowNumberColumn({ accessorKey: "rowNum", id: "rowNum" }),
+    {
+      accessorKey: "employeeName",
+      header: "NAMA",
+      enableSorting: true,
+      cell: ({ row }: any) => row.original.employeeName || row.original.name || "-",
+    },
+    {
+      accessorKey: "subContractorName",
+      header: "PERUSAHAAN",
+      enableSorting: true,
+      cell: ({ row }: any) => row.original.subContractorName || row.original.company || "-",
+    },
+    {
+      accessorKey: "dob",
+      header: "DOB",
+      enableSorting: true,
+    },
+    // {
+    //   accessorKey: "action",
+    //   header: "",
+    //   enableSorting: false,
+    //   size: 40,
+    //   cell: ({ row }: any) => {
+    //     const [editModalOpen, setEditModalOpen] = React.useState(false);
+
+    //     return <div className={"flex flex-row gap-1"}>
+    //       <Popover open={editModalOpen} onOpenChange={setEditModalOpen}>
+    //         <PopoverTrigger asChild>
+    //           <Button size={"icon"} variant={"outline"} className={"w-7 h-7 text-primary"} ><CiEdit /></Button>
+    //         </PopoverTrigger>
+    //         <PopoverContent className="w-80">
+    //           <FormOverstayPersonnel onSubmitClicked={(item: any) => onEditClicked(item, row.index)}
+    //             title={"Edit Participant"}
+    //             defaultValues={{ name: row?.original.name, company: row?.original.company, dob: row?.original.dob }} />
+    //         </PopoverContent>
+    //       </Popover>
+    //       <Button size={"icon"} variant={"outline"} className={"w-7 h-7 text-destructive"}
+    //         onClick={(event: React.MouseEvent<HTMLButtonElement>) => onDeleteClicked(event, row.index)}><CiTrash /></Button>
+    //     </div>
+    //   }
+    // },
+  ], [onEditClicked, onDeleteClicked]);
+
+  const { table } = useDataTable({
+    data: tableData || [],
+    columns,
+    pageCount: -1,
+    initialState: {
+      columnPinning: { left: ["rowNum"], right: ["action"] },
+      pagination: { pageIndex: 0, pageSize: 10 }, // Convert 1-based to 0-based
+    },
+    manualSorting: false,
+    manualPagination: false,
+    manualFiltering: false,
+  });
+
+  return (
+    <div className={"mt-2"}>
+      <DataTable
+        table={table}
+        totalRowCount={tableData?.length ?? 0}
+      >
+        <div>
+          {tableComponent}
+          {/* <Popover open={createModalOpen} onOpenChange={setCreateModalOpen}>
+            <PopoverTrigger asChild>
+              <Button variant={"outline"}><FiUserPlus /> Add Personnel</Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-80">
+              <FormOverstayPersonnel onSubmitClicked={onCreateClicked}
+                title={"Add Participant"}
+                defaultValues={{ name: "", company: "", dob: "" }} />
+            </PopoverContent>
+          </Popover> */}
+        </div>
+      </DataTable>
+    </div>
+  )
+}
+export default TableDailyPersonnal

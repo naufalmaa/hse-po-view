@@ -1,0 +1,15 @@
+{
+  "validator_id": "section_check",
+  "description": "Capabilities for section_check",
+  "input_fields": [
+    "document_content"
+  ],
+  "output_fields": [
+    "is_valid",
+    "confidence",
+    "reasoning"
+  ],
+  "pass_condition": {
+    "is_valid": true
+  }
+}

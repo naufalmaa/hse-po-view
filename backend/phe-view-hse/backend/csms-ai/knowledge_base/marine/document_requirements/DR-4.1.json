@@ -1,0 +1,21 @@
+{
+  "requirement_id": "DR-4.1",
+  "category_id": "4.1",
+  "required_documents": [
+    "Dokumen Penilaian Risiko Induk (HIRADC/HIRA/Risk Register) beserta Prosedur Identifikasi Bahaya dan Penilaian Risiko",
+    "didukung oleh bukti sosialisasi formal (Daftar Hadir)",
+    "Prosedur Kerja Aman terkait risiko tinggi",
+    "bukti pengawasan lapangan (Laporan Inspeksi harian/mingguan)",
+    "serta dokumen Job Safety Analysis (JSA) bulanan proyek berjalan."
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

@@ -1,0 +1,5 @@
+{
+  "agent_id": "appeal_agent",
+  "name": "Appeal Agent",
+  "type": "model-agnostic"
+}

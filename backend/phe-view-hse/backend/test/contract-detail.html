@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contract Detail</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --background: #f8fafc;
+            --foreground: #0f172a;
+            --card: #ffffff;
+            --card-foreground: #0f172a;
+            --primary: #0ea5e9;
+            --primary-foreground: #f8fafc;
+            --border: #e2e8f0;
+            --radius: 0.5rem;
+        }
+        
+        body {
+            background-color: var(--background);
+            color: var(--foreground);
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .card {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        /* Removed the hover effect that was causing the card to move */
+        .card:hover {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            /* Removed transform: translateY(-2px); which was causing the movement */
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+        }
+        
+        .btn-primary:hover {
+            background-color: #0284c7;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border);
+            color: var(--foreground);
+        }
+        
+        .btn-outline:hover {
+            background-color: #f1f5f9;
+        }
+        
+        .input, .select {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background-color: var(--card);
+            transition: border-color 0.2s ease;
+        }
+        
+        .input:focus, .select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+        }
+        
+        /* Line clamp utility */
+        .line-clamp-2 {
+            display: -webkit-box;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        /* Truncate utility */
+        .truncate {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        /* Fixed positioning for modals to prevent movement */
+        .modal-card {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+        }
+        
+        /* Sidebar navigation styles */
+        .sidebar-nav button {
+            transition: all 0.2s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="max-w-8xl mx-auto py-6 px-4 sm:px-6">
+        <div class="mb-6">
+            <button onclick="backToMain()" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i>
+                Back to Dashboard
+            </button>
+        </div>
+        
+        <div class="card">
+            <div class="p-6">
+                <div class="mb-4">
+                    <h3 class="text-lg font-semibold" id="contractTitleHeader"></h3>
+                    <p class="text-sm text-gray-600">Contract ID: <span id="contractIdDisplay"></span></p>
+                </div>
+
+                <div id="contractInfo" class="mb-6 p-4 bg-gray-50 rounded-lg hidden">
+                    <h4 class="font-semibold text-md mb-2">Contract Information</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-sm text-gray-600">Tanggal Mulai Kontrak</p>
+                            <p class="font-medium" id="contractStartDate"></p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-600">Tanggal Akhir Kontrak</p>
+                            <p class="font-medium" id="contractEndDate"></p>
+                        </div>
+                        <div class="hidden">
+                            <p class="text-sm text-gray-600">Catatan Kontrak</p>
+                            <p class="font-medium" id="contractNote"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="listResult" class="hidden">
+                    <!-- Result will be displayed here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3000/api/public/csms';
+        let currentContractId = null;
+
+        // Get contract ID from URL parameters and fetch title from API
+        window.addEventListener('load', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const contractId = urlParams.get('id');
+            
+            if (contractId) {
+                showContractDetail(contractId, '');
+            } else {
+                // If no parameters, redirect to dashboard
+                window.location.href = 'contract-dashboard.html';
+            }
+        });
+
+        function showContractDetail(contractId, contractTitle) {
+            // Set contract info
+            currentContractId = contractId;
+            document.getElementById('contractIdDisplay').textContent = contractId;
+            
+            // Load folders for this contract (title will be set from API response)
+            listContractFolders();
+        }
+
+        function backToMain() {
+            // Redirect to main dashboard
+            window.location.href = 'contract-dashboard.html';
+        }
+
+        async function listContractFolders() {
+            if (!currentContractId) {
+                showResult('listResult', 'No contract selected', 'error');
+                return;
+            }
+
+            showResult('listResult', 'Loading contract folders...', 'info');
+            
+            try {
+                const response = await fetch(`${API_BASE}/contract-folders?contractId=${encodeURIComponent(currentContractId)}`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    displayFolders(result.data, result.contract);
+                } else {
+                    showResult('listResult', `Error: ${result.message}`, 'error');
+                }
+            } catch (error) {
+                console.error('List folders error:', error);
+                showResult('listResult', `Error: ${error.message}`, 'error');
+            }
+        }
+
+        // Update completion status for all assessment folders in a contract
+        async function updateAllAssessmentFoldersCompletionStatus() {
+            if (!currentContractId) {
+                return;
+            }
+
+            try {
+                // Call the backend API to update completion status for all assessment folders
+                const response = await fetch(`${API_BASE}/update-all-folder-completion-status`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        contractId: currentContractId
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (!result.success) {
+                    console.error('Failed to update completion status:', result.message);
+                }
+                
+                // Refresh the folder list to show updated completion status
+                await listContractFolders();
+            } catch (error) {
+                console.error('Update completion status error:', error);
+            }
+        }
+
+        function displayFolders(folders, contract) {
+            // Store contract data globally for later use
+            window.currentContractData = contract;
+            
+            // Display contract information
+            if (contract) {
+                document.getElementById('contractInfo').classList.remove('hidden');
+                
+                // Format and display dates
+                if (contract.startDate) {
+                    document.getElementById('contractStartDate').textContent = 
+                        new Date(contract.startDate).toLocaleDateString();
+                }
+                
+                if (contract.endDate) {
+                    document.getElementById('contractEndDate').textContent = 
+                        new Date(contract.endDate).toLocaleDateString();
+                }
+                
+                // Display other contract information
+                if (contract.title) {
+                    // Update the header with the contract title
+                    document.getElementById('contractTitleHeader').textContent = contract.title;
+                }
+                
+                // Display contract note if available
+                if (contract.note) {
+                    const noteContainer = document.getElementById('contractNote');
+                    if (noteContainer) {
+                        noteContainer.textContent = contract.note;
+                        noteContainer.closest('div').classList.remove('hidden');
+                    }
+                }
+                
+                // Display final assessment date if available
+                if (contract.finalAssessmentDate) {
+                    const finalAssessmentContainer = document.getElementById('contractFinalAssessmentDate');
+                    if (finalAssessmentContainer) {
+                        finalAssessmentContainer.textContent = 
+                            new Date(contract.finalAssessmentDate).toLocaleDateString();
+                        finalAssessmentContainer.closest('div').classList.remove('hidden');
+                    }
+                }
+            }
+            
+            const container = document.getElementById('listResult');
+            container.classList.remove('hidden');
+            
+            if (folders.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8">
+                        <div class="text-gray-500">No folders found for this contract</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Group folders by semester (folders are already in tree structure from backend)
+            const semesterGroups = groupFoldersBySemester(folders, contract);
+            
+            // Store semester groups globally for access by other functions
+            window.semesterGroups = semesterGroups;
+            
+            // Generate tabs HTML
+            let tabsHtml = '<div class="mb-4">';
+            tabsHtml += '<h3 class="text-lg font-semibold">Contract Assessments</h3>';
+            tabsHtml += '<div class="mt-4">';
+            tabsHtml += '<button onclick="expandAllFolders()" class="btn btn-outline mr-2">';
+            tabsHtml += '<i class="fas fa-expand mr-1"></i> Expand All';
+            tabsHtml += '</button>';
+            tabsHtml += '<button onclick="collapseAllFolders()" class="btn btn-outline mr-2">';
+            tabsHtml += '<i class="fas fa-compress mr-1"></i> Collapse All';
+            tabsHtml += '</div>';
+            tabsHtml += '</div>';
+            
+            // Create sidebar navigation instead of horizontal tabs
+            tabsHtml += '<div class="flex flex-col md:flex-row gap-6">';
+            
+            // Sidebar navigation
+            tabsHtml += '<div class="md:w-1/5">';
+            tabsHtml += '<div class="card p-4">';
+            tabsHtml += '<nav class="space-y-2" aria-label="Sidebar">';
+            
+            semesterGroups.forEach((group, index) => {
+                const isActive = index === 0 ? 'bg-indigo-50 text-indigo-700 border-indigo-500' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900 border-transparent';
+                const isLocked = group.isLocked ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer';
+                const tabIndexAttr = group.isLocked ? '' : `onclick="switchTab(${index})"`;
+                tabsHtml += `<button id="tab-${index}" class="w-full text-left px-3 py-2 text-sm font-medium border-l-4 ${isActive} ${isLocked}" ${tabIndexAttr}>`;
+                tabsHtml += group.title;
+                if (group.isLocked) {
+                    tabsHtml += ' <i class="fas fa-lock text-gray-400 ml-1"></i>';
+                }
+                tabsHtml += '</button>';
+            });
+            
+            tabsHtml += '</nav>';
+            tabsHtml += '</div>';
+            tabsHtml += '</div>';
+            
+            // Main content area
+            tabsHtml += '<div class="md:w-4/5">';
+            tabsHtml += '<div class="card overflow-hidden">';
+            tabsHtml += '<div class="overflow-x-auto">';
+            
+            semesterGroups.forEach((group, index) => {
+                const isActive = index === 0 ? '' : 'hidden';
+                tabsHtml += `<div id="tab-content-${index}" class="${isActive}">`;
+                tabsHtml += '<table class="min-w-full divide-y divide-gray-200">';
+                tabsHtml += '<thead class="bg-gray-50">';
+                tabsHtml += '<tr>';
+                tabsHtml += '<th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>';
+                tabsHtml += '<th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Type</th>';
+                tabsHtml += '<th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Updated At</th>';
+                tabsHtml += '<th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>';
+                tabsHtml += '</tr>';
+                tabsHtml += '</thead>';
+                tabsHtml += '<tbody class="divide-y divide-gray-200" id="folderTreeContainer">';
+                
+                // Render the folder tree for this semester (already in tree structure from backend)
+                tabsHtml += renderFolderTree(group.folders, 0);
+                
+                tabsHtml += '</tbody>';
+                tabsHtml += '</table>';
+                tabsHtml += '</div>';
+            });
+            
+            tabsHtml += '</div>';
+            tabsHtml += '</div>';
+            tabsHtml += '</div>';
+            
+            tabsHtml += '</div>'; // Close flex container
+            
+            container.innerHTML = tabsHtml;
+        }
+
+        // Group folders by semester based on contract dates
+        function groupFoldersBySemester(folders, contract) {
+            // If we don't have contract data, return all folders in one group
+            if (!contract || !contract.startDate) {
+                return [{
+                    title: 'All Assessments',
+                    folders: folders,
+                    isLocked: false
+                }];
+            }
+            
+            // Parse contract start date
+            const startDate = new Date(contract.startDate);
+            
+            // Create semester groups based on ongoing assessment dates
+            const semesterGroups = [];
+            
+            // Add groups for ongoing assessment dates (only PB folders)
+            if (contract.nearestOngoingAssessmentDate && Array.isArray(contract.nearestOngoingAssessmentDate)) {
+                contract.nearestOngoingAssessmentDate.forEach((date, index) => {
+                    const assessmentDate = new Date(date);
+                    
+                    // Calculate the date 6 months after contract start date for title purposes
+                    const sixMonthsAfterStart = new Date(startDate);
+                    sixMonthsAfterStart.setMonth(sixMonthsAfterStart.getMonth() + 6);
+                    const semesterTitle = getSemesterTitle(assessmentDate, sixMonthsAfterStart);
+                    
+                    // Find PB folders that belong to this semester
+                    const semesterFolders = folders.filter(folder => {
+                        if (folder.name.endsWith(' - PB')) {
+                            // Extract date from folder name
+                            const folderDateStr = folder.name.substring(0, 10);
+                            const [day, month, year] = folderDateStr.split('-');
+                            const folderDate = new Date(year, month - 1, day);
+                            
+                            // Check if folder date matches the semester
+                            return isSameSemester(folderDate, assessmentDate);
+                        }
+                        return false;
+                    });
+                    
+                    // Determine if this semester should be locked
+                    // First semester is never locked, subsequent semesters are locked unless previous semester is complete
+                    let isLocked = false;
+                    if (index > 0) {
+                        // Check if the previous semester is complete
+                        const previousSemester = semesterGroups[index - 1];
+                        isLocked = !isSemesterComplete(previousSemester.folders);
+                    }
+                    
+                    if (semesterFolders.length > 0 || index === 0) { // Always show first semester
+                        semesterGroups.push({
+                            title: semesterTitle,
+                            folders: semesterFolders,
+                            isLocked: isLocked
+                        });
+                    }
+                });
+            }
+            
+            // Add group for final assessment if it exists (only PA folders)
+            if (contract.finalAssessmentDate) {
+                const finalDate = new Date(contract.finalAssessmentDate);
+                const finalTitle = `PENILAIAN AKHIR ${finalDate.getFullYear()}`;
+                
+                // Find PA folders that belong to final assessment
+                const finalFolders = folders.filter(folder => {
+                    return folder.name.endsWith(' - PA');
+                });
+                
+                // Check if final assessment should be locked (if previous semester is not complete)
+                const isLocked = semesterGroups.length > 0 ? 
+                    !isSemesterComplete(semesterGroups[semesterGroups.length - 1].folders) : 
+                    false;
+                
+                if (finalFolders.length > 0) {
+                    semesterGroups.push({
+                        title: finalTitle,
+                        folders: finalFolders,
+                        isLocked: isLocked
+                    });
+                }
+            }
+            
+            // If no groups were created, put all folders in one group
+            if (semesterGroups.length === 0) {
+                return [{
+                    title: 'All Assessments',
+                    folders: folders,
+                    isLocked: false
+                }];
+            }
+            
+            return semesterGroups;
+        }
+
+        // Get semester title based on date
+        function getSemesterTitle(assessmentDate, sixMonthsAfterStartDate) {
+            const year = assessmentDate.getFullYear();
+            const month = assessmentDate.getMonth();
+            
+            // Semester I: January - June
+            // Semester II: July - December
+            if (month < 6) {
+                return `PENILAIAN BERJALAN SEMESTER I ${year}`;
+            } else {
+                return `PENILAIAN BERJALAN SEMESTER II ${year}`;
+            }
+        }
+
+        // Check if two dates are in the same semester
+        function isSameSemester(date1, date2) {
+            return date1.getFullYear() === date2.getFullYear() &&
+                   Math.floor(date1.getMonth() / 6) === Math.floor(date2.getMonth() / 6);
+        }
+
+        // Format date for comparison (DD-MM-YYYY)
+        function formatDateForComparison(date) {
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}-${month}-${year}`;
+        }
+
+        // Check if a semester is complete (all PB folders have at least one file in children of numbered K3LL folders)
+        function isSemesterComplete(semesterFolders) {
+            // For each PB folder in this semester, check if it's marked as complete
+            for (const folder of semesterFolders) {
+                if (folder.name.endsWith(' - PB')) {
+                    // Use the isComplete property from the folder data
+                    // If isComplete is null or undefined, default to false
+                    if (!(folder.isComplete === true)) {
+                        return false;
+                    }
+                }
+            }
+            
+            return true; // All folders in this semester are complete
+        }
+
+        // Switch between tabs
+        function switchTab(tabIndex) {
+            // Store semester groups globally when displaying folders
+            if (!window.semesterGroups) {
+                return; // No semester groups available
+            }
+            
+            // Check if the tab is locked
+            if (window.semesterGroups[tabIndex] && window.semesterGroups[tabIndex].isLocked) {
+                return; // Don't switch to locked tabs
+            }
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('[id^="tab-"]').forEach(tab => {
+                tab.classList.remove('bg-indigo-50', 'text-indigo-700', 'border-indigo-500');
+                tab.classList.add('text-gray-600', 'hover:bg-gray-50', 'hover:text-gray-900', 'border-transparent');
+            });
+            
+            // Add active class to selected tab
+            const selectedTab = document.getElementById(`tab-${tabIndex}`);
+            if (selectedTab) {
+                selectedTab.classList.remove('text-gray-600', 'hover:bg-gray-50', 'hover:text-gray-900', 'border-transparent');
+                selectedTab.classList.add('bg-indigo-50', 'text-indigo-700', 'border-indigo-500');
+            }
+            
+            // Hide all tab content
+            document.querySelectorAll('[id^="tab-content-"]').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Show selected tab content
+            const contentElement = document.getElementById(`tab-content-${tabIndex}`);
+            if (contentElement) {
+                contentElement.classList.remove('hidden');
+            }
+        }
+
+        // Render folder tree recursively (folders are already in tree structure from backend)
+        function renderFolderTree(nodes, level) {
+            let html = '';
+            
+            nodes.forEach(node => {
+                const isFolder = node.fileType === 'folder';
+                const hasChildren = node.children && node.children.length > 0;
+                const indent = level * 20;
+                
+                // Check if the parent tab is locked
+                const isTabLocked = isCurrentTabLocked();
+                
+                // Add a class to disable folder rows when tab is locked
+                const rowClass = isTabLocked ? 'folder-row cursor-not-allowed opacity-50' : 'folder-row';
+                
+                // Prevent all interactions with the row when tab is locked
+                const rowAttributes = isTabLocked ? 'style="pointer-events: none;"' : '';
+                
+                html += `
+                    <tr class="${rowClass}" data-folder-id="${node.id}" data-level="${level}" ${rowAttributes}>
+                        <td class="px-4 py-3 whitespace-nowrap">
+                            <div class="flex items-center" style="margin-left: ${indent}px;">
+                                ${isFolder ? `
+                                    ${hasChildren ? `
+                                        <span class="folder-toggle cursor-pointer mr-2" data-folder-id="${node.id}" ${isTabLocked ? 'style="opacity: 0.5; cursor: not-allowed;"' : 'onclick="toggleFolder(\'' + node.id + '\')"'}>
+                                            <i class="fas fa-chevron-right text-xs"></i>
+                                        </span>
+                                    ` : `
+                                        <span class="folder-toggle mr-2" style="width: 16px; display: inline-block;"></span>
+                                    `}
+                                    <i class="fas fa-folder text-yellow-500 mr-2"></i>
+                                ` : `
+                                    <i class="fas fa-file text-blue-500 mr-2"></i>
+                                `}
+                                <span>
+                    ${node.name} 
+                    ${(node.fileType === 'folder' && (node.name.endsWith(' - PB') || node.name.endsWith(' - PA'))) ? (node.isComplete ? '<i class="fas fa-check-circle text-green-500 ml-2"></i>' : '<i class="fas fa-clock text-yellow-500 ml-2"></i>') : ''}
+                    ${isTabLocked ? '<i class="fas fa-lock text-gray-400 ml-2"></i>' : ''}
+                </span>
+                            </div>
+                        </td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
+                            ${node.fileType}
+                        </td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
+                            ${node.updatedAt ? new Date(node.updatedAt).toLocaleString() : 'N/A'}
+                        </td>
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium">
+                            <button onclick="showFolderOptions('${node.id}', '${node.name}', '${node.fileType}')" class="text-indigo-600 hover:text-indigo-900" ${isTabLocked ? 'disabled style="opacity: 0.5; cursor: not-allowed;"' : ''}>
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+                
+                // Render children if they exist (now collapsed by default)
+                if (hasChildren) {
+                    html += `
+                        <tr class="folder-children hidden" data-parent-id="${node.id}">
+                            <td colspan="4" class="p-0">
+                                <table class="w-full">
+                                    <tbody>
+                                        ${renderFolderTree(node.children, level + 1)}
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    `;
+                }
+            });
+            
+            return html;
+        }
+
+        // Check if the current tab is locked
+        function isCurrentTabLocked() {
+            // Get the currently active tab content
+            const activeTabContent = document.querySelector('[id^="tab-content-"]:not(.hidden)');
+            if (!activeTabContent) return false;
+            
+            // Extract tab index from the ID
+            const tabId = activeTabContent.id;
+            const tabIndex = parseInt(tabId.replace('tab-content-', ''));
+            
+            // Check if semester groups are available
+            if (!window.semesterGroups || !window.semesterGroups[tabIndex]) {
+                return false;
+            }
+            
+            // Return the locked status of the current tab
+            return window.semesterGroups[tabIndex].isLocked || false;
+        }
+
+        // Toggle folder visibility
+        function toggleFolder(folderId) {
+            // Check if the current tab is locked
+            if (isCurrentTabLocked()) {
+                return; // Don't toggle if tab is locked
+            }
+            
+            // Find the currently active tab content
+            const activeTabContent = document.querySelector('[id^="tab-content-"]:not(.hidden)');
+            if (!activeTabContent) return;
+            
+            const toggleElement = activeTabContent.querySelector(`.folder-toggle[data-folder-id="${folderId}"]`);
+            const childrenRow = activeTabContent.querySelector(`tr.folder-children[data-parent-id="${folderId}"]`);
+            
+            if (toggleElement && childrenRow) {
+                childrenRow.classList.toggle('hidden');
+                
+                // Update icon
+                const icon = toggleElement.querySelector('i');
+                if (childrenRow.classList.contains('hidden')) {
+                    icon.className = 'fas fa-chevron-right text-xs';
+                } else {
+                    icon.className = 'fas fa-chevron-down text-xs';
+                }
+            }
+        }
+
+        // Expand all folders
+        function expandAllFolders() {
+            // Find the currently active tab content
+            const activeTabContent = document.querySelector('[id^="tab-content-"]:not(.hidden)');
+            if (activeTabContent) {
+                activeTabContent.querySelectorAll('.folder-children').forEach(row => {
+                    row.classList.remove('hidden');
+                });
+                
+                // Update all icons in the active tab
+                activeTabContent.querySelectorAll('.folder-toggle i').forEach(icon => {
+                    icon.className = 'fas fa-chevron-down text-xs';
+                });
+            }
+        }
+
+        // Collapse all folders
+        function collapseAllFolders() {
+            // Find the currently active tab content
+            const activeTabContent = document.querySelector('[id^="tab-content-"]:not(.hidden)');
+            if (activeTabContent) {
+                activeTabContent.querySelectorAll('.folder-children').forEach(row => {
+                    row.classList.add('hidden');
+                });
+                
+                // Update all icons in the active tab
+                activeTabContent.querySelectorAll('.folder-toggle i').forEach(icon => {
+                    icon.className = 'fas fa-chevron-right text-xs';
+                });
+            }
+        }
+
+        function showResult(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            let bgColor = 'bg-blue-100 text-blue-800';
+            if (type === 'error') {
+                bgColor = 'bg-red-100 text-red-800';
+            } else if (type === 'success') {
+                bgColor = 'bg-green-100 text-green-800';
+            }
+            
+            element.innerHTML = `
+                <div class="p-4 rounded ${bgColor}">
+                    ${message}
+                </div>
+            `;
+            element.classList.remove('hidden');
+        }
+
+        // Check if a folder should be enabled based on completion status and contract dates
+        function isFolderEnabled(folderId, folderName) {
+            // If we don't have contract data, enable all folders
+            if (!window.currentContractData) {
+                return true;
+            }
+            
+            // For assessment folders (PB or PA), check if they should be enabled
+            const isPBFolder = folderName.endsWith(' - PB');
+            const isPAFolder = folderName.endsWith(' - PA');
+            
+            if (isPBFolder || isPAFolder) {
+                // Extract date from folder name (first 10 characters: DD-MM-YYYY)
+                const folderDateStr = folderName.substring(0, 10);
+                
+                // Convert DD-MM-YYYY to Date object
+                const [day, month, year] = folderDateStr.split('-');
+                const folderDate = new Date(year, month - 1, day); // Month is 0-indexed
+                
+                if (isPAFolder) {
+                    // PA folder is enabled if all PB folders are complete
+                    // For now, we'll just enable it
+                    return true;
+                } else {
+                    // PB folder is enabled if it's the first one or if the previous one is complete
+                    // For now, we'll just enable it
+                    return true;
+                }
+            }
+            
+            // For non-assessment folders, enable by default
+            return true;
+        }
+        
+        // Show options dialog for folder actions
+        function showFolderOptions(folderId, folderName, fileType) {
+            // Check if the current tab is locked
+            if (isCurrentTabLocked()) {
+                return; // Don't show options for locked tabs
+            }
+            
+            // Remove any existing modal
+            const existingModal = document.getElementById('folderOptionsModal');
+            if (existingModal) {
+                document.body.removeChild(existingModal);
+            }
+            
+            // Create a modal dialog for folder options
+            const modal = document.createElement('div');
+            modal.id = 'folderOptionsModal';
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 z-50';
+            
+            const modalContent = document.createElement('div');
+            modalContent.className = 'card absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-90vw max-w-md';
+            
+            // Check if folder is enabled
+            const isEnabled = isFolderEnabled(folderId, folderName);
+            
+            // Check if it's a file or folder
+            if (fileType === 'file') {
+                // For files, show View File, Edit File and Delete File options
+                modalContent.innerHTML = `
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h2 class="text-xl font-bold">
+                                <i class="fas fa-file text-blue-500"></i>
+                                File Options
+                            </h2>
+                            <p class="text-gray-600 text-sm mt-1">Select an action for file: ${folderName}${!isEnabled ? ' <i class="fas fa-lock text-gray-400 ml-2"></i> (Locked)' : ''}</p>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="viewFile('${folderId}')" class="btn btn-outline w-full flex items-center justify-start" ${!isEnabled ? 'disabled' : ''}>
+                                <i class="fas fa-eye mr-2"></i>
+                                View File
+                            </button>
+                            <button onclick="showEditFile('${folderId}', '${folderName}')" class="btn btn-outline w-full flex items-center justify-start" ${!isEnabled ? 'disabled' : ''}>
+                                <i class="fas fa-edit mr-2"></i>
+                                Edit File
+                            </button>
+                            <button onclick="confirmDeleteFile('${folderId}', '${folderName}')" class="btn btn-outline w-full flex items-center justify-start text-red-600 hover:text-red-700" ${!isEnabled ? 'disabled' : ''}>
+                                <i class="fas fa-trash mr-2"></i>
+                                Delete File
+                            </button>
+                            <button onclick="closeFolderOptions()" class="btn btn-outline w-full flex items-center justify-center mt-4">
+                                <i class="fas fa-times mr-2"></i>
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Check if it's an assessment folder (PB or PA)
+                const isAssessmentFolder = folderName.endsWith(' - PB') || folderName.endsWith(' - PA');
+                
+                // Get folder data to check if it's a depth 0 folder (no parentId)
+                const folderRow = document.querySelector(`tr[data-folder-id="${folderId}"]`);
+                const isDepth0Folder = folderRow && folderRow.dataset.level === "0";
+                
+                if (isAssessmentFolder) {
+                    // For assessment folders, show edit date option only (no folder name editing)
+                    // Hide delete option for depth 0 folders
+                    modalContent.innerHTML = `
+                        <div class="p-6">
+                            <div class="mb-4">
+                                <h2 class="text-xl font-bold">
+                                    <i class="fas fa-folder text-indigo-500"></i>
+                                    Folder Options
+                                </h2>
+                                <p class="text-gray-600 text-sm mt-1">${folderName}${!isEnabled ? ' <i class="fas fa-lock text-gray-400 ml-2"></i> (Locked)' : ''}</p>
+                            </div>
+                            <div class="space-y-3">
+                                <button onclick="triggerCreateFolder('${folderId}', '${folderName}')" class="btn btn-outline w-full flex items-center justify-start" ${!isEnabled ? 'disabled' : ''}>
+                                    <i class="fas fa-folder-plus mr-2"></i>
+                                    Create Subfolder
+                                </button>
+                                <button onclick="showEditFolderDescription('${folderId}', '${folderName}')" class="btn btn-outline w-full flex items-center justify-start" ${!isEnabled ? 'disabled' : ''}>
+                                    <i class="fas fa-edit mr-2"></i>
+                                    Edit Description
+                                </button>
+                                ${!isDepth0Folder ? `
+                                <button onclick="confirmDeleteFolder('${folderId}', '${folderName}')" class="btn btn-outline w-full flex items-center justify-start text-red-600 hover:text-red-700" ${!isEnabled ? 'disabled' : ''}>
+                                    <i class="fas fa-trash mr-2"></i>
+                                    Delete Folder
+                                </button>
+                                ` : ''}
+                                <button onclick="closeFolderOptions()" class="btn btn-outline w-full flex items-center justify-center mt-4">
+                                    <i class="fas fa-times mr-2"></i>
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // This is a folder, show folder options
+                    // Hide delete option for depth 0 folders
+                    modalContent.innerHTML = `
+                        <div class="p-6">
+                            <div class="mb-4">
+                                <h2 class="text-xl font-bold">
+                                    <i class="fas fa-folder text-indigo-500"></i>
+                                    Folder Options
+                                </h2>
+                                <p class="text-gray-600 text-sm mt-1">Select an action for folder: ${folderName}${!isEnabled ? ' <i class="fas fa-lock text-gray-400 ml-2"></i> (Locked)' : ''}</p>
+                            </div>
+                            <div class="space-y-3">
+                                <button onclick="checkFolderFile('${folderId}', '${folderName}')" class="btn btn-primary w-full flex items-center justify-start" ${!isEnabled ? 'disabled' : ''}>
+                                    <i class="fas fa-file-upload mr-2"></i>
+                                    Upload File
+                                </button>
+                                <button onclick="triggerCreateFolder('${folderId}', '${folderName}')" class="btn btn-outline w-full flex items-center justify-start" ${!isEnabled ? 'disabled' : ''}>
+                                    <i class="fas fa-folder-plus mr-2"></i>
+                                    Create Subfolder
+                                </button>
+                                <button onclick="showEditFolderNameAndDescription('${folderId}', '${folderName}')" class="btn btn-outline w-full flex items-center justify-start" ${!isEnabled ? 'disabled' : ''}>
+                                    <i class="fas fa-edit mr-2"></i>
+                                    Edit Folder
+                                </button>
+                                ${!isDepth0Folder ? `
+                                <button onclick="confirmDeleteFolder('${folderId}', '${folderName}')" class="btn btn-outline w-full flex items-center justify-start text-red-600 hover:text-red-700" ${!isEnabled ? 'disabled' : ''}>
+                                    <i class="fas fa-trash mr-2"></i>
+                                    Delete Folder
+                                </button>
+                                ` : ''}
+                                <button onclick="closeFolderOptions()" class="btn btn-outline w-full flex items-center justify-center mt-4">
+                                    <i class="fas fa-times mr-2"></i>
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+        }
+
+        // Close folder options dialog
+        function closeFolderOptions() {
+            const modal = document.getElementById('folderOptionsModal');
+            if (modal) {
+                document.body.removeChild(modal);
+            }
+        }
+
+        // Show edit folder description dialog
+        async function showEditFolderDescription(folderId, currentFolderName) {
+            // Close any existing modals
+            closeFolderOptions();
+            
+            // Remove any existing modal
+            const existingModal = document.getElementById('editFolderDescriptionModal');
+            if (existingModal) {
+                document.body.removeChild(existingModal);
+            }
+            
+            // Create a modal dialog for editing folder description
+            const modal = document.createElement('div');
+            modal.id = 'editFolderDescriptionModal';
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 z-50';
+            
+            const modalContent = document.createElement('div');
+            modalContent.className = 'card absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-90vw max-w-md';
+            
+            modalContent.innerHTML = `
+                <div class="p-6">
+                    <div class="mb-4">
+                        <h2 class="text-xl font-bold">
+                            <i class="fas fa-edit text-indigo-500"></i>
+                            Edit Folder Description
+                        </h2>
+                        <p class="text-gray-600 text-sm mt-1">Update description for folder: ${currentFolderName}</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Folder Description</label>
+                            <textarea id="editFolderDescription" class="input" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="flex justify-end gap-2 mt-6">
+                        <button onclick="closeEditFolderDescription()" class="btn btn-outline">
+                            <i class="fas fa-times mr-1"></i>
+                            Cancel
+                        </button>
+                        <button onclick="updateFolderDescription('${folderId}')" class="btn btn-primary">
+                            <i class="fas fa-save mr-1"></i>
+                            Update Description
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            
+            // Focus on the textarea field
+            setTimeout(() => {
+                document.getElementById('editFolderDescription').focus();
+            }, 100);
+        }
+
+        // Close edit folder description dialog
+        function closeEditFolderDescription() {
+            const modal = document.getElementById('editFolderDescriptionModal');
+            if (modal) {
+                document.body.removeChild(modal);
+            }
+        }
+
+        // Update folder description
+        async function updateFolderDescription(folderId) {
+            const folderDescription = document.getElementById('editFolderDescription').value;
+            
+            // Show loading message
+            showResult('listResult', 'Updating folder description...', 'info');
+            closeEditFolderDescription();
+            
+            try {
+                // Call the backend API to update folder description
+                const response = await fetch(`${API_BASE}/update-folder`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        folderId: folderId,
+                        description: folderDescription
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showResult('listResult', result.message, 'success');
+                    // Refresh the folder list and update completion status
+                    if (currentContractId) {
+                        await updateAllAssessmentFoldersCompletionStatus();
+                        listContractFolders();
+                    }
+                } else {
+                    showResult('listResult', `Error: ${result.message}`, 'error');
+                }
+            } catch (error) {
+                console.error('Update folder description error:', error);
+                showResult('listResult', `Error updating folder description: ${error.message}`, 'error');
+            }
+        }
+
+        // Show edit folder name and description dialog
+        async function showEditFolderNameAndDescription(folderId, currentFolderName) {
+            // Close any existing modals
+            closeFolderOptions();
+            
+            // Remove any existing modal
+            const existingModal = document.getElementById('editFolderNameAndDescriptionModal');
+            if (existingModal) {
+                document.body.removeChild(existingModal);
+            }
+            
+            // Create a modal dialog for editing folder name and description
+            const modal = document.createElement('div');
+            modal.id = 'editFolderNameAndDescriptionModal';
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 z-50';
+            
+            const modalContent = document.createElement('div');
+            modalContent.className = 'floating-card card absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-90vw max-w-md';
+            
+            modalContent.innerHTML = `
+                <div class="card-header">
+                    <h2 class="card-title">
+                        <i class="fas fa-edit text-indigo-500"></i>
+                        Edit Folder Name and Description
+                    </h2>
+                    <p class="card-description">Update name and description for folder: ${currentFolderName}</p>
+                </div>
+                <div class="card-content">
+                    <div class="grid grid-cols-1 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Folder Name *</label>
+                            <input type="text" id="editFolderName" value="${currentFolderName}" class="input">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Folder Description</label>
+                            <textarea id="editFolderDescription" class="input" rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button onclick="closeEditFolderNameAndDescription()" class="btn btn-outline mr-2">
+                        <i class="fas fa-times mr-1"></i>
+                        Cancel
+                    </button>
+                    <button onclick="updateFolderNameAndDescription('${folderId}')" class="btn btn-default">
+                        <i class="fas fa-save mr-1"></i>
+                        Update Folder
+                    </button>
+                </div>
+            `;
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            
+            // Focus on the input field
+            setTimeout(() => {
+                document.getElementById('editFolderName').focus();
+            }, 100);
+        }
+
+        // Close edit folder name and description dialog
+        function closeEditFolderNameAndDescription() {
+            const modal = document.getElementById('editFolderNameAndDescriptionModal');
+            if (modal) {
+                document.body.removeChild(modal);
+            }
+        }
+
+        // Update folder name and description
+        async function updateFolderNameAndDescription(folderId) {
+            const folderName = document.getElementById('editFolderName').value;
+            const folderDescription = document.getElementById('editFolderDescription').value;
+            
+            if (!folderName) {
+                alert('Please fill in the folder name');
+                return;
+            }
+            
+            // Show loading message
+            showResult('listResult', 'Updating folder name and description...', 'info');
+            closeEditFolderNameAndDescription();
+            
+            try {
+                // Call the backend API to update folder name and description
+                const response = await fetch(`${API_BASE}/update-folder`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        folderId: folderId,
+                        name: folderName,
+                        description: folderDescription
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showResult('listResult', result.message, 'success');
+                    // Refresh the folder list and update completion status
+                    if (currentContractId) {
+                        await updateAllAssessmentFoldersCompletionStatus();
+                        listContractFolders();
+                    }
+                } else {
+                    showResult('listResult', `Error: ${result.message}`, 'error');
+                }
+            } catch (error) {
+                console.error('Update folder name and description error:', error);
+                showResult('listResult', `Error updating folder name and description: ${error.message}`, 'error');
+            }
+        }
+
+        // Confirm folder deletion
+        function confirmDeleteFolder(folderId, folderName) {
+            // Close any existing modals
+            closeFolderOptions();
+            
+            // Remove any existing modal
+            const existingModal = document.getElementById('confirmDeleteFolderModal');
+            if (existingModal) {
+                document.body.removeChild(existingModal);
+            }
+            
+            // Create a modal dialog for confirming folder deletion
+            const modal = document.createElement('div');
+            modal.id = 'confirmDeleteFolderModal';
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 z-50';
+            
+            const modalContent = document.createElement('div');
+            modalContent.className = 'card absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-90vw max-w-md';
+            
+            modalContent.innerHTML = `
+                <div class="p-6">
+                    <div class="mb-4">
+                        <h2 class="text-xl font-bold">
+                            <i class="fas fa-trash text-red-500"></i>
+                            Confirm Folder Deletion
+                        </h2>
+                        <p class="text-gray-600 text-sm mt-1">Are you sure you want to delete folder: ${folderName}</p>
+                    </div>
+                    <div class="flex justify-end gap-2">
+                        <button onclick="closeConfirmDeleteFolder()" class="btn btn-outline">
+                            <i class="fas fa-times mr-1"></i>
+                            Cancel
+                        </button>
+                        <button onclick="deleteFolder('${folderId}')" class="btn btn-outline text-red-600 hover:text-red-700">
+                            <i class="fas fa-trash mr-1"></i>
+                            Delete Folder
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+        }
+
+        // Close confirm folder deletion dialog
+        function closeConfirmDeleteFolder() {
+            const modal = document.getElementById('confirmDeleteFolderModal');
+            if (modal) {
+                document.body.removeChild(modal);
+            }
+        }
+
+        // Delete folder
+        async function deleteFolder(folderId) {
+            // Show loading message
+            showResult('listResult', 'Deleting folder...', 'info');
+            closeConfirmDeleteFolder();
+            
+            try {
+                // Call the backend API to delete folder
+                const response = await fetch(`${API_BASE}/delete-folder?folderId=${encodeURIComponent(folderId)}`, {
+                    method: 'DELETE',
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showResult('listResult', result.message, 'success');
+                    // Refresh the folder list and update completion status
+                    if (currentContractId) {
+                        await updateAllAssessmentFoldersCompletionStatus();
+                        listContractFolders();
+                    }
+                } else {
+                    showResult('listResult', `Error: ${result.message}`, 'error');
+                }
+            } catch (error) {
+                console.error('Delete folder error:', error);
+                showResult('listResult', `Error deleting folder: ${error.message}`, 'error');
+            }
+        }
+
+        // Delete file
+        async function deleteFile(fileId) {
+            // Show loading message
+            showResult('listResult', 'Deleting file...', 'info');
+            closeConfirmDeleteFile();
+            
+            try {
+                // Call the backend API to delete file
+                const response = await fetch(`${API_BASE}/delete-file?fileId=${encodeURIComponent(fileId)}`, {
+                    method: 'DELETE',
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showResult('listResult', result.message, 'success');
+                    // Refresh the folder list and update completion status
+                    if (currentContractId) {
+                        // First update all assessment folders completion status
+                        await updateAllAssessmentFoldersCompletionStatus();
+                        // Then refresh the folder list
+                        await listContractFolders();
+                    }
+                } else {
+                    showResult('listResult', `Error: ${result.message}`, 'error');
+                }
+            } catch (error) {
+                console.error('Delete file error:', error);
+                showResult('listResult', `Error deleting file: ${error.message}`, 'error');
+            }
+        }
+
+        // Trigger folder creation
+        function triggerCreateFolder(parentFolderId, parentFolderName) {
+            // Close any existing modals
+            closeFolderOptions();
+            
+            // Remove any existing modal
+            const existingModal = document.getElementById('createFolderModal');
+            if (existingModal) {
+                document.body.removeChild(existingModal);
+            }
+            
+            // Create a modal dialog for creating a new folder
+            const modal = document.createElement('div');
+            modal.id = 'createFolderModal';
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 z-50';
+            
+            const modalContent = document.createElement('div');
+            modalContent.className = 'card absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-90vw max-w-md';
+            
+            modalContent.innerHTML = `
+                <div class="p-6">
+                    <div class="mb-4">
+                        <h2 class="text-xl font-bold">
+                            <i class="fas fa-folder-plus text-indigo-500"></i>
+                            Create New Folder
+                        </h2>
+                        <p class="text-gray-600 text-sm mt-1">Create a new folder under: ${parentFolderName}</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Folder Name *</label>
+                            <input type="text" id="newFolderName" class="input" placeholder="Enter folder name">
+                        </div>
+                    </div>
+                    <div class="flex justify-end gap-2 mt-6">
+                        <button onclick="closeCreateFolder()" class="btn btn-outline">
+                            <i class="fas fa-times mr-1"></i>
+                            Cancel
+                        </button>
+                        <button onclick="createFolder('${parentFolderId}')" class="btn btn-primary">
+                            <i class="fas fa-folder-plus mr-1"></i>
+                            Create Folder
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            
+            // Focus on the input field
+            setTimeout(() => {
+                document.getElementById('newFolderName').focus();
+            }, 100);
+        }
+
+        // Close folder creation dialog
+        function closeCreateFolder() {
+            const modal = document.getElementById('createFolderModal');
+            if (modal) {
+                document.body.removeChild(modal);
+            }
+        }
+
+        // Create folder
+        async function createFolder(parentFolderId) {
+            const folderName = document.getElementById('newFolderName').value;
+            
+            if (!folderName) {
+                alert('Please fill in the folder name');
+                return;
+            }
+            
+            // Show loading message
+            showResult('listResult', 'Creating folder...', 'info');
+            closeCreateFolder();
+            
+            try {
+                // Call the backend API to create folder
+                const response = await fetch(`${API_BASE}/create-subfolder`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        parentFolderId: parentFolderId,
+                        folderName: folderName
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showResult('listResult', result.message, 'success');
+                    // Refresh the folder list and update completion status
+                    if (currentContractId) {
+                        await updateAllAssessmentFoldersCompletionStatus();
+                        listContractFolders();
+                    }
+                } else {
+                    showResult('listResult', `Error: ${result.message}`, 'error');
+                }
+            } catch (error) {
+                console.error('Create folder error:', error);
+                showResult('listResult', `Error creating folder: ${error.message}`, 'error');
+            }
+        }
+
+        // Upload file to folder
+        function checkFolderFile(folderId, folderName) {
+            // Close any existing modals
+            closeFolderOptions();
+            
+            // Remove any existing modal
+            const existingModal = document.getElementById('checkFolderFileModal');
+            if (existingModal) {
+                document.body.removeChild(existingModal);
+            }
+            
+            // Create a modal dialog for checking folder file
+            const modal = document.createElement('div');
+            modal.id = 'checkFolderFileModal';
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 z-50';
+            
+            const modalContent = document.createElement('div');
+            modalContent.className = 'card absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-90vw max-w-md';
+            
+            modalContent.innerHTML = `
+                <div class="p-6">
+                    <div class="mb-4">
+                        <h2 class="text-xl font-bold">
+                            <i class="fas fa-file-upload text-indigo-500"></i>
+                            Upload File to Folder
+                        </h2>
+                        <p class="text-gray-600 text-sm mt-1">Upload a file to folder: ${folderName}</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1">File to Upload *</label>
+                            <input type="file" id="folderFile" class="input">
+                        </div>
+                    </div>
+                    <div class="flex justify-end gap-2 mt-6">
+                        <button onclick="closeCheckFolderFile()" class="btn btn-outline">
+                            <i class="fas fa-times mr-1"></i>
+                            Cancel
+                        </button>
+                        <button onclick="uploadFolderFile('${folderId}')" class="btn btn-primary">
+                            <i class="fas fa-upload mr-1"></i>
+                            Upload File
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            
+            // Focus on the file input field
+            setTimeout(() => {
+                document.getElementById('folderFile').focus();
+            }, 100);
+        }
+
+        // Close folder file check dialog
+        function closeCheckFolderFile() {
+            const modal = document.getElementById('checkFolderFileModal');
+            if (modal) {
+                document.body.removeChild(modal);
+            }
+        }
+
+        // Upload folder file
+        async function uploadFolderFile(folderId) {
+            const fileInput = document.getElementById('folderFile');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                alert('Please select a file to upload');
+                return;
+            }
+            
+            // Show loading message
+            showResult('listResult', 'Uploading file...', 'info');
+            closeCheckFolderFile();
+            
+            try {
+                // Create a FormData object to send the file
+                const formData = new FormData();
+                formData.append('folderId', folderId);
+                formData.append('file', file);
+
+                const response = await fetch(`${API_BASE}/upload-file-to-folder`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                // Check if the response is OK
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+                }
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showResult('listResult', result.message, 'success');
+                    // Refresh the folder list and update completion status
+                    if (currentContractId) {
+                        await updateAllAssessmentFoldersCompletionStatus();
+                        listContractFolders();
+                    }
+                } else {
+                    showResult('listResult', `Error: ${result.message}`, 'error');
+                }
+            } catch (error) {
+                console.error('Upload folder file error:', error);
+                // Provide more detailed error information
+                let errorMessage = 'Failed to upload file';
+                if (error instanceof TypeError && error.message === 'Failed to fetch') {
+                    errorMessage = 'Network error: Unable to connect to the server. Please check your internet connection and try again.';
+                } else {
+                    errorMessage = `Error uploading folder file: ${error.message}`;
+                }
+                showResult('listResult', errorMessage, 'error');
+            }
+        }
+
+        function showResult(elementId, message, type) {
+            const element = document.getElementById(elementId);
+            
+            const typeClasses = {
+                'success': 'bg-green-100 text-green-800',
+                'error': 'bg-red-100 text-red-800',
+                'info': 'bg-blue-100 text-blue-800'
+            };
+            
+            element.innerHTML = `
+                <div class="p-4 rounded-md ${typeClasses[type] || ''}">
+                    ${message}
+                </div>
+            `;
+        }
+
+        // Show edit folder name and description dialog
+        async function showEditFolderNameAndDescription(folderId, currentFolderName) {
+            // Close any existing modals
+            closeFolderOptions();
+            
+            // Remove any existing modal
+            const existingModal = document.getElementById('editFolderNameAndDescriptionModal');
+            if (existingModal) {
+                document.body.removeChild(existingModal);
+            }
+            
+            // Create a modal dialog for editing folder name and description
+            const modal = document.createElement('div');
+            modal.id = 'editFolderNameAndDescriptionModal';
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 z-50';
+            
+            const modalContent = document.createElement('div');
+            modalContent.className = 'card absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-90vw max-w-md';
+            
+            modalContent.innerHTML = `
+                <div class="p-6">
+                    <div class="mb-4">
+                        <h2 class="text-xl font-bold">
+                            <i class="fas fa-edit text-indigo-500"></i>
+                            Edit Folder Name and Description
+                        </h2>
+                        <p class="text-gray-600 text-sm mt-1">Update name and description for folder: ${currentFolderName}</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Folder Name *</label>
+                            <input type="text" id="editFolderName" value="${currentFolderName}" class="input">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Folder Description</label>
+                            <textarea id="editFolderDescription" class="input" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="flex justify-end gap-2 mt-6">
+                        <button onclick="closeEditFolderNameAndDescription()" class="btn btn-outline">
+                            <i class="fas fa-times mr-1"></i>
+                            Cancel
+                        </button>
+                        <button onclick="updateFolderNameAndDescription('${folderId}')" class="btn btn-primary">
+                            <i class="fas fa-save mr-1"></i>
+                            Update Folder
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            
+            // Focus on the input field
+            setTimeout(() => {
+                document.getElementById('editFolderName').focus();
+            }, 100);
+        }
+
+        // Close edit folder name and description dialog
+        function closeEditFolderNameAndDescription() {
+            const modal = document.getElementById('editFolderNameAndDescriptionModal');
+            if (modal) {
+                document.body.removeChild(modal);
+            }
+        }
+
+        // Close folder options dialog
+        function closeFolderOptions() {
+            const modal = document.getElementById('folderOptionsModal');
+            if (modal) {
+                document.body.removeChild(modal);
+            }
+        }
+
+        // Show edit file dialog
+        async function showEditFile(fileId, fileName) {
+            // Close any existing modals
+            closeFolderOptions();
+            
+            // Remove any existing modal
+            const existingModal = document.getElementById('editFileModal');
+            if (existingModal) {
+                document.body.removeChild(existingModal);
+            }
+            
+            // Create a modal dialog for editing file
+            const modal = document.createElement('div');
+            modal.id = 'editFileModal';
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 z-50';
+            
+            const modalContent = document.createElement('div');
+            modalContent.className = 'card absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-90vw max-w-md';
+            
+            modalContent.innerHTML = `
+                <div class="p-6">
+                    <div class="mb-4">
+                        <h2 class="text-xl font-bold">
+                            <i class="fas fa-edit text-blue-500"></i>
+                            Edit File
+                        </h2>
+                        <p class="text-gray-600 text-sm mt-1">Editing file: ${fileName}</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1">File Name *</label>
+                            <input type="text" id="editFileName" value="${fileName}" class="input">
+                        </div>
+                    </div>
+                    <div class="flex justify-end gap-2 mt-6">
+                        <button onclick="closeEditFile()" class="btn btn-outline">
+                            <i class="fas fa-times mr-1"></i>
+                            Cancel
+                        </button>
+                        <button onclick="updateFileName('${fileId}')" class="btn btn-primary">
+                            <i class="fas fa-save mr-1"></i>
+                            Update File
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            
+            // Focus on the input field
+            setTimeout(() => {
+                document.getElementById('editFileName').focus();
+            }, 100);
+        }
+
+        // Close edit file dialog
+        function closeEditFile() {
+            const modal = document.getElementById('editFileModal');
+            if (modal) {
+                document.body.removeChild(modal);
+            }
+        }
+
+        // Update file name
+        async function updateFileName(fileId) {
+            const fileName = document.getElementById('editFileName').value;
+            
+            if (!fileName) {
+                alert('Please fill in the file name');
+                return;
+            }
+            
+            // Show loading message
+            showResult('listResult', 'Updating file name...', 'info');
+            closeEditFile();
+            
+            try {
+                // Call the backend API to update file name
+                const response = await fetch(`${API_BASE}/update-folder`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        folderId: fileId,
+                        name: fileName
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showResult('listResult', result.message, 'success');
+                    // Refresh the folder list
+                    if (currentContractId) {
+                        listContractFolders();
+                    }
+                } else {
+                    showResult('listResult', `Error: ${result.message}`, 'error');
+                }
+            } catch (error) {
+                console.error('Update file name error:', error);
+                showResult('listResult', `Error updating file name: ${error.message}`, 'error');
+            }
+        }
+
+        // Confirm file deletion
+        function confirmDeleteFile(fileId, fileName) {
+            // Close any existing modals
+            closeFolderOptions();
+            
+            // Remove any existing modal
+            const existingModal = document.getElementById('confirmDeleteFileModal');
+            if (existingModal) {
+                document.body.removeChild(existingModal);
+            }
+            
+            // Create a modal dialog for confirming file deletion
+            const modal = document.createElement('div');
+            modal.id = 'confirmDeleteFileModal';
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 z-50';
+            
+            const modalContent = document.createElement('div');
+            modalContent.className = 'card absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-90vw max-w-md';
+            
+            modalContent.innerHTML = `
+                <div class="p-6">
+                    <div class="mb-4">
+                        <h2 class="text-xl font-bold">
+                            <i class="fas fa-trash text-red-500"></i>
+                            Confirm File Deletion
+                        </h2>
+                        <p class="text-gray-600 text-sm mt-1">Are you sure you want to delete file: ${fileName}</p>
+                    </div>
+                    <div class="flex justify-end gap-2">
+                        <button onclick="closeConfirmDeleteFile()" class="btn btn-outline">
+                            <i class="fas fa-times mr-1"></i>
+                            Cancel
+                        </button>
+                        <button onclick="deleteFile('${fileId}')" class="btn btn-outline text-red-600 hover:text-red-700">
+                            <i class="fas fa-trash mr-1"></i>
+                            Delete File
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+        }
+
+        // Close confirm file deletion dialog
+        function closeConfirmDeleteFile() {
+            const modal = document.getElementById('confirmDeleteFileModal');
+            if (modal) {
+                document.body.removeChild(modal);
+            }
+        }
+
+        // Delete file
+        async function deleteFile(fileId) {
+            // Show loading message
+            showResult('listResult', 'Deleting file...', 'info');
+            closeConfirmDeleteFile();
+            
+            try {
+                // Call the backend API to delete file
+                const response = await fetch(`${API_BASE}/delete-file?fileId=${encodeURIComponent(fileId)}`, {
+                    method: 'DELETE',
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showResult('listResult', result.message, 'success');
+                    // Refresh the folder list
+                    if (currentContractId) {
+                        listContractFolders();
+                    }
+                } else {
+                    showResult('listResult', `Error: ${result.message}`, 'error');
+                }
+            } catch (error) {
+                console.error('Delete file error:', error);
+                showResult('listResult', `Error deleting file: ${error.message}`, 'error');
+            }
+        }
+
+        // View file function to open file in new tab
+        async function viewFile(fileId) {
+            // Close any existing modals
+            closeFolderOptions();
+            
+            try {
+                // Show loading message
+                showResult('listResult', 'Loading file...', 'info');
+                
+                // Call the backend API to get file details
+                const response = await fetch(`${API_BASE}/file-details?folderId=${encodeURIComponent(fileId)}`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Open file in new tab
+                    window.open(result.data.url, '_blank');
+                    showResult('listResult', 'File opened in new tab', 'success');
+                } else {
+                    showResult('listResult', `Error: ${result.message}`, 'error');
+                }
+            } catch (error) {
+                console.error('View file error:', error);
+                showResult('listResult', `Error viewing file: ${error.message}`, 'error');
+            }
+        }
+    </script>
+</body>
+</html>

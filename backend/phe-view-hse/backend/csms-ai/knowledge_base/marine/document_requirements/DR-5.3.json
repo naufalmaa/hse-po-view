@@ -1,0 +1,21 @@
+{
+  "requirement_id": "DR-5.3",
+  "category_id": "5.3",
+  "required_documents": [
+    "- Prosedur Manajemen Perubahan (Management of Change / MOC) resmi yang disahkan oleh manajemen puncak.<br>- Formulir / Template Kontrol Perubahan kosong.<br>- Formulir MOC yang sudah diisi/diimplementasikan secara lengkap (mencakup perubahan prosedur",
+    "peralatan",
+    "dan personil/organisasi).<br>- Daftar Register MOC sebagai pemantauan seluruh perubahan.<br>- Dokumen Kajian Risiko Perubahan (seperti HIRADC",
+    "JSA",
+    "atau lembar kajian risiko yang menyatu dalam formulir MOC).<br>- Bukti sosialisasi/koordinasi perubahan (Daftar Hadir dan Foto Rapat)."
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

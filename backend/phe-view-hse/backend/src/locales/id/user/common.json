@@ -1,0 +1,20 @@
+{
+  "usersListed": "Daftar pengguna berhasil diambil",
+  "contractorVessel": {
+    "vesselAssigned": "Kapal berhasil ditetapkan ke kontraktor",
+    "vesselsAssigned": "Kapal-kapal berhasil ditetapkan ke kontraktor",
+    "vesselAssignFailed": "Gagal menetapkan kapal ke kontraktor",
+    "vesselRemoved": "Kapal berhasil dihapus dari kontraktor",
+    "vesselRemoveFailed": "Gagal menghapus kapal dari kontraktor",
+    "noContractorFound": "Tidak ada kontraktor yang ditemukan untuk kapal ini",
+    "vesselsListed": "Daftar kapal berhasil diambil",
+    "invalidRequest": "Permintaan tidak valid. Harap berikan vesselId atau vesselIds."
+  },
+  "dashboard": {
+    "metricsRetrieved": "Metrik proyek berhasil diambil",
+    "metricsRetrieveFailed": "Gagal mengambil metrik proyek"
+  },
+  "notification": {
+    "notificationsRetrieved": "Notifikasi berhasil diambil"
+  }
+}

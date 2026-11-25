@@ -1,0 +1,24 @@
+{
+  "requirement_id": "DR-5.2",
+  "category_id": "5.2",
+  "required_documents": [
+    "- Prosedur Tertulis Rencana Kerja & Program Kerja K3LL terkait Kehandalan Infrastruktur dan Peralatan (contoh: Manual Pemeliharaan",
+    "Program Pemeliharaan Lapangan/Kapal).<br>- Daftar Inventaris Peralatan Kerja Aktif Proyek (Listing Tools & Equipment Project) yang memuat tipe alat",
+    "nomor seri",
+    "status kelaikan",
+    "dan tanggal kedaluwarsa sertifikat pendukung.<br>- Dokumen Bukti Pelaksanaan Pemeliharaan Berkala (contoh: Laporan Pemeliharaan Bulanan Dek/Mesin/Peralatan Utama).<br>- Dokumen Bukti Kalibrasi & Sertifikasi Peralatan Kritis dari Pihak Ketiga Berwenang (contoh: Sertifikat Kalibrasi Gas Detector",
+    "Sertifikat Uji Layak Lifting Gears",
+    "Sertifikat Keselamatan/Kelas).<br>- Formulir Checklist Pemeriksaan Harian / Pre-Use Inspection yang terisi lengkap (contoh: Daily/Weekly Equipment Checklist",
+    "Pre-Use Inspection Form).<br>- Laporan Pemantauan Rutin / Evaluasi Keefektifan Program ITM dari Manajemen/Darat (contoh: Laporan Inspeksi Berkala / Vessel Inspection Report)."
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

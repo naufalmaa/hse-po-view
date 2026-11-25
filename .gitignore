@@ -1,0 +1,40 @@
+node_modules
+dist
+dist-ssr
+.vite
+.idea
+.DS_Store
+*.local
+.venv
+__pycache__
+
+# secrets / per-environment config (templates: *.example are committed)
+.env
+.env.*
+!.env.*.example
+!.env.example
+!.env.docker.example
+# daftar password hasil set_demo_passwords.mjs
+demo-credentials*.csv
+
+# uploads (prod + demo) and heavy generated data
+uploads
+uploads_demo
+docs/backup_data
+docs/safeview-demo
+docs/demo_data
+*.rar
+*.gz
+!docs/demo_data/synthetic_pheview_hse_server.sql.gz
+.legacy-git
+
+
+# heavy print-ready marketing PDFs (RGB versions stay)
+docs/*_CMYK.pdf
+!frontend/phe-view-hse/.env.demo
+
+# cypress artefacts
+frontend/phe-view-hse/cypress/reports
+frontend/phe-view-hse/cypress/videos
+frontend/phe-view-hse/cypress/screenshots
+uploads_test

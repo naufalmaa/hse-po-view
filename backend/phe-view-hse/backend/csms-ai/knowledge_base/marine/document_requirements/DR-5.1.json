@@ -1,0 +1,20 @@
+{
+  "requirement_id": "DR-5.1",
+  "category_id": "5.1",
+  "required_documents": [
+    "- Manual Operasi K3LL / Prosedur K3LL Terintegrasi yang melingkupi seluruh kegiatan operasional dan disahkan oleh Manajemen Puncak.<br>- Daftar Induk Dokumen K3LL (SOP & Instruksi Kerja) yang diperbarui secara berkala.<br>- Prosedur Pengendalian Dokumen & Prosedur Pembuatan",
+    "Perubahan",
+    "dan Pembatalan Dokumen (Siklus Kontrol Dokumen).<br>- Daftar Induk Dokumen Eksternal / Daftar Peraturan Perundangan K3LL yang menyandingkan prosedur kerja dengan undang-undang/regulasi nasional dan standar industri internasional yang relevan.<br>- Bukti Pemantauan Aktif / Reviu Berkala: Bukti pengisian formulir Reviu Informasi Terdokumentasi (reviu berkala maks. 3 tahun untuk risiko tinggi",
+    "5 tahun untuk operasional umum).<br>- Bukti Sosialisasi Prosedur: Lembar pernyataan pemahaman individu (Formulir Bukti Membaca dan Memahami) ATAU Daftar Hadir + Notulen Rapat sosialisasi kelompok lengkap dengan foto dokumentasi kegiatan ber-watermark waktu realtime (tanggal dan jam aktif).<br>- Bukti Penggunaan Prosedur di Lapangan: Formulir pengajuan perbaikan/perubahan dokumen (Document Improvement Note) yang ditandatangani."
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

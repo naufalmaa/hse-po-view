@@ -1,0 +1,17 @@
+node_modules
+uploads
+uploads_demo
+migrations
+.idea
+dist
+
+# backend/.env
+# backend/.env.dev
+.history
+frontend
+dashboard
+research_calculation_from_db.ipynb
+src/routeTree.gen.ts
+
+.vite
+*.gz

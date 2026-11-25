@@ -1,0 +1,14 @@
+/.venv
+# /.env
+# .env
+*.pyc
+__pycache__
+/test_submissions
+/test_submissions_dedicated
+*.db
+# *.html
+*.rar
+
+logs/
+outputs/html
+outputs/manual_testing

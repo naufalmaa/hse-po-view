@@ -1,0 +1,275 @@
+{
+  "category_id": "8.1",
+  "folder_name": "8.1 Sertifikasi Sistem Pengelolaan K3LL",
+  "expected_score": 10,
+  "compliance_score": 10,
+  "evidence_score": 10,
+  "hse_score": 10,
+  "consensus_score": 10,
+  "final_score": 10,
+  "require_review": false,
+  "final_reasoning": "All three independent AI Jurors (Compliance, Evidence, HSE) unanimously assigned a score of 10 with high confidence (0.95). The evidence confirms PT. Logindo Samudramakmur Tbk. holds all three mandatory and optional ISO management system certifications (ISO 45001:2018, ISO 14001:2015, ISO 9001:2015) issued by a globally recognized accreditation body (LRQA Limited). All certificates are valid well beyond the 30-day grace period, entity alignment is confirmed, and no critical information is missing. The consensus is strong and unambiguous.",
+  "ai_recommendation_for_excellent_score": {
+    "recommendations": [
+      "Excellent! Maintain current documentation standards."
+    ],
+    "required_documents": [],
+    "improvement_areas": [
+      "Continuous improvement"
+    ],
+    "priority_actions": [
+      "Regular review and update of documentation"
+    ],
+    "reasoning": "Rule-based analysis: score 10/10, 0 missing items"
+  },
+  "evidence_count": 3,
+  "evidence_found": [
+    "Current issue date:\n11 August 2023\nOriginal approval(s):\nExpiry date:\n10 August 2026\nISO 9001 - 11 A",
+    "Certificate identity number: 10542281\nCertificate Schedule\n          \n    \nLRQA Group Limited, its a",
+    "This is to certify that the Management System of: PT. Logindo Samudramakmur Tbk.",
+    "has been approved by LRQA to the following standards: ISO 9001:2015",
+    "The scope of this approval is applicable to: Ship owner, ship operating and ship chartering.",
+    "Current issue date: 11 August 2023",
+    "Expiry date: 10 August 2026",
+    "Certificate identity number: 10542281",
+    "Approval number(s): ISO 9001 – 0044785-001",
+    "Issued by: LRQA Limited"
+  ],
+  "missing_evidence": [],
+  "reasoning": "All three independent AI Jurors (Compliance, Evidence, HSE) unanimously assigned a score of 10 with high confidence (0.95). The evidence confirms PT. Logindo Samudramakmur Tbk. holds all three mandatory and optional ISO management system certifications (ISO 45001:2018, ISO 14001:2015, ISO 9001:2015) issued by a globally recognized accreditation body (LRQA Limited). All certificates are valid well beyond the 30-day grace period, entity alignment is confirmed, and no critical information is missing. The consensus is strong and unambiguous.",
+  "confidence": 0.95,
+  "status": "passed",
+  "processing_time_sec": 76.16,
+  "errors": [],
+  "warnings": [
+    "Evidence coverage: 333.3% (10/3 required items found)"
+  ],
+  "provider": "VLLMProvider",
+  "model": "qwen35",
+  "start_date": "2026-01-01",
+  "end_date": "2026-10-01",
+  "company": "PT. Logindo Samudramakmur Tbk.",
+  "chunking_mode": "memory_only",
+  "discovery_records": [
+    {
+      "category": "8.1",
+      "file": "a. Sertifikat ISO 9001.pdf",
+      "extension": ".pdf",
+      "mime": "application/pdf",
+      "size": 865171,
+      "priority": 4,
+      "status": "ok"
+    },
+    {
+      "category": "8.1",
+      "file": "b. Sertifikat ISO 14001.pdf",
+      "extension": ".pdf",
+      "mime": "application/pdf",
+      "size": 862383,
+      "priority": 4,
+      "status": "ok"
+    },
+    {
+      "category": "8.1",
+      "file": "c. Sertifikat ISO 45001.PDF",
+      "extension": ".pdf",
+      "mime": "application/pdf",
+      "size": 862880,
+      "priority": 4,
+      "status": "ok"
+    }
+  ],
+  "extraction_records": [
+    {
+      "category": "8.1",
+      "file": "a. Sertifikat ISO 9001.pdf",
+      "extractor_used": "PDFExtractor",
+      "vision_model_used": "qwen3-vl",
+      "ocr_used": false,
+      "pages": 2,
+      "pages_extracted": 2,
+      "characters_extracted": 2636,
+      "estimated_characters": 3000,
+      "coverage_pct": 87.9,
+      "ocr_confidence": 1.0,
+      "vision_confidence": 0.98,
+      "extraction_latency": 29.938,
+      "extraction_success": true,
+      "warnings": "",
+      "errors": ""
+    },
+    {
+      "category": "8.1",
+      "file": "b. Sertifikat ISO 14001.pdf",
+      "extractor_used": "PDFExtractor",
+      "vision_model_used": "qwen3-vl",
+      "ocr_used": false,
+      "pages": 1,
+      "pages_extracted": 1,
+      "characters_extracted": 1375,
+      "estimated_characters": 1500,
+      "coverage_pct": 91.7,
+      "ocr_confidence": 1.0,
+      "vision_confidence": 0.95,
+      "extraction_latency": 13.331,
+      "extraction_success": true,
+      "warnings": "",
+      "errors": ""
+    },
+    {
+      "category": "8.1",
+      "file": "c. Sertifikat ISO 45001.PDF",
+      "extractor_used": "PDFExtractor",
+      "vision_model_used": "qwen3-vl",
+      "ocr_used": false,
+      "pages": 1,
+      "pages_extracted": 1,
+      "characters_extracted": 1422,
+      "estimated_characters": 1500,
+      "coverage_pct": 94.8,
+      "ocr_confidence": 1.0,
+      "vision_confidence": 0.95,
+      "extraction_latency": 12.035,
+      "extraction_success": true,
+      "warnings": "",
+      "errors": ""
+    }
+  ],
+  "evidence_record": {
+    "category": "8.1",
+    "required_evidence": "Documented procedure | Implementation record | Verification audit",
+    "found_evidence": "Current issue date:\n11 August 2023\nOriginal approv | Certificate identity number: 10542281\nCertificate  | This is to certify that the Management System of:  | has been approved by LRQA to the following standar | The scope of this approval is applicable to: Ship  | Current issue date: 11 August 2023 | Expiry date: 10 August 2026 | Certificate identity number: 10542281 | Approval number(s): ISO 9001 – 0044785-001 | Issued by: LRQA Limited",
+    "missing_evidence": "",
+    "coverage_pct": 333.3,
+    "confidence": 0.92,
+    "source_documents": "doc | doc | doc"
+  },
+  "validator_records": [
+    {
+      "category": "8.1",
+      "validator": "ocr_image_processing",
+      "passed": true,
+      "failed": false,
+      "coverage": 100.0,
+      "execution_time": 0.002
+    },
+    {
+      "category": "8.1",
+      "validator": "semantic_search",
+      "passed": true,
+      "failed": false,
+      "coverage": 100.0,
+      "execution_time": 0.002
+    },
+    {
+      "category": "8.1",
+      "validator": "metadata_extraction_nlp",
+      "passed": true,
+      "failed": false,
+      "coverage": 100.0,
+      "execution_time": 0.002
+    },
+    {
+      "category": "8.1",
+      "validator": "signature_detection_computer_vision",
+      "passed": true,
+      "failed": false,
+      "coverage": 100.0,
+      "execution_time": 0.002
+    },
+    {
+      "category": "8.1",
+      "validator": "date_range_validation",
+      "passed": true,
+      "failed": false,
+      "coverage": 100.0,
+      "execution_time": 0.002
+    },
+    {
+      "category": "8.1",
+      "validator": "fuzzy_string_matching_entity",
+      "passed": true,
+      "failed": false,
+      "coverage": 100.0,
+      "execution_time": 0.002
+    }
+  ],
+  "reasoning_records": [
+    {
+      "category": "8.1",
+      "juror": "ComplianceJuror",
+      "model": "qwen35",
+      "confidence": 0.95,
+      "recommended_score": 10,
+      "reasoning": [
+        "Evidence confirms PT. Logindo Samudramakmur Tbk. holds ISO 45001:2018 (Occupational Health and Safety), ISO 14001:2015 (Environmental Management), and ISO 9001:2015 (Quality Management) certifications.",
+        "All three required management system certificates (K3, Lingkungan, Mutu) are present and valid, meeting the mandatory requirement for Score 10.",
+        "Certifications are issued by LRQA Limited, a globally recognized accreditation body, satisfying the Issuer Validation criteria.",
+        "Validity dates are confirmed: ISO 9001 valid until 10 August 2026, ISO 14001 valid until 15 July 2027, and ISO 45001 valid until 5 November 2026. All are well beyond the 30-day grace period.",
+        "Entity alignment is confirmed as the certificate holder name matches the contractor name 'PT. Logindo Samudramakmur Tbk.'",
+        "The evidence explicitly states 'missing_critical_info: false', indicating all necessary fields were successfully extracted and validated."
+      ],
+      "latency": 4.88,
+      "input_tokens": 3913,
+      "output_tokens": 291,
+      "prompt_version": "v3"
+    },
+    {
+      "category": "8.1",
+      "juror": "EvidenceJuror",
+      "model": "qwen35",
+      "confidence": 0.95,
+      "recommended_score": 10,
+      "reasoning": [
+        "Evidence contains three valid ISO management system certificates (ISO 9001, ISO 14001, ISO 45001) issued by LRQA Limited, an internationally accredited certification body.",
+        "All certificates are held by PT. Logindo Samudramakmur Tbk., matching the entity name provided in the evidence.",
+        "ISO 45001:2018 (Occupational Health and Safety) is valid until 5 November 2026, satisfying the mandatory Category A requirement.",
+        "ISO 14001:2015 (Environmental Management) is valid until 15 July 2027, satisfying the mandatory Category B requirement.",
+        "ISO 9001:2015 (Quality Management) is valid until 10 August 2026, satisfying the optional Category C requirement.",
+        "All certificates have valid expiry dates well beyond the 30-day grace period threshold.",
+        "The evidence demonstrates full compliance with the mandatory integration check (Category A and Category B both active simultaneously).",
+        "Document types are confirmed as PDFs with no missing critical information flagged."
+      ],
+      "latency": 4.78,
+      "input_tokens": 3916,
+      "output_tokens": 288,
+      "prompt_version": "v3"
+    },
+    {
+      "category": "8.1",
+      "juror": "HSEJuror",
+      "model": "qwen35",
+      "confidence": 0.95,
+      "recommended_score": 10,
+      "reasoning": [
+        "Evidence confirms PT. Logindo Samudramakmur Tbk. holds ISO 45001:2018 certification (Category A - Occupational Health and Safety), valid until 5 November 2026.",
+        "Evidence confirms PT. Logindo Samudramakmur Tbk. holds ISO 14001:2015 certification (Category B - Environmental Management), valid until 15 July 2027.",
+        "Both mandatory certifications (ISO 45001 and ISO 14001) are issued by LRQA Limited, a globally recognized accreditation body.",
+        "All certificates are valid for more than 30 days from the current assessment date, satisfying the validity requirement.",
+        "The entity name on the certificates matches the contractor name (PT. Logindo Samudramakmur Tbk.), satisfying entity alignment.",
+        "The presence of both Category A and Category B certifications simultaneously meets the strict criteria for a score of 10."
+      ],
+      "latency": 4.285,
+      "input_tokens": 3916,
+      "output_tokens": 249,
+      "prompt_version": "v3"
+    }
+  ],
+  "consensus_record": {
+    "category": "8.1",
+    "compliance_score": 10,
+    "evidence_score": 10,
+    "hse_score": 10,
+    "consensus_score": 10,
+    "requires_review": false,
+    "final_reasoning": "All three independent AI Jurors (Compliance, Evidence, HSE) unanimously assigned a score of 10 with high confidence (0.95). The evidence confirms PT. Logindo Samudramakmur Tbk. holds all three mandatory and optional ISO management system certifications (ISO 45001:2018, ISO 14001:2015, ISO 9001:2015) issued by a globally recognized accreditation body (LRQA Limited). All certificates are valid well beyond the 30-day grace period, entity alignment is confirmed, and no critical information is missing. The consensus is strong and unambiguous."
+  },
+  "final_score_record": {
+    "category": "8.1",
+    "expected": 10,
+    "predicted": 10,
+    "correct": 1,
+    "confidence": 0.95
+  },
+  "html_viewer_path": "x:\\naufal\\Kerja\\Kerja-an\\Waviv\\Project\\PHE_HSE\\apps\\backend\\phe-view-hse\\backend\\csms-ai\\engine\\..\\outputs\\html\\category_8.1.html"
+}

@@ -1,0 +1,94 @@
+{
+  "category_id": "8.1",
+  "expected_score": 10,
+  "calibrated_score": 6,
+  "criteria": [
+    {
+      "type": "document_presence",
+      "status": "pass",
+      "evidence": [
+        "a. Sertifikat ISO 9001.pdf",
+        "8.1.1. Certificate ISO 9001-2015 Quality Management System PT Makara Jaya Marine.pdf",
+        "c. Sertifikat ISO 45001.PDF",
+        "b. Sertifikat ISO 14001.pdf"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "type": "keyword_coverage",
+      "status": "fail",
+      "evidence": [
+        "ISO 45001",
+        "ISO 9001",
+        "ISO 14001",
+        "DOC"
+      ],
+      "confidence": 0.8
+    },
+    {
+      "type": "mandatory_fields",
+      "status": "partial",
+      "evidence": [
+        "Nomor sertifikat + tanggal expired tiap sertifikat",
+        "% sertifikat yang masih valid",
+        "Apakah ada ISO 45001 DAN ISO 14001 (keduanya valid)"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "type": "implementation_evidence",
+      "status": "fail",
+      "evidence": [
+        "0 implementation mentions"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "type": "temporal_validity",
+      "status": "pass",
+      "evidence": [
+        "25 dates found"
+      ],
+      "confidence": 0.75
+    }
+  ],
+  "kb_expansion": {
+    "additional_keywords": [
+      "ADD: marine-specific term for 8.1",
+      "ADD: regulatory reference (SOLAS/MARPOL/ISPS/STCW)",
+      "ADD: Indonesian/English variation"
+    ],
+    "additional_mandatory_fields": [
+      "ADD: structured field spec for 8.1",
+      "ADD: validation rule (format, range)"
+    ],
+    "additional_document_requirements": [],
+    "implementation_checks": [
+      "ADD: execution proof requirement for 8.1",
+      "ADD: minimum evidence count"
+    ]
+  },
+  "score_gates": {
+    "0": {
+      "min_documents": 0,
+      "min_keywords": 0,
+      "min_mandatory": 0
+    },
+    "3": {
+      "min_documents": 1,
+      "min_keywords": 2,
+      "min_mandatory": 1
+    },
+    "6": {
+      "min_documents": 3,
+      "min_keywords": 4,
+      "min_mandatory": 3
+    },
+    "10": {
+      "min_documents": 5,
+      "min_keywords": 6,
+      "min_mandatory": 5,
+      "implementation_proof": true
+    }
+  }
+}

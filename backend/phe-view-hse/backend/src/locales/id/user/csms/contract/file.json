@@ -1,0 +1,17 @@
+{
+  "contractIdRequired": "ID kontrak diperlukan",
+  "evaluasiDokumenGenerateFailed": "Gagal menghasilkan dokumen evaluasi",
+  "evaluasiDokumenGenerated": "Dokumen evaluasi berhasil dihasilkan",
+  "evaluasiDokumenUploaded": "Dokumen evaluasi berhasil diunggah",
+  "evaluasiDokumenUploadFailed": "Gagal mengunggah dokumen evaluasi",
+  "fileDeleted": "File berhasil dihapus",
+  "fileDeleteFailed": "Gagal menghapus file",
+  "fileDetailsRetrieved": "Detail file berhasil diambil",
+  "fileNotFound": "File tidak ditemukan",
+  "fileUploaded": "File berhasil diunggah",
+  "fileUploadFailed": "Gagal mengunggah file",
+  "folderIdRequired": "ID folder diperlukan",
+  "noFilesUploaded": "Tidak ada file yang diunggah",
+  "maxFilesExceeded": "Maksimal 25 file yang dapat diunggah dalam satu kali proses",
+  "maxBatchSizeExceeded": "Total ukuran file dalam satu batch upload tidak boleh melebihi 100 MB"
+}

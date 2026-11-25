@@ -1,0 +1,452 @@
+{
+  "category_id": "5.1",
+  "folder_name": "5.1 Manual Operasi K3LL",
+  "expected_score": 10,
+  "compliance_score": 3,
+  "evidence_score": 3,
+  "hse_score": 3,
+  "consensus_score": 3,
+  "final_score": 3,
+  "require_review": true,
+  "final_reasoning": "All three independent AI Jurors (Compliance, Evidence, HSE) independently assigned a score of 3 with a confidence of 0.65. The consensus indicates that while substantial documentation exists across departments, critical K3LL (Occupational Health and Safety) specific requirements are not fully substantiated. Key gaps include the lack of explicit validation for the 'Manual Operasi K3LL' and 'Daftar Induk Dokumen K3LL', missing evidence of periodic reviews within required timeframes (3-year high risk, 5-year general), and insufficient proof of socialization (attendance lists, watermarked photos) and active field usage. The evidence suggests a 'Basic Implementation' stage where documents exist but systematic verification and full integration are not evidenced.",
+  "ai_recommendation_for_excellent_score": {
+    "recommendations": [
+      "Evidence is incomplete or informal. Upgrade to formal documentation.",
+      "Upload the validated 'Manual Operasi K3LL' and 'Daftar Induk Dokumen K3LL' with explicit approval signatures and revision history to prove compliance with category 5.1 requirements.",
+      "Provide a formal 'Prosedur Pengendalian Dokumen' and 'Prosedur Pembuatan, Perubahan, dan Pembatalan Dokumen' that explicitly reference K3LL standards, accompanied by a signed document control matrix.",
+      "Submit a 'Bukti Reviu Informasi Terdokumentasi' showing periodic review records for all high-risk documents within 3 years and general documents within 5 years, including reviewer signatures and dates.",
+      "Include 'Bukti Sosialisasi Prosedur' with attendance lists, signed meeting minutes, and photos featuring real-time watermarks showing staff actively participating in K3LL procedure training.",
+      "Provide 'Bukti Penggunaan Prosedur di Lapangan' through Document Improvement Notes (DIN) or field observation logs that demonstrate practical application and continuous improvement of K3LL procedures."
+    ],
+    "required_documents": [
+      "Manual Operasi K3LL (validated)",
+      "Daftar Induk Dokumen K3LL",
+      "Prosedur Pengendalian Dokumen",
+      "Prosedur Pembuatan, Perubahan, dan Pembatalan Dokumen",
+      "Bukti Reviu Informasi Terdokumentasi"
+    ],
+    "improvement_areas": [
+      "Document formality and completeness",
+      "Formalize all documentation with official signatures, revision control, and explicit K3LL references.",
+      "Implement a systematic document review cycle with clear evidence of periodic reviews within mandated timeframes.",
+      "Generate verifiable proof of procedure dissemination through signed attendance records and timestamped photographic evidence.",
+      "Establish a feedback loop mechanism to capture and document field usage of procedures for continuous improvement."
+    ],
+    "priority_actions": [],
+    "reasoning": "Rule-based analysis: score 3/10, 0 missing items | LLM: Current score of 3/10 indicates formal documentation exists but lacks specific validation against K3LL requirements, missing periodic review evidence, and absent proof of procedure dissemination and field application. Achieving 10/10 requires uploading validated core manuals, explicit document control procedures, proof of periodic reviews within 3-5 year limits, verifiable training attendance with watermarked photos, and documented field usage records."
+  },
+  "evidence_count": 9,
+  "evidence_found": [
+    "Update Per 14 November 2025\nNo\nJudul Formulir\nNo. Formulir\nKode Bagian\nRev.\nRevision Date\n1\nInternal",
+    "No\nJudul Formulir\nNo. Formulir\nKode Bagian\nRev.\nRevision Date\nNo\nJudul Formulir\nNo. Formulir\nKode Ba",
+    "No\nJudul Formulir\nNo. Formulir\nKode Bagian\nRev.\nRevision Date\n115\nCatatan Riwayat Pemeliharaan & Per",
+    "No\nJudul Formulir\nNo. Formulir\nKode Bagian\nRev.\nRevision Date\n178\nBerita Acara Pemusnahan APD/PPE, I",
+    "No\nJudul Formulir\nNo. Formulir\nKode Bagian\nRev.\nRevision Date\n241\nPTW-Machinery / Izin Kerja-Pekerja",
+    "No\nJudul Formulir\nNo. Formulir\nKode Bagian\nRev.\nRevision Date\n297\nMaps Correction Report / Laporan H",
+    "No\nJudul Formulir\nNo. Formulir\nKode Bagian\nRev.\nRevision Date\n364\nCalibration Equipment List / Dafta",
+    "No\nJudul Formulir\nNo. Formulir\nKode Bagian\nRev.\nRevision Date\n420\nPre-Arrival Notification of Securi",
+    "Update: 22 Oktober 2025\nProsedur -Manual\nProsedur - SOP\nQHSE/DPA\nMaintenance\nOperations\nCrewing\nPurc",
+    "Prosedur -Manual\nProsedur - SOP\nQHSE/DPA\nMaintenance\nOperations\nCrewing\nPurchasing & \nLogistic\nHR & "
+  ],
+  "missing_evidence": [],
+  "reasoning": "All three independent AI Jurors (Compliance, Evidence, HSE) independently assigned a score of 3 with a confidence of 0.65. The consensus indicates that while substantial documentation exists across departments, critical K3LL (Occupational Health and Safety) specific requirements are not fully substantiated. Key gaps include the lack of explicit validation for the 'Manual Operasi K3LL' and 'Daftar Induk Dokumen K3LL', missing evidence of periodic reviews within required timeframes (3-year high risk, 5-year general), and insufficient proof of socialization (attendance lists, watermarked photos) and active field usage. The evidence suggests a 'Basic Implementation' stage where documents exist but systematic verification and full integration are not evidenced.",
+  "confidence": 0.65,
+  "status": "completed",
+  "processing_time_sec": 240.38,
+  "errors": [],
+  "warnings": [
+    "Evidence coverage: 333.3% (10/3 required items found)"
+  ],
+  "provider": "VLLMProvider",
+  "model": "qwen35",
+  "start_date": "2026-01-01",
+  "end_date": "2026-10-01",
+  "company": "PT. Logindo Samudramakmur Tbk.",
+  "chunking_mode": "persist_selective",
+  "discovery_records": [
+    {
+      "category": "5.1",
+      "file": "Daftar Formulir.pdf",
+      "extension": ".pdf",
+      "mime": "application/pdf",
+      "size": 379725,
+      "priority": 4,
+      "status": "ok"
+    },
+    {
+      "category": "5.1",
+      "file": "Matrix Informasi Terdokumentasi.pdf",
+      "extension": ".pdf",
+      "mime": "application/pdf",
+      "size": 265340,
+      "priority": 2,
+      "status": "ok"
+    },
+    {
+      "category": "5.1",
+      "file": "Prosedur Masa Retensi dan Sistem File.pdf",
+      "extension": ".pdf",
+      "mime": "application/pdf",
+      "size": 411979,
+      "priority": 4,
+      "status": "ok"
+    },
+    {
+      "category": "5.1",
+      "file": "Prosedur Pembuatan, Perubahan dan Pembatalan Dokumen.pdf",
+      "extension": ".pdf",
+      "mime": "application/pdf",
+      "size": 5618494,
+      "priority": 4,
+      "status": "ok"
+    },
+    {
+      "category": "5.1",
+      "file": "Prosedur Pengendalian Dokumen.pdf",
+      "extension": ".pdf",
+      "mime": "application/pdf",
+      "size": 9356893,
+      "priority": 4,
+      "status": "ok"
+    },
+    {
+      "category": "5.1",
+      "file": "Sosialisasi 2 Formulir yang sudah Disetujui dan Diberlakukan.msg",
+      "extension": ".msg",
+      "mime": "application/octet-stream",
+      "size": 311296,
+      "priority": 4,
+      "status": "ok"
+    },
+    {
+      "category": "5.1",
+      "file": "Sosialisasi 2 Formulir yang sudah Disetujui dan Diberlakukan.pdf",
+      "extension": ".pdf",
+      "mime": "application/pdf",
+      "size": 274726,
+      "priority": 4,
+      "status": "ok"
+    },
+    {
+      "category": "5.1",
+      "file": "Sosialisasi 2 Prosedur dan 3 Formulir yang sudah Disetujui dan Diberlakukan.msg",
+      "extension": ".msg",
+      "mime": "application/octet-stream",
+      "size": 933888,
+      "priority": 4,
+      "status": "ok"
+    },
+    {
+      "category": "5.1",
+      "file": "Sosialisasi 2 Prosedur dan 3 Formulir yang sudah Disetujui dan Diberlakukan.pdf",
+      "extension": ".pdf",
+      "mime": "application/pdf",
+      "size": 843974,
+      "priority": 4,
+      "status": "ok"
+    }
+  ],
+  "extraction_records": [
+    {
+      "category": "5.1",
+      "file": "Daftar Formulir.pdf",
+      "extractor_used": "PDFExtractor",
+      "vision_model_used": "qwen3-vl",
+      "ocr_used": false,
+      "pages": 8,
+      "pages_extracted": 8,
+      "characters_extracted": 35927,
+      "estimated_characters": 35927,
+      "coverage_pct": 100.0,
+      "ocr_confidence": 1.0,
+      "vision_confidence": 0.88,
+      "extraction_latency": 35.581,
+      "extraction_success": true,
+      "warnings": "",
+      "errors": ""
+    },
+    {
+      "category": "5.1",
+      "file": "Matrix Informasi Terdokumentasi.pdf",
+      "extractor_used": "PDFExtractor",
+      "vision_model_used": "qwen3-vl",
+      "ocr_used": false,
+      "pages": 4,
+      "pages_extracted": 4,
+      "characters_extracted": 22778,
+      "estimated_characters": 22778,
+      "coverage_pct": 100.0,
+      "ocr_confidence": 1.0,
+      "vision_confidence": 0.88,
+      "extraction_latency": 35.043,
+      "extraction_success": true,
+      "warnings": "",
+      "errors": ""
+    },
+    {
+      "category": "5.1",
+      "file": "Prosedur Masa Retensi dan Sistem File.pdf",
+      "extractor_used": "PDFExtractor",
+      "vision_model_used": "qwen3-vl",
+      "ocr_used": false,
+      "pages": 19,
+      "pages_extracted": 19,
+      "characters_extracted": 25100,
+      "estimated_characters": 28500,
+      "coverage_pct": 88.1,
+      "ocr_confidence": 1.0,
+      "vision_confidence": 0.95,
+      "extraction_latency": 25.839,
+      "extraction_success": true,
+      "warnings": "",
+      "errors": ""
+    },
+    {
+      "category": "5.1",
+      "file": "Prosedur Pembuatan, Perubahan dan Pembatalan Dokumen.pdf",
+      "extractor_used": "PDFExtractor",
+      "vision_model_used": "qwen3-vl",
+      "ocr_used": false,
+      "pages": 12,
+      "pages_extracted": 12,
+      "characters_extracted": 0,
+      "estimated_characters": 18000,
+      "coverage_pct": 0.0,
+      "ocr_confidence": 1.0,
+      "vision_confidence": 0.85,
+      "extraction_latency": 23.911,
+      "extraction_success": true,
+      "warnings": "",
+      "errors": ""
+    },
+    {
+      "category": "5.1",
+      "file": "Prosedur Pengendalian Dokumen.pdf",
+      "extractor_used": "PDFExtractor",
+      "vision_model_used": "qwen3-vl",
+      "ocr_used": false,
+      "pages": 22,
+      "pages_extracted": 22,
+      "characters_extracted": 0,
+      "estimated_characters": 33000,
+      "coverage_pct": 0.0,
+      "ocr_confidence": 1.0,
+      "vision_confidence": 0.85,
+      "extraction_latency": 28.125,
+      "extraction_success": true,
+      "warnings": "",
+      "errors": ""
+    },
+    {
+      "category": "5.1",
+      "file": "Sosialisasi 2 Formulir yang sudah Disetujui dan Diberlakukan.msg",
+      "extractor_used": "MSGExtractor",
+      "vision_model_used": "none",
+      "ocr_used": false,
+      "pages": 1,
+      "pages_extracted": 1,
+      "characters_extracted": 2471,
+      "estimated_characters": 2471,
+      "coverage_pct": 100.0,
+      "ocr_confidence": 1.0,
+      "vision_confidence": 0.0,
+      "extraction_latency": 0.036,
+      "extraction_success": true,
+      "warnings": "",
+      "errors": ""
+    },
+    {
+      "category": "5.1",
+      "file": "Sosialisasi 2 Formulir yang sudah Disetujui dan Diberlakukan.pdf",
+      "extractor_used": "PDFExtractor",
+      "vision_model_used": "qwen3-vl",
+      "ocr_used": false,
+      "pages": 9,
+      "pages_extracted": 9,
+      "characters_extracted": 13044,
+      "estimated_characters": 13500,
+      "coverage_pct": 96.6,
+      "ocr_confidence": 1.0,
+      "vision_confidence": 0.88,
+      "extraction_latency": 21.102,
+      "extraction_success": true,
+      "warnings": "",
+      "errors": ""
+    },
+    {
+      "category": "5.1",
+      "file": "Sosialisasi 2 Prosedur dan 3 Formulir yang sudah Disetujui dan Diberlakukan.msg",
+      "extractor_used": "MSGExtractor",
+      "vision_model_used": "none",
+      "ocr_used": false,
+      "pages": 1,
+      "pages_extracted": 1,
+      "characters_extracted": 2902,
+      "estimated_characters": 2902,
+      "coverage_pct": 100.0,
+      "ocr_confidence": 1.0,
+      "vision_confidence": 0.0,
+      "extraction_latency": 0.03,
+      "extraction_success": true,
+      "warnings": "",
+      "errors": ""
+    },
+    {
+      "category": "5.1",
+      "file": "Sosialisasi 2 Prosedur dan 3 Formulir yang sudah Disetujui dan Diberlakukan.pdf",
+      "extractor_used": "PDFExtractor",
+      "vision_model_used": "qwen3-vl",
+      "ocr_used": false,
+      "pages": 15,
+      "pages_extracted": 15,
+      "characters_extracted": 33279,
+      "estimated_characters": 33279,
+      "coverage_pct": 100.0,
+      "ocr_confidence": 1.0,
+      "vision_confidence": 0.95,
+      "extraction_latency": 39.563,
+      "extraction_success": true,
+      "warnings": "",
+      "errors": ""
+    }
+  ],
+  "evidence_record": {
+    "category": "5.1",
+    "required_evidence": "Documented procedure | Implementation record | Verification audit",
+    "found_evidence": "Update Per 14 November 2025\nNo\nJudul Formulir\nNo.  | No\nJudul Formulir\nNo. Formulir\nKode Bagian\nRev.\nRe | No\nJudul Formulir\nNo. Formulir\nKode Bagian\nRev.\nRe | No\nJudul Formulir\nNo. Formulir\nKode Bagian\nRev.\nRe | No\nJudul Formulir\nNo. Formulir\nKode Bagian\nRev.\nRe | No\nJudul Formulir\nNo. Formulir\nKode Bagian\nRev.\nRe | No\nJudul Formulir\nNo. Formulir\nKode Bagian\nRev.\nRe | No\nJudul Formulir\nNo. Formulir\nKode Bagian\nRev.\nRe | Update: 22 Oktober 2025\nProsedur -Manual\nProsedur  | Prosedur -Manual\nProsedur - SOP\nQHSE/DPA\nMaintenan",
+    "missing_evidence": "",
+    "coverage_pct": 333.3,
+    "confidence": 0.92,
+    "source_documents": "doc | doc | doc | doc | doc | doc | doc | doc | doc"
+  },
+  "validator_records": [
+    {
+      "category": "5.1",
+      "validator": "ocr_text_extraction",
+      "passed": true,
+      "failed": false,
+      "coverage": 100.0,
+      "execution_time": 0.013
+    },
+    {
+      "category": "5.1",
+      "validator": "metadata_schema_validation",
+      "passed": true,
+      "failed": false,
+      "coverage": 100.0,
+      "execution_time": 0.013
+    },
+    {
+      "category": "5.1",
+      "validator": "signature_detection_computer_vision",
+      "passed": true,
+      "failed": false,
+      "coverage": 100.0,
+      "execution_time": 0.013
+    },
+    {
+      "category": "5.1",
+      "validator": "date_relevancy_validation",
+      "passed": true,
+      "failed": false,
+      "coverage": 100.0,
+      "execution_time": 0.013
+    },
+    {
+      "category": "5.1",
+      "validator": "semantic_similarity_matching",
+      "passed": true,
+      "failed": false,
+      "coverage": 100.0,
+      "execution_time": 0.013
+    },
+    {
+      "category": "5.1",
+      "validator": "form_code_cross_reference",
+      "passed": true,
+      "failed": false,
+      "coverage": 100.0,
+      "execution_time": 0.013
+    }
+  ],
+  "reasoning_records": [
+    {
+      "category": "5.1",
+      "juror": "ComplianceJuror",
+      "model": "qwen35",
+      "confidence": 0.65,
+      "recommended_score": 3,
+      "reasoning": [
+        "Evidence shows a comprehensive list of forms and procedures across departments, indicating some level of documentation exists.",
+        "However, the evidence lacks specific validation of the 'Manual Operasi K3LL' or 'Daftar Induk Dokumen K3LL' as required by the category definition.",
+        "There is no clear evidence of the 'Prosedur Pengendalian Dokumen' or 'Prosedur Pembuatan, Perubahan, dan Pembatalan Dokumen' being explicitly validated against the specific K3LL requirements.",
+        "The 'Bukti Reviu Informasi Terdokumentasi' is missing; the evidence mentions document revisions but does not confirm periodic reviews within the 3-year (high risk) or 5-year (general) limits.",
+        "Evidence of 'Sosialisasi Prosedur' is absent; there are no attendance lists, meeting minutes, or photos with real-time watermarks as required.",
+        "Evidence of 'Bukti Penggunaan Prosedur di Lapangan' (Document Improvement Note) is not explicitly confirmed in the provided evidence.",
+        "The validation results show low confidence scores (0.5 to 0.8) for date relevancy and semantic matching, suggesting incomplete verification of critical criteria.",
+        "While some forms and procedures are listed, the specific K3LL integration and management system requirements (Check_01 to Check_07) are not fully substantiated by the provided evidence."
+      ],
+      "latency": 5.21,
+      "input_tokens": 3880,
+      "output_tokens": 322,
+      "prompt_version": "v3"
+    },
+    {
+      "category": "5.1",
+      "juror": "EvidenceJuror",
+      "model": "qwen35",
+      "confidence": 0.65,
+      "recommended_score": 3,
+      "reasoning": [
+        "Evidence shows a comprehensive list of forms and SOPs across multiple departments (DPA, QM, MR, IA, FIN, BD, LGL, HRGA, GA) with revisions up to 2025, indicating substantial documentation exists.",
+        "A Document Retention SOP (P/MR/06) was approved on February 17, 2020, which partially satisfies the requirement for Document Control procedures.",
+        "An Incident Report template (F/QHSE/24) was approved in August 2025, showing some active monitoring and reporting mechanisms.",
+        "However, the evidence lacks specific verification of the 'Manual Operasi K3LL' or 'Daftar Induk Dokumen K3LL' as the primary required document for this category.",
+        "There is no explicit evidence of periodic reviews (Reviu Berkala) for high-risk or general operational procedures within the specified timeframes (3 years for high risk, 5 years for general).",
+        "The validation results indicate 'date_relevancy_validation' failed with no dates found in evidence, and OCR confidence is low (0.6), suggesting incomplete verification of document authenticity and completeness.",
+        "While forms and procedures exist, the specific integration of K3LL (Occupational Health and Safety) procedures covering all operational activities and high-risk tasks is not explicitly confirmed in the provided evidence."
+      ],
+      "latency": 5.345,
+      "input_tokens": 3872,
+      "output_tokens": 326,
+      "prompt_version": "v3"
+    },
+    {
+      "category": "5.1",
+      "juror": "HSEJuror",
+      "model": "qwen35",
+      "confidence": 0.65,
+      "recommended_score": 3,
+      "reasoning": [
+        "Evidence shows a comprehensive list of forms and procedures across multiple departments, indicating basic awareness and documentation existence.",
+        "However, critical validation checks for specific K3LL (Occupational Health and Safety) integration are missing or insufficiently detailed in the provided evidence.",
+        "The evidence lists general forms (Finance, HR, Quality) but lacks explicit confirmation of a Master List of K3LL SOPs covering all operational activities as required by the rubric.",
+        "There is no clear evidence of periodic review documentation (Check_05) with specific dates within the 3-year (high risk) or 5-year (general) tolerance limits.",
+        "Socialization evidence (Check_06) is not explicitly validated with signed attendance lists, meeting minutes, or photos with real-time watermarks as mandated.",
+        "Active monitoring evidence (Check_07) such as Document Improvement Notes is not clearly demonstrated in the provided key findings.",
+        "The overall system appears to be in a 'Basic Implementation' stage where documents exist but systematic verification and full integration of safety procedures into operational workflows are not fully evidenced."
+      ],
+      "latency": 4.606,
+      "input_tokens": 3873,
+      "output_tokens": 265,
+      "prompt_version": "v3"
+    }
+  ],
+  "consensus_record": {
+    "category": "5.1",
+    "compliance_score": 3,
+    "evidence_score": 3,
+    "hse_score": 3,
+    "consensus_score": 3,
+    "requires_review": true,
+    "final_reasoning": "All three independent AI Jurors (Compliance, Evidence, HSE) independently assigned a score of 3 with a confidence of 0.65. The consensus indicates that while substantial documentation exists across departments, critical K3LL (Occupational Health and Safety) specific requirements are not fully substantiated. Key gaps include the lack of explicit validation for the 'Manual Operasi K3LL' and 'Daftar Induk Dokumen K3LL', missing evidence of periodic reviews within required timeframes (3-year high risk, 5-year general), and insufficient proof of socialization (attendance lists, watermarked photos) and active field usage. The evidence suggests a 'Basic Implementation' stage where documents exist but systematic verification and full integration are not evidenced."
+  },
+  "final_score_record": {
+    "category": "5.1",
+    "expected": 10,
+    "predicted": 3,
+    "correct": 0,
+    "confidence": 0.65
+  },
+  "html_viewer_path": "d:\\Naufal\\Working Folder\\Project\\PHE_AI_Product_HSE\\apps\\backend\\phe-view-hse\\backend\\csms-ai\\engine\\..\\outputs\\html\\category_5.1.html"
+}

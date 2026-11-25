@@ -1,0 +1,19 @@
+{
+  "requirement_id": "DR-4.2",
+  "category_id": "4.2",
+  "required_documents": [
+    "\"- Dokumen Identifikasi Bahaya Kesehatan Kerja / Occupational Health Risk Assessment (OHRA) ATAU Risk Register / HIRADC Kesehatan Kerja\"<br>\"- Bukti Pelaksanaan Pemeriksaan Kesehatan Kerja berkala / Medical Check Up (MCU) seluruh pekerja aktif (Form Validasi MCU oleh Dokter Validator)\"<br>\"- Evidence 6 Program Manajemen Risiko Kesehatan Spesifik (Prosedur & Laporan Program)\"<br>\"- Dokumen Kerja Sama / MoU Rumah Sakit atau Klinik Rujukan Medis Darurat terdekat yang masih berlaku\"<br>\"- Prosedur & Laporan Inspeksi Higiene Makanan / Food Hygiene berkala\"<br>\"- Dokumen Komunikasi Bahaya Kesehatan di Tempat Kerja (Materi sosialisasi",
+    "poster",
+    "atau briefing K3LL)\""
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

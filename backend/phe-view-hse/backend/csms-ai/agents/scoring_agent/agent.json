@@ -1,0 +1,5 @@
+{
+  "agent_id": "scoring_agent",
+  "name": "Scoring Agent",
+  "type": "model-agnostic"
+}

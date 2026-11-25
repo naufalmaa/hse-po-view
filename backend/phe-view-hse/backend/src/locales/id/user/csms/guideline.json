@@ -1,0 +1,12 @@
+{
+  "guidelineCreated": "Panduan berhasil dibuat",
+  "guidelineCreateFailed": "Gagal membuat panduan",
+  "guidelineDeleted": "Panduan berhasil dihapus",
+  "guidelineDeleteFailed": "Gagal menghapus panduan",
+  "guidelineNotFound": "Panduan tidak ditemukan",
+  "guidelineUpdated": "Panduan berhasil diperbarui",
+  "guidelineUpdateFailed": "Gagal memperbarui panduan",
+  "guidelinesListed": "Daftar panduan berhasil diambil",
+  "guidelineRetrieved": "Detail panduan berhasil diambil",
+  "filesDeleted": "File berhasil dihapus"
+}

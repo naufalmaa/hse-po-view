@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSMS AI Batch Evaluation Dashboard</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background: #0f172a; color: #e2e8f0; padding: 2rem; }
+        .container { max-width: 1600px; margin: 0 auto; }
+        h1 { font-size: 2rem; margin-bottom: 0.5rem; background: linear-gradient(135deg, #3b82f6, #10b981); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { color: #94a3b8; margin-bottom: 2rem; }
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+        .summary-card { background: #1e293b; padding: 1.5rem; border-radius: 12px; border: 1px solid #334155; }
+        .summary-card h3 { font-size: 0.85rem; color: #94a3b8; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .summary-card .value { font-size: 2rem; font-weight: 700; }
+        .value.correct { color: #10b981; }
+        .value.partial { color: #f59e0b; }
+        .value.incorrect { color: #ef4444; }
+        table { width: 100%; border-collapse: collapse; background: #1e293b; border-radius: 12px; overflow: hidden; margin-bottom: 2rem; }
+        th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #334155; }
+        th { background: #0f172a; font-weight: 600; color: #94a3b8; font-size: 0.85rem; text-transform: uppercase; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: rgba(59, 130, 246, 0.05); }
+        .badge { padding: 0.3rem 0.7rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600; display: inline-block; }
+        .badge.correct { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+        .badge.incorrect { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+        .progress-bar { background: #334155; border-radius: 6px; height: 20px; overflow: hidden; position: relative; }
+        .progress-fill { height: 100%; transition: width 0.3s ease; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 600; color: white; }
+        .progress-fill.correct { background: linear-gradient(90deg, #10b981, #059669); }
+        .progress-fill.partial { background: linear-gradient(90deg, #f59e0b, #d97706); }
+        .progress-fill.incorrect { background: linear-gradient(90deg, #ef4444, #dc2626); }
+        .comparison { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 0.5rem; }
+        .comparison-item { background: #0f172a; padding: 0.5rem; border-radius: 6px; text-align: center; font-size: 0.8rem; }
+        .comparison-item .label { color: #94a3b8; font-size: 0.7rem; margin-bottom: 0.2rem; }
+        .comparison-item .score { font-size: 1.2rem; font-weight: 700; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>CSMS AI Batch Evaluation Dashboard</h1>
+    <p class="subtitle">Marine Category Scoring — 29 Categories Evaluated</p>
+    
+    <div class="summary-grid" id="summary-grid"></div>
+    
+    <h2 style="margin-bottom: 1rem;">Category Results</h2>
+    <table id="results-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Category ID</th>
+                <th>Category Name</th>
+                <th>Expected</th>
+                <th>Original</th>
+                <th>Enhanced (Small)</th>
+                <th>Enhanced (Large)</th>
+                <th>Best Match</th>
+            </tr>
+        </thead>
+        <tbody id="results-tbody"></tbody>
+    </table>
+</div>
+
+<script>
+const DATA = {"timestamp": "2026-08-05T20:37:00.439098", "total_categories": 29, "configuration": {"run_original": true, "run_enhanced_small": false, "run_enhanced_large": true, "embedding_model_small": "text-embedding-3-small", "embedding_model_large": "text-embedding-3-large", "chunk_size": 512, "chunk_overlap": 50, "top_k": 15}, "summary": {"original": {"correct": 2, "accuracy": 6.896551724137931, "total_time": 11291.590000000002}, "enhanced_large": {"correct": 1, "accuracy": 3.4482758620689653, "total_time": 17157.95}}, "results": [{"category_id": "1", "category_name": "1 Kepemimpinan dan Komitmen", "expected": 10, "original": {"predicted": 0, "confidence": 0.95, "comp_score": 0, "ev_score": 0, "hse_score": 3, "time": 677.97, "docs": 30}, "original_correct": 0, "enhanced_large": {"predicted": 0, "confidence": 0.95, "comp_score": 0, "ev_score": 0, "hse_score": 3, "time": 649.47, "docs": 30, "chunks": 379, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "2", "category_name": "2 Kebijakan dan Sasaran Strategis K3LL", "expected": 10, "original": {"predicted": 3, "confidence": 0.9, "comp_score": 0, "ev_score": 3, "hse_score": 3, "time": 322.33, "docs": 17}, "original_correct": 0, "enhanced_large": {"predicted": 3, "confidence": 0.85, "comp_score": 3, "ev_score": 3, "hse_score": 3, "time": 344.18, "docs": 17, "chunks": 722, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "3.1", "category_name": "3.1 Struktur Organisasi untuk Pengelolaan K3LL", "expected": 10, "original": {"predicted": 3, "confidence": 0.95, "comp_score": 0, "ev_score": 3, "hse_score": 3, "time": 268.54, "docs": 8}, "original_correct": 0, "enhanced_large": {"predicted": 0, "confidence": 0.95, "comp_score": 0, "ev_score": 0, "hse_score": 0, "time": 260.45, "docs": 8, "chunks": 344, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "3.2", "category_name": "3.2 Pelatihan K3LL untuk para Manajer, pengawas (supervisor) dan pemegang jabatan penting K3LL", "expected": 10, "original": {"predicted": 3, "confidence": 0.85, "comp_score": 3, "ev_score": 3, "hse_score": 3, "time": 194.42, "docs": 9}, "original_correct": 0, "enhanced_large": {"predicted": 0, "confidence": 0.95, "comp_score": 0, "ev_score": 0, "hse_score": 3, "time": 195.58, "docs": 9, "chunks": 108, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "3.3", "category_name": "3.3 Pelatihan K3LL Umum (pada seluruh pekerja dan pihak yang terkait)", "expected": 10, "original": {"predicted": 0, "confidence": 1.0, "comp_score": 0, "ev_score": 0, "hse_score": 0, "time": 67.59, "docs": 4}, "original_correct": 0, "enhanced_large": {"predicted": 0, "confidence": 1.0, "comp_score": 0, "ev_score": 0, "hse_score": 0, "time": 67.92, "docs": 4, "chunks": 56, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "3.4", "category_name": "3.4 Pemenuhan Kompetensi Teknis dan K3LL", "expected": 10, "original": {"predicted": 0, "confidence": 0.95, "comp_score": 0, "ev_score": 0, "hse_score": 3, "time": 280.8, "docs": 9}, "original_correct": 0, "enhanced_large": {"predicted": 0, "confidence": 0.95, "comp_score": 0, "ev_score": 0, "hse_score": 0, "time": 298.45, "docs": 9, "chunks": 511, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "3.5", "category_name": "3.5 Pengelolaan K3LL kontraktor (Mitra Kerja)", "expected": 10, "original": {"predicted": 0, "confidence": 0.95, "comp_score": 0, "ev_score": 0, "hse_score": 3, "time": 96.24, "docs": 4}, "original_correct": 0, "enhanced_large": {"predicted": 0, "confidence": 0.95, "comp_score": 0, "ev_score": 0, "hse_score": 3, "time": 107.79, "docs": 4, "chunks": 98, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "3.6", "category_name": "3.6 Peraturan dan Standar K3LL", "expected": 10, "original": {"predicted": 3, "confidence": 0.85, "comp_score": 3, "ev_score": 3, "hse_score": 3, "time": 322.54, "docs": 14}, "original_correct": 0, "enhanced_large": {"predicted": 3, "confidence": 0.6, "comp_score": 3, "ev_score": 3, "hse_score": 3, "time": 334.45, "docs": 14, "chunks": 883, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "4.1", "category_name": "4.1 Penilaian dan Pengendalian Risiko", "expected": 6, "original": {"predicted": 3, "confidence": 0.85, "comp_score": 3, "ev_score": 3, "hse_score": 6, "time": 789.71, "docs": 28}, "original_correct": 0, "enhanced_large": {"predicted": 3, "confidence": 0.85, "comp_score": 3, "ev_score": 3, "hse_score": 3, "time": 807.71, "docs": 28, "chunks": 916, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "4.2", "category_name": "4.2 Bahaya Terhadap Kesehatan Kerja", "expected": 10, "original": {"predicted": 3, "confidence": 0.85, "comp_score": 3, "ev_score": 3, "hse_score": 3, "time": 1401.34, "docs": 36}, "original_correct": 0, "enhanced_large": {"predicted": 3, "confidence": 0.85, "comp_score": 3, "ev_score": 3, "hse_score": 3, "time": 1645.95, "docs": 36, "chunks": 2516, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "4.3", "category_name": "4.3 Bahaya Terhadap Keselamatan Kerja", "expected": 10, "original": {"predicted": 3, "confidence": 0.85, "comp_score": 3, "ev_score": 0, "hse_score": 3, "time": 866.57, "docs": 36}, "original_correct": 0, "enhanced_large": {"predicted": 0, "confidence": 0.95, "comp_score": 0, "ev_score": 0, "hse_score": 0, "time": 887.82, "docs": 36, "chunks": 935, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "4.4", "category_name": "4.4 Bahaya Terhadap Kegiatan Logistik", "expected": 10, "original": {"predicted": 0, "confidence": 0.95, "comp_score": 0, "ev_score": 0, "hse_score": 3, "time": 206.25, "docs": 9}, "original_correct": 0, "enhanced_large": {"predicted": 0, "confidence": 0.95, "comp_score": 0, "ev_score": 0, "hse_score": 3, "time": 216.97, "docs": 9, "chunks": 225, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "4.5", "category_name": "4.5 Bahaya Terhadap Lingkungan", "expected": 10, "original": {"predicted": 0, "confidence": 0.95, "comp_score": 0, "ev_score": 0, "hse_score": 3, "time": 251.16, "docs": 12}, "original_correct": 0, "enhanced_large": {"predicted": 0, "confidence": 0.95, "comp_score": 0, "ev_score": 0, "hse_score": 3, "time": 253.38, "docs": 12, "chunks": 576, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "4.6", "category_name": "4.6 Bahaya Terhadap Keamanan", "expected": 10, "original": {"predicted": 3, "confidence": 0.85, "comp_score": 3, "ev_score": 3, "hse_score": 3, "time": 295.39, "docs": 12}, "original_correct": 0, "enhanced_large": {"predicted": 0, "confidence": 0.95, "comp_score": 0, "ev_score": 0, "hse_score": 3, "time": 286.1, "docs": 12, "chunks": 208, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "4.7", "category_name": "4.7 Bahaya Terhadap Aspek Sosial", "expected": 10, "original": {"predicted": 3, "confidence": 0.85, "comp_score": 3, "ev_score": 3, "hse_score": 3, "time": 247.13, "docs": 10}, "original_correct": 0, "enhanced_large": {"predicted": 3, "confidence": 0.65, "comp_score": 3, "ev_score": 3, "hse_score": 3, "time": 247.55, "docs": 10, "chunks": 121, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "4.8", "category_name": "4.8 Alat Pelindung Diri (APD)", "expected": 10, "original": {"predicted": 3, "confidence": 0.95, "comp_score": 3, "ev_score": 3, "hse_score": 3, "time": 220.83, "docs": 11}, "original_correct": 0, "enhanced_large": {"predicted": 3, "confidence": 0.85, "comp_score": 3, "ev_score": 3, "hse_score": 3, "time": 6490.66, "docs": 11, "chunks": 28225, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "5.1", "category_name": "5.1 Manual Operasi K3LL", "expected": 10, "original": {"predicted": 3, "confidence": 0.85, "comp_score": 3, "ev_score": 0, "hse_score": 3, "time": 152.28, "docs": 7}, "original_correct": 0, "enhanced_large": {"predicted": 3, "confidence": 0.75, "comp_score": 3, "ev_score": 3, "hse_score": 3, "time": 141.93, "docs": 7, "chunks": 231, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "5.2", "category_name": "5.2 Kehandalan Infrastruktur dan Peralatan", "expected": 10, "original": {"predicted": 3, "confidence": 0.85, "comp_score": 3, "ev_score": 3, "hse_score": 6, "time": 412.78, "docs": 15}, "original_correct": 0, "enhanced_large": {"predicted": 3, "confidence": 0.9, "comp_score": 0, "ev_score": 3, "hse_score": 3, "time": 426.46, "docs": 15, "chunks": 332, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "5.3", "category_name": "5.3 Manajemen Perubahan", "expected": 10, "original": {"predicted": 3, "confidence": 0.85, "comp_score": 3, "ev_score": 3, "hse_score": 3, "time": 138.84, "docs": 5}, "original_correct": 0, "enhanced_large": {"predicted": 3, "confidence": 0.85, "comp_score": 3, "ev_score": 3, "hse_score": 3, "time": 145.81, "docs": 5, "chunks": 104, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "5.4", "category_name": "5.4 Implementasi Tanggap Darurat", "expected": 10, "original": {"predicted": 3, "confidence": 0.85, "comp_score": 3, "ev_score": 3, "hse_score": 3, "time": 540.99, "docs": 19}, "original_correct": 0, "enhanced_large": {"predicted": 3, "confidence": 0.85, "comp_score": 3, "ev_score": 3, "hse_score": 3, "time": 526.79, "docs": 19, "chunks": 330, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "6.1", "category_name": "6.1 Sistem Pemantauan Kinerja K3LL", "expected": 10, "original": {"predicted": 6, "confidence": 0.85, "comp_score": 6, "ev_score": 3, "hse_score": 6, "time": 1462.66, "docs": 24}, "original_correct": 0, "enhanced_large": {"predicted": 3, "confidence": 0.85, "comp_score": 3, "ev_score": 3, "hse_score": 3, "time": 772.73, "docs": 24, "chunks": 221, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "6.2", "category_name": "6.2 Indikator Kinerja K3LL", "expected": 10, "original": {"predicted": 3, "confidence": 0.95, "comp_score": 3, "ev_score": 0, "hse_score": 3, "time": 769.09, "docs": 24}, "original_correct": 0, "enhanced_large": {"predicted": 0, "confidence": 0.95, "comp_score": 0, "ev_score": 0, "hse_score": 3, "time": 761.73, "docs": 24, "chunks": 216, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "6.3", "category_name": "6.3 Pemantauan Kinerja K3LL", "expected": 10, "original": {"predicted": 3, "confidence": 0.85, "comp_score": 3, "ev_score": 3, "hse_score": 3, "time": 774.66, "docs": 24}, "original_correct": 0, "enhanced_large": {"predicted": 3, "confidence": 0.55, "comp_score": 3, "ev_score": 3, "hse_score": 6, "time": 777.66, "docs": 24, "chunks": 201, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "6.4", "category_name": "6.4 Investigasi dan Tindak Lanjut Insiden K3LL", "expected": 10, "original": {"predicted": 3, "confidence": 0.85, "comp_score": 3, "ev_score": 3, "hse_score": 3, "time": 155.26, "docs": 6}, "original_correct": 0, "enhanced_large": {"predicted": 3, "confidence": 0.95, "comp_score": 3, "ev_score": 3, "hse_score": 3, "time": 153.31, "docs": 6, "chunks": 226, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "6.5", "category_name": "6.5 Insiden yang Harus Dilaporkan Sesuai Undang-Undang dan Catatan Ketidakpatuhan", "expected": 0, "original": {"predicted": 0, "confidence": 1.0, "comp_score": 0, "ev_score": 0, "hse_score": 0, "time": 10.0, "docs": 0}, "original_correct": 1, "enhanced_large": {"predicted": 0, "confidence": 1.0, "comp_score": 0, "ev_score": 0, "hse_score": 0, "time": 11.38, "docs": 0, "chunks": 0, "relevant_chunks": 0, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 1}, {"category_id": "7.1", "category_name": "7.1 Audit", "expected": 10, "original": {"predicted": 3, "confidence": 0.85, "comp_score": 3, "ev_score": 3, "hse_score": 3, "time": 98.57, "docs": 3}, "original_correct": 0, "enhanced_large": {"predicted": 0, "confidence": 0.95, "comp_score": 0, "ev_score": 0, "hse_score": 3, "time": 95.25, "docs": 3, "chunks": 80, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "7.2", "category_name": "7.2 Tinjauan Manajemen", "expected": 10, "original": {"predicted": 6, "confidence": 0.85, "comp_score": 6, "ev_score": 3, "hse_score": 6, "time": 92.6, "docs": 2}, "original_correct": 0, "enhanced_large": {"predicted": 0, "confidence": 0.95, "comp_score": 0, "ev_score": 0, "hse_score": 3, "time": 88.22, "docs": 2, "chunks": 19, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "8.1", "category_name": "8.1 Sertifikasi Sistem Pengelolaan K3LL", "expected": 10, "original": {"predicted": 10, "confidence": 0.95, "comp_score": 10, "ev_score": 10, "hse_score": 10, "time": 92.94, "docs": 4}, "original_correct": 1, "enhanced_large": {"predicted": 6, "confidence": 0.9, "comp_score": 6, "ev_score": 6, "hse_score": 6, "time": 90.12, "docs": 4, "chunks": 41, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}, {"category_id": "8.2", "category_name": "8.2 Ciri-ciri Tambahan Sistem Pengelolaan K3LL", "expected": 10, "original": {"predicted": 0, "confidence": 0.95, "comp_score": 0, "ev_score": 0, "hse_score": 0, "time": 82.11, "docs": 4}, "original_correct": 0, "enhanced_large": {"predicted": 0, "confidence": 0.95, "comp_score": 0, "ev_score": 0, "hse_score": 0, "time": 72.13, "docs": 4, "chunks": 17, "relevant_chunks": 15, "embedding_model": "text-embedding-3-large"}, "enhanced_large_correct": 0}]};
+
+function renderSummary() {
+    const summary = DATA.summary;
+    const total = DATA.total_categories;
+    let html = '';
+    
+    if (summary.original) {
+        html += `<div class="summary-card">
+            <h3>Original Pipeline</h3>
+            <div class="value">${summary.original.correct}/${total}</div>
+            <div style="color: #94a3b8; font-size: 0.9rem; margin-top: 0.5rem;">${summary.original.accuracy.toFixed(1)}% accuracy</div>
+        </div>`;
+    }
+    
+    if (summary.enhanced_small) {
+        html += `<div class="summary-card">
+            <h3>Enhanced (Small)</h3>
+            <div class="value">${summary.enhanced_small.correct}/${total}</div>
+            <div style="color: #94a3b8; font-size: 0.9rem; margin-top: 0.5rem;">${summary.enhanced_small.accuracy.toFixed(1)}% accuracy</div>
+        </div>`;
+    }
+    
+    if (summary.enhanced_large) {
+        html += `<div class="summary-card">
+            <h3>Enhanced (Large)</h3>
+            <div class="value">${summary.enhanced_large.correct}/${total}</div>
+            <div style="color: #94a3b8; font-size: 0.9rem; margin-top: 0.5rem;">${summary.enhanced_large.accuracy.toFixed(1)}% accuracy</div>
+        </div>`;
+    }
+    
+    document.getElementById('summary-grid').innerHTML = html;
+}
+
+function renderResults() {
+    const results = DATA.results;
+    let html = '';
+    
+    results.forEach((r, idx) => {
+        const expected = r.expected;
+        
+        let origScore = '-', origBadge = '';
+        if (r.original) {
+            origScore = r.original.predicted;
+            origBadge = r.original_correct ? '<span class="badge correct">Correct</span>' : '<span class="badge incorrect">Wrong</span>';
+        }
+        
+        let smallScore = '-', smallBadge = '';
+        if (r.enhanced_small) {
+            smallScore = r.enhanced_small.predicted;
+            smallBadge = r.enhanced_small_correct ? '<span class="badge correct">Correct</span>' : '<span class="badge incorrect">Wrong</span>';
+        }
+        
+        let largeScore = '-', largeBadge = '';
+        if (r.enhanced_large) {
+            largeScore = r.enhanced_large.predicted;
+            largeBadge = r.enhanced_large_correct ? '<span class="badge correct">Correct</span>' : '<span class="badge incorrect">Wrong</span>';
+        }
+        
+        let bestMatch = 'None';
+        if (r.original_correct || r.enhanced_small_correct || r.enhanced_large_correct) {
+            const matches = [];
+            if (r.original_correct) matches.push('Orig');
+            if (r.enhanced_small_correct) matches.push('Small');
+            if (r.enhanced_large_correct) matches.push('Large');
+            bestMatch = matches.join(', ');
+        }
+        
+        html += `<tr>
+            <td>${idx + 1}</td>
+            <td><strong>${r.category_id}</strong></td>
+            <td>${r.category_name.substring(0, 50)}${r.category_name.length > 50 ? '...' : ''}</td>
+            <td><strong>${expected}</strong></td>
+            <td>
+                <div style="font-size: 1.2rem; font-weight: 700;">${origScore}</div>
+                ${origBadge}
+            </td>
+            <td>
+                <div style="font-size: 1.2rem; font-weight: 700;">${smallScore}</div>
+                ${smallBadge}
+            </td>
+            <td>
+                <div style="font-size: 1.2rem; font-weight: 700;">${largeScore}</div>
+                ${largeBadge}
+            </td>
+            <td>${bestMatch}</td>
+        </tr>`;
+    });
+    
+    document.getElementById('results-tbody').innerHTML = html;
+}
+
+renderSummary();
+renderResults();
+</script>
+</body>
+</html>

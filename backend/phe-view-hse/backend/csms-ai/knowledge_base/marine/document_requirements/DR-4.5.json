@@ -1,0 +1,31 @@
+{
+  "requirement_id": "DR-4.5",
+  "category_id": "4.5",
+  "required_documents": [
+    "- Dokumen HIRADC/Risk Register Lingkungan (Form standar HSE",
+    "memuat aspek lingkungan",
+    "bahaya potensial",
+    "tingkat risiko",
+    "dan matriks pengendalian)<br>- Prosedur Pengelolaan Sampah dan Limbah Cair/Padat Operasional (mengacu pada regulasi internasional MARPOL 73/78 Annex I & V untuk laut",
+    "serta regulasi lingkungan nasional untuk darat)<br>- Prosedur Pengelolaan Air Ballast / Ballast Water Management (jika berlaku pada jenis proyek perairan/marine)<br>- Log Catatan Pembuangan Sampah / Record of Garbage Discharges (mencatat tanggal",
+    "koordinat posisi kapal/lokasi kerja",
+    "kategori sampah",
+    "volume",
+    "tanda tangan petugas lapangan & verifikator pimpinan)<br>- Dokumen Serah Terima Limbah B3 internal / Waste Transfer Note (pencatatan internal kondisi dan detil drum penyimpanan limbah sebelum diserahkan)<br>- Manifest Elektronik Limbah B3 resmi dari instansi pemerintah terkait (seperti sistem Festronik)<br>- Bukti Sosialisasi/HSE Campaign Lingkungan (materi visual campaign",
+    "absensi fisik bertanda tangan",
+    "dan dokumentasi foto kegiatan)<br>- Laporan Hasil Pengujian Lingkungan (LHP) berkala dari Laboratorium Pihak Ketiga Terakreditasi KAN (mencakup Air Limbah Domestik",
+    "Udara Ambien",
+    "Emisi Cerobong Genset",
+    "dan Kebisingan Lingkungan)<br>- Sertifikat Lulus Uji Emisi Kendaraan Operasional Proyek darat yang masih berlaku<br>- Laporan Inspeksi/Pemantauan Lingkungan Lapangan Berkala oleh tim HSE<br>- Sertifikat Penghargaan Lingkungan Nasional/Daerah (PROPER Hijau/Emas atau setara) jika ada"
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

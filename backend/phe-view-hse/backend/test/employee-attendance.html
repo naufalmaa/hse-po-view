@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Absensi Karyawan - HSE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e4a8f;
+            --primary-light: #2a5db8;
+            --success: #16a34a;
+            --success-light: #22c55e;
+            --destructive: #dc2626;
+            --info: #0ea5e9;
+            --background: #f5f7fa;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --radius: 12px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+            color: white;
+            padding: 24px 28px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 40px -10px rgba(37, 99, 235, 0.4);
+        }
+
+        header .top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        header h1 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .logout-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        header .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .user-details h2 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .user-details p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .user-details .hsse-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        /* Time Display */
+        .time-card {
+            background: var(--card);
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .time-display .label {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .time-display .time {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'SF Mono', 'Consolas', monospace;
+            letter-spacing: -2px;
+        }
+
+        .time-display .date {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Stats */
+        .stats-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .stat-box {
+            background: var(--card);
+            padding: 16px;
+            border-radius: var(--radius);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .stat-box .label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .stat-box .value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .stat-box .value.success { color: var(--success); }
+        .stat-box .value.destructive { color: var(--destructive); }
+
+        /* Attendance Card */
+        .attendance-card {
+            background: var(--card);
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .attendance-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .attendance-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .attendance-status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .attendance-status.on-duty {
+            background: rgba(22, 163, 74, 0.1);
+            color: #16a34a;
+        }
+
+        .attendance-status.off-duty {
+            background: rgba(220, 38, 38, 0.1);
+            color: #dc2626;
+        }
+
+        .attendance-status.not-yet {
+            background: rgba(100, 116, 139, 0.1);
+            color: #64748b;
+        }
+
+        .attendance-body {
+            padding: 20px;
+        }
+
+        .attendance-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+        }
+
+        .attendance-row:not(:last-child) {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .attendance-row .label {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .attendance-row .value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .attendance-row .value.success { color: var(--success); }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 18px 24px;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 16px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-checkin {
+            background: var(--success);
+            color: white;
+            box-shadow: 0 4px 15px -3px rgba(22, 163, 74, 0.4);
+        }
+
+        .btn-checkin:hover:not(:disabled) {
+            background: var(--success-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-checkout {
+            background: var(--destructive);
+            color: white;
+            box-shadow: 0 4px 15px -3px rgba(220, 38, 38, 0.4);
+        }
+
+        .btn-checkout:hover:not(:disabled) {
+            transform: translateY(-2px);
+        }
+
+        /* History Section */
+        .history-card {
+            background: var(--card);
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .history-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .history-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .history-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            padding: 14px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .history-item:last-child {
+            border-bottom: none;
+        }
+
+        .history-item .date {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .history-item .times {
+            display: flex;
+            gap: 16px;
+        }
+
+        .history-item .time-item {
+            text-align: center;
+        }
+
+        .history-item .time-item .label {
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .history-item .time-item .value {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .history-item .time-item.check-in .value { color: var(--success); }
+        .history-item .time-item.check-out .value { color: var(--destructive); }
+
+        .empty-history {
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* Modal PIN */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal {
+            background: var(--card);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .modal-header {
+            padding: 24px 24px 16px;
+            text-align: center;
+        }
+
+        .modal-header .icon-wrap {
+            width: 56px;
+            height: 56px;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+
+        .modal-header .icon-wrap svg {
+            width: 28px;
+            height: 28px;
+            color: var(--primary);
+        }
+
+        .modal-header h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .modal-header p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .modal-body {
+            padding: 0 24px 24px;
+        }
+
+        .pin-inputs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 24px 0;
+        }
+
+        .pin-inputs input {
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: 700;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .pin-inputs input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+
+        .pin-error {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: var(--destructive);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .pin-error svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Photo Upload Styles */
+        .photo-upload-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 200px;
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--background);
+        }
+
+        .photo-placeholder:hover {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .photo-placeholder svg {
+            width: 48px;
+            height: 48px;
+            color: var(--text-muted);
+        }
+
+        .photo-placeholder span {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .photo-preview {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+        }
+
+        .btn-retake {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: var(--card);
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-retake:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-retake svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .photo-error {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: var(--destructive);
+            font-size: 14px;
+            margin-top: 12px;
+        }
+
+        .photo-error.show {
+            display: flex;
+        }
+
+        .photo-error svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .modal-footer {
+            padding: 0 24px 24px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-modal {
+            flex: 1;
+            padding: 16px;
+            border-radius: var(--radius);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            border: none;
+        }
+
+        .btn-cancel {
+            background: var(--card);
+            border: 2px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        .btn-confirm {
+            background: var(--primary);
+            color: white;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            padding: 16px 32px;
+            border-radius: var(--radius);
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .toast-success { background: var(--success); }
+        .toast-error { background: var(--destructive); }
+
+        /* Not Logged In State */
+        .not-logged-in {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 24px;
+        }
+
+        .not-logged-in.show {
+            display: flex;
+        }
+
+        .not-logged-in svg {
+            width: 80px;
+            height: 80px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .not-logged-in h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .not-logged-in p {
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .btn-login {
+            background: var(--primary);
+            color: white;
+            padding: 16px 32px;
+            border-radius: var(--radius);
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-login:hover {
+            background: var(--primary-light);
+        }
+    </style>
+</head>
+<body>
+    <!-- Not Logged In State -->
+    <div class="not-logged-in" id="notLoggedIn">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+        </svg>
+        <h2>Akses Terbatas</h2>
+        <p>Silakan login terlebih dahulu untuk mengakses halaman absensi</p>
+        <button class="btn-login" onclick="redirectToLogin()">Login Sekarang</button>
+    </div>
+
+    <!-- Main Content -->
+    <div id="mainContent">
+        <div class="container">
+            <header>
+                <div class="top-row">
+                    <h1>Absensi HSE</h1>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
+                <div class="user-info">
+                    <div class="avatar" id="userAvatar">--</div>
+                    <div class="user-details">
+                        <h2 id="userName">--</h2>
+                        <p id="userRole">Karyawan</p>
+                        <div class="hsse-badge" id="userHsse">HSSE: --</div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="time-card">
+                <div class="time-display">
+                    <div class="label">Waktu Sekarang</div>
+                    <div class="time" id="currentTime">--:--:--</div>
+                    <div class="date" id="currentDate">--</div>
+                </div>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-box">
+                    <div class="label">Masuk Hari Ini</div>
+                    <div class="value" id="checkInStat">--:--</div>
+                </div>
+                <div class="stat-box">
+                    <div class="label">Pulang Hari Ini</div>
+                    <div class="value" id="checkOutStat">--:--</div>
+                </div>
+            </div>
+
+            <div class="attendance-card">
+                <div class="attendance-header">
+                    <h3>Status Absensi Hari Ini</h3>
+                    <span class="attendance-status not-yet" id="todayStatus">Belum Absen</span>
+                </div>
+                <div class="attendance-body">
+                    <div class="attendance-row">
+                        <span class="label">Tanggal</span>
+                        <span class="value" id="todayDate">--</span>
+                    </div>
+                    <div class="attendance-row">
+                        <span class="label">Status Saat Ini</span>
+                        <span class="value" id="currentStatus">--</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons" id="actionButtons">
+                <button class="btn btn-checkin" id="btnCheckIn" onclick="initiateCheckIn()">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+                    </svg>
+                    Absen Masuk
+                </button>
+                <button class="btn btn-checkout" id="btnCheckOut" onclick="initiateCheckOut()">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                    </svg>
+                    Absen Keluar
+                </button>
+            </div>
+
+            <div class="history-card" style="margin-top: 16px;">
+                <div class="history-header">
+                    <h3>Riwayat Absensi (7 Hari Terakhir)</h3>
+                </div>
+                <div class="history-list" id="historyList">
+                    <div class="empty-history">Memuat riwayat...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Photo Upload Modal -->
+    <div class="modal-overlay" id="photoModal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="icon-wrap">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                </div>
+                <h3 id="modalAction">Absen Masuk</h3>
+                <p id="modalUser">Nama Karyawan</p>
+            </div>
+            <div class="modal-body">
+                <div class="photo-upload-area" id="photoUploadArea">
+                    <input type="file" id="photoInput" accept="image/*" capture="environment" style="display: none;" onchange="handlePhotoSelect(event)">
+                    <div class="photo-placeholder" id="photoPlaceholder" onclick="document.getElementById('photoInput').click()">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        <span>Klik untuk ambil foto</span>
+                    </div>
+                    <img id="photoPreview" class="photo-preview" style="display: none;">
+                    <button type="button" class="btn-retake" id="btnRetake" onclick="retakePhoto()" style="display: none;">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                        Ambil Ulang
+                    </button>
+                </div>
+                <div class="photo-error" id="photoError">
+                    <svg fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                    </svg>
+                    <span>Gagal upload foto, coba lagi</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-modal btn-cancel" onclick="closePhotoModal()">Batal</button>
+                <button class="btn-modal btn-confirm" id="btnConfirmPhoto" onclick="submitAttendance()">Konfirmasi</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        const API_BASE = 'http://localhost:3000/api/v1/employee';
+        const AUTH_BASE = 'http://localhost:3000/api/auth';
+        let currentUser = null;
+        let todayAttendance = null;
+        let currentAction = null;
+        let selectedPhoto = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAuth();
+            updateTime();
+            setInterval(updateTime, 1000);
+        });
+
+        function checkAuth() {
+            // Only check localStorage, no session check
+            const userData = localStorage.getItem('employeeUser');
+            if (userData) {
+                currentUser = JSON.parse(userData);
+                if (currentUser.id && currentUser.hssePassportNumber) {
+                    showMainContent();
+                } else {
+                    showLoginScreen();
+                }
+            } else {
+                showLoginScreen();
+            }
+        }
+
+        function showMainContent() {
+            document.getElementById('notLoggedIn').classList.remove('show');
+            document.getElementById('mainContent').style.display = 'block';
+            updateUserInfo();
+            loadTodayAttendance();
+            loadAttendanceHistory();
+        }
+
+        function showLoginScreen() {
+            document.getElementById('notLoggedIn').classList.add('show');
+            document.getElementById('mainContent').style.display = 'none';
+        }
+
+        function updateUserInfo() {
+            if (!currentUser) return;
+            document.getElementById('userAvatar').textContent = getInitials(currentUser.name);
+            document.getElementById('userName').textContent = currentUser.name || 'Unknown';
+            document.getElementById('userRole').textContent = getRoleLabel(currentUser.role);
+            document.getElementById('userHsse').textContent = 'HSSE: ' + (currentUser.hssePassportNumber || '-');
+        }
+
+        function getInitials(name) {
+            if (!name) return '--';
+            return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+        }
+
+        function getRoleLabel(role) {
+            const labels = {
+                'admin': 'Administrator',
+                'user': 'User',
+                'employee': 'Karyawan',
+                'crew': 'Crew',
+                'contractor': 'Kontraktor',
+                'evaluator': 'Evaluator',
+                'verifikator': 'Verifikator',
+                'manager': 'Manager'
+            };
+            return labels[role] || role || 'Karyawan';
+        }
+
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            const dateString = now.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+            document.getElementById('currentTime').textContent = timeString;
+            document.getElementById('currentDate').textContent = dateString;
+        }
+
+        async function loadTodayAttendance() {
+            try {
+                const today = new Date().toISOString().slice(0, 10);
+                const response = await fetch(`${API_BASE}/attendance/list`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ date_start: today, date_end: today, limit: 100 })
+                });
+
+                if (response.status === 401 || response.status === 403) {
+                    showLoginScreen();
+                    return;
+                }
+
+                const result = await response.json();
+
+                if (result.success && result.data) {
+                    // Find today's attendance for current user
+                    todayAttendance = result.data.find(a => a.employeeId === currentUser.id) || null;
+                    updateAttendanceUI();
+                }
+            } catch (error) {
+                console.error('Error loading attendance:', error);
+            }
+        }
+
+        async function loadAttendanceHistory() {
+            try {
+                const list = document.getElementById('historyList');
+                const response = await fetch(`${API_BASE}/attendance/list`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ limit: 100 })
+                });
+
+                if (response.status === 401 || response.status === 403) {
+                    showLoginScreen();
+                    return;
+                }
+
+                const result = await response.json();
+
+                if (result.success && result.data) {
+                    // Filter and sort by date for current user
+                    const userAttendance = result.data
+                        .filter(a => a.employeeId === currentUser.id)
+                        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                        .slice(0, 7);
+
+                    if (userAttendance.length === 0) {
+                        list.innerHTML = '<div class="empty-history">Belum ada riwayat absensi</div>';
+                        return;
+                    }
+
+                    // Group by date
+                    const grouped = {};
+                    userAttendance.forEach(record => {
+                        const date = new Date(record.createdAt).toLocaleDateString('id-ID', { weekday: 'short', day: 'numeric', month: 'short' });
+                        if (!grouped[date]) grouped[date] = { checkIn: null, checkOut: null };
+                        if (record.statusAfter === 'on_duty') grouped[date].checkIn = record.createdAt;
+                        if (record.statusAfter === 'off_duty') grouped[date].checkOut = record.createdAt;
+                    });
+
+                    list.innerHTML = Object.entries(grouped).map(([date, times]) => `
+                        <div class="history-item">
+                            <span class="date">${date}</span>
+                            <div class="times">
+                                <div class="time-item check-in">
+                                    <div class="label">Masuk</div>
+                                    <div class="value">${times.checkIn ? formatTime(times.checkIn) : '-'}</div>
+                                </div>
+                                <div class="time-item check-out">
+                                    <div class="label">Pulang</div>
+                                    <div class="value">${times.checkOut ? formatTime(times.checkOut) : '-'}</div>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('Error loading history:', error);
+                document.getElementById('historyList').innerHTML = '<div class="empty-history">Gagal memuat riwayat</div>';
+            }
+        }
+
+        function formatTime(iso) {
+            if (!iso) return '--:--';
+            return new Date(iso).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function updateAttendanceUI() {
+            const today = new Date().toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+            document.getElementById('todayDate').textContent = today;
+
+            const btnCheckIn = document.getElementById('btnCheckIn');
+            const btnCheckOut = document.getElementById('btnCheckOut');
+            const todayStatus = document.getElementById('todayStatus');
+            const currentStatus = document.getElementById('currentStatus');
+            const checkInStat = document.getElementById('checkInStat');
+            const checkOutStat = document.getElementById('checkOutStat');
+
+            if (!todayAttendance) {
+                // No attendance record yet
+                todayStatus.className = 'attendance-status not-yet';
+                todayStatus.textContent = 'Belum Absen';
+                currentStatus.textContent = 'Libur / Belum Masuk';
+                checkInStat.textContent = '--:--';
+                checkInStat.className = 'value';
+                checkOutStat.textContent = '--:--';
+                checkOutStat.className = 'value';
+                btnCheckIn.style.display = 'flex';
+                btnCheckOut.style.display = 'none';
+            } else if (todayAttendance.statusAfter === 'on_duty') {
+                // Checked in
+                const checkInTime = formatTime(todayAttendance.createdAt);
+                todayStatus.className = 'attendance-status on-duty';
+                todayStatus.textContent = 'Sudah Masuk';
+                currentStatus.textContent = 'Sedang Bertugas';
+                checkInStat.textContent = checkInTime;
+                checkInStat.className = 'value success';
+                checkOutStat.textContent = '--:--';
+                checkOutStat.className = 'value';
+                btnCheckIn.style.display = 'none';
+                btnCheckOut.style.display = 'flex';
+            } else if (todayAttendance.statusAfter === 'off_duty') {
+                // Checked out - need to find check-in record
+                const checkInRecord = findCheckInRecord();
+                const checkInTime = checkInRecord ? formatTime(checkInRecord.createdAt) : '--:--';
+                const checkOutTime = formatTime(todayAttendance.createdAt);
+
+                todayStatus.className = 'attendance-status off-duty';
+                todayStatus.textContent = 'Sudah Pulang';
+                currentStatus.textContent = 'Tugas Selesai';
+                checkInStat.textContent = checkInTime;
+                checkInStat.className = 'value success';
+                checkOutStat.textContent = checkOutTime;
+                checkOutStat.className = 'value destructive';
+                btnCheckIn.style.display = 'none';
+                btnCheckOut.style.display = 'none';
+            }
+        }
+
+        function findCheckInRecord() {
+            const today = new Date().toISOString().slice(0, 10);
+            return fetch(`${API_BASE}/attendance/list`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ date_start: today, date_end: today, limit: 100 })
+            })
+            .then(r => r.json())
+            .then(result => {
+                if (result.success && result.data) {
+                    return result.data.find(a =>
+                        a.employeeId === currentUser.id &&
+                        a.statusAfter === 'on_duty'
+                    );
+                }
+                return null;
+            });
+        }
+
+        function logout() {
+            // Just clear localStorage, no session call
+            localStorage.removeItem('employeeUser');
+            window.location.href = 'employee-login.html';
+        }
+
+        function initiateCheckIn() {
+            currentAction = 'check-in';
+            openPhotoModal();
+        }
+
+        function initiateCheckOut() {
+            currentAction = 'check-out';
+            openPhotoModal();
+        }
+
+        function openPhotoModal() {
+            document.getElementById('modalAction').textContent = currentAction === 'check-in' ? 'Absen Masuk' : 'Absen Keluar';
+            document.getElementById('modalUser').textContent = currentUser.name;
+            document.getElementById('photoModal').classList.add('active');
+            document.getElementById('photoError').classList.remove('show');
+            selectedPhoto = null;
+            resetPhotoUI();
+        }
+
+        function closePhotoModal() {
+            document.getElementById('photoModal').classList.remove('active');
+        }
+
+        function resetPhotoUI() {
+            document.getElementById('photoPlaceholder').style.display = 'flex';
+            document.getElementById('photoPreview').style.display = 'none';
+            document.getElementById('btnRetake').style.display = 'none';
+            document.getElementById('photoInput').value = '';
+        }
+
+        function handlePhotoSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            selectedPhoto = file;
+
+            // Show preview
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                document.getElementById('photoPreview').src = e.target.result;
+                document.getElementById('photoPlaceholder').style.display = 'none';
+                document.getElementById('photoPreview').style.display = 'block';
+                document.getElementById('btnRetake').style.display = 'flex';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function retakePhoto() {
+            selectedPhoto = null;
+            resetPhotoUI();
+            document.getElementById('photoInput').click();
+        }
+
+        async function submitAttendance() {
+            if (!selectedPhoto) {
+                showToast('Silakan ambil foto terlebih dahulu', 'error');
+                return;
+            }
+
+            const btn = document.getElementById('btnConfirmPhoto');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="loading-spinner"></span>';
+            btn.disabled = true;
+
+            try {
+                // First, get employee ID from hssePassportNumber
+                const empResponse = await fetch(`${API_BASE}/employee/list`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ limit: 1000 })
+                });
+                const empResult = await empResponse.json();
+
+                if (!empResult.success) throw new Error('Failed to get employee');
+
+                const employee = empResult.data?.find(e => e.hssePassportNumber === currentUser.hssePassportNumber);
+                if (!employee) throw new Error('Employee not found');
+
+                const status = currentAction === 'check-in' ? 'on_duty' : 'off_duty';
+
+                // Create FormData for multipart upload
+                const formData = new FormData();
+                formData.append('employeeId', employee.id);
+                formData.append('status', status);
+                formData.append('photoEvidence', selectedPhoto);
+
+                const response = await fetch(`${API_BASE}/attendance/update`, {
+                    method: 'POST',
+                    credentials: 'include',
+                    body: formData
+                });
+
+                if (response.status === 401 || response.status === 403) {
+                    showLoginScreen();
+                    return;
+                }
+
+                const result = await response.json();
+
+                if (result.success) {
+                    closePhotoModal();
+                    showToast(currentAction === 'check-in' ? 'Absen masuk berhasil!' : 'Absen keluar berhasil!', 'success');
+                    await loadTodayAttendance();
+                    await loadAttendanceHistory();
+                } else {
+                    document.getElementById('photoError').classList.add('show');
+                }
+            } catch (error) {
+                console.error('Submit attendance error:', error);
+                showToast('Gagal memproses absensi', 'error');
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        function showToast(msg, type) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.className = `toast toast-${type} show`;
+            setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        // Close modal on outside click
+        window.onclick = (e) => {
+            if (e.target === document.getElementById('photoModal')) closePhotoModal();
+        };
+
+        function redirectToLogin() {
+            // Redirect to login with current URL as return target
+            const currentUrl = encodeURIComponent(window.location.href);
+            window.location.href = `employee-login.html?redirect=${currentUrl}`;
+        }
+    </script>
+</body>
+</html>

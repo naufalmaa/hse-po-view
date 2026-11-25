@@ -1,0 +1,38 @@
+{
+  "requirement_id": "DR-3.2",
+  "category_id": "3.2",
+  "required_documents": [
+    "- Matrix Training Need Analysis (TNA) / Matrix Pelatihan untuk posisi kunci (e.g. Manajer",
+    "Supervisor",
+    "dan Pemegang Jabatan K3LL) yang disahkan oleh pejabat berwenang",
+    "memuat: nama karyawan",
+    "jabatan",
+    "departemen",
+    "jenis pelatihan (Internal/Eksternal",
+    "K3LL/Technical)",
+    "target tanggal/tahun rencana",
+    "dan status realisasi (done/pending).<br>- Laporan Rekapitulasi & Persentase Kepatuhan (Compliance) Pelatihan: memuat visualisasi atau tabel perhitungan pencapaian % realisasi vs target rencana pelatihan",
+    "dipisah antara Pelatihan K3LL Formal dan Pelatihan Technical Formal.<br>- Sertifikat Pelatihan/Kompetensi K3LL Formal per individu (e.g. Sertifikat Ahli K3 Umum/Migas",
+    "BOSIET",
+    "HUET",
+    "First Aid",
+    "Sistem Izin Kerja Aman (SIKA)",
+    "CSMS",
+    "Higiene Industri",
+    "dll) yang diterbitkan oleh instansi resmi atau asosiasi berwenang.<br>- Sertifikat Pelatihan Technical Formal per individu yang relevan dengan tugas dan fungsi jabatan manajerial/teknis operasional (e.g. Auditor Sistem Manajemen",
+    "Marine Surveyor",
+    "Superintendent",
+    "Project Management",
+    "dll)."
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

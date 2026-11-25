@@ -1,0 +1,21 @@
+{
+  "requirement_id": "DR-6.5",
+  "category_id": "6.5",
+  "required_documents": [
+    "1. Kebijakan & Prosedur Investigasi dan Pelaporan Insiden sesuai regulasi yang berlaku (seperti UU No. 1 Tahun 1970 atau standar keselamatan industri sejenis).<br>2. Formulir Laporan Resmi & Bukti Kepatuhan (misal: Formulir Laporan Kecelakaan",
+    "Berita Acara Kejadian",
+    "Laporan Investigasi Insiden).<br>3. Laporan Bulanan Nil Accident / Surat Pernyataan Zero Accident resmi yang ditandatangani oleh pimpinan unit kerja berwenang (misal: Nakhoda Kapal / Kepala Proyek) dan berstempel resmi secara rutin setiap bulan selama proyek berjalan.<br>4. HSE Monthly Performance Report yang mencantumkan statistik Jam Kerja Aman (Safe Man Hours).<br>5. Evidence Proaktif (Pembelajaran Kasus): Laporan pelaksanaan Safety Stand Down (SSD) Meeting harian/mingguan (memuat materi pembahasan/alert insiden eksternal",
+    "absensi bertandatangan",
+    "dan foto dokumentasi kegiatan)."
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

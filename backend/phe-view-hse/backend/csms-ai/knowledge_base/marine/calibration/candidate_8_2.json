@@ -1,0 +1,87 @@
+{
+  "category_id": "8.2",
+  "expected_score": 10,
+  "calibrated_score": 6,
+  "criteria": [
+    {
+      "type": "document_presence",
+      "status": "pass",
+      "evidence": [
+        "PENGHARGAAN ZA_KEMNAKER.pdf",
+        "b. Sertifikat Keanggotaan P2K3.pdf",
+        "8.2.6. KADIN Member of PT Makara Jaya Marine.pdf",
+        "8.2.4. Kartu Tanda Anggota Asosiasi Independen Surveyor Indonesia PT Makara Jaya Marine 2025.pdf"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "type": "keyword_coverage",
+      "status": "fail",
+      "evidence": [],
+      "confidence": 0.8
+    },
+    {
+      "type": "mandatory_fields",
+      "status": "pass",
+      "evidence": [
+        "Tahun penghargaan (dalam 5 tahun terakhir: ya/tidak)",
+        "Jenis penghargaan (internal/pemda/nasional)",
+        "Nama lembaga pemberi penghargaan",
+        "Kesesuaian nama perusahaan di sertifikat"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "type": "implementation_evidence",
+      "status": "fail",
+      "evidence": [
+        "0 implementation mentions"
+      ],
+      "confidence": 0.7
+    },
+    {
+      "type": "temporal_validity",
+      "status": "fail",
+      "evidence": [
+        "0 dates found"
+      ],
+      "confidence": 0.7
+    }
+  ],
+  "kb_expansion": {
+    "additional_keywords": [
+      "ADD: marine-specific term for 8.2",
+      "ADD: regulatory reference (SOLAS/MARPOL/ISPS/STCW)",
+      "ADD: Indonesian/English variation"
+    ],
+    "additional_mandatory_fields": [],
+    "additional_document_requirements": [],
+    "implementation_checks": [
+      "ADD: execution proof requirement for 8.2",
+      "ADD: minimum evidence count"
+    ]
+  },
+  "score_gates": {
+    "0": {
+      "min_documents": 0,
+      "min_keywords": 0,
+      "min_mandatory": 0
+    },
+    "3": {
+      "min_documents": 1,
+      "min_keywords": 2,
+      "min_mandatory": 1
+    },
+    "6": {
+      "min_documents": 3,
+      "min_keywords": 4,
+      "min_mandatory": 3
+    },
+    "10": {
+      "min_documents": 5,
+      "min_keywords": 6,
+      "min_mandatory": 5,
+      "implementation_proof": true
+    }
+  }
+}

@@ -1,0 +1,30 @@
+category_id,category_name,expected,chunks,documents,keywords,mandatory,raw_score,calibrated,original,enhanced,calibrated_correct,gaps
+1,1 Kepemimpinan dan Komitmen,10,379,30,1,7,8.05,10,0,0,1,0
+2,2 Kebijakan dan Sasaran Strategis K3LL,10,722,17,4,6,8.05,10,3,3,1,0
+3.1,3.1 Struktur Organisasi untuk Pengelolaan K3LL,10,344,8,2,5,8.05,10,3,0,1,0
+3.2,"3.2 Pelatihan K3LL untuk para Manajer, pengawas (s",10,108,9,2,6,6.25,10,3,0,1,0
+3.3,3.3 Pelatihan K3LL Umum (pada seluruh pekerja dan ,10,56,4,0,5,6.3,10,0,0,1,0
+3.4,3.4 Pemenuhan Kompetensi Teknis dan K3LL,10,511,9,0,7,8.05,10,0,0,1,0
+3.5,3.5 Pengelolaan K3LL kontraktor (Mitra Kerja),10,98,4,0,6,8.05,10,0,0,1,0
+3.6,3.6 Peraturan dan Standar K3LL,10,883,14,3,5,8.05,10,3,3,1,0
+4.1,4.1 Penilaian dan Pengendalian Risiko,6,916,28,3,5,10.0,10,3,3,0,0
+4.2,4.2 Bahaya Terhadap Kesehatan Kerja,10,2516,36,1,5,8.05,10,3,3,1,0
+4.3,4.3 Bahaya Terhadap Keselamatan Kerja,10,935,36,3,5,8.05,10,3,0,1,0
+4.4,4.4 Bahaya Terhadap Kegiatan Logistik,10,225,9,1,6,8.05,10,0,0,1,0
+4.5,4.5 Bahaya Terhadap Lingkungan,10,576,12,2,5,8.05,10,0,0,1,0
+4.6,4.6 Bahaya Terhadap Keamanan,10,208,12,5,5,9.12,10,3,0,1,0
+4.7,4.7 Bahaya Terhadap Aspek Sosial,10,121,10,2,4,8.05,10,3,3,1,0
+4.8,4.8 Alat Pelindung Diri (APD),10,28225,11,4,5,8.05,10,3,3,1,0
+5.1,5.1 Manual Operasi K3LL,10,231,7,2,5,8.05,10,3,3,1,0
+5.2,5.2 Kehandalan Infrastruktur dan Peralatan,10,332,15,0,5,8.05,10,3,3,1,0
+5.3,5.3 Manajemen Perubahan,10,104,5,3,5,8.05,10,3,3,1,0
+5.4,5.4 Implementasi Tanggap Darurat,10,330,19,8,6,9.12,10,3,3,1,0
+6.1,6.1 Sistem Pemantauan Kinerja K3LL,10,221,24,1,5,7.18,10,6,3,1,0
+6.2,6.2 Indikator Kinerja K3LL,10,216,24,2,4,7.18,10,3,0,1,0
+6.3,6.3 Pemantauan Kinerja K3LL,10,201,24,3,5,7.18,10,3,3,1,0
+6.4,6.4 Investigasi dan Tindak Lanjut Insiden K3LL,10,226,6,5,5,9.12,10,3,3,1,0
+6.5,6.5 Insiden yang Harus Dilaporkan Sesuai Undang-Un,0,0,0,0,0,0.0,0,0,0,1,0
+7.1,7.1 Audit,10,80,3,1,5,8.05,10,3,0,1,0
+7.2,7.2 Tinjauan Manajemen,10,19,2,1,4,6.08,10,6,0,1,0
+8.1,8.1 Sertifikasi Sistem Pengelolaan K3LL,10,41,4,4,3,5.19,6,10,6,0,3
+8.2,8.2 Ciri-ciri Tambahan Sistem Pengelolaan K3LL,10,17,4,0,4,4.43,6,0,0,0,3

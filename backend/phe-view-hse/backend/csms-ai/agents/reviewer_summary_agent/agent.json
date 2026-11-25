@@ -1,0 +1,5 @@
+{
+  "agent_id": "reviewer_summary_agent",
+  "name": "Reviewer Summary Agent",
+  "type": "model-agnostic"
+}

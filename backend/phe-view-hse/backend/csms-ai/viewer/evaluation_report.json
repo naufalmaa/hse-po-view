@@ -1,0 +1,1110 @@
+{
+    "timestamp": "2026-07-08 11:59:49",
+    "total_categories": 29,
+    "passed": 1,
+    "needs_review": 2,
+    "failed": 26,
+    "accuracy": 10.3,
+    "results": [
+        {
+            "category_id": "1",
+            "folder_name": "1 Kepemimpinan dan Komitmen",
+            "expected_score": 10,
+            "predicted_score": 3,
+            "confidence": 0.54,
+            "status": "failed",
+            "evidence_count": 30,
+            "evidence_found": [
+                "MWT / Vessel Management Visit reports dated 20 Jan 2025 and 12 Mar 2025",
+                "MWT reports show verification/approval (DPA/Head of Operations and approved by Director)",
+                "Delegation of Authority for MWT dated 8 Sep 2025",
+                "MoM / meeting evidence: HSE Meeting Level 2 (14 Nov 2025) and multiple town-hall/manager meetings (Sep\n\nDec 2025)",
+                "MoM/minutes reference K3LL topics (safety drills, confined-space campaign, KPI/HSE performance)"
+            ],
+            "missing_evidence": [
+                "Approved HSE Plan containing explicit jadwal MWT (denominator needed to compute % realisasi MWT)",
+                "Complete mapping of all scheduled MWTs to actual MWT reports (to calculate % realisasi MWT)",
+                "Quantified % bulan dengan MoM office\n\nfield (months-with-MoM vs total project months)",
+                "Evidence of HSE reward (min. 1x/year) such as certificate, photo, or announcement",
+                "Clear sosialisasi/campaign HSE evidence with photos and attendance lists (absensi)",
+                "Full set of MWT reports showing required fields for every report (date, location, senior manager name + signature, findings, tindak lanjut) mapped to schedule",
+                "Documentation or tables (section_check/table_check outputs) enumerating schedule and realization for automated validation"
+            ],
+            "reasoning": [
+                "Two jurors (Compliance and HSE) scored 3 citing missing critical items (HSE Plan jadwal MWT and ability to compute % realisasi MWT; MoM monthly coverage not quantified). One juror (Evidence) scored 6 based on positive signs of senior-management involvement and signed reports but also flagged inability to compute % realisasi and unclear MoM frequency.",
+                "Scoring rules: score 0 requires no MWT reports and missing HSE Plan; that is not applicable because MWT reports exist.",
+                "Score 6 and 10 both require a verified % realisasi MWT (>=50% for 6, 100% for 10) and quantified MoM monthly coverage (>=50% for 6, 100% for 10). Because the approved HSE Plan with scheduled MWT (the denominator) is not available, % realisasi cannot be calculated; therefore the criteria for 6 or 10 cannot be deterministically met.",
+                "Available evidence (signed MWT reports, delegation, recurring meetings) demonstrates some senior-management involvement but is insufficiently complete or auditable to confirm consistent implementation per SR-1 thresholds; this aligns with the 'SKOR 3' description ('keterlibatan ada tapi sangat terbatas').",
+                "Given the jurors' inputs and the scoring rules, the conservative and rules-compliant recommendation is SKOR 3. This avoids over-crediting incomplete evidence while recognizing documented senior-management activity.",
+                "Requires review: to consider upgrading to 6 (or 10) the following must be supplied: the approved HSE Plan with MWT schedule; mapping of scheduled vs performed MWTs (to compute % realisasi); monthly MoM log to compute % bulan dengan MoM; complete MWT reports with signatures and follow-ups; and for score 10, HSE reward and sosialisasi/campaign evidence plus program/delegation documentation as required."
+            ],
+            "processing_time_sec": 141.75,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "2",
+            "folder_name": "2 Kebijakan dan Sasaran Strategis K3LL",
+            "expected_score": 10,
+            "predicted_score": 3,
+            "confidence": 0.66,
+            "status": "failed",
+            "evidence_count": 17,
+            "evidence_found": [
+                "Company QHSE policy (K/LSM/01 Rev.09, effective 2 Oct 2023)",
+                "HSE Plan documents and Bridging Document present",
+                "HSSE performance form and CSV metrics (lagging/leading indicators)",
+                "Management meeting minutes indicating HSE focus and assigned PICs",
+                "Signature/approval indicators on some policy documents (approver names/PICs repeated)"
+            ],
+            "missing_evidence": [
+                "Daftar tanda tangan komitmen pekerja (nama + jabatan + tanda tangan)",
+                "% pekerja yang sudah menandatangani komitmen vs total employee data",
+                "% pekerja yang mengikuti sosialisasi (attendance/absensi lists with dates) / tanggal sosialisasi dan absensi peserta",
+                "Hasil nilai test evaluasi per pekerja (per-individual scores or pass/fail)",
+                "Explicit evidence that both CLSR and AKHLAK topics were covered in sosialisasi materials",
+                "Structured tables/sections showing attendance and test score breakdowns (table_check/section_check outputs)"
+            ],
+            "reasoning": [
+                "SR-2: SKOR 0 applies only if kebijakan tidak ada OR % coverage sosialisasi = 0%. Policy documents exist, so SKOR 0 is not strictly supported by the rule set.",
+                "Both Compliance and Evidence jurors scored 3 because policies are present but critical mandatory sosialisasi artifacts (test evaluation results per worker, attendance lists/dates, daftar tanda tangan komitmen pekerja, % coverage metrics) are missing \u2014 and absence of test evaluation meets SR-2 condition for SKOR 3.",
+                "HSE juror argued for SKOR 0 by treating lack of documented attendance/coverage as evidentiary 0%; however SR-2 requires either an explicit absence of policy or documented 0% coverage. Because the policy exists and there is no definitive proof that coverage = 0%, SKOR 3 is the more appropriate application of the written scoring rules.",
+                "The available evidence (policies, HSE Plan, meeting minutes, performance forms, some signatures) demonstrates governance and activity but lacks the mandatory per-worker proof (attendance, commitments, test results) required to reach higher scores (6 or 10).",
+                "Given the two jurors supporting SKOR 3, the rule text that cites missing test evaluation as a SKOR 3 condition, and the lack of explicit 0% coverage evidence, the recommended score is 3.",
+                "Requires review: true \u2014 to confirm and possibly raise the score, request the missing mandatory artifacts: signed worker commitment list, attendance/absensi with dates and counts, per-worker test evaluation results, and explicit sosialisasi materials covering CLSR and AKHLAK."
+            ],
+            "processing_time_sec": 98.67,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "3.1",
+            "folder_name": "3.1 Struktur Organisasi untuk Pengelolaan K3LL",
+            "expected_score": 10,
+            "predicted_score": 3,
+            "confidence": 0.5,
+            "status": "failed",
+            "evidence_count": 8,
+            "evidence_found": [
+                "Organigram (shore-based & shipboard) present with named HSE positions (QHSE Manager Eka Nirwana, Fleet Manager Parabu S. Rizki, Project Manager Yundi Armanda).",
+                "QHSE/IMS Manual and Roles & Responsibilities documents exist and include role descriptions and QHSE-related duties (Top Management, Fleet Manager, Master).",
+                "Certificates and training records are present for personnel, including a 'Calon Ahli K3 Umum' (26 Jan\u201306 Feb 2022) and various maritime/QHSE trainings.",
+                "Personnel CVs / biodata and some employee lists are included in the submitted material.",
+                "Automated checks ran: keyword_search detected 2/9 AI checkpoint keywords; section/table/date validators were attempted (date_validation failed)."
+            ],
+            "missing_evidence": [
+                "HSE Plan staffing requirement (kebutuhan pengawas K3LL) \u2014 required to compute % pemenuhan pengawas K3LL.",
+                "Clear certificate metadata for K3LL-recognized credentials (AK3U / K3LL SKK Migas or equivalent): certificate numbers, issuing authority, issuance and expiry dates.",
+                "Validated count of valid certified pengawas K3LL (numerator) and documented HSE Plan requirement (denominator) to calculate % pemenuhan.",
+                "Complete, machine-readable employee data with total project workforce and roles (nama, jabatan, status).",
+                "Evidence that supervisors/penyelia hold recognized K3LL certificates (required condition for score 10).",
+                "Explicit R&R text verifying K3LL responsibilities across all required levels (Top Management, Management, Office staff, Field Crew) in a verifiable format."
+            ],
+            "reasoning": [
+                "Consensus of jurors: all three jurors scored 3 with similar justifications \u2014 organizational structure and R&R exist, but certification completeness/validity and required numeric data are not verifiable.",
+                "Apply SR-3.1: score 3 corresponds to 'struktur ada tapi tidak lengkap / sertifikasi kurang' which matches the evidence pattern (R&R present but explicit K3LL responsibilities across all levels and certificate validity/% pemenuhan cannot be demonstrated).",
+                "Key deterministic checks missing: without HSE Plan staffing requirement and clear certificate metadata (issuers and expiry dates) the % pemenuhan cannot be calculated, and supervisors' certification status cannot be confirmed \u2014 these gaps preclude scores 6 or 10.",
+                "Automated validation weaknesses (keyword coverage 2/9, failed date validation) reduce confidence in the submitted documentation's completeness and verifiability.",
+                "Confidence reported is the average of juror confidences (0.50); requires_review is true because providing the missing evidence (HSE Plan requirement, validated certificates, complete employee data, explicit R&R wording, supervisor certificates) could change the score to 6 or 10 upon re-evaluation."
+            ],
+            "processing_time_sec": 117.41,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "3.2",
+            "folder_name": "3.2 Pelatihan K3LL untuk para Manajer, pengawas (supervisor) dan pemegang jabatan penting K3LL",
+            "expected_score": 10,
+            "predicted_score": 3,
+            "confidence": 0.62,
+            "status": "failed",
+            "evidence_count": 9,
+            "evidence_found": [
+                "2025 REV training/job matrix (sheet) listing topics and planned trainings",
+                "Training realization record: 12 planned events / 10 completed -> 83% realization for 2025 land-based training man-days",
+                "Multiple individual certificates and course records with dates and some certificate IDs (examples: PTW PA/AA/SC trainings 2022-2024, First Aid 2024, ISO/PROPER 2024)",
+                "Ministerial appointment for Ahli K3 Umum (Anindya Yessi Nareswari) dated 15 Aug 2025 with 3-year validity",
+                "Training topics covered in documents include hazard ID, risk assessment, permit-to-work, first aid, industrial hygiene, ISO auditing (indicating relevant K3LL/technical content)"
+            ],
+            "missing_evidence": [
+                "Explicit TNA matrix mapping employee NAME and JOB TITLE to target trainings (mandatory: 'Nama pekerja dan jabatan dalam TNA')",
+                "Numeric % compliance K3LL formal (realized/target) explicitly calculated and documented",
+                "Numeric % compliance Technical formal (realized/target) explicitly calculated and documented",
+                "Per-individual linkage showing status realisasi (done/pending) with cross-reference to each individual's certificate",
+                "Consolidated certificate expiry/validity audit showing % of certificates still valid (required thresholds: >=80% for score 6; 100% for score 10)",
+                "Evidence that TNA explicitly covers ALL required positions (Manager, Supervisor, Pemegang Jabatan K3LL)",
+                "Explicit presence of required formal K3LL course names where applicable (e.g., BOSIET, HUET, K3 Migas) for relevant roles",
+                "Outputs from automated validators (section_check, table_check) or equivalent structured tables to verify TNA and matrices"
+            ],
+            "reasoning": [
+                "SR-3.2 scoring is strict and requires verifiable, numeric compliance fields and per-individual TNA linkage; those mandatory data points are missing or not explicitly documented.",
+                "Two jurors (Evidence and HSE) agree there is clear training activity (matrix, certificates, and an 83% realization metric) which supports a non-zero score; the Compliance juror stresses that missing mandatory numeric fields and verifiable links force a zero if strict proof is required.",
+                "The available 83% realization metric supports that % compliance for some training activity is >=50% and <100%, but it is not explicitly labeled as '% compliance K3LL formal' and there is no separate documented '% compliance Technical formal'\u2014both are required by SR-3.2 for awarding score 6.",
+                "Score 6 requires additional conditions (TNA covers all managers/supervisors/K3 holders; certificates for every 'done' item; >=80% certificates valid). The evidence suggests many recent certificates exist, but there is no consolidated expiry analysis to confirm the >=80% validity threshold, nor clear per-individual TNA mapping to confirm coverage.",
+                "Given documented training activity and certificates but lacking the mandatory structured/numeric evidence required for higher tiers, the balanced and rules-consistent resolution is SKOR 3: 'Ada pelatihan tapi tidak memadai (<50% dari target)' in practice reflecting 'training exists but documentation incomplete for higher scores.'",
+                "Requires review and remediation to raise score: upload the TNA with names/positions, compute and present numeric % compliance for K3LL and Technical separately, attach all certificates mapped to 'done' records with expiry dates, and provide a consolidated expiry/validity summary and validator outputs."
+            ],
+            "processing_time_sec": 140.89,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "3.3",
+            "folder_name": "3.3 Pelatihan K3LL Umum (pada seluruh pekerja dan pihak yang terkait)",
+            "expected_score": 10,
+            "predicted_score": 0,
+            "confidence": 0.9,
+            "status": "failed",
+            "evidence_count": 4,
+            "evidence_found": [
+                "Provided documents are HIRADC / risk assessment materials (pdf/images) rather than training/TNA documentation.",
+                "Keyword search returned 0/9 AI checkpoint keywords related to non-formal K3LL training (e.g., 'training matrix', 'TNA non-formal', 'toolbox meeting').",
+                "No attendance lists (absensi) or per-session training materials were located in the submitted evidence.",
+                "Validation checks (section_check/table_check) did not find training matrix, TNA, or required training procedure sections."
+            ],
+            "missing_evidence": [
+                "TNA / Training matrix for non-formal K3LL (office and field)",
+                "% compliance pelatihan K3LL non-formal pekerja kantor",
+                "% compliance pelatihan K3LL non-formal pekerja lapangan",
+                "% coverage peserta (unique names in absensi vs total employee data)",
+                "Absensi peserta per sesi pelatihan (attendance lists)",
+                "Judul/materi setiap sesi pelatihan (session materials)",
+                "Prosedur Pelatihan K3LL (training procedure)",
+                "Prosedur Pelatihan Technical (technical training procedure)",
+                "Evidence of additional training outside TNA (certificates/absensi) if claiming score 10"
+            ],
+            "reasoning": [
+                "All three jurors independently scored 0 with high confidence (0.9) and reasoning consistent with SR-3.3 conditions.",
+                "SR-3.3 specifies SKOR 0 applies when TNA is absent AND there are no training attendance records; current evidence meets both conditions.",
+                "Keyword and document checks found no training-related keywords, matrices, TNA, attendance, or session materials; mandatory fields required by VR-3.3 are missing.",
+                "Without TNA and absensi it is impossible to calculate % compliance or % coverage as required by the scoring rules, precluding scores 3, 6, or 10.",
+                "Given unanimous juror agreement, the absence of conflicting evidence, and direct match to the SR-3.3 SKOR 0 condition, the final recommended score is 0."
+            ],
+            "processing_time_sec": 58.64,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "3.4",
+            "folder_name": "3.4 Pemenuhan Kompetensi Teknis dan K3LL",
+            "expected_score": 10,
+            "predicted_score": 3,
+            "confidence": 0.69,
+            "status": "failed",
+            "evidence_count": 9,
+            "evidence_found": [
+                "Procedure RAS-HOP-07 (competency procedure) dated 06-01-2025",
+                "Training matrix F-073/P and induction materials (Oct 2025)",
+                "Crew certificate monitoring sheet (TB. FORISA 12) with sample expiry dates (e.g., 2026-2029)",
+                "Individual competency evaluation forms (FM-HR-05) showing per-person assessments and gap notes",
+                "Monitoring snapshots showing many core crew certificates present (BST/AFF/MFA, OMOC/MMC, SIKA reported in samples)",
+                "Documented examples of expired endorsements/certificates and medical deviations/restrictions in monitoring extracts"
+            ],
+            "missing_evidence": [
+                "Explicit formal TNA document clearly labelled as 'TNA formal' split into the 4 required segments (K3LL office, K3LL field, Technical office, Technical field)",
+                "Mandatory numeric % compliance values for each of the 4 segments (one % per segment) to permit calculation of compliance = done/target x100",
+                "Complete per-segment compliance demonstrating all four segments >=50% (required for SKOR 6) or =100% (required for SKOR 10)",
+                "Evidence that all formal certificates for the population are valid (no expired certificates) as required for SKOR 6/10",
+                "Documented systematic follow-up evidence and scheduled competency reassessment process (evidence of implementation/execution) required for SKOR 10",
+                "Clear office-worker (shore) K3LL and Technical compliance data distinct from field/crew data"
+            ],
+            "reasoning": [
+                "All three jurors independently concluded SKOR 3 with moderate confidence; there is unanimous agreement supporting a single recommended score.",
+                "Evidence demonstrates an existing formal competency framework (procedures, training matrix, induction, certificate monitoring, individual evaluations) so SKOR 0 is not applicable.",
+                "SR-3.4 requires numeric % compliance per four segments (K3LL office, K3LL field, Technical office, Technical field). These mandatory per-segment % values are not present, preventing verification that all segments meet the thresholds for SKOR 6 (>=50%) or SKOR 10 (100%).",
+                "Monitoring snapshots show many valid certificates for sampled crew but also document expired endorsements and medical limitations; the criterion 'all certificates valid' for SKOR 6/10 is therefore not met.",
+                "SKOR 6 conditions (all 4 segments >=50%, individual profiles, all certificates valid, gaps identified) cannot be confirmed because per-segment percentages are missing and some expiries exist.",
+                "SKOR 10 conditions (100% across all segments, systematic documented follow-up, 100% valid certificates, scheduled reassessment) are clearly not met by the available evidence.",
+                "Given the presence of a basic formal system but incomplete/missing mandatory compliance data and some expired items, the correct mapping under SR-3.4 is SKOR 3: 'Ada sistem dasar tapi tidak mencukupi.'",
+                "Confidence is set at 0.69 reflecting unanimous juror scores and consistent reasoning, tempered by missing mandatory numeric fields and some documented expired certificates which limit certainty for higher scores."
+            ],
+            "processing_time_sec": 109.61,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "3.5",
+            "folder_name": "3.5 Pengelolaan K3LL kontraktor (Mitra Kerja)",
+            "expected_score": 10,
+            "predicted_score": 3,
+            "confidence": 0.77,
+            "status": "failed",
+            "evidence_count": 4,
+            "evidence_found": [
+                "Procurement / Purchasing Procedure RAS\u2013HOP\u2013306 (issued 06-01-2025) \u2014 procedural document present",
+                "Supplier Performance Report (F-091) for UD. Wengki (Jan\u2013May 2024) \u2014 single PB/monitoring entry",
+                "Keyword search returned 0/7 AI checkpoint keywords (no explicit CSMS/K3LL terms found)",
+                "Procedural content appears truncated in provided extracts (cannot confirm K3LL clauses)"
+            ],
+            "missing_evidence": [
+                "Listing kontraktor aktif (table with title, contract number, validity period, contractor name, PK/PB/PA schedule)",
+                "Jumlah kontraktor aktif dalam listing (total contractors)",
+                "% PK completion (documents PK per contractor / total contractors)",
+                "% PB completion (documents PB per contractor / total contractors)",
+                "% PA completion (documents PA per contractor where contract finished)",
+                "Dokumen Penilaian Awal (PK) per kontraktor",
+                "Dokumen Penilaian Berjalan (PB) per kontraktor (beyond the single F-091 entry)",
+                "Dokumen Penilaian Akhir (PA) per kontraktor (where applicable)",
+                "Bukti komunikasi standar K3LL PHE OSES ke subkontraktor (notulen/surat/email)",
+                "Evidence tindak lanjut kinerja kontraktor yang under-perform (corrective actions, follow-up records)",
+                "Klausul/ketentuan K3LL yang eksplisit dalam proses seleksi kontraktor",
+                "Jika tidak ada subkontraktor: surat pernyataan tidak ada subkontraktor (not provided)"
+            ],
+            "reasoning": [
+                "All three jurors independently recommended score 3 with similar reasoning and moderate-to-high confidences; there is no disagreement to resolve.",
+                "Per SR-3.5, score 3 is appropriate when a procedure exists but K3LL selection criteria are absent or CSMS coverage is incomplete/limited. The Procurement/Purchasing procedure is present, so SKOR 0 is excluded.",
+                "Mandatory quantitative evidence to support higher scores (listing of active contractors; PK/PB/PA documents per contractor; % PK/% PB/% PA) is missing, preventing calculation of coverage rates required for SKOR 6 or 10.",
+                "Operational evidence is limited to a single Supplier Performance Report (F-091) for one supplier \u2014 insufficient to demonstrate >=50% CSMS coverage or full CSMS cycles across contractors.",
+                "Keyword checks and truncated procedure extracts provide no confirmation of explicit K3LL criteria in contractor selection or documented communication of K3LL standards to subcontractors, both required for higher scores.",
+                "Given the presence of a procedure but absence of the mandatory listing, CSMS documentation and evidence of communication/tindak lanjut, the correct final recommendation is SKOR 3.",
+                "Recommendation stands unless additional evidence is uploaded (complete listing, PK/PB/PA per contractor, documented K3LL selection criteria, communication records, and evidence of performance follow-up), in which case re-evaluation would be needed."
+            ],
+            "processing_time_sec": 111.68,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "3.6",
+            "folder_name": "3.6 Peraturan dan Standar K3LL",
+            "expected_score": 10,
+            "predicted_score": 3,
+            "confidence": 0.6,
+            "status": "failed",
+            "evidence_count": 14,
+            "evidence_found": [
+                "Multiple QHSE SOPs and procedural documents reference national laws and standards (examples cited: P/QHSE/12, P/QHSE/17, HR P/HRGA/01 referencing UU Cipta Kerja 2023 and UU No.13/2003).",
+                "A legal compliance matrix / register exists linking laws to procedures and assigning owners and monitoring dates.",
+                "Document control pages, authorizations, and effective dates are present on many SOPs (dates in evidence range around 2023-2025).",
+                "Some referenced statutes include explicit nomor+tahun in sample documents (examples: UU No.1/1970, UU No.17/2008, UU No.36/2009, UU No.13/2003) in parts of the evidence."
+            ],
+            "missing_evidence": [
+                "Complete tabular listing of all procedures (nomor prosedur, judul) with a clear total row count to calculate % prosedur.",
+                "For every procedure row: explicit referensi regulasi with nomor + tahun (complete coverage across all procedures).",
+                "Status peraturan (berlaku/dicabut) for each referenced regulation across the full listing.",
+                "Tanggal review terakhir for every procedure in the listing (and verification that none are older than 2 years where required).",
+                "Documented scheduled periodic review mechanism embedded in the Document Control procedure (evidence required for SKOR 10).",
+                "Validated outputs from table_check and date_validation (these validators reported invalid/failed).",
+                "Computed % prosedur with referensi regulasi (nomor+tahun) and a verified assertion that 50% or 100% thresholds are met or not met."
+            ],
+            "reasoning": [
+                "All three jurors independently assessed the same evidence and concluded that regulatory references exist but documentation is incomplete or not fully verifiable; their scores are unanimous at SKOR 3.",
+                "Per SR-3.6, SKOR 6 or 10 require demonstrable percentage calculations, complete per-row nomor+tahun references, status verification that references are still berlaku, and valid review date data (plus scheduled review for score 10). Those mandatory conditions are not met or cannot be validated with the provided evidence.",
+                "Validation checks (table_check and date_validation) failed or produced invalid results, preventing reliable computation of % referensi and confirmation that all references are current and reviewed within required timeframes.",
+                "Given the documented presence of references but the lack of complete, validated listing data and mandatory fields, the evidence aligns with the SR-3.6 definition of SKOR 3 ('Referensi regulasi ada tapi tidak lengkap').",
+                "Recommended score 3 is therefore the conservative, rules-consistent outcome. Because critical mandatory evidence is missing or unvalidated, further review (and submission of the missing documents/data) is required to consider upgrading the score to 6 or 10."
+            ],
+            "processing_time_sec": 103.54,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "4.1",
+            "folder_name": "4.1 Penilaian dan Pengendalian Risiko",
+            "expected_score": 6,
+            "predicted_score": 6,
+            "confidence": 0.67,
+            "status": "needs_review",
+            "evidence_count": 28,
+            "evidence_found": [
+                "HIRADC / Risk Register and multiple activity-specific risk assessment forms present (e.g., P5.F1 and other assessments).",
+                "Risk analysis performed: risk matrix and hazard ratings documented (several hazards rated and mitigations recorded).",
+                "Mitigations and procedures for high-risk activities exist: JSA, PTW, inductions, pre-job checklists, hot work permits, toolbox meetings, and activity-specific procedures (mooring, welding, personnel transfer, etc.).",
+                "Assigned responsibilities for oversight and inspections are documented (ship officers and QHSE roles cited).",
+                "Dated forms cited (e.g., HIRADC matrix 04-Apr-2022; project assessment 28-Jun-2024) indicating a formal risk management framework."
+            ],
+            "missing_evidence": [
+                "Validated % kelengkapan kolom Risk Register (hazard, risk level, controls, status) \u2014 numeric confirmation of \u226580% or 100%.",
+                "Validated % coverage sosialisasi HIRADC vs total project workers (numeric attendance/coverage) \u2014 needed to assess \u226550% or 100%.",
+                "Explicit confirmation that Risk Register covers ALL required stages (mobilisasi, operasi, commissioning) together.",
+                "Documented audit reports verifying comprehensive identification and mitigation (partner audits) as required for SKOR 10.",
+                "Clear, verifiable evidence of inspections in the field (signed/dated inspection records verifying implementation).",
+                "Section/table validator outputs (section_check, table_check) and date validation results were missing/failed; full validator confirmations are absent.",
+                "Evidence of initiation of program to subcontractors (if subcontractors exist) per SKOR 10 additional conditions."
+            ],
+            "reasoning": [
+                "Majority consensus (2 of 3 jurors) scores 6 \u2014 evidence shows risk identification and mitigation are implemented and exceed minimal listing of hazards, satisfying SKOR 6 criteria (\u226550% stages coverage implied, controls and procedures for high-risk activities present, risk analysis performed).",
+                "The single dissenting juror scored 3 because mandatory quantitative metrics (coverage %, column completeness, explicit stage coverage) were not documented/validated; while that point is valid, the substantive presence of documented analyses and active mitigations outweighs a minimal-score classification.",
+                "SKOR 10 cannot be recommended because all mandatory SKOR 10 conditions are not met: no validated 100% column completeness, no 100% HIRADC socialization coverage, no explicit evidence of all three stages covered, and no partner audits/subcontractor initiation evidence.",
+                "Given the documented risk assessments, procedures for high-risk tasks, and implemented controls, the evidence best matches the SR-4.1 description for SKOR 6 (identifikasi memadai, mitigasi dilakukan, procedures for high-risk present) despite missing numeric verifications.",
+                "Confidence is set at 0.67 (moderate) to reflect agreement among jurors but acknowledging validation gaps and missing mandatory numeric evidences that reduce certainty.",
+                "Requires review: additional documentary validation is recommended to confirm % completeness of Risk Register columns, % HIRADC coverage, explicit stage coverage (mobilisasi/operasi/commissioning), partner audit reports, and signed/dated field inspection evidence \u2014 these could raise the score to 10 if fully satisfied."
+            ],
+            "processing_time_sec": 131.6,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "4.2",
+            "folder_name": "4.2 Bahaya Terhadap Kesehatan Kerja",
+            "expected_score": 10,
+            "predicted_score": 3,
+            "confidence": 0.45,
+            "status": "failed",
+            "evidence_count": 36,
+            "evidence_found": [
+                "Existence of OHRA / Task Risk Assessments and Job/Task RAs that identify hazards and controls (e.g., pre-op checks, PPE, administrative controls).",
+                "MCU-related documentation and individual MCU validation records for personnel (records dated 2024-2026).",
+                "QHSE procedures relevant to occupational health: Medical Check Up procedure (P/QHSE/17), TB control (P/QHSE/32), Food Management System (P/VES/30), LVOM alcohol & drug chapter.",
+                "Food hygiene and ship hygiene checklists and inspection materials indicating some food hygiene program activity.",
+                "Evidence of some health surveillance activities and fitness-for-work indicators (onboard fitness equipment, daily health monitoring forms).",
+                "References to chemical/hazard controls in specific RAs (bunkering, oil spill response, manual handling, enclosed space, etc.)."
+            ],
+            "missing_evidence": [
+                "MoU(s) with RS/clinic showing provider name(s) and valid period(s) and OSES listing/approval (required for SKOR 6/10).",
+                "Aggregate % MCU coverage across the workforce and documentation that MCU = 100% or the exact % (including consolidated 'layak kerja' recommendations per worker).",
+                "Complete evidence for all 6 standard health-risk programs (Hearing conservation; Hazardous chemical management; Industrial hygiene monitoring; Fitness for work; Drug & alcohol program; Health surveillance).",
+                "Employee-level updated health data with follow-up actions per worker (consolidated employee health database / evidence of physician follow-up for all).",
+                "Documented industrial hygiene monitoring reports for noise, dust, chemical exposure (formal monitoring results).",
+                "Explicit hearing conservation program documentation (audiometry records, program implementation evidence).",
+                "Evidence of systematic hazard communication program (briefings, posters, materials) covering occupational health hazards.",
+                "Explicit completeness metrics for mandatory fields: '% kelengkapan kolom identifikasi bahaya kesehatan' and '% program manajemen risiko kesehatan' as required by VR-4.2.",
+                "Clear evidence of management of chemical/radioactive/communicable hazards per SKOR 10 requirements (policy/evidence missing or not located).",
+                "Improved keyword coverage for checkpoint terms (many AI checkpoint keywords not found in available documents)."
+            ],
+            "reasoning": [
+                "All three jurors independently scored SKOR 3 and provided consistent rationales: occupational health program elements exist but critical documentary elements and quantified coverage are missing, preventing confirmation of higher scores.",
+                "SR-4.2 requires conjunctive criteria for SKOR 6 and SKOR 10 (e.g., OHRA completeness AND quantified MCU thresholds AND MoU AND >=3/6 or 6/6 programs). While OHRA and program fragments exist, the AND conditions cannot be fully verified from the provided evidence.",
+                "The available evidence supports that a program exists but is not demonstrably adequate per the scoring rules (fits the SR-4.2 description for SKOR 3: 'Ada program kesehatan tapi tidak memadai (<50%)' given missing/insufficient documentary proof).",
+                "Key missing items (MoU validity, % MCU, comprehensive 6-program evidence, employee-level follow-up) are decisive: their absence prevents awarding SKOR 6 or 10 despite some positive elements (RAs, procedures, MCU records).",
+                "Confidence is moderate (0.45): unanimous juror score increases confidence that SKOR 3 is appropriate, but jurors flagged incomplete/ambiguous documentation and potential missing files which prevent higher certainty.",
+                "Requires_review = true because submission lacks mandatory/decisive documents and quantified metrics required by VR-4.2/SR-4.2. Supplying the missing evidence (MoU(s), % MCU aggregate with 'layak kerja' documentation, full 6-program evidence, IH monitoring reports, employee-level health follow-up) could change the score to 6 or 10 after re-evaluation."
+            ],
+            "processing_time_sec": 129.43,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "4.3",
+            "folder_name": "4.3 Bahaya Terhadap Keselamatan Kerja",
+            "expected_score": 10,
+            "predicted_score": 3,
+            "confidence": 0.62,
+            "status": "failed",
+            "evidence_count": 36,
+            "evidence_found": [
+                "Multiple HIRADC / Risk Assessment forms present",
+                "Several JSA and SOP documents available for vessel and office activities",
+                "Risk evaluation framework present (risk matrix, named assessors, assessment entries)",
+                "Marine-specific hazards and activity assessments included in evidence",
+                "Project risk summary referenced (e.g., dated 28-Jun-2024) and QHSE procedure references"
+            ],
+            "missing_evidence": [
+                "Consolidated Risk Register explicitly covering all project stages (mobilisasi, operasi, commissioning)",
+                "% kelengkapan kolom Risk Register (calculation of completeness >=80% or 100%)",
+                "% coverage sosialisasi HIRADC (attendance vs total employee list)",
+                "% realisasi awareness HSE vs target (HSE Plan metrics)",
+                "Explicit inventory/count showing JSA/SOP available for all high-risk activities",
+                "Evidence of routine monitoring of program effectiveness (monitoring reports)",
+                "Evidence of initiation/communication of program to subcontractors (if applicable)",
+                "Validated document structure: section/table checks and consistent valid dates across documents"
+            ],
+            "reasoning": [
+                "All three jurors independently scored 3 with similar confidence and reasoning \u2014 program exists but mandatory quantitative metrics are not demonstrated.",
+                "SKOR 0 is excluded because HIRADC forms and JSA/SOPs are present; SKOR 6/10 cannot be justified because the scoring rules require explicit verification of stage coverage, completeness percentages, sosialisasi/awareness >=50% (for 6) or 100% (for 10), and monitoring evidence.",
+                "Given available evidence shows activity-level assessments and procedures but lacks the consolidated Risk Register coverage and the required percentage metrics, the correct application of SR-4.3 is SKOR 3 ('program exists but not comprehensive').",
+                "Requires review: submit the missing quantitative evidence (Risk Register stage coverage, % completeness, sosialisasi attendance lists mapped to total workforce, awareness realization vs HSE Plan, monitoring reports, and JSA/SOP inventory) to reconsider upgrading the score to 6 or 10."
+            ],
+            "processing_time_sec": 101.44,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "4.4",
+            "folder_name": "4.4 Bahaya Terhadap Kegiatan Logistik",
+            "expected_score": 10,
+            "predicted_score": 3,
+            "confidence": 0.75,
+            "status": "failed",
+            "evidence_count": 9,
+            "evidence_found": [
+                "Terdapat sistem QHSE terdokumentasi (General Service, Procurement, Warehouse)",
+                "Driving Safety guidance / Risk Assessment yang menyebut kontrol pre-trip/pre-use inspection",
+                "Referensi pembatasan berkendara malam muncul dalam Risk Assessment / guidance",
+                "Tanggal dokumen tersedia (date fields present)",
+                "Keyword search menemukan sedikit kaitan (1/8 AI checkpoint keywords)"
+            ],
+            "missing_evidence": [
+                "Daftar kendaraan project (plat nomor, jenis, driver) \u2014 tidak ditemukan",
+                "% kendaraan dengan form pre-use inspection (perhitungan/rekaman) \u2014 tidak ditemukan",
+                "% driver dengan pre-fit test (perhitungan/rekaman) \u2014 tidak ditemukan",
+                "Bukti alkohol test driver (form/alat/bukti hasil) \u2014 tidak ditemukan",
+                "Kebijakan tertulis night driving restriction yang terpisah dan terdokumentasi beserta monitoring/log \u2014 tidak ditemukan",
+                "% realisasi sosialisasi safety driving vs target HSE Plan \u2014 tidak ditemukan",
+                "Journey management / log perjalanan / monitoring perjalanan \u2014 tidak ditemukan",
+                "Laporan monitoring keefektifan program logistik (pemantauan rutin) \u2014 tidak ditemukan"
+            ],
+            "reasoning": [
+                "Semua tiga juror memberi skor 3: bukti menunjukkan program/prosedur ada tetapi implementasi dan bukti kuantitatif tidak memadai.",
+                "SKOR 0 tidak berlaku karena ada bukti adanya pre-trip/pre-use inspection di guidance (pre-use inspection \u2260 0).",
+                "SKOR 6 dan 10 mensyaratkan bukti kuantitatif (% pre-use, % pre-fit, % sosialisasi \u226550% atau 100%), kebijakan malam tertulis dengan monitoring, bukti alkohol test, dan laporan monitoring \u2014 dokumen/dataset tersebut tidak ditemukan sehingga SKOR 6/10 tidak terpenuhi.",
+                "SR-4.4 menyatakan SKOR 3 berlaku jika % pre-use <50% OR % pre-fit <50% OR pre-fit ada tetapi tanpa alkohol test OR tidak ada kebijakan tertulis pembatasan berkendara malam. Karena bukti alkohol test tidak ditemukan dan data persentase implementasi tidak tersedia, kondisi untuk SKOR 3 terpenuhi.",
+                "Confidence diambil sebagai rata-rata bobot juror (0.75) \u2014 juror confidences: 0.75, 0.8, 0.7. Meski ada indikasi kebijakan, ketiadaan dokumen wajib menurunkan confidence.",
+                "Direkomendasikan review ulang setelah pengunggahan dokumen yang hilang: daftar kendaraan, formulir/rekaman pre-use per kendaraan dan perhitungan %, rekaman pre-fit termasuk bukti alkohol test dan % coverage, kebijakan night-driving tertulis + monitoring/journey logs, bukti dan % realisasi sosialisasi, serta laporan monitoring efektivitas program."
+            ],
+            "processing_time_sec": 87.43,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "4.5",
+            "folder_name": "4.5 Bahaya Terhadap Lingkungan",
+            "expected_score": 10,
+            "predicted_score": 3,
+            "confidence": 0.5,
+            "status": "failed",
+            "evidence_count": 12,
+            "evidence_found": [
+                "Risk assessment / Risk Register document: F/QHSE/43 Rev.02 dated 30 Jun 2025 (documents environmental aspects and controls).",
+                "Vessel environmental procedures present (SOP MARPOL Annex V, ballast water procedure P/LSM-VES/14).",
+                "Daily garbage discharge records (Category B food waste) logged and signed by Master.",
+                "Operational monitoring entries (e.g., noise measurements) and other routine monitoring notes.",
+                "HSE campaign communications referencing environmental activities (some attachments truncated/missing)."
+            ],
+            "missing_evidence": [
+                "Manifest limbah B3 (hazardous waste) records: nomor manifest, tanggal, jenis, volume, nama TPLB3, dan izin TPLB3 (complete manifests absent).",
+                "% coverage sosialisasi pemilahan limbah ke pekerja lapangan (attendance lists vs total workforce).",
+                "% realisasi inspeksi lingkungan vs target (inspection reports with targets and realization).",
+                "Izin Lingkungan / Izin PPLH: nomor referensi dan masa berlaku (permits/references not provided or validated).",
+                "Rekap distribusi limbah ke TPLB3 (monthly reports with nama + nomor izin TPLB3).",
+                "Full, untruncated copies of key documents (several uploads/extractions were truncated or blank).",
+                "Evidence of routine monitoring program effectiveness (periodic monitoring reports) and any PROPER or equivalent awards (optional for score 10)."
+            ],
+            "reasoning": [
+                "All three jurors independently scored 3 and their rationales align: an environmental program and a risk-assessment-type document exist, therefore SKOR 0 is not applicable.",
+                "SR-4.5 thresholds: scores >=6 require complete B3 manifests, validated permits, and measurable coverage/inspection >=50%; these mandatory items are absent or unprovable in the evidence set, so scores 6 and 10 cannot be justified.",
+                "The available evidence demonstrates presence of program-level controls (procedures, risk assessment, MARPOL garbage logs) but lacks the B3-specific manifests, permit validation, and required percentage metrics \u2014 this matches SR-4.5 description for SKOR 3 ('program exists but not adequate / incomplete').",
+                "Documentation quality issues (truncated files, missing attachments, limited keyword hits) reduce verifiability and justify a moderate confidence rather than high confidence despite juror unanimity.",
+                "Because multiple mandatory fields from VR-4.5 are missing, follow-up review is required to obtain manifests, permits, coverage and inspection metrics, and full untruncated documents to allow re-evaluation and potential score escalation."
+            ],
+            "processing_time_sec": 103.54,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "4.6",
+            "folder_name": "4.6 Bahaya Terhadap Keamanan",
+            "expected_score": 10,
+            "predicted_score": 3,
+            "confidence": 0.73,
+            "status": "failed",
+            "evidence_count": 12,
+            "evidence_found": [
+                "Formal CSO appointment (documented coverage dates)",
+                "SSO assignment recorded (short-term coverage noted)",
+                "Ship Security Assessment (SSA) present",
+                "Documented stowaway drill",
+                "CCTV inspections and patrol/watch rosters/logs",
+                "Routine operational/security checks and HSES/K3L records indicating programmatic activity"
+            ],
+            "missing_evidence": [
+                "Ship Security Plan (SSP) / ERP text demonstrating coverage of security scenarios",
+                "Complete ERT roster with names and contact numbers",
+                "Counts and validity/expiry dates of First Aid certificates for ERT members (to calculate % valid)",
+                "Counts and validity/expiry dates of Fire Fighting certificates for ERT members (to calculate % valid)",
+                "MoU(s) with hospital(s) including Nama RS + nomor MoU + masa berlaku",
+                "Evidence of field security inspections demonstrating screening/access control and asset protection (photos, inspection logs)",
+                "Security monitoring/reporting logs and incident/case logs with follow-up actions",
+                "Untruncated source documents and valid dates for expiry checks (several extracts were truncated or failed date validation)"
+            ],
+            "reasoning": [
+                "All three jurors independently scored 3 with moderate confidence and their rationales align: there is demonstrable security program activity but critical mandatory items from VR-4.6 are missing or not verifiable.",
+                "Per SR-4.6, score 3 is appropriate when a security program exists but key certification metrics or MoU(s) are missing or inadequate (e.g., % First Aid or Fire Fighting certificates <50% or MoU RS absent). The provided evidence meets the 'program exists' criterion but fails mandatory verification of ERT certification percentages and MoU validity.",
+                "Document quality issues (truncated extracts and failed date validation) prevent confirmation of the thresholds required for higher scores (6 or 10), such as verified %certification and active MoU(s).",
+                "To justify upgrading to score 6, the dossier must include: SSP/ERP covering security scenarios, full ERT roster (name+contact), verifiable >=50% valid First Aid and Fire Fighting certification each, and active MoU(s) with RS. To reach 10, all of the above plus 100% ERT certification and routine monitoring/incident logs are required.",
+                "Given unanimous juror agreement and the absence of conflicting evidence, the final recommended score is 3. However, because mandatory evidence is missing or unverifiable, further review with the requested documents is required to reassess and potentially upgrade the score."
+            ],
+            "processing_time_sec": 89.51,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "4.7",
+            "folder_name": "4.7 Bahaya Terhadap Aspek Sosial",
+            "expected_score": 10,
+            "predicted_score": 3,
+            "confidence": 0.66,
+            "status": "failed",
+            "evidence_count": 10,
+            "evidence_found": [
+                "Multiple CSR activity reports documenting community development actions (house repairs, donations to schools and orphanage, beach clean + outreach).",
+                "Mangrove planting activity with 126 employees planting 378 seedlings (dates, locations, participant counts).",
+                "Blood donation event and other community-facing activities with itemized costs and participant lists.",
+                "HIRADC assessment and signed PDF artifacts supporting document provenance.",
+                "No records of unresolved social cases (no demos/keluhan tercatat found in provided evidence)."
+            ],
+            "missing_evidence": [
+                "Formal CSR plan document (rencana CSR) with objectives, targets, and timeline.",
+                "Routine monitoring reports of community relations (laporan berkala monitoring hubungan warga) showing monitoring frequency.",
+                "Evaluation of program effectiveness (before-after comparisons or impact evaluation data).",
+                "Log of social cases and documented follow-ups (if any) and field inspection reports assessing activity impact vs community."
+            ],
+            "reasoning": [
+                "All three jurors independently scored 3 and provided consistent findings: only 1 of 3 CSR criteria (community development) is demonstrably met based on the activity-level evidence.",
+                "Per SR-4.7 mapping: kriteria CSR = 1/3 -> SKOR 3. Criteria (b) monitoring rutin hubungan warga and (c) evaluasi keefektifan lack convincing evidence, preventing scores of 6 or 10.",
+                "Available evidence shows execution of community activities (supports criterion a) and no unresolved social cases, but lacks the mandatory strategic and monitoring/evaluation documents required for higher scores.",
+                "Confidence (0.66) reflects moderate agreement among jurors (0.8, 0.72, 0.45) and unanimous scoring, tempered by missing critical documents that limit certainty about sustained CSR management.",
+                "Requires_review set to false because the available evidence supports the SKOR 3 determination under SR-4.7. To raise the score, submit the missing CSR plan, routine monitoring reports, and impact/evaluation data for re-evaluation."
+            ],
+            "processing_time_sec": 82.89,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "4.8",
+            "folder_name": "4.8 Alat Pelindung Diri (APD)",
+            "expected_score": 10,
+            "predicted_score": 3,
+            "confidence": 0.57,
+            "status": "failed",
+            "evidence_count": 11,
+            "evidence_found": [
+                "Documented PPE program / technical standard (F/QHSE/38) present",
+                "Inspection criteria / procedure template (F/QHSE/37) present",
+                "Inventory snapshot (crew PPE inventory, Dec 2025) showing items for 17 crew and stock >= minima",
+                "PPE training event record (Feb 2025) with sign-in",
+                "Observation/reporting template for PPE monitoring",
+                "Crew inspection snapshot / inspection records showing PPE issued/recorded for a subset of crew"
+            ],
+            "missing_evidence": [
+                "Matrix PPE mapping positions -> APD coverage and % posisi tercakup (position coverage matrix)",
+                "Tanda terima distribusi APD (signed distribution receipts) showing % pekerja yang sudah menerima APD",
+                "Quantified % kepatuhan penggunaan APD from the latest monitoring report",
+                "Pre-use inspection logs showing % hari kerja with pre-use inspection APD (frequency/coverage)",
+                "Evidence of PPE fit-to-test program (attendance lists + photos) / fit-to-test records",
+                "Monitoring & evaluation report(s) demonstrating routine monitoring and program effectiveness"
+            ],
+            "reasoning": [
+                "All three jurors independently scored 3 and provided consistent reasoning: APD/PPE program elements exist but mandatory documents and quantified KPIs required by SR-4.8 to justify higher scores are missing or not verifiable.",
+                "Score 0 is not applicable because there is clear evidence of PPE program activity (standards, inspections, training, inventory).",
+                "Score 6 requirements (complete matrix including APD khusus, % tanda terima >=50%, pre-use inspection >=50% of workdays, % kepatuhan >=50%) cannot be verified from the provided evidence; required documents/metrics are absent.",
+                "Score 10 requirements (100% matrix coverage, 100% tanda terima, pre-use inspection >=80%, % kepatuhan >=80%, fit-to-test evidence, routine monitoring reports) are not met\u2014multiple mandatory items are missing.",
+                "Given the presence of program elements but lack of the mandatory quantified evidence, the strict application of SR-4.8 supports SKOR 3 (APD exists but management/documentation is inadequate).",
+                "Recommendation: maintain SKOR 3; mark for review and request the missing artifacts (position-to-PPE matrix, signed distribution receipts with coverage %, latest monitoring report with compliance %, pre-use inspection logs showing coverage, and fit-to-test evidence) to allow re-evaluation and potential upgrade to score 6 or 10."
+            ],
+            "processing_time_sec": 132.46,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "5.1",
+            "folder_name": "5.1 Manual Operasi K3LL",
+            "expected_score": 10,
+            "predicted_score": 3,
+            "confidence": 0.53,
+            "status": "failed",
+            "evidence_count": 7,
+            "evidence_found": [
+                "Procedures index / document register present and updated (index updated 22 Oct 2025)",
+                "Multiple SOP/procedure entries with revision history through Nov 2025",
+                "Document control activities observed (regular revisions, intranet publication)",
+                "Two dissemination emails from QHSE/Doc Control announcing issuance/distribution to vessels",
+                "Existence of internal-audit and QMS forms/checklists in the register",
+                "Signature checks reported with reasonable confidence"
+            ],
+            "missing_evidence": [
+                "Quantified '% aktivitas yang memiliki prosedur K3LL' (coverage percentage) or completeness mapping",
+                "Explicit confirmation / evidence that ALL aktivitas risiko tinggi have dedicated SOPs (permit-to-work, confined space, hot work, lifting)",
+                "Master List mapped to 100% of activities or mapping showing \u226580% coverage",
+                "Evidence of sosialisasi to workers at field level (attendance sheets, toolbox talks, signed distribution receipts)",
+                "Attachments referenced in dissemination emails (procedures themselves) - missing",
+                "Completed internal audit reports, corrective action follow-ups, or monitoring logs demonstrating structured, consistent verification",
+                "Evidence of procedures being used as field reference (permits referencing SOPs, photos, jobcards citing SOPs)",
+                "Consistent, validated revision dates across all procedures (date_validation flagged false / inconsistent)"
+            ],
+            "reasoning": [
+                "All three jurors independently scored 3 (presence of procedures but incomplete demonstrable coverage and verification), so consensus score is 3.",
+                "Scoring rules: 6 requires \u226580% coverage, all high-risk activities covered, sosialisasi, and consistent verification; 10 requires 100% coverage plus stricter conditions. Those higher-score conditions are not demonstrably met in the evidence set.",
+                "Evidence shows an active document control system and dissemination attempts (register, index updates, revision history, emails) which rules out score 0 and supports a low-but-present-procedure scoring (3).",
+                "Critical mandatory validation fields and supporting documents are missing or incomplete (no coverage percentages, no proof all high-risk tasks have SOPs, no field-level sosialisasi evidence, no completed verification/audit records), preventing assignment of score 6 or 10.",
+                "Data quality issues (missing attachments, failed date validation, limited keyword coverage) reduce confidence in automated extractions and the completeness of the evidence package.",
+                "Recommendation: score 3 with moderate confidence and flag for review so missing mandatory evidence (coverage mapping, high-risk SOP confirmations, sosialisasi and monitoring records, and validated revision dates) can be obtained to reassess for a higher score."
+            ],
+            "processing_time_sec": 86.11,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "5.2",
+            "folder_name": "5.2 Kehandalan Infrastruktur dan Peralatan",
+            "expected_score": 10,
+            "predicted_score": 3,
+            "confidence": 0.8,
+            "status": "failed",
+            "evidence_count": 15,
+            "evidence_found": [
+                "Existence of ITM procedures: Logindo Shore Based Manual (LSBM) and Logindo Vessel Maintenance Manual (LVMM), including work order procedures (LSBM Bab 14).",
+                "Planned maintenance schedules for 2025: Engine Maintenance Plan (F/LSM-TEK/03) and Deck Maintenance Plan (F/LSM-TEK/04).",
+                "Monthly inspection and execution records: Engine Monthly, Deck Monthly, PSU/CPP checklist, Engine Critical Equipment Inspection, thruster inspection entries (dated Oct\u2013Dec 2025).",
+                "Documented maintenance activities completed (e.g., turbocharger cleaning, filter replacement, cooling water replacement, gearbox/pump checks).",
+                "Signed and dated records present (signature_check = true; date_validation = true).",
+                "Inspection finding recorded (oil seal leakage on thruster dated 25/10/2025) showing active detection and follow-up identification."
+            ],
+            "missing_evidence": [
+                "Listing tools & equipment project (complete list with jumlah item, nama alat).",
+                "% peralatan bersertifikat valid including certificate numbers and expiry dates (per-alat sertifikat).",
+                "% peralatan dengan form pre-use inspection (pre-use inspection forms per equipment).",
+                "% realisasi jadwal maintenance/kalibrasi (quantified realization rates).",
+                "Pemantauan rutin/monitoring berkala keefektifan program ITM (required for score 10).",
+                "Certificate files / calibration certificates for equipment that require certification (e.g., crane, pressure vessels, alat angkat).",
+                "Automated keyword hits for critical checkpoints (keyword_search returned 0/8), indicating indexing or upload gaps for required documents."
+            ],
+            "reasoning": [
+                "All three jurors independently assigned score 3 with equal confidence (0.8) based on the same evidence set and SR-5.2 rules -> consensus supports score 3.",
+                "SR-5.2 mapping: Score 0 conditions not met because ITM procedures exist (LSBM, LVMM) -> cannot be 0.",
+                "Score 10 requirements (100% certified equipment, 100% pre-use inspection, 100% maintenance realization, complete listing, and routine monitoring) are not met \u2014 multiple mandatory documents and metrics are absent.",
+                "Score 6 requirements (100% certificates AND \u226580% pre-use AND \u226580% maintenance realization AND complete listing) are not met due to absent certificate listing, missing pre-use forms, and no quantified maintenance realization numbers.",
+                "Score 3 condition matches observed facts: there is an ITM program and evidence of maintenance activity/implementation, but critical implementation evidence (certificate coverage, pre-use inspection coverage, quantified maintenance realization) is missing or not demonstrable.",
+                "Validation outputs strengthen this conclusion: signature and date checks are positive (documents appear official and recent), but keyword_search failed (0/8), indicating that required certificate/calibration/pre-use documents were not provided or not indexed.",
+                "Given consistent juror scoring, medium-quality procedural and operational evidence, and the explicit absence of mandatory certification/pre-use/realization metrics, recommended final score is 3.",
+                "Requires review: true \u2014 because mandatory VR-5.2 fields are missing and the assessor should request/upload the listed missing evidence (equipment listing with certificate numbers/expiry, pre-use forms, maintenance realization metrics, and monitoring reports) to validate a higher score."
+            ],
+            "processing_time_sec": 86.62,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "5.3",
+            "folder_name": "5.3 Manajemen Perubahan",
+            "expected_score": 10,
+            "predicted_score": 3,
+            "confidence": 0.63,
+            "status": "failed",
+            "evidence_count": 5,
+            "evidence_found": [
+                "Prosedur MOC tersedia (MMR Bab 12; QHSE procedure P/QHSE/23).",
+                "Ada MOC register (Logindo) mencatat perubahan periode 2015-2025.",
+                "Terdapat contoh form MOC yang diisi (PT Sowohi Change Control Form No.001/MOC/I/2024, tanggal 17 Jan 2024).",
+                "Dokumen prosedur menyebutkan metode penilaian risiko (HIRADC, JSA, Permit to Work) sebagai bagian dari proses MOC.",
+                "Bukti menunjukkan MOC diaplikasikan untuk beberapa jenis perubahan (prosedur/policy, peralatan/fasilitas, organisatoris/personil) berdasarkan register dan entri contoh."
+            ],
+            "missing_evidence": [
+                "% kelengkapan form MOC yang terukur (tidak ada metrik yang menunjukkan \u226580% atau 100%).",
+                "Verifikasi bahwa setiap form MOC yang diisi mencantumkan risk assessment lengkap untuk setiap perubahan.",
+                "Bukti tanda tangan (signature_check) dan validasi tanggal (date_validation) konsisten pada kumpulan form MOC.",
+                "Bukti pemantauan risiko baru pasca-perubahan (kolom 'risiko baru' pada setiap form atau bukti monitoring/mitigasi untuk setiap perubahan).",
+                "Ringkasan jumlah total form MOC yang telah diimplementasikan dan cakupan representatifnya (kuantifikasi implementasi).",
+                "Dokumentasi atau audit yang menunjukkan % kelengkapan atau kualitas pengisian form secara agregat."
+            ],
+            "reasoning": [
+                "Semua tiga juror memberikan skor 3 dan setuju bahwa prosedur MOC dan contoh implementasi ada, sehingga kondisi minimum untuk skor >0 terpenuhi.",
+                "Meskipun ada prosedur dan beberapa form MOC yang terisi, kriteria SR-5.3 untuk skor 6 mengharuskan: cakupan ketiga jenis perubahan, form MOC diimplementasikan dengan risk assessment, DAN % kelengkapan form \u226580%. % kelengkapan dan bukti risk assessment per form tidak diverifikasi dalam bukti yang diserahkan.",
+                "Kriteria tertinggi (skor 10) mensyaratkan kelengkapan 100% plus bukti monitoring risiko baru untuk setiap perubahan (mis. kolom 'risiko baru' atau dokumentasi mitigasi). Tidak ada bukti yang mendukung pemenuhan persyaratan tambahan ini.",
+                "Validasi teknis (signature_check dan date_validation) gagal atau tidak konsisten menurut juror, yang mengurangi keandalan bukti implementasi dan traceability yang diperlukan untuk skor lebih tinggi.",
+                "Karena tidak ada konflik antar-juror dan bukti yang ada tidak memenuhi persyaratan kuantitatif/mandatory untuk menaikkan skor, rekomendasi final adalah skor konservatif 3.",
+                "Rekomendasi tindak lanjut untuk meningkatkan skor: kumpulkan metrik % kelengkapan, sediakan contoh terpilih dari beberapa form MOC yang menunjukkan risk assessment lengkap + tanda tangan + tanggal, dan tunjukkan bukti monitoring/melacak 'risiko baru' serta penutupan mitigasi."
+            ],
+            "processing_time_sec": 114.89,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "5.4",
+            "folder_name": "5.4 Implementasi Tanggap Darurat",
+            "expected_score": 10,
+            "predicted_score": 3,
+            "confidence": 0.71,
+            "status": "failed",
+            "evidence_count": 19,
+            "evidence_found": [
+                "Existence of ERP/MER and related SOPs (Logindo MER, vessel emergency plans, SOP P/QHSE/13).",
+                "Documented emergency organisation and responsibilities, with emergency contact lists and shipboard teams.",
+                "Records of drills for vessel and office (fire, abandon ship, oil spill, collision, medical/evacuation) with some drill reports including timelines, evaluations and recommendations.",
+                "Routine equipment functional checks documented (weekly davit crane & rescue boat checks, weekly firefighting pump tests).",
+                "Some vessel-specific checklists and entries (equipment tests, signed vessel entries) present in the evidence set.",
+                "Multiple jurors independently concluded ERP and drills exist but mandatory certification/checklist evidence is not fully verifiable."
+            ],
+            "missing_evidence": [
+                "Complete list of ERT members with % certified in First Aid (including copies of certificates and expiry dates) demonstrating 100% certification if applicable.",
+                "Complete list of ERT members with % certified in Fire Fighting (including certificates and expiry dates) demonstrating 100% certification if applicable.",
+                "Drill realisation metrics vs schedule (percentage of planned drills executed) to validate \u226580% or 100% thresholds.",
+                "Comprehensive drill reports per SR-5.4 showing evaluasi target vs actual time per stage and observer reports for each drill.",
+                "Full LSA/FFA/Safety Equipment checklists for barge/platform (marine) consistently filled per schedule.",
+                "Bagan ERT with names and contact numbers in full (some rosters appear truncated).",
+                "Replacement or complete versions of blank/truncated documents to allow expiry checks and verification of mandatory fields."
+            ],
+            "reasoning": [
+                "All three jurors independently scored 3 and cited the same core facts: ERP and drills exist but mandatory certification and complete checklist/documentation are missing or unverifiable.",
+                "Per SR-5.4, score 3 applies when ERP exists but ERT is not fully certified OR drills lack structured evaluation; available evidence matches these conditions (ERP present, but 100% ERT First Aid/Fire Fighting certification not shown and drill evaluation/observer documentation inconsistent).",
+                "Higher scores (6 or 10) require demonstrable 100% certification, drill realisation thresholds, and comprehensive drill evaluation/observer reports \u2014 these mandatory items are not evidenced or are incomplete, so upgrading is not justified.",
+                "Average juror confidence is ~0.71, supporting moderate confidence in the assigned score while acknowledging data gaps.",
+                "Requires review: because several critical documents are missing, truncated, or lack expiry checks, a targeted document request (certificates, full rosters, complete drill reports, LSA/FFA checklists) could materially change the score if they demonstrate compliance with SR-5.4.",
+                "Recommendation: finalize score = 3 now, and trigger document follow-up to verify missing mandatory items for potential reassessment."
+            ],
+            "processing_time_sec": 89.19,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "6.1",
+            "folder_name": "6.1 Sistem Pemantauan Kinerja K3LL",
+            "expected_score": 10,
+            "predicted_score": 6,
+            "confidence": 0.62,
+            "status": "failed",
+            "evidence_count": 24,
+            "evidence_found": [
+                "Leading indicators tracked (HSSE Meeting, Inspeksi HSSE, JSA, Tool Box Meeting, Permit To Work, Training HSSE) documented in KPI/templates and monthly reports.",
+                "Lagging indicators defined in KPI documents (FIR, LWDC, RWDC, MTC) and monthly reports showing zero incidents for sampled months.",
+                "Monthly HSE Performance reports (Lampiran 22) covering Jan\u2013Nov (multiple months documented), meeting the >=80% reporting threshold in the sample.",
+                "Monthly office\u2013field HSE meetings documented (meeting minutes, MoM, action logs) across many months (Jan\u2013Nov), supporting >=80% meeting frequency.",
+                "Safe man-hours evidence present (KPI documents listing total man-hours e.g., ~22,044/year and monthly breakdowns) and zero incident reporting for the period.",
+                "Field inspections, meeting minutes, and action logs showing implementation activity and corrective action tracking (though many actions remain open)."
+            ],
+            "missing_evidence": [
+                "Clear, consolidated HSE Plan file demonstrably listing both complete leading AND lagging indicators in one authoritative document (some jurors noted this was not explicitly identified).",
+                "100% monthly HSE Performance reports for the entire project duration (SR-6.1 requirement for score 10).",
+                "100% monthly MoM office\u2013field meeting records for the entire project duration (SR-6.1 requirement for score 10).",
+                "Documented HSE Meeting between management and workers (MoM) for every month (management\u2013worker meeting evidence not clearly present/complete).",
+                "Formal 'kajian perbaikan' (system-level review with analysis and recommendations to improve K3LL implementation) required for score 10.",
+                "Complete inspection reports explicitly demonstrating that field implementation matched the Rencana K3LL for all areas (some inspection evidence exists but not fully verifiable/complete).",
+                "Consistent denominators/context for some KPI calculations (some Lampiran 22 records lack man-hour denominators or clear context)."
+            ],
+            "reasoning": [
+                "All three jurors independently scored 6 with similar confidence levels and consistent reasoning: leading and lagging indicators are present, monthly reporting and meetings meet the >=80% threshold in the sampled months, and safe man-hours evidence exists.",
+                "SR-6.1 score-6 criteria are satisfied: HSE Plan elements (leading + lagging indicators) are represented in the evidence, >=80% monthly HSE Performance reports are present in the sample, >=80% monthly office\u2013field meetings are documented, and safe man-hours evidence is provided.",
+                "Score-10 criteria are not met: mandatory 100% requirements (100% monthly reports and 100% monthly meetings), documented management\u2013worker HSE meeting MoMs for every month, a formal kajian perbaikan, and complete verification inspections against the Rencana K3LL are not fully demonstrated in the evidence.",
+                "Data quality and completeness issues (inconsistent audit reporting, open corrective actions, missing denominators/context in some records, and absent explicit system-improvement documentation) reduce certainty that higher thresholds for score 10 have been achieved.",
+                "Given unanimous juror agreement on score 6, and the identified evidence gaps preventing score 10, the recommended final score is 6. Confidence is set at 0.62 (average of juror confidences adjusted for noted evidence quality issues)."
+            ],
+            "processing_time_sec": 101.82,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "6.2",
+            "folder_name": "6.2 Indikator Kinerja K3LL",
+            "expected_score": 10,
+            "predicted_score": 3,
+            "confidence": 0.69,
+            "status": "failed",
+            "evidence_count": 24,
+            "evidence_found": [
+                "Multiyear incident statistics provided covering 2022\u20132025 (4 years of data).",
+                "Annual incident counts reported as zero recordable incidents for each year in the available period.",
+                "Leading indicator activities documented: inspections, JSA, toolbox talks, permit-to-work records, meeting minutes.",
+                "Operational gaps noted in evidence: inconsistent audit delivery, some months with 0% audits, emergency drills sometimes below target, open corrective actions.",
+                "Validation/keyword search returned low coverage (approx. 2/8 VR-6.2 keywords found) indicating limited documentation against checkpoint keywords.",
+                "Juror assessments (Compliance, Evidence, HSE) unanimously interpreted the evidence as data-present but not demonstrating an improving TRIR/LTI trend or mature near-miss culture."
+            ],
+            "missing_evidence": [
+                "Nilai TRIR atau LTI rate per tahun (explicit calculations for each year).",
+                "Jumlah near miss report vs actual incident per year (near-miss counts and ratio).",
+                "Incident records with full detail per incident: tanggal, jenis, lokasi, jumlah korban, LTI flag.",
+                "Statistik insiden \u2265 5 tahun (extension of dataset to meet SR-6.2 top-score requirement).",
+                "Evidence demonstrating a stable year-on-year decreasing TRIR/LTI trend (required for score 6\u219210 differentiation).",
+                "Documentary evidence required for score 10 (HSE Plan with KPIs, HSE Monthly Performance \u22655 years, inspection logs, safe man hours evidence) or closure evidence for outstanding corrective actions."
+            ],
+            "reasoning": [
+                "All three jurors scored 3 and provided similar reasoning: multiyear data exist (2022\u20132025) but do not meet SR-6.2 requirements for higher scores.",
+                "Per SR-6.2, score 3 applies when data exist but trend does not show improvement (or data <2 years). Here the available 4-year series is flat (zero incidents) rather than a demonstrable year\u2011on\u2011year decrease in TRIR/LTI, so it does not meet the 'tren membaik' condition for score 6 or the \u22655-year + mature-reporting conditions for score 10.",
+                "Key mandatory fields are missing or not verifiable (notably TRIR/LTI per year and near-miss vs actual incident counts), reducing ability to validate an improving lagging metric or mature reporting culture.",
+                "Leading indicator evidence is positive but insufficient to override the absence of validated lagging trends and near-miss reporting required by SR-6.2 for higher scores.",
+                "Given unanimous juror agreement, consistent application of SR-6.2, and the documented evidence gaps, the conservative and rule-consistent final recommendation is score 3.",
+                "To raise the score in future assessments: supply explicit TRIR/LTI calculations per year, extend incident statistics to \u22655 years, provide detailed incident logs and near-miss counts demonstrating a mature reporting culture (near-miss \u22655\u00d7 actual incidents), and close outstanding corrective actions / standardize audits and drills."
+            ],
+            "processing_time_sec": 74.42,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "6.3",
+            "folder_name": "6.3 Pemantauan Kinerja K3LL",
+            "expected_score": 10,
+            "predicted_score": 3,
+            "confidence": 0.68,
+            "status": "failed",
+            "evidence_count": 24,
+            "evidence_found": [
+                "Monthly HSE performance reports (2022\u00002025) showing KPI tables and trends",
+                "Lagging indicators reported as zero (no LTI/fatality/MTC/spills) across covered periods",
+                "Leading-indicator records for many activities (HSSE meetings, inspections, JSA, toolbox talks, permit-to-work) with month-by-month entries",
+                "Meeting minutes (MoM) field\u00013 office and HSE meeting minutes, attendance lists and safety talk records",
+                "Inspection reports and corrective action logs (open and closed actions documented)",
+                "KPI definitions/formulas and man-hours tables"
+            ],
+            "missing_evidence": [
+                "Consolidated per-indicator % pencapaian leading indicator (numeric, auditable table against HSE Plan targets)",
+                "Consolidated per-indicator % pencapaian lagging indicator (numeric, auditable table against HSE Plan targets)",
+                "Complete HSE Plan table showing leading+lagging targets vs realizations in single auditable matrix",
+                "Company-wide evidence that KPI were communicated to all organizational levels (e.g., memos/distribution lists/sign-off logs)",
+                "Consolidated evidence of safe man-hours supporting 'zero accident' claim (single summary)",
+                "Formal root-cause analyses linking causes to specific unmet KPIs for underperforming leading programs"
+            ],
+            "reasoning": [
+                "Two of three jurors (Compliance and HSE) independently scored 3 and provide consistent reasoning that leading indicators are not uniformly 100% while lagging indicators show zero incidents; Evidence juror scored 6 but flagged key mandatory consolidation gaps that prevent full validation to a higher score.",
+                "SR-6.3 mapping: score 10 requires 100% leading AND 100% lagging AND zero accident AND documented KPI communication to all levels. That full set of conditions is not met (leading not uniformly 100%, KPI communication to all levels not fully evidenced).",
+                "Score 6 requires both leading and lagging = 100% (and any accidents only keparahan I). Leading evidence shows variability (many activities at/above target but some key leading programs repeatedly low, with monthly realizations as low as 4\u0000239%); therefore the strict criterion for 6 is not satisfied.",
+                "Score 3 applies when indicators are partially achieved (50%\n<100%) or when there is a keparahan II accident. The documented monthly overall compliance trend (reported ~82%\u0000200% across months) and specific underperforming leading programs place performance in the 'partial achievement' band, matching score 3.",
+                "There is clear evidence of zero accidents (supports not assigning 0), but missing consolidated numeric achievement tables and incomplete proof of KPI communication prevent upgrading to 6 or 10.",
+                "Given the juror majority, the documented evidence, and the mandatory-field gaps that reduce upward confidence, the conservative, rules-aligned recommendation is score = 3 with moderate confidence and further reviewer follow-up requested to obtain the missing consolidated documentation before reconsidering a higher score."
+            ],
+            "processing_time_sec": 99.32,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "6.4",
+            "folder_name": "6.4 Investigasi dan Tindak Lanjut Insiden K3LL",
+            "expected_score": 10,
+            "predicted_score": 3,
+            "confidence": 0.7,
+            "status": "failed",
+            "evidence_count": 6,
+            "evidence_found": [
+                "Dokumen prosedur investigasi insiden: MJM-HSEP-004.x dan Logindo P/QHSE/08 (mencakup ruang lingkup, definisi, dan panduan komposisi tim investigasi).",
+                "Rekam pelatihan/sertifikat Accident Investigation (periode 2020-2021) tersedia (tetapi masa berlaku/validitas tidak terverifikasi).",
+                "Bukti kegiatan implementasi parsial: shipboard meetings, toolbox talks, kampanye QHSE 2025, dan meeting minutes contoh (31 Dec 2025).",
+                "Hasil pencarian kata kunci menemukan beberapa checkpoint (5/9 keywords relevan).",
+                "Terdapat satu dokumen yang tidak dapat dibaca/korup (Doc 6), mengurangi kelengkapan bukti."
+            ],
+            "missing_evidence": [
+                "Dokumen laporan investigasi insiden/near miss yang terinvestigasi (laporan investigasi lengkap / RCFA).",
+                "Bukti Safety Stand Down (laporan/absensi/agenda) dan persentase realisasi Safety Stand Down sesuai jadwal.",
+                "% coverage sosialisasi cara pelaporan (harus terkuantifikasi; untuk skor 6 minimal >=80%, untuk skor 10 =100%).",
+                "Bukti formulir pelaporan + alur proses (flowchart) dan/atau bagan tim investigasi yang lengkap dan terlampir dalam prosedur (jika belum jelas).",
+                "Sertifikat kompetensi tim investigasi yang valid dan tidak expired (masa berlaku/divalidasi).",
+                "Bukti bahwa pekerja mampu mengenali unsafe act/unsafe condition (hasil inspeksi/observasi/monitoring).",
+                "Bukti zero incident selama proyek (untuk skor 10) \u2014 tidak tersedia.",
+                "Dokumen yang korup/terbaca rusak (Doc 6) perlu diganti agar evaluasi lengkap dapat dilakukan."
+            ],
+            "reasoning": [
+                "Semua tiga juror (Compliance, Evidence, HSE) independen merekomendasikan skor 3 dengan confidence sedang-tinggi; tidak ada konflik skor antar juror.",
+                "Skor 3 sesuai dengan SR-6.4 apabila prosedur investigasi ada tetapi implementasi/instrumen pendukung atau tim tidak bersertifikat/valid atau tidak ada bukti laporan investigasi (prosedur ada tetapi 0 implementasi atau tim tidak bersertifikat).",
+                "Terdapat prosedur tertulis dan aktivitas QHSE parsial, namun tidak ada bukti dokumenter laporan investigasi/RCFA, tidak ada bukti Safety Stand Down yang memenuhi persyaratan, dan sertifikat pelatihan tidak diverifikasi masa berlakunya \u2014 sehingga persyaratan untuk skor 6 atau 10 tidak terpenuhi.",
+                "Skor 0 tidak berlaku karena prosedur ada; skor 6/10 tidak dapat diberikan karena ketiadaan bukti implementasi, validitas sertifikat, coverage sosialisasi, dan bukti Safety Stand Down/zero incident.",
+                "Rekomendasi tindakan: upload laporan investigasi/RCFA, sertifikat terkini yang menunjukkan masa berlaku, bukti sosialisasi dengan persentase coverage (absensi + materi), dan dokumentasi Safety Stand Down untuk memungkinkan kenaikan skor pada review selanjutnya."
+            ],
+            "processing_time_sec": 77.92,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "6.5",
+            "folder_name": "6.5 Insiden yang Harus Dilaporkan Sesuai Undang-Undang dan Catatan Ketidakpatuhan",
+            "expected_score": 0,
+            "predicted_score": 0,
+            "confidence": 0.38,
+            "status": "needs_review",
+            "evidence_count": 0,
+            "evidence_found": [],
+            "missing_evidence": [
+                "Rekam insiden 5 tahun terakhir: tabel (tanggal, jenis, jumlah hari LTI, tindak lanjut)",
+                "Insiden terberat: kategori (fatality / LTI >21 hari / LTI \u0004321 hari / zero)",
+                "Ada/tidaknya catatan ketidakpatuhan regulasi (dokumentasi dan tindak lanjut)",
+                "Status project: pernyataan/bukti zero accident (jika mengklaim zero accident)",
+                "Prosedur pelaporan insiden sesuai undang-undang (dokumen prosedur)",
+                "Bukti pelaporan ke regulator untuk setiap insiden yang wajib dilaporkan (jika ada)",
+                "AI checkpoint keywords / text evidence (no occurrences of required keywords found)"
+            ],
+            "reasoning": [
+                "All three jurors independently assigned score 0. There is unanimity in the numeric assessment.",
+                "No evidence documents or content were provided (evidence set empty) and automated keyword validation found 0/8 required keywords, so none of the VR-6.5 mandatory fields can be verified.",
+                "Per SR-6.5, non-zero scores require explicit evidence: fatality -> 0, LTI >21 days or >1 LTI/year -> 3, only LTI <=21 days -> 6, zero-accident + complete reporting/procedures + no non-compliance + 5-year record -> 10. None of these conditions can be confirmed from the submitted materials.",
+                "Given absence of required records and inability to verify reporting or incident severity, the conservative and consistent application of the scoring rules is to assign score 0 (jurors also treated missing/absent mandatory evidence as critical for this category).",
+                "Confidence is moderate-low (0.38): one juror expressed high confidence (0.95) due to complete absence of evidence, while the others gave low-to-zero confidence; the average of juror confidences yields the reported value.",
+                "Requires review: true \u2014 the finding should be re-evaluated once the missing mandatory documents (5-year incident log, reporting evidence, procedures, non-compliance records, zero-accident statement if claimed) are uploaded."
+            ],
+            "processing_time_sec": 46.05,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "7.1",
+            "folder_name": "7.1 Audit",
+            "expected_score": 10,
+            "predicted_score": 3,
+            "confidence": 0.52,
+            "status": "failed",
+            "evidence_count": 3,
+            "evidence_found": [
+                "Internal HSSE/HSE audit checklists present",
+                "Two dated audit instances: 25 Nov 2024 and 27 Nov 2025",
+                "Auditor named: Capt. Farid Teguh",
+                "Checklist format consistent with OHSAS 18001 and multiple items marked compliant"
+            ],
+            "missing_evidence": [
+                "% realisasi audit vs jadwal (realisasi terhadap program/jadwal audit)",
+                "Program/jadwal audit (documented audit schedule)",
+                "% auditor bersertifikat internal auditor HSSE (certification status for all auditors)",
+                "Complete audit reports showing daftar temuan + rencana tindak lanjut per temuan + auditor signatures",
+                "Evidence audit was cross-function (yes/no and supporting docs)",
+                "Evidence senior management acted as auditor (certificates/evidence)",
+                "Auditor certificates with validity/expiry dates",
+                "Evidence of zero temuan in PB and PA (required for score 10)",
+                "Readable/complete uploaded documents (Doc1 empty; Doc2/Doc3 truncated)"
+            ],
+            "reasoning": [
+                "All three jurors independently scored 3 and provided aligned rationale: audit activity exists but critical mandatory items and completeness required for higher scores are not evidenced.",
+                "Per SR-7.1, scores 6 and 10 require documented program/jadwal, 100% realization, 100% certified auditors, complete reports (findings + TL + signatures), and cross-function audits; score 10 additionally requires senior management auditors and evidence of zero findings. These conditions are not met by the provided evidence.",
+                "Existing evidence (checklists and two dated audits) demonstrates implementation, which excludes score 0, but the lack of program/jadwal, realization %, auditor certification evidence, complete reports, cross-function involvement, and senior management auditor evidence prevents awarding scores 6 or 10.",
+                "Document quality issues (empty/truncated files) reduce verifiability and support the need for review and additional uploads to validate higher scoring.",
+                "Recommendation: maintain score 3. To reconsider upward, request/upload: full audit program/jadwal, evidence of realization (%), complete signed audit reports (findings + TL), auditor certificates with expiry dates (including senior management if applicable), and documentation proving cross-function audits or zero findings where claimed."
+            ],
+            "processing_time_sec": 68.6,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "7.2",
+            "folder_name": "7.2 Tinjauan Manajemen",
+            "expected_score": 10,
+            "predicted_score": 6,
+            "confidence": 0.5,
+            "status": "failed",
+            "evidence_count": 2,
+            "evidence_found": [
+                "MoM / RTM reports dated 21 Jan 2025 and 20 Jan 2026",
+                "RTM reports approved by Director (evidence of top management involvement)",
+                "Action plans recorded with PICs (FT & MP and supporting persons) and target/due dates",
+                "Follow-up status recorded and previous MR actions reported as closed with verification dates",
+                "Internal audit results reporting zero non-conformities (NC/NCR = 0)"
+            ],
+            "missing_evidence": [
+                "Formal Management Review procedure document (Prosedur Tinjauan Manajemen)",
+                "Explicit quantitative metric: % RTM terlaksana vs terjadwal",
+                "Explicit quantitative metric: % temuan audit yang dibahas in numeric form",
+                "Explicit quantitative metric: % temuan yang closed on-time = 100%",
+                "Clear attendance roster or signed participant list proving pimpinan hadir at each RTM session",
+                "Comprehensive evidence that all action items were closed on-time (closure timestamps for all items)"
+            ],
+            "reasoning": [
+                "SR-7.2 score-6 criteria: (a) 100% temuan audit dibahas dalam RTM, (b) semua temuan memiliki action plan dengan PIC + target tanggal, (c) pimpinan perusahaan hadir in RTM.",
+                "Documentation shows RTM MoM for two sessions, director approval (pimpinan hadir), and action plans with PICs and target dates \u2014 satisfying criteria (b) and evidence for (c).",
+                "Internal audit shows zero non-conformities; where there are no open findings, it is reasonable to interpret that 100% of audit findings were addressed/discussed (de facto 100%), which meets criterion (a) for score 6.",
+                "Score 10 cannot be awarded because multiple mandatory 10-level elements are not evidenced: no formal procedure uploaded, no % RTM terlaksana metric, and no proof that 100% of findings were closed on-time.",
+                "Compliance juror raised valid concerns about absence of explicit numeric fields and some attendance proof; these gaps lower overall confidence but do not invalidate the evidence that meets the score-6 requirements.",
+                "Given two jurors scored 6 (with documented RTM, action plans, leadership involvement and closed previous actions) versus one juror scoring 3 due to missing numeric metrics, the consensus recommendation is score 6 with moderate confidence.",
+                "If the requester wants to pursue score 10, they should upload the Management Review procedure, explicit % RTM terlaksana vs terjadwal, a numeric % temuan dibahas field, full action-plan closure evidence showing 100% closed on-time, and attendance rosters proving pimpinan hadir at every RTM."
+            ],
+            "processing_time_sec": 91.35,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "8.1",
+            "folder_name": "8.1 Sertifikasi Sistem Pengelolaan K3LL",
+            "expected_score": 10,
+            "predicted_score": 10,
+            "confidence": 0.77,
+            "status": "passed",
+            "evidence_count": 4,
+            "evidence_found": [
+                "ISO 45001:2018 certificate for PT. Logindo Samudramakmur Tbk (issued 6 Nov 2023, expires 5 Nov 2026) \u2014 issued by LRQA; issue and expiry dates present",
+                "ISO 14001:2015 certificate for PT. Logindo Samudramakmur Tbk (issued 16 Jul 2024, expires 15 Jul 2027) \u2014 issued by LRQA; issue and expiry dates present",
+                "ISO 9001:2015 certificates present as supplemental evidence (PT Makara Jaya Marine \u2014 DNV, valid to 13 May 2028; PT. Logindo \u2014 LRQA, valid to 10 Aug 2026)",
+                "Issuing bodies named and reputable (LRQA, DNV); certificates include scopes/locations and approval/identification metadata in the provided evidence",
+                "All cited ISO 45001 and ISO 14001 certificates are within their validity periods (i.e., active) per the evidence"
+            ],
+            "missing_evidence": [
+                "Explicit confirmation of entity-level attribution for every certificate (some documents reference multiple legal entities; need to confirm which certificates apply to the assessed entity)",
+                "Explicit '% sertifikat yang masih valid' field (although derivable, not provided directly)",
+                "Direct certificate scans or verifications (copy of certificates with certificate numbers/approval numbers for all relevant documents and/or validation from certifying bodies to confirm authenticity)",
+                "Documentation showing that the ISO certificates' scopes cover the assessed operational activities (e.g., maritime/ship operations) and any required maritime-specific certifications (DOC / ISPS) if applicable",
+                "Surveillance audit status and recent audit evidence (to ensure continued compliance beyond expiry dates)"
+            ],
+            "reasoning": [
+                "All three jurors independently scored 10 based on SR-8.1: the scoring rule requires valid ISO 45001 AND valid ISO 14001 from external certification bodies \u2014 both are present and within validity period for PT. Logindo Samudramakmur Tbk in the provided evidence.",
+                "Additional ISO 9001 certificates strengthen the profile per the scoring rule's 'SYARAT TAMBAHAN', supporting the maximum score.",
+                "Evidence jurors noted certificate metadata (issuing body, issue/expiry dates, scopes) is present and issued by reputable bodies (LRQA, DNV), satisfying mandatory fields needed to award score 10 (presence and validity of ISO 45001 and ISO 14001).",
+                "However, there are minor but material verification gaps: entity-level attribution ambiguity (documents reference more than one legal entity), lack of an explicit '% sertifikat yang masih valid' field, and no independent certificate authenticity check supplied. These reduce absolute confidence and require a short review/verification step.",
+                "Given the clear presence of valid ISO 45001 and ISO 14001 meeting SR-8.1 requirements, the recommended final score is 10. Because of the noted verification gaps, set requires_review = true and recommend obtaining certificate scans/IDs, confirming entity attribution, and optionally verifying with certifying bodies to raise confidence further."
+            ],
+            "processing_time_sec": 90.62,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        },
+        {
+            "category_id": "8.2",
+            "folder_name": "8.2 Ciri-ciri Tambahan Sistem Pengelolaan K3LL",
+            "expected_score": 10,
+            "predicted_score": 0,
+            "confidence": 0.58,
+            "status": "failed",
+            "evidence_count": 4,
+            "evidence_found": [
+                "No verifiable award certificates or extractable text found in the submitted documents (Docs 1-3 contain no extractable evidence; Doc 4 corrupted / OCR unreadable).",
+                "Automated keyword search returned 0/7 checkpoint keywords: (penghargaan K3LL, PROPER, penghargaan lingkungan, penghargaan keselamatan, penghargaan pemerintah, CSR award, zero accident award).",
+                "No mandatory fields (award type, awarding institution, award year, PROPER level where applicable, company name on certificate) could be confirmed from the submission."
+            ],
+            "missing_evidence": [
+                "Jenis penghargaan (internal/pemda/nasional) \u2014 not present or unverifiable",
+                "Nama lembaga pemberi penghargaan \u2014 not present or unverifiable",
+                "Tahun penghargaan (within last 5 years) \u2014 not present or unverifiable",
+                "Untuk PROPER: level warna (Hijau/Emas) \u2014 not present or unverifiable",
+                "Kesesuaian nama perusahaan pada sertifikat \u2014 cannot be checked (no readable certificate)",
+                "Readable / machine-extractable copies of certificates/piagam (selectable-text PDF or high-quality scan) \u2014 required",
+                "Any evidence proving government-level award (regional or national) \u2014 absent"
+            ],
+            "reasoning": [
+                "All three jurors independently scored 0 based on the same evidence issues; there is unanimity on the numerical outcome.",
+                "Scoring rules (SR-8.2) require verifiable certificates for scores >0: internal awards (3), regional government awards (6), or national government awards within 5 years (10). None of these conditions can be verified from the submission.",
+                "Automated keyword checkpoint found zero occurrences of expected award-related keywords, consistent with jurors' findings of no extractable award evidence.",
+                "Mandatory validation fields per VR-8.2 are missing or unverifiable, preventing confirmation of award type, awarding body, award year recency, PROPER level, and company name matching.",
+                "Given the lack of any verifiable award evidence, SR-8.2 maps to score 0 (no verifiable government awards / no verifiable awards).",
+                "Confidence is moderate (0.58): jurors are unanimous on the score but document quality issues (corrupted/unextractable files) limit certainty about whether supporting evidence exists but was not captured; therefore require manual/document resubmission for higher assurance.",
+                "Recommended action: request clear, machine-readable copies of certificates/piagams showing award type, awarding institution, award year (within 5 years if claiming regional/national), PROPER level if relevant, and company name exactly as in contract. Re-assess after valid documents are uploaded."
+            ],
+            "processing_time_sec": 55.28,
+            "errors": [],
+            "warnings": [],
+            "provider": "OpenAIProvider",
+            "model": "gpt-5-mini"
+        }
+    ]
+}

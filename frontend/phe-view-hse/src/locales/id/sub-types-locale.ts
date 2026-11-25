@@ -1,0 +1,30 @@
+export default {
+    pageTitle: "Nama Proyek",
+    pageSubtitle: "Kelola nama proyek dan kategori",
+    addProjectName: "Tambah Nama Proyek",
+    updateProjectName: "Perbarui Nama Proyek",
+    deleteProjectName: "Hapus Nama Proyek",
+    name: "Nama Proyek",
+    hoursPobPheOses: "Hours POB PHE OSES",
+    hoursPobContractor: "Hours POB Contractor",
+    target: "Target",
+    autoCalculateManhours: "Trigger Otomatis Manhours",
+    autoCalculateTooltip: "Set ON apabila project terus berjalan dan OFF apabila project telah selesai",
+    workLocations: "Lokasi Kerja",
+    newProject: "Nama Proyek Baru",
+    nameRequired: "Nama proyek wajib diisi",
+    projects: "Proyek",
+    deleteConfirmation: "Hapus tipe sub dan semua datanya. Tindakan ini tidak dapat dibatalkan. Harap konfirmasi dengan hati-hati.",
+    deleteSuccess: "Nama proyek berhasil dihapus",
+    createSuccess: "Nama proyek berhasil dibuat",
+    updateSuccess: "Nama proyek berhasil diperbarui",
+    form: {
+        addTitle: "Tambah Nama Proyek Baru",
+        addDescription: "Silakan isi formulir di bawah ini untuk membuat nama proyek baru.",
+        updateTitle: "Perbarui Nama Proyek",
+        updateDescription: "Silakan isi formulir di bawah ini untuk memperbarui nama proyek.",
+        deleteTitle: "Hapus Nama Proyek",
+        deleteDescription: "Apakah Anda yakin ingin menghapus ",
+        deleteQuestionMark: " ?"
+    }
+}

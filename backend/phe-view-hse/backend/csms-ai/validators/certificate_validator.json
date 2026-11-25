@@ -1,0 +1,15 @@
+{
+  "validator_id": "certificate_validator",
+  "description": "Capabilities for certificate_validator",
+  "input_fields": [
+    "document_content"
+  ],
+  "output_fields": [
+    "is_valid",
+    "confidence",
+    "reasoning"
+  ],
+  "pass_condition": {
+    "is_valid": true
+  }
+}

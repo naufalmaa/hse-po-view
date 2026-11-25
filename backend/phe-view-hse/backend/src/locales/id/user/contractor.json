@@ -1,0 +1,11 @@
+{
+  "contractorCreated": "Kontraktor berhasil dibuat",
+  "contractorCreateFailed": "Gagal membuat kontraktor",
+  "contractorDeleted": "Kontraktor berhasil dihapus",
+  "contractorDeleteFailed": "Gagal menghapus kontraktor",
+  "contractorUpdated": "Kontraktor berhasil diperbarui",
+  "contractorUpdateFailed": "Gagal memperbarui kontraktor",
+  "contractorNotFound": "Kontraktor tidak ditemukan",
+  "contractorInUse": "Kontraktor sedang digunakan dan tidak dapat dihapus",
+  "contractorsListed": "Daftar kontraktor berhasil diambil"
+}

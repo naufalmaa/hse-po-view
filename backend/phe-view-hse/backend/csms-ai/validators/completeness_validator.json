@@ -1,0 +1,15 @@
+{
+  "validator_id": "completeness_validator",
+  "description": "Capabilities for completeness_validator",
+  "input_fields": [
+    "document_content"
+  ],
+  "output_fields": [
+    "is_valid",
+    "confidence",
+    "reasoning"
+  ],
+  "pass_condition": {
+    "is_valid": true
+  }
+}

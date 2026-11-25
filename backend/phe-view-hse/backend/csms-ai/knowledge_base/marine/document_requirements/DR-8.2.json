@@ -1,0 +1,26 @@
+{
+  "requirement_id": "DR-8.2",
+  "category_id": "8.2",
+  "required_documents": [
+    "- Piagam/Sertifikat Penghargaan K3LL (Kesehatan",
+    "Keselamatan",
+    "Keamanan",
+    "dan Lindungan Lingkungan) atau CSR resmi skala Nasional (misal: Penghargaan Kecelakaan Nihil / Zero Accident Award dari Kementerian Ketenagakerjaan RI",
+    "atau PROPER tingkat Nasional dengan predikat Hijau atau Emas dari Kementerian Lingkungan Hidup dan Kehutanan RI",
+    "maksimal 5 tahun terakhir).- Piagam/Sertifikat Penghargaan K3LL atau CSR resmi tingkat Pemerintah Daerah Provinsi atau Kabupaten/Kota (misal: Penghargaan K3 dari Disnakertrans Daerah",
+    "Penghargaan Lingkungan/CSR dari Pemerintah Daerah/Dinas terkait",
+    "maksimal 5 tahun terakhir).- Sertifikat/Kartu Keanggotaan Asosiasi K3LL",
+    "Asosiasi K3 Nasional",
+    "atau Asosiasi Sektor Industri Penunjang yang masih aktif sebagai dokumen pendukung komitmen HSSE eksternal (maksimal 5 tahun terakhir)."
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

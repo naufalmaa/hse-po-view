@@ -1,0 +1,27 @@
+{
+  "requirement_id": "DR-6.4",
+  "category_id": "6.4",
+  "required_documents": [
+    "1. Prosedur Investigasi Insiden: Dokumen resmi disahkan manajemen puncak",
+    "memuat bagan alur pelaporan kejadian (verbal segera",
+    "tertulis <= 24 jam)",
+    "Form Laporan Kejadian Awal",
+    "Form Investigasi Akar Penyebab (RCA/SCAT)",
+    "serta bagan tim investigasi.<br>2. Sertifikat Kompetensi Investigator: Sertifikat Kompetensi Investigator / Penganalisa Kecelakaan Kerja (e.g.",
+    "BNSP atau lembaga terakreditasi resmi) untuk personil yang tercantum dalam bagan tim investigasi.<br>3. Bukti Sosialisasi Pelaporan Bahaya: Laporan sosialisasi tata cara pelaporan bahaya (Unsafe Act/Unsafe Condition/Near Miss) berupa poster",
+    "foto",
+    "absensi",
+    "materi briefing",
+    "atau log penggunaan aplikasi pelaporan keselamatan mandiri.<br>4. Dokumen Safety Stand Down (SSD): Risalah rapat khusus membahas pembelajaran kasus keselamatan terbaru (latest case) atau hasil investigasi aktual.<br>5. Laporan Observasi/Inspeksi Lapangan: Rekapitulasi kartu observasi harian/bulanan untuk menilai keaktifan pekerja dalam mengenali dan melaporkan kondisi/tindakan tidak aman."
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

@@ -1,0 +1,5 @@
+{
+  "metricsRetrieved": "Metrik dashboard berhasil diambil",
+  "metricsRetrieveFailed": "Gagal mengambil metrik dashboard",
+  "exportFailed": "Gagal mengekspor data dashboard"
+}

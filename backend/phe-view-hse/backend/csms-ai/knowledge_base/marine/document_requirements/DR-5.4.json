@@ -1,0 +1,35 @@
+{
+  "requirement_id": "DR-5.4",
+  "category_id": "5.4",
+  "required_documents": [
+    "- Dokumen Manual / Prosedur Emergency Response Plan (ERP) komprehensif (Sisi Kapal & Darat)<br>- Dokumen Bagan Organisasi / Alur Komunikasi Emergency Response Team (ERT) atau Muster List Kapal (Sesuai SOLAS/STCW)\n<br>- Dokumen sertifikat kompetensi penolong pertama (First Aider) berlisensi valid (BST/STCW atau instansi standar) untuk personel yang ditunjuk<br>- Dokumen sertifikat kompetensi pemadam kebakaran (Fire Fighting/BST) berlisensi valid untuk personel yang ditunjuk<br>- Dokumen jadwal tahunan latihan tanggap darurat (Annual Emergency Drill Schedule) yang disetujui manajemen\n<br>- Dokumen Laporan Pelaksanaan Emergency Drill komprehensif (Memuat skenario",
+    "daftar hadir peserta",
+    "dokumentasi foto",
+    "kronologi waktu target vs actual",
+    "evaluasi response per tim",
+    "dan rekomendasi perbaikan)\n<br>- Dokumen Laporan Evaluasi / Verifikasi dari Observer Independen (seperti DPA - Designated Person Ashore atau Auditor K3LL eksternal) per pelaksanaan drill\n<br>- Dokumen Monthly Checklist pengisian rutin untuk Life Saving Appliances (LSA) di kapal/barge/platform (Lifejacket",
+    "Liferaft",
+    "Lifebuoy",
+    "dll.)\n<br>- Dokumen Monthly Checklist pengisian rutin untuk Fire Fighting Appliances (FFA) di kapal/barge/platform (APAR",
+    "CO2 System",
+    "Fire Hose",
+    "Nozzle",
+    "Pompa Pemadam",
+    "dll.)\n<br>- Dokumen Laporan Inspeksi rutin LSA",
+    "FFA",
+    "dan Safety Equipment berkala (Weekly/Monthly) serta Laporan Pengetesan Fungsi peralatan kritikal (contoh: Weekly Fire Fighting Pump Test Form dengan data parameter tekanan outlet",
+    "RPM",
+    "durasi",
+    "dan jarak pancaran)"
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

@@ -1,0 +1,30 @@
+{
+    "vision_model": {
+        "provider": "vllm",
+        "model": "qwen3-vl",
+        "endpoint": "http://localhost:5163/v1",
+        "max_tokens": 1024
+    },
+    "reasoning_model": {
+        "provider": "vllm",
+        "model": "qwen35",
+        "endpoint": "http://localhost:8000/v1",
+        "max_tokens": 2048
+    },
+    "consensus_model": {
+        "provider": "vllm",
+        "model": "qwen35",
+        "endpoint": "http://localhost:8000/v1",
+        "max_tokens": 2048
+    },
+    "openai_reasoning": {
+        "provider": "openai",
+        "model": "gpt-5-mini",
+        "temperature": 0.0
+    },
+    "openai_consensus": {
+        "provider": "openai",
+        "model": "gpt-5-mini",
+        "temperature": 0.0
+    }
+}

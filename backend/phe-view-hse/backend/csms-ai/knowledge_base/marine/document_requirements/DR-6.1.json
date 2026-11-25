@@ -1,0 +1,20 @@
+{
+  "requirement_id": "DR-6.1",
+  "category_id": "6.1",
+  "required_documents": [
+    "- Rencana K3LL / HSE Plan Proyek yang memuat matriks target KPI Leading & Lagging secara lengkap (Form No: HSE-PLAN-01 atau setara)\n.<br>- Laporan Evaluasi Kinerja K3LL Bulanan / HSE Monthly Performance Report yang mencantumkan statistik leading & lagging indicator secara berkala (Form No: HSE-REP-01 atau setara",
+    "misal: Lampiran 22 TKO CSMS)\n.<br>- Risalah Rapat Bulanan (MoM Monthly Meeting Office-Lapangan) bertandatangan lengkap yang membahas kinerja HSSE dan tindak lanjut rekomendasi perbaikan (Form No: HSE-MOM-01 atau setara)\n.<br>- Risalah Rapat Pertemuan Keselamatan Manajemen-Pekerja (MoM Management-Workers HSE Meeting / Safety Committee Meeting)\n.<br>- Laporan Inspeksi Lapangan Rutin untuk verifikasi kesesuaian program kerja K3LL (Form No: HSE-INS-01 atau setara)\n.<br>- Catatan Statistik Akumulasi Jam Kerja Aman (Safe Man-Hours Log / Report) yang terintegrasi dalam laporan bulanan\n.<br>- Kajian/Evaluasi Perbaikan Sistem K3LL (Matriks Rekomendasi Tindak Lanjut / Action Plan Tracking dengan status Open/Close",
+    "Target Tanggal",
+    "dan PIC)\n."
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

@@ -1,0 +1,43 @@
+{
+  "requirement_id": "DR-4.8",
+  "category_id": "4.8",
+  "required_documents": [
+    "- Matriks APD (PPE Matrix): Tabel pemetaan seluruh posisi jabatan kerja vs jenis APD wajib yang spesifik (APD Umum & APD Khusus per jenis aktivitas kerja berisiko tinggi)",
+    "standar referensi teknis",
+    "serta ketentuan masa pakai APD.<br>- Prosedur Pengelolaan APD: Dokumen resmi yang disahkan manajemen",
+    "mencakup siklus hidup APD secara komprehensif (perencanaan",
+    "pengadaan",
+    "standarisasi merek",
+    "penyimpanan/gudang",
+    "distribusi",
+    "inspeksi berkala",
+    "perawatan",
+    "penggantian APD rusak",
+    "dan disposal/pemusnahan limbah APD bekas).<br>- Formulir Pemeriksaan Harian APD (Pre-use Inspection Checklist): Log pemeriksaan mandiri kelayakan APD per pekerja sebelum mulai bekerja",
+    "lengkap dengan kolom tanda tangan pekerja dan verifikasi tanda tangan supervisor.<br>- Tanda Terima Distribusi APD: Lembar serah terima tertulis (mencantumkan Nama",
+    "ID Karyawan",
+    "Jabatan",
+    "Daftar Jenis APD yang diserahkan",
+    "Jumlah",
+    "Tanggal Terima",
+    "dan Tanda Tangan Basah atau verifikasi sistem digital).<br>- Evidence Program Fit-to-Test / PPE Testing & Pelatihan: Dokumen laporan pelaksanaan pengujian kelayakan ukuran dan fungsi APD",
+    "laporan pelatihan cara pemakaian APD khusus",
+    "daftar hadir Kru bertanda tangan",
+    "materi/modul",
+    "dan foto dokumentasi kegiatan.<br>- Laporan Monitoring & Rekap Kepatuhan Penggunaan APD: Laporan pengawasan lapangan berkala (bulanan/mingguan) yang memuat statistik frekuensi inspeksi acak",
+    "jumlah observasi perilaku",
+    "persentase kepatuhan",
+    "rincian temuan ketidakpatuhan",
+    "beserta status penanganan tindakan korektif (CAPA)."
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

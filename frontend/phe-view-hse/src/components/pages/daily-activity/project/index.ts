@@ -1,0 +1,9 @@
+export {default as ViewLagging} from "./ViewLagging";
+export {default as ViewSmartCard} from "./ViewSmartCard";
+export {default as ViewManHours} from "./ViewManHours";
+export {default as ViewMeeting} from "./ViewMeeting";
+export {default as ViewTraining} from "./ViewTraining";
+export {default as ViewDrill} from "./ViewDrill";
+export {default as ViewInspection} from "./ViewInspection";
+export {default as ViewPermitToWork} from "./ViewPermitToWork";
+export {default as ViewTodayHighlight} from "./ViewTodayHighlight";

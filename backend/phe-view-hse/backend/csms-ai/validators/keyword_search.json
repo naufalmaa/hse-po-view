@@ -1,0 +1,15 @@
+{
+  "validator_id": "keyword_search",
+  "description": "Capabilities for keyword_search",
+  "input_fields": [
+    "document_content"
+  ],
+  "output_fields": [
+    "is_valid",
+    "confidence",
+    "reasoning"
+  ],
+  "pass_condition": {
+    "is_valid": true
+  }
+}

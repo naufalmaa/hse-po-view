@@ -1,0 +1,9 @@
+{
+    "provider": "vllm",
+    "parallel_categories": 2,
+    "parallel_documents": 4,
+    "vision_enabled": true,
+    "ocr_enabled": true,
+    "evaluation_enabled": true,
+    "dashboard_enabled": true
+}

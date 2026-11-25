@@ -1,0 +1,5 @@
+{
+  "agent_id": "validation_agent",
+  "name": "Validation Agent",
+  "type": "model-agnostic"
+}

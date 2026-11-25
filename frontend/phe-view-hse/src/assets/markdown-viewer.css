@@ -1,0 +1,260 @@
+.markdown-viewer {
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  color: var(--foreground);
+  background-color: var(--card);
+  /*padding: 1.5rem;*/
+  /* border-radius: 1.5rem;  rounded-2xl equivalent */
+  /*box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);  soft shadow */
+  transition: all 0.3s ease; /* smooth transitions */
+}
+
+.markdown-viewer:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); /* hover effect */
+  transform: translateY(-2px); /* subtle lift */
+}
+
+.markdown-viewer h1,
+.markdown-viewer h2,
+.markdown-viewer h3,
+.markdown-viewer h4,
+.markdown-viewer h5,
+.markdown-viewer h6 {
+  margin-top: 1.25rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--foreground);
+  letter-spacing: -0.02em; /* playful typography */
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem; /* Added padding */
+  border-radius: 0.75rem; /* Rounded corners */
+}
+
+.markdown-viewer h1 {
+  font-size: 2.25rem;
+  border: 2px solid var(--primary-muted); /* Full border */
+  border-bottom: 4px solid var(--primary); /* Emphasized bottom border */
+  padding: 1rem 1.5rem; /* Increased padding */
+  color: var(--primary);
+  background: linear-gradient(135deg, var(--primary-muted) 0%, transparent 100%); /* Subtle background */
+  margin-top: 0.5rem;
+}
+
+.markdown-viewer h2 {
+  font-size: 1.75rem;
+  border: 1px dashed var(--border); /* Full border */
+  border-bottom: 2px dashed var(--secondary); /* Emphasized bottom border */
+  padding: 0.8rem 1.25rem; /* Increased padding */
+  color: var(--secondary);
+  background: linear-gradient(135deg, var(--secondary-muted) 0%, transparent 100%); /* Subtle background */
+}
+
+.markdown-viewer h3 {
+  font-size: 1.35rem;
+  border: 1px dotted var(--border); /* Full border */
+  border-bottom: 2px dotted var(--accent); /* Emphasized bottom border */
+  padding: 0.6rem 1rem; /* Increased padding */
+  color: var(--accent);
+  background: linear-gradient(135deg, var(--accent-muted) 0%, transparent 100%); /* Subtle background */
+}
+
+.markdown-viewer h4 {
+  font-size: 1.1rem;
+  border: 1px solid var(--border); /* Added full border */
+  padding: 0.5rem 0.75rem; /* Increased padding */
+  margin-bottom: 0.5rem;
+  color: var(--muted-foreground);
+  background: linear-gradient(135deg, var(--muted) 0%, transparent 100%); /* Subtle background */
+  border-radius: 0.5rem; /* Rounded corners */
+}
+
+.markdown-viewer p {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.markdown-viewer ul,
+.markdown-viewer ol {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  padding-left: 1.75rem;
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 1rem;
+  border: 1px solid var(--border-muted); /* softer border */
+  border-radius: 1rem; /* rounded-xl */
+  background-color: var(--muted);
+  margin: 0.75rem 0;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03); /* subtle inner shadow */
+  transition: all 0.2s ease;
+}
+
+.markdown-viewer ul:hover,
+.markdown-viewer ol:hover {
+  background-color: var(--muted-hover); /* hover effect */
+  border-color: var(--border-hover);
+}
+
+.markdown-viewer ul {
+  list-style-type: disc;
+}
+
+.markdown-viewer ol {
+  list-style-type: decimal;
+}
+
+.markdown-viewer li {
+  margin-bottom: 0.35rem;
+  transition: all 0.2s ease;
+  padding: 0.1rem 0;
+}
+
+.markdown-viewer li:hover {
+  transform: translateX(4px); /* subtle hover effect */
+  color: var(--primary);
+}
+
+.markdown-viewer li > p {
+  margin-bottom: 0;
+}
+
+.markdown-viewer code {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  background-color: var(--muted);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.5rem; /* more rounded */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* subtle shadow */
+  transition: all 0.2s ease;
+}
+
+.markdown-viewer code:hover {
+  background-color: var(--primary-muted); /* pastel accent */
+  transform: scale(1.02); /* subtle scale */
+}
+
+.markdown-viewer pre {
+  background-color: var(--muted);
+  padding: 1.25rem;
+  border-radius: 1rem; /* rounded-xl */
+  overflow-x: auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* soft shadow */
+  border: 1px solid var(--border-muted);
+  transition: all 0.3s ease;
+}
+
+.markdown-viewer pre:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* hover effect */
+  border-color: var(--border-hover);
+}
+
+.markdown-viewer pre > code {
+  background: none;
+  padding: 0;
+}
+
+.markdown-viewer blockquote {
+  margin: 0 0 1.25rem;
+  padding: 0.75rem 1.25rem;
+  border-left: 0.35rem solid var(--primary-muted); /* pastel accent */
+  color: var(--muted-foreground);
+  background-color: var(--muted);
+  border-radius: 0 0.5rem 0.5rem 0; /* rounded corner */
+  font-style: italic;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03); /* subtle shadow */
+  transition: all 0.2s ease;
+}
+
+.markdown-viewer blockquote:hover {
+  border-left-color: var(--primary); /* accent on hover */
+  background-color: var(--muted-hover);
+}
+
+.markdown-viewer table {
+  width: 100%;
+  margin: 1rem 0 1.5rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: var(--card);
+  border-radius: 1rem; /* rounded-xl */
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* soft shadow */
+  transition: all 0.3s ease;
+  border: 1px solid var(--border); /* Added border */
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.markdown-viewer table th,
+.markdown-viewer table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.markdown-viewer table th {
+  background-color: var(--muted);
+  font-weight: 600;
+  color: var(--foreground);
+  border-bottom: 2px solid var(--border);
+}
+
+.markdown-viewer table tr:nth-child(even) {
+  background-color: var(--muted-bg);
+}
+
+.markdown-viewer table tr:hover {
+  background-color: var(--muted-hover);
+  transform: scale(1.01);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.markdown-viewer table:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* hover effect */
+  border-color: var(--border-hover);
+}
+
+.markdown-viewer a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: all 0.2s ease;
+  border-radius: 0.25rem;
+  padding: 0.1rem 0.2rem;
+}
+
+.markdown-viewer a:hover {
+  color: var(--primary-foreground);
+  background-color: var(--primary-muted); /* pastel background */
+  text-decoration-thickness: 2px;
+}
+
+/* Already included in the previous rule */
+
+.markdown-viewer hr {
+  margin: 1.75rem 0;
+  border: 0;
+  border-top: 1px dashed var(--border); /* playful style */
+  height: 1px;
+  background-image: linear-gradient(to right, transparent, var(--border), transparent); /* gradient effect */
+}
+
+.markdown-viewer img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem; /* rounded-lg */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* soft shadow */
+  transition: all 0.3s ease;
+}
+
+.markdown-viewer img:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12); /* hover effect */
+  transform: scale(1.02); /* subtle scale */
+}

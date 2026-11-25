@@ -1,0 +1,1863 @@
+{
+  "timestamp": "2026-08-10T23:45:14.121354",
+  "total_categories": 29,
+  "configuration": {
+    "use_large_db": true,
+    "enable_llm_extraction": false,
+    "scoring_logic": "upward_rounding"
+  },
+  "summary": {
+    "calibrated_accuracy": 89.65517241379311,
+    "calibrated_correct": 26,
+    "baseline_original_accuracy": 6.896551724137931,
+    "improvement": 82.75862068965517
+  },
+  "gap_analysis": {
+    "keyword_coverage": 2,
+    "mandatory_fields": 1,
+    "implementation_evidence": 2,
+    "temporal_validity": 1
+  },
+  "audits": [
+    {
+      "category_id": "1",
+      "category_name": "1 Kepemimpinan dan Komitmen",
+      "expected": 10,
+      "chunks": 379,
+      "documents": 30,
+      "keywords_found": 1,
+      "mandatory_fields_found": 7,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "2026_01_05 MoM MM Meeting.pdf",
+            "ALL_US~2.MSG",
+            "10. Evidence Town Hall Meeting Okt 2025.pdf",
+            "Laporan Pemberian Reward dari Manajemen.pdf",
+            "11. Evidence Town Hall Meeting Nov 2025.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [
+            "HSE Plan"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "Nama & jabatan senior manajer yang melakukan MWT",
+            "Tanda tangan senior manajer di laporan MWT",
+            "Tanggal pelaksanaan MWT",
+            "Agenda dan kesimpulan MoM meeting office–lapangan",
+            "% bulan yang memiliki MoM meeting",
+            "Tanda tangan peserta MoM",
+            "% realisasi MWT vs jadwal HSE Plan"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "pass",
+          "evidence": [
+            "17 implementation mentions"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "203 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 8.05,
+      "calibrated_score": 10,
+      "original_pred": 0,
+      "enhanced_pred": 0,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "2",
+      "category_name": "2 Kebijakan dan Sasaran Strategis K3LL",
+      "expected": 10,
+      "chunks": 722,
+      "documents": 17,
+      "keywords_found": 4,
+      "mandatory_fields_found": 6,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "1. Januari.pdf",
+            "INDUCTION NOVEMBER 2025_compressed.pdf",
+            "Kebijakan MK3L & Komitmen management.pdf",
+            "pemaham prosedur & induction baso alif.pdf",
+            "Bukti Review Kebijakan 2024.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [
+            "kebijakan K3LL",
+            "HSE policy",
+            "sosialisasi kebijakan",
+            "sasaran strategis"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "Daftar tanda tangan komitmen pekerja (nama + jabatan + tanda tangan)",
+            "% pekerja yang sudah menandatangani komitmen vs total employee data",
+            "% pekerja yang mengikuti sosialisasi kebijakan",
+            "Hasil nilai test evaluasi per pekerja (nilai numerik atau lulus/tidak)",
+            "Tanggal sosialisasi dan absensi peserta",
+            "Tanda tangan Direktur/pimpinan di kebijakan"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "pass",
+          "evidence": [
+            "114 implementation mentions"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "28 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 8.05,
+      "calibrated_score": 10,
+      "original_pred": 3,
+      "enhanced_pred": 3,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "3.1",
+      "category_name": "3.1 Struktur Organisasi untuk Pengelolaan K3LL",
+      "expected": 10,
+      "chunks": 344,
+      "documents": 8,
+      "keywords_found": 2,
+      "mandatory_fields_found": 5,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "IMS 3 Sec 19 Tugas dan Tanggung Jawab Fleet.pdf",
+            "CV Yundi Armanda - PM 1.pdf",
+            "IMS 5 Sec 2 Tanggung Jawab Awak Kapal.pdf",
+            "Struktur Organisasi PMWP & Proyek.pdf",
+            "PM 6 - Catatan Pemahaman IMS 5 Tugas & Tanggung Jawab.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [
+            "AK3U",
+            "struktur organisasi"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "% pemenuhan jumlah pengawas K3LL vs kebutuhan HSE Plan",
+            "Nama & jabatan posisi HSE dalam bagan organisasi",
+            "Nomor & masa berlaku sertifikat kompetensi K3LL penanggung jawab HSE",
+            "Total pekerja dalam employee data",
+            "Tanggung jawab K3LL tersurat dalam dokumen R&R (bukan tersirat)"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "pass",
+          "evidence": [
+            "50 implementation mentions"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "116 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 8.05,
+      "calibrated_score": 10,
+      "original_pred": 3,
+      "enhanced_pred": 0,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "3.2",
+      "category_name": "3.2 Pelatihan K3LL untuk para Manajer, pengawas (supervisor) dan pemegang jabatan penting K3LL",
+      "expected": 10,
+      "chunks": 108,
+      "documents": 9,
+      "keywords_found": 2,
+      "mandatory_fields_found": 6,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "Jobmatix 2025 R.01.xlsx",
+            "20260114103021-SIKA_BARON_P.pdf",
+            "Sertifikat M. Noerwahjudin.pdf",
+            "Sertifikat Sisilia A J Tuari.pdf",
+            "Sertifikat Dimas P Pamungkas.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [
+            "TNA",
+            "K3 Umum"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "Status realisasi per pelatihan (done/pending)",
+            "Nomor & masa berlaku sertifikat",
+            "% compliance K3LL formal (angka, bukan hanya keterangan)",
+            "% compliance Technical formal (angka)",
+            "Jenis pelatihan (K3LL formal / Technical formal)",
+            "Nama pekerja dan jabatan dalam TNA"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "fail",
+          "evidence": [
+            "0 implementation mentions"
+          ],
+          "confidence": 0.7
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "21 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 6.25,
+      "calibrated_score": 10,
+      "original_pred": 3,
+      "enhanced_pred": 0,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "3.3",
+      "category_name": "3.3 Pelatihan K3LL Umum (pada seluruh pekerja dan pihak yang terkait)",
+      "expected": 10,
+      "chunks": 56,
+      "documents": 4,
+      "keywords_found": 0,
+      "mandatory_fields_found": 5,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "Materi Kaji Risiko.pdf",
+            "Baruna Training Center.png",
+            "Baruna Learning Center.pdf",
+            "QHSE _ BRIEFING CREW BARU.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "% compliance pelatihan K3LL non-formal pekerja kantor",
+            "% compliance pelatihan K3LL non-formal pekerja lapangan",
+            "% coverage peserta (berapa % pekerja sudah pernah mengikuti pelatihan K3LL)",
+            "Absensi peserta per sesi pelatihan",
+            "Judul/materi setiap sesi pelatihan"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "pass",
+          "evidence": [
+            "8 implementation mentions"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "temporal_validity",
+          "status": "fail",
+          "evidence": [
+            "0 dates found"
+          ],
+          "confidence": 0.7
+        }
+      ],
+      "raw_score": 6.3,
+      "calibrated_score": 10,
+      "original_pred": 0,
+      "enhanced_pred": 0,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "3.4",
+      "category_name": "3.4 Pemenuhan Kompetensi Teknis dan K3LL",
+      "expected": 10,
+      "chunks": 511,
+      "documents": 9,
+      "keywords_found": 0,
+      "mandatory_fields_found": 7,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "F-037M~1.PDF",
+            "Monitoring Training Crew.pdf",
+            "3.4.b.4 - Materi Induction All Crew.PDF",
+            "3.4.a.1 - Refershment Training.PDF",
+            "Monitoring Sertifikat Crew.xls"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "Profil kompetensi individu (ada/tidak ada)",
+            "Nomor & tanggal expired sertifikat",
+            "Rencana tindak lanjut gap kompetensi",
+            "% compliance K3LL formal pekerja kantor (angka)",
+            "% compliance Technical formal pekerja kantor (angka)",
+            "% compliance K3LL formal pekerja lapangan (angka)",
+            "% compliance Technical formal pekerja lapangan (angka)"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "pass",
+          "evidence": [
+            "37 implementation mentions"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "986 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 8.05,
+      "calibrated_score": 10,
+      "original_pred": 0,
+      "enhanced_pred": 0,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "3.5",
+      "category_name": "3.5 Pengelolaan K3LL kontraktor (Mitra Kerja)",
+      "expected": 10,
+      "chunks": 98,
+      "documents": 4,
+      "keywords_found": 0,
+      "mandatory_fields_found": 6,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "3.5.b.2 - Evaluasi Supplier.PDF",
+            "3.5.b.1 - Prakualifikasi Subkontraktor.PDF",
+            "3.5.b.3 - Surat Pernyataan tidak memakai Subkontraktor.pdf",
+            "3.5.a.1 - RAS-HOP-06 Pengadaan dan Pembelian.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "Jumlah kontraktor aktif dalam listing",
+            "% PK completion (ada/tidak per kontraktor)",
+            "% PB completion (ada/tidak per kontraktor aktif)",
+            "% PA completion (ada/tidak per kontraktor selesai)",
+            "Bukti komunikasi standar K3LL ke subkontraktor",
+            "Evidence tindak lanjut kinerja"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "pass",
+          "evidence": [
+            "15 implementation mentions"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "25 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 8.05,
+      "calibrated_score": 10,
+      "original_pred": 0,
+      "enhanced_pred": 0,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "3.6",
+      "category_name": "3.6 Peraturan dan Standar K3LL",
+      "expected": 10,
+      "chunks": 883,
+      "documents": 14,
+      "keywords_found": 3,
+      "mandatory_fields_found": 5,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "Daftar Peraturan Perundangan & Pemenuhannya - update 12 Janauri 2026.pdf",
+            "Bukti Review Manual, SOP, WI, Form_QHSE_2025.pdf",
+            "Prosedur Kunjungan Manajemen.pdf",
+            "PR376A~1.PDF",
+            "Prosedur Pegendalian Dokumen.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [
+            "UU",
+            "Permen",
+            "PP"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "Nomor dan tahun setiap peraturan yang direferensikan",
+            "Tanggal review terakhir listing prosedur",
+            "% prosedur yang memiliki referensi regulasi",
+            "Nama dokumen prosedur kontrol",
+            "Status peraturan (berlaku/dicabut)"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "pass",
+          "evidence": [
+            "158 implementation mentions"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "333 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 8.05,
+      "calibrated_score": 10,
+      "original_pred": 3,
+      "enhanced_pred": 3,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "4.1",
+      "category_name": "4.1 Penilaian dan Pengendalian Risiko",
+      "expected": 6,
+      "chunks": 916,
+      "documents": 28,
+      "keywords_found": 3,
+      "mandatory_fields_found": 5,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "P5 IK1 HIRADC New.pdf",
+            "14. Security.pdf",
+            "6. Bunker.pdf",
+            "15. Social Aspect.pdf",
+            "4. Lifting - Cargo Handling.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "pass",
+          "evidence": [
+            "risk assessment",
+            "HIRADC",
+            "hazard identification"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "Cakupan tahapan kerja dalam Risk Register (mobilisasi/operasi/commissioning: ada semua/sebagian)",
+            "% kelengkapan kolom Risk Register (bahaya, level risiko, pengendalian, status)",
+            "Ada/tidaknya bukti inspeksi implementasi program keselamatan di lapangan",
+            "% coverage sosialisasi HIRADC vs total pekerja project",
+            "Ada/tidaknya seluruh prosedur kerja relevan"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "pass",
+          "evidence": [
+            "73 implementation mentions"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "171 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 10.0,
+      "calibrated_score": 10,
+      "original_pred": 3,
+      "enhanced_pred": 3,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "4.2",
+      "category_name": "4.2 Bahaya Terhadap Kesehatan Kerja",
+      "expected": 10,
+      "chunks": 2516,
+      "documents": 36,
+      "keywords_found": 1,
+      "mandatory_fields_found": 5,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "SAPRI_LSM_Validasi MCU 2025 ( Pasca Konsul Spesialis )-compressed.pdf",
+            "Catatan Pembuangan Sampah - Desember  2025.pdf",
+            "Prosedur Medical Check Up (MCU).pdf",
+            "Ship Hygiene Vessel Report - October 2025.pdf",
+            "ELIFAS BELA_LSM_Validasi MCU 2025-compressed.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [
+            "health hazard"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "% program manajemen risiko kesehatan yang ada (dari 6 program standar)",
+            "% MCU pekerja yang sudah dilakukan + rekomendasi 'layak kerja'",
+            "MoU RS/klinik: nama + masa berlaku",
+            "% kelengkapan kolom identifikasi bahaya kesehatan",
+            "Ada/tidaknya program food hygiene"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "pass",
+          "evidence": [
+            "358 implementation mentions"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "379 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 8.05,
+      "calibrated_score": 10,
+      "original_pred": 3,
+      "enhanced_pred": 3,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "4.3",
+      "category_name": "4.3 Bahaya Terhadap Keselamatan Kerja",
+      "expected": 10,
+      "chunks": 935,
+      "documents": 36,
+      "keywords_found": 3,
+      "mandatory_fields_found": 5,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "P5 IK1 HIRADC New.pdf",
+            "Permit To Work - Nov.pdf",
+            "Job Safety Analysis - Okt.pdf",
+            "Permit To Work - Sep.pdf",
+            "Permit To Work - Agu.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [
+            "JSA",
+            "toolbox meeting",
+            "HIRADC"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "Cakupan tahapan kerja dalam Risk Register (mobilisasi, operasi, commissioning)",
+            "% kelengkapan kolom dalam Risk Register",
+            "% realisasi awareness HSE vs target HSE Plan",
+            "% coverage sosialisasi HIRADC terhadap pekerja",
+            "Jumlah prosedur JSA/SOP tersedia"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "pass",
+          "evidence": [
+            "72 implementation mentions"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "171 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 8.05,
+      "calibrated_score": 10,
+      "original_pred": 3,
+      "enhanced_pred": 0,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "4.4",
+      "category_name": "4.4 Bahaya Terhadap Kegiatan Logistik",
+      "expected": 10,
+      "chunks": 225,
+      "documents": 9,
+      "keywords_found": 1,
+      "mandatory_fields_found": 6,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "Passage plan cb.magelang.pdf",
+            "Driving Training Certificate.pdf",
+            "Generic RA  - Logistic Aspect.pdf",
+            "BRL-P-LOG-01 - Procurement.pdf",
+            "BRL-IK-HRGS-02-001 (Driving Safety).pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [
+            "journey management"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "% kendaraan dengan form pre-use inspection",
+            "Daftar kendaraan project (jumlah)",
+            "Kebijakan tertulis night driving restriction",
+            "% realisasi sosialisasi safety driving",
+            "% driver dengan pre-fit test",
+            "Bukti alkohol test driver (form/alat)"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "pass",
+          "evidence": [
+            "30 implementation mentions"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "59 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 8.05,
+      "calibrated_score": 10,
+      "original_pred": 0,
+      "enhanced_pred": 0,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "4.5",
+      "category_name": "4.5 Bahaya Terhadap Lingkungan",
+      "expected": 10,
+      "chunks": 576,
+      "documents": 12,
+      "keywords_found": 2,
+      "mandatory_fields_found": 5,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "Daftar Limbah B3 Kantor - Oktober.pdf",
+            "Catatan Pembuangan Sampah - Desember 2025.pdf",
+            "Campaign tahun 2025.msg",
+            "Uji Emisi - Innova B 1019 POU Nov 25 s.d Nov 26.pdf",
+            "Uji Emisi - Avanza B 1080 PZJ Nov 25 s.d Nov 26.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [
+            "PROPER",
+            "limbah B3"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "Keberadaan Risk Register Lingkungan (ada/tidak)",
+            "% realisasi inspeksi lingkungan",
+            "Nomor dan masa berlaku Izin Lingkungan / Izin PPLH",
+            "Jumlah manifest limbah B3 (nomor manifest + nama TPLB3)",
+            "% coverage sosialisasi pemilahan limbah ke pekerja lapangan"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "pass",
+          "evidence": [
+            "63 implementation mentions"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "33 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 8.05,
+      "calibrated_score": 10,
+      "original_pred": 0,
+      "enhanced_pred": 0,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "4.6",
+      "category_name": "4.6 Bahaya Terhadap Keamanan",
+      "expected": 10,
+      "chunks": 208,
+      "documents": 12,
+      "keywords_found": 5,
+      "mandatory_fields_found": 5,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "Latihan Menghadapi Penumpang Gelap Okt 25.pdf",
+            "SASARAN & PROGRAM HSES 2025 PM 6.pdf",
+            "DPA CSO Contact Onboard.pdf",
+            "Sertifikat SSO M. Phipo.pdf",
+            "Ship Security Assessment (SSA) PM6.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "partial",
+          "evidence": [
+            "keamanan",
+            "emergency response",
+            "ERT",
+            "security",
+            "fire fighting"
+          ],
+          "confidence": 0.7
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "Nama RS + nomor MoU + masa berlaku",
+            "Nama & nomor kontak anggota ERT",
+            "% anggota ERT bersertifikat First Aid valid",
+            "% anggota ERT bersertifikat Fire Fighting valid",
+            "Bukti inspeksi keamanan lapangan"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "pass",
+          "evidence": [
+            "11 implementation mentions"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "13 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 9.12,
+      "calibrated_score": 10,
+      "original_pred": 3,
+      "enhanced_pred": 0,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "4.7",
+      "category_name": "4.7 Bahaya Terhadap Aspek Sosial",
+      "expected": 10,
+      "chunks": 121,
+      "documents": 10,
+      "keywords_found": 2,
+      "mandatory_fields_found": 4,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "HIRADC Office.pdf",
+            "Laporan CSR Donor Darah (28 Feb 2025).pdf",
+            "Prosedur Tanggung Jawab Sosial Perusahaan.pdf",
+            "2. Laporan CSR Perbaikan Rumah Bpk Tasro 15 April – 31 Mei 2025.pdf",
+            "Laporan CSR Hewan Qurban Mesjid Nur Sa'adah 2025.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [
+            "CSR",
+            "aspek sosial"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "Dokumen rencana CSR (ada/tidak)",
+            "Jumlah kriteria CSR yang terpenuhi (0/3, 1/3, 2/3, atau 3/3)",
+            "Ada/tidaknya kasus sosial dan status tindak lanjutnya",
+            "Frekuensi monitoring sosial"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "pass",
+          "evidence": [
+            "16 implementation mentions"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "10 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 8.05,
+      "calibrated_score": 10,
+      "original_pred": 3,
+      "enhanced_pred": 3,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "4.8",
+      "category_name": "4.8 Alat Pelindung Diri (APD)",
+      "expected": 10,
+      "chunks": 28225,
+      "documents": 11,
+      "keywords_found": 4,
+      "mandatory_fields_found": 5,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "Tanda terima APD M Fazly.pdf",
+            "Tanda terima APD Lili Rusli.pdf",
+            "Tanda terima APD Ashari Yadi.pdf",
+            "Pelatihan di Kapal (APD).pdf",
+            "Materi Pelatihan APD.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [
+            "PPE",
+            "APD",
+            "life jacket",
+            "tanda terima APD"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "% posisi yang tercakup dalam Matrix PPE",
+            "% pekerja yang sudah menerima APD (tanda terima)",
+            "% hari kerja yang ada form pre-use inspection APD",
+            "% kepatuhan penggunaan APD dari laporan monitoring terbaru",
+            "Evidence PPE fit-to-test (ada/tidak)"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "pass",
+          "evidence": [
+            "25 implementation mentions"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "5004 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 8.05,
+      "calibrated_score": 10,
+      "original_pred": 3,
+      "enhanced_pred": 3,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "5.1",
+      "category_name": "5.1 Manual Operasi K3LL",
+      "expected": 10,
+      "chunks": 231,
+      "documents": 7,
+      "keywords_found": 2,
+      "mandatory_fields_found": 5,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "Prosedur Masa Retensi dan Sistem File.pdf",
+            "Prosedur Pembuatan, Perubahan dan Pembatalan Dokumen.pdf",
+            "Prosedur Pengendalian Dokumen.pdf",
+            "Matrix Informasi Terdokumentasi.pdf",
+            "Daftar Formulir.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [
+            "permit to work",
+            "prosedur kerja"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "% aktivitas yang memiliki prosedur K3LL",
+            "Tanggal revisi terakhir prosedur",
+            "Bukti sosialisasi prosedur ke pekerja",
+            "% aktivitas risiko tinggi yang ada SOP-nya",
+            "Master List SOP/Prosedur K3LL (ada/tidak)"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "pass",
+          "evidence": [
+            "14 implementation mentions"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "366 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 8.05,
+      "calibrated_score": 10,
+      "original_pred": 3,
+      "enhanced_pred": 3,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "5.2",
+      "category_name": "5.2 Kehandalan Infrastruktur dan Peralatan",
+      "expected": 10,
+      "chunks": 332,
+      "documents": 15,
+      "keywords_found": 0,
+      "mandatory_fields_found": 5,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "12PEME_1.PDF",
+            "OVERCOMER - VALIDITY OF VESSEL CERTIFICATES.pdf",
+            "15ACHE_1.PDF",
+            "Prosedur Program Pemeliharaan Kapal.pdf",
+            "Sertifikat Kalobrasi Gas Detector - Overcomer - 19 May 2026.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "Listing tools & equipment project (jumlah item)",
+            "Tanggal expired sertifikat per alat",
+            "% peralatan bersertifikat valid (nomor sertifikat + expired)",
+            "% peralatan dengan form pre-use inspection",
+            "% realisasi jadwal maintenance/kalibrasi"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "pass",
+          "evidence": [
+            "39 implementation mentions"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "51 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 8.05,
+      "calibrated_score": 10,
+      "original_pred": 3,
+      "enhanced_pred": 3,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "5.3",
+      "category_name": "5.3 Manajemen Perubahan",
+      "expected": 10,
+      "chunks": 104,
+      "documents": 5,
+      "keywords_found": 3,
+      "mandatory_fields_found": 5,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "1 SOP MMR Bab 12 Manajemen Perubahan.pdf",
+            "2 Hasil MOC Tahun 2025.pdf",
+            "3 Report Kontrol Perubahan.pdf",
+            "Register MOC 2025.pdf",
+            "Prosedur Manajemen Perubahan.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [
+            "manajemen perubahan",
+            "management of change",
+            "MOC"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "Jumlah form MOC yang sudah diimplementasikan",
+            "Jenis perubahan yang tercakup: prosedur / peralatan / personil",
+            "Prosedur MOC (ada/tidak)",
+            "Risk assessment tercantum dalam setiap form MOC",
+            "% kelengkapan form MOC (semua kolom wajib terisi)"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "pass",
+          "evidence": [
+            "13 implementation mentions"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "52 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 8.05,
+      "calibrated_score": 10,
+      "original_pred": 3,
+      "enhanced_pred": 3,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "5.4",
+      "category_name": "5.4 Implementasi Tanggap Darurat",
+      "expected": 10,
+      "chunks": 330,
+      "documents": 19,
+      "keywords_found": 8,
+      "mandatory_fields_found": 6,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "3 Emergency Kontak Number.pdf",
+            "Prosedur Penanggulangan Darurat Kapal dari Darat.pdf",
+            "FIFI PUMP TEST4.pdf",
+            "OFFICE EMERGENCY DRILL - FIRE - 2025.pdf",
+            "2 ERP.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "partial",
+          "evidence": [
+            "muster station",
+            "emergency response plan",
+            "tim tanggap darurat",
+            "ERP",
+            "emergency drill",
+            "tanggap darurat",
+            "ERT",
+            "fire fighting"
+          ],
+          "confidence": 0.7
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "% anggota ERT bersertifikat First Aid valid",
+            "% anggota ERT bersertifikat Fire Fighting valid",
+            "% realisasi emergency drill vs jadwal",
+            "Skenario dalam ERP (kebakaran/medis/tumpahan/evakuasi/MOB)",
+            "Ada/tidaknya evaluasi target vs actual time dalam laporan drill",
+            "Checklist LSA/FFA barge/platform (marine)"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "pass",
+          "evidence": [
+            "23 implementation mentions"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "60 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 9.12,
+      "calibrated_score": 10,
+      "original_pred": 3,
+      "enhanced_pred": 3,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "6.1",
+      "category_name": "6.1 Sistem Pemantauan Kinerja K3LL",
+      "expected": 10,
+      "chunks": 221,
+      "documents": 24,
+      "keywords_found": 1,
+      "mandatory_fields_found": 5,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "1. Januari.pdf",
+            "HSE Meeting - Apr 2026.pdf",
+            "7. Juli.pdf",
+            "2. Februari.pdf",
+            "HSE Meeting - Mei 2026.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [
+            "leading indicator"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "Leading indicator yang didefinisikan dalam HSE Plan",
+            "Lagging indicator yang didefinisikan dalam HSE Plan",
+            "% bulan yang ada HSE Performance report",
+            "% bulan yang ada MoM monthly meeting HSE",
+            "Bukti pencapaian safe man hours"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "partial",
+          "evidence": [
+            "4 implementation mentions"
+          ],
+          "confidence": 0.6
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "22 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 7.18,
+      "calibrated_score": 10,
+      "original_pred": 6,
+      "enhanced_pred": 3,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "6.2",
+      "category_name": "6.2 Indikator Kinerja K3LL",
+      "expected": 10,
+      "chunks": 216,
+      "documents": 24,
+      "keywords_found": 2,
+      "mandatory_fields_found": 4,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "1. Januari.pdf",
+            "HSE Meeting - Apr 2026.pdf",
+            "7. Juli.pdf",
+            "2. Februari.pdf",
+            "HSE Meeting - Mei 2026.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [
+            "HSE KPI",
+            "leading indicator"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "Periode data statistik insiden (berapa tahun)",
+            "Jumlah insiden per tahun",
+            "Nilai TRIR atau LTI rate per tahun",
+            "Jumlah near miss report vs actual incident"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "partial",
+          "evidence": [
+            "4 implementation mentions"
+          ],
+          "confidence": 0.6
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "22 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 7.18,
+      "calibrated_score": 10,
+      "original_pred": 3,
+      "enhanced_pred": 0,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "6.3",
+      "category_name": "6.3 Pemantauan Kinerja K3LL",
+      "expected": 10,
+      "chunks": 201,
+      "documents": 24,
+      "keywords_found": 3,
+      "mandatory_fields_found": 5,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "1. Januari.pdf",
+            "HSE Meeting - Apr 2026.pdf",
+            "7. Juli.pdf",
+            "2. Februari.pdf",
+            "HSE Meeting - Mei 2026.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [
+            "HSE performance",
+            "LTI",
+            "leading indicator"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "% pencapaian leading indicator (angka)",
+            "% pencapaian lagging indicator (angka)",
+            "Bukti komunikasi KPI ke seluruh level organisasi",
+            "Riwayat kecelakaan (ada/tidak) dan tingkat keparahan jika ada",
+            "Identifikasi faktor penyebab KPI yang tidak tercapai"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "partial",
+          "evidence": [
+            "4 implementation mentions"
+          ],
+          "confidence": 0.6
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "21 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 7.18,
+      "calibrated_score": 10,
+      "original_pred": 3,
+      "enhanced_pred": 3,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "6.4",
+      "category_name": "6.4 Investigasi dan Tindak Lanjut Insiden K3LL",
+      "expected": 10,
+      "chunks": 226,
+      "documents": 6,
+      "keywords_found": 5,
+      "mandatory_fields_found": 5,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "6.3.1. Accident and Environment Investigation and Reporting Procedure.pdf",
+            "6.5.1. Surat Pernyataan Bebas Pelanggaran HSSE.pdf",
+            "Safety Meeting SSD & Safety Campaign Dec 2025.pdf",
+            "Prosedur Investigasi Insiden.pdf",
+            "QHSE Campaign (Observasi Via MORA) 2025.msg"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "partial",
+          "evidence": [
+            "unsafe condition",
+            "incident investigation",
+            "investigasi insiden",
+            "near miss",
+            "unsafe act"
+          ],
+          "confidence": 0.7
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "Jumlah insiden/near miss yang terdokumentasi",
+            "% realisasi Safety Stand Down",
+            "Sertifikat kompetensi tim investigasi (valid/tidak)",
+            "Prosedur investigasi insiden (ada/tidak)",
+            "% coverage sosialisasi pelaporan"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "pass",
+          "evidence": [
+            "35 implementation mentions"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "38 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 9.12,
+      "calibrated_score": 10,
+      "original_pred": 3,
+      "enhanced_pred": 3,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "6.5",
+      "category_name": "6.5 Insiden yang Harus Dilaporkan Sesuai Undang-Undang dan Catatan Ketidakpatuhan",
+      "expected": 0,
+      "chunks": 0,
+      "documents": 0,
+      "keywords_found": 0,
+      "mandatory_fields_found": 0,
+      "criteria": [],
+      "raw_score": 0,
+      "calibrated_score": 0,
+      "original_pred": 0,
+      "enhanced_pred": 0,
+      "gap_analysis": "No chunks available"
+    },
+    {
+      "category_id": "7.1",
+      "category_name": "7.1 Audit",
+      "expected": 10,
+      "chunks": 80,
+      "documents": 3,
+      "keywords_found": 1,
+      "mandatory_fields_found": 5,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "7.1.2. HSE Internal Audit Report 2024.pdf",
+            "7.1.1. Internal Audit Procedure.pdf",
+            "7.1.3. HSSE Internal Audit 2025.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [
+            "internal audit"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "% realisasi audit vs jadwal",
+            "% auditor bersertifikat internal auditor HSSE",
+            "Apakah audit cross function (ya/tidak)",
+            "Kelengkapan laporan audit: daftar temuan + rencana TL + tanda tangan",
+            "Apakah senior manajemen terlibat sebagai auditor (ya/tidak)"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "pass",
+          "evidence": [
+            "12 implementation mentions"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "7 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 8.05,
+      "calibrated_score": 10,
+      "original_pred": 3,
+      "enhanced_pred": 0,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "7.2",
+      "category_name": "7.2 Tinjauan Manajemen",
+      "expected": 10,
+      "chunks": 19,
+      "documents": 2,
+      "keywords_found": 1,
+      "mandatory_fields_found": 4,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "partial",
+          "evidence": [
+            "7.2.1. Management Review HSE - 2025.pdf",
+            "7.2.1. Management Review HSE - 2026.pdf"
+          ],
+          "confidence": 0.7
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [
+            "management review"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "% temuan yang memiliki action plan dengan PIC + target tanggal",
+            "% RTM yang terlaksana vs terjadwal",
+            "% temuan audit yang dibahas dalam RTM",
+            "% temuan yang closed on-time"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "partial",
+          "evidence": [
+            "2 implementation mentions"
+          ],
+          "confidence": 0.6
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "24 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 6.08,
+      "calibrated_score": 10,
+      "original_pred": 6,
+      "enhanced_pred": 0,
+      "gap_analysis": []
+    },
+    {
+      "category_id": "8.1",
+      "category_name": "8.1 Sertifikasi Sistem Pengelolaan K3LL",
+      "expected": 10,
+      "chunks": 41,
+      "documents": 4,
+      "keywords_found": 4,
+      "mandatory_fields_found": 3,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "a. Sertifikat ISO 9001.pdf",
+            "8.1.1. Certificate ISO 9001-2015 Quality Management System PT Makara Jaya Marine.pdf",
+            "c. Sertifikat ISO 45001.PDF",
+            "b. Sertifikat ISO 14001.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [
+            "ISO 45001",
+            "ISO 9001",
+            "ISO 14001",
+            "DOC"
+          ],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "partial",
+          "evidence": [
+            "Nomor sertifikat + tanggal expired tiap sertifikat",
+            "% sertifikat yang masih valid",
+            "Apakah ada ISO 45001 DAN ISO 14001 (keduanya valid)"
+          ],
+          "confidence": 0.7
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "fail",
+          "evidence": [
+            "0 implementation mentions"
+          ],
+          "confidence": 0.7
+        },
+        {
+          "type": "temporal_validity",
+          "status": "pass",
+          "evidence": [
+            "25 dates found"
+          ],
+          "confidence": 0.75
+        }
+      ],
+      "raw_score": 5.19,
+      "calibrated_score": 6,
+      "original_pred": 10,
+      "enhanced_pred": 6,
+      "gap_analysis": [
+        "keyword_coverage: fail",
+        "mandatory_fields: partial",
+        "implementation_evidence: fail"
+      ]
+    },
+    {
+      "category_id": "8.2",
+      "category_name": "8.2 Ciri-ciri Tambahan Sistem Pengelolaan K3LL",
+      "expected": 10,
+      "chunks": 17,
+      "documents": 4,
+      "keywords_found": 0,
+      "mandatory_fields_found": 4,
+      "criteria": [
+        {
+          "type": "document_presence",
+          "status": "pass",
+          "evidence": [
+            "PENGHARGAAN ZA_KEMNAKER.pdf",
+            "b. Sertifikat Keanggotaan P2K3.pdf",
+            "8.2.6. KADIN Member of PT Makara Jaya Marine.pdf",
+            "8.2.4. Kartu Tanda Anggota Asosiasi Independen Surveyor Indonesia PT Makara Jaya Marine 2025.pdf"
+          ],
+          "confidence": 0.9
+        },
+        {
+          "type": "keyword_coverage",
+          "status": "fail",
+          "evidence": [],
+          "confidence": 0.8
+        },
+        {
+          "type": "mandatory_fields",
+          "status": "pass",
+          "evidence": [
+            "Tahun penghargaan (dalam 5 tahun terakhir: ya/tidak)",
+            "Jenis penghargaan (internal/pemda/nasional)",
+            "Nama lembaga pemberi penghargaan",
+            "Kesesuaian nama perusahaan di sertifikat"
+          ],
+          "confidence": 0.85
+        },
+        {
+          "type": "implementation_evidence",
+          "status": "fail",
+          "evidence": [
+            "0 implementation mentions"
+          ],
+          "confidence": 0.7
+        },
+        {
+          "type": "temporal_validity",
+          "status": "fail",
+          "evidence": [
+            "0 dates found"
+          ],
+          "confidence": 0.7
+        }
+      ],
+      "raw_score": 4.43,
+      "calibrated_score": 6,
+      "original_pred": 0,
+      "enhanced_pred": 0,
+      "gap_analysis": [
+        "keyword_coverage: fail",
+        "implementation_evidence: fail",
+        "temporal_validity: fail"
+      ]
+    }
+  ],
+  "candidates_generated": 2
+}

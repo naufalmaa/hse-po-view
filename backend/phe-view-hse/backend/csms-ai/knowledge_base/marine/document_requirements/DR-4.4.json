@@ -1,0 +1,30 @@
+{
+  "requirement_id": "DR-4.4",
+  "category_id": "4.4",
+  "required_documents": [
+    "- Prosedur/Program Keselamatan Logistik & Transportasi (mencakup: prosedur keselamatan berkendara harian",
+    "instruksi kerja manual handling",
+    "pedoman pengangkatan aman/lifting safety",
+    "serta aturan penanganan & penyimpanan bahan kimia/B3).<br>- Daftar Induk Kendaraan & Pengemudi (Fleet & Driver Masterlist) (tabel resmi memuat nomor registrasi/plat kendaraan",
+    "tipe/jenis unit",
+    "dan nama pengemudi yang didedikasikan untuk proyek).<br>- Formulir Inspeksi Kelayakan Kendaraan Harian (Pre-use/Pre-trip Inspection Form) (checklist fisik kendaraan operasional yang ditandatangani oleh Pengemudi sebagai Pemeriksa dan Supervisor/Kepala Pool sebagai Verifikator).<br>- Formulir Pemeriksaan Kesehatan Harian Pengemudi (Driver Pre-fit Test Log) (bukti uji kebugaran sebelum berkendara harian",
+    "mencakup tensi darah",
+    "kondisi kelelahan/fatigue",
+    "dan bukti hasil uji kadar alkohol melalui breathalyzer atau alkohol test strip).<br>- Sertifikat Kompetensi Defensive Driving (DDT Certificate) (bukti pelatihan defensif mengemudi darat/laut yang sah dan diterbitkan oleh lembaga sertifikasi K3 terakreditasi untuk seluruh driver aktif).<br>- Dokumen Rencana Perjalanan (Journey Management Plan / Passage Plan) (log perjalanan tertulis atau rencana navigasi pelayaran untuk logistik sektor laut yang memuat jarak",
+    "rute aman",
+    "koordinat",
+    "dan otorisasi dari nakhoda/supervisor).<br>- Bukti Sosialisasi Berkendara Aman Berkala (absensi bertanda tangan lengkap dari pengemudi",
+    "materi safety campaign",
+    "dan foto dokumentasi pelaksanaan)."
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

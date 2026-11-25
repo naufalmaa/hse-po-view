@@ -1,0 +1,23 @@
+{
+  "contractCreated": "Kontrak berhasil dibuat",
+  "contractAlreadyExists": "Gagal membuat kontrak, kontrak sudah ada",
+  "invalidDate": "Tanggal mulai kontrak harus lebih kecil dari tanggal akhir kontrak",
+  "contractCreateFailed": "Gagal membuat kontrak",
+  "contractDeleted": "Kontrak berhasil dihapus",
+  "contractDeleteFailed": "Gagal menghapus kontrak",
+  "contractNotFound": "Kontrak tidak ditemukan",
+  "contractUpdated": "Kontrak berhasil diperbarui",
+  "contractUpdateFailed": "Gagal memperbarui kontrak",
+  "contractInitialized": "Struktur kontrak berhasil diinisialisasi",
+  "contractInitializeFailed": "Gagal menginisialisasi struktur kontrak",
+  "contractsListed": "Daftar kontrak berhasil diambil",
+  "subfolderCreated": "Subfolder berhasil dibuat",
+  "subfolderCreateFailed": "Gagal membuat subfolder",
+  "folderDeleted": "Folder berhasil dihapus",
+  "folderDeleteFailed": "Gagal menghapus folder",
+  "folderUpdated": "Folder berhasil diperbarui",
+  "folderUpdateFailed": "Gagal memperbarui folder",
+  "assessmentDatesUpdated": "Tanggal assessment berhasil diperbarui",
+  "assessmentDatesUpdateFailed": "Gagal memperbarui tanggal assessment",
+  "exportPdfFailed": "Gagal mengekspor PDF evaluasi"
+}

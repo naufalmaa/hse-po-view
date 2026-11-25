@@ -1,0 +1,32 @@
+{
+  "requirement_id": "DR-2",
+  "category_id": "2",
+  "required_documents": [
+    "- Kebijakan K3LL Klien / Instansi Pemberi Kerja (Disahkan oleh Pimpinan Klien)<br>- Kebijakan Mutu",
+    "K3",
+    "Lingkungan",
+    "dan Keamanan Kontraktor (Ditandatangani oleh Pimpinan Tertinggi Kontraktor)<br>- Bukti Tinjauan / Review Kebijakan K3LL Tahunan (Formulir/Notulen Tinjauan Tahunan jika kebijakan utama berusia > 2 tahun)<br>- Kebijakan / Surat Keputusan Komitmen Sosial Khusus (Kebijakan dilarang Pinjaman Online",
+    "Judi Online",
+    "dan Anti-Korupsi/Gratifikasi yang disahkan Direksi)<br>- Lembar Pernyataan Komitmen Bersama Kebijakan Sosial (Ditandatangani oleh Manajemen Senior dan Pekerja/Kru Lapangan)<br>- Bukti Sosialisasi Kebijakan K3LL dan Budaya Kerja Selamat (Materi Presentasi",
+    "Berita Acara",
+    "Dokumentasi Foto",
+    "dan Absensi Kehadiran)<br>- Formulir Induksi Keselamatan On-boarding Pekerja Baru / Pengunjung Aset (Ditandatangani oleh Pekerja Baru",
+    "Petugas HSE",
+    "dan Pengawas/Nahkoda Lapangan)<br>- Dokumen Soal Ujian (Test Evaluasi Kognitif) Pemahaman Kebijakan dan Aturan Keselamatan<br>- Rekapitulasi Daftar Nilai Hasil Ujian Kognitif (Memuat Nama",
+    "Jabatan",
+    "Nilai Numerik",
+    "dan Status Kelulusan)<br>- Laporan Bulanan Pemutakhiran Kinerja K3LL (Laporan Kinerja Bulanan",
+    "memuat indikator proaktif/leading dan reaktif/lagging",
+    "ditandatangani Manajer QHSE)"
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

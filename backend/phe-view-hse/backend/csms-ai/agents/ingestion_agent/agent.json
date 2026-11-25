@@ -1,0 +1,5 @@
+{
+  "agent_id": "ingestion_agent",
+  "name": "Ingestion Agent",
+  "type": "model-agnostic"
+}

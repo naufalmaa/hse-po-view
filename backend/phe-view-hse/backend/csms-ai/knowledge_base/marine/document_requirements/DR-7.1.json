@@ -1,0 +1,23 @@
+{
+  "requirement_id": "DR-7.1",
+  "category_id": "7.1",
+  "required_documents": [
+    "- Prosedur Pelaksanaan Audit K3LL Internal (mencakup tata cara perencanaan",
+    "pelaksanaan",
+    "pelaporan",
+    "dan tindak lanjut audit)\n<br>- Jadwal / Program Audit K3LL Tahunan (menunjukkan pembagian jadwal",
+    "ruang lingkup",
+    "dan penunjukan auditor)\n<br>- Laporan Pelaksanaan Audit K3LL Internal (Form Checklist Audit yang diisi lengkap beserta tanda tangan auditor dan auditee)\n<br>- Laporan Ketidaksesuaian / Non-Conformance Report (NCR) beserta log tindakan perbaikan (Corrective Action Plan / NCR Log)\n<br>- Sertifikat Kompetensi Auditor (Sertifikat Internal Auditor K3LL / ISO 45001 Lead Auditor / sertifikat pelatihan audit sejenis)\n<br>- Bukti keterlibatan Manajemen Senior sebagai Auditor (e.g.",
+    "Laporan Audit ditandatangani oleh Direktur / Manajer Senior selaku Auditor / Lead Auditor)\n<br>- Bukti status bebas temuan mayor atau seluruh temuan minor telah ditutup (Outstanding NC = 0) saat Penilaian Berjalan (PB) dan Penilaian Akhir (PA)"
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

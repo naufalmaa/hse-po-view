@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employees Without Observations - Smart Card System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="max-w-6xl mx-auto py-8 px-6">
+        <div class="bg-white rounded-lg shadow-lg p-8">
+            <!-- Header -->
+            <div class="border-b border-gray-200 pb-6 mb-8">
+                <h1 class="text-3xl font-bold text-gray-800">Employees Without Observations</h1>
+                <p class="text-gray-600 mt-2">Monitor employees who haven't filled their smart card observations</p>
+                <div class="mt-4 flex gap-4">
+                    <a href="smart-card-upload-test.html" class="text-blue-600 hover:text-blue-800 underline">← Back to Upload</a>
+                    <a href="upload-validation.html" class="text-blue-600 hover:text-blue-800 underline">Error Validation</a>
+                    <button onclick="refreshData()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm">
+                        Refresh Data
+                    </button>
+                </div>
+            </div>
+
+            <!-- Statistics Dashboard -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                    <div class="text-blue-800">
+                        <h3 class="text-lg font-semibold">Total Employees</h3>
+                        <p class="text-3xl font-bold mt-2" id="totalEmployeesCount">-</p>
+                        <p class="text-sm text-blue-600 mt-1">All employees</p>
+                    </div>
+                </div>
+                <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+                    <div class="text-green-800">
+                        <h3 class="text-lg font-semibold">Active Employees</h3>
+                        <p class="text-3xl font-bold mt-2" id="activeEmployeesCount">-</p>
+                        <p class="text-sm text-green-600 mt-1">Currently active</p>
+                    </div>
+                </div>
+                <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                    <div class="text-purple-800">
+                        <h3 class="text-lg font-semibold">With Observations</h3>
+                        <p class="text-3xl font-bold mt-2" id="withObservationsCount">-</p>
+                        <p class="text-sm text-purple-600 mt-1">Have filled forms</p>
+                    </div>
+                </div>
+                <div class="bg-orange-50 border border-orange-200 rounded-lg p-6">
+                    <div class="text-orange-800">
+                        <h3 class="text-lg font-semibold">Without Observations</h3>
+                        <p class="text-3xl font-bold mt-2" id="withoutObservationsCount">-</p>
+                        <p class="text-sm text-orange-600 mt-1">Need to fill</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters Section -->
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Filters & Search</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Search Employee:</label>
+                        <input type="text" id="employeeSearch" placeholder="Search by name..." 
+                               onkeyup="debounceFilter()" 
+                               class="w-full p-2 border border-gray-300 rounded focus:border-blue-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Company:</label>
+                        <select id="companyFilter" onchange="loadEmployeesWithoutObservations(true)" 
+                                class="w-full p-2 border border-gray-300 rounded focus:border-blue-500 focus:outline-none">
+                            <option value="">-- Loading companies... --</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Position:</label>
+                        <input type="text" id="positionFilter" placeholder="Filter by position..." 
+                               onkeyup="debounceFilter()" 
+                               class="w-full p-2 border border-gray-300 rounded focus:border-blue-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Category:</label>
+                        <select id="categoryFilter" onchange="loadEmployeesWithoutObservations(true)" 
+                                class="w-full p-2 border border-gray-300 rounded focus:border-blue-500 focus:outline-none">
+                            <option value="">All Categories</option>
+                            <option value="mitra">Mitra</option>
+                            <option value="project">Project</option>
+                            <option value="crew marine">Crew Marine</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Date Start:</label>
+                        <input type="date" id="startDateFilter" onchange="loadStatistics(); loadEmployeesWithoutObservations(true)" 
+                               class="w-full p-2 border border-gray-300 rounded focus:border-blue-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Date End:</label>
+                        <input type="date" id="endDateFilter" onchange="loadStatistics(); loadEmployeesWithoutObservations(true)" 
+                               class="w-full p-2 border border-gray-300 rounded focus:border-blue-500 focus:outline-none">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Sort By:</label>
+                        <select id="sortByFilter" onchange="loadEmployeesWithoutObservations(true)" 
+                                class="w-full p-2 border border-gray-300 rounded focus:border-blue-500 focus:outline-none">
+                            <option value="employeeName">Employee Name</option>
+                            <option value="companyName">Company Name</option>
+                            <option value="position">Position</option>
+                            <option value="category">Category</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Order:</label>
+                        <select id="orderByFilter" onchange="loadEmployeesWithoutObservations(true)" 
+                                class="w-full p-2 border border-gray-300 rounded focus:border-blue-500 focus:outline-none">
+                            <option value="asc">Ascending</option>
+                            <option value="desc">Descending</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Per Page:</label>
+                        <select id="limitFilter" onchange="loadEmployeesWithoutObservations(true)" 
+                                class="w-full p-2 border border-gray-300 rounded focus:border-blue-500 focus:outline-none">
+                            <option value="10">10 per page</option>
+                            <option value="25">25 per page</option>
+                            <option value="50">50 per page</option>
+                            <option value="100">100 per page</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 mb-4">
+                    <button onclick="setDateRangeThisWeek()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm px-3 py-1 rounded transition-colors">This Week</button>
+                    <button onclick="setDateRangeThisMonth()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm px-3 py-1 rounded transition-colors">This Month</button>
+                    <button onclick="setDateRangeLastMonth()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm px-3 py-1 rounded transition-colors">Last Month</button>
+                    <button onclick="clearDateRange()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm px-3 py-1 rounded transition-colors">Clear Dates</button>
+                    <button onclick="clearAllFilters()" class="bg-red-500 hover:bg-red-600 text-white text-sm px-3 py-1 rounded transition-colors">Clear All Filters</button>
+                </div>
+
+                <div class="text-xs text-gray-600">
+                    <strong>Note:</strong> Date filters show employees who don't have observations within the selected date range. Leave empty to show all employees who have never filled observations.
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6"> Employee Status Overview</h2>
+                
+                <div id="employeesResult">
+                    <div class="text-center text-gray-500 py-8">
+                        Loading employees data...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://127.0.0.1:3000/api/public';
+        let currentEmployeesData = [];
+        let currentPage = 0;
+        let totalPages = 0;
+        let filterTimeout;
+        
+        // Load initial data
+        window.addEventListener('load', () => {
+            loadCompanies();
+            loadStatistics();
+            loadEmployeesWithoutObservations(); // Auto-load employees data
+        });
+        
+        async function refreshData() {
+            showResult('employeesResult', 'Refreshing data...', 'info');
+            await Promise.all([
+                loadCompanies(),
+                loadStatistics(),
+                loadEmployeesWithoutObservations(true)
+            ]);
+        }
+        
+        async function loadStatistics() {
+            try {
+                const startDate = document.getElementById('startDateFilter').value;
+                const endDate = document.getElementById('endDateFilter').value;
+                
+                const params = new URLSearchParams();
+                if (startDate) params.append('startDate', startDate);
+                if (endDate) params.append('endDate', endDate);
+                
+                const response = await fetch(`${API_BASE}/observation-statistics?${params}`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    document.getElementById('totalEmployeesCount').textContent = result.data.totalAllEmployees;
+                    document.getElementById('activeEmployeesCount').textContent = result.data.totalActiveEmployees;
+                    document.getElementById('withObservationsCount').textContent = result.data.employeesWithObservations;
+                    document.getElementById('withoutObservationsCount').textContent = result.data.employeesWithoutObservations;
+                }
+            } catch (error) {
+                console.error('Load statistics error:', error);
+            }
+        }
+        
+        async function loadCompanies() {
+            try {
+                const response = await fetch(`${API_BASE}/companies`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    populateCompanyDropdown(result.data);
+                } else {
+                    showCompanyDropdownError();
+                }
+            } catch (error) {
+                console.error('Error loading companies:', error);
+                showCompanyDropdownError();
+            }
+        }
+        
+        function populateCompanyDropdown(companies) {
+            const dropdown = document.getElementById('companyFilter');
+            dropdown.innerHTML = '<option value="">-- All Companies --</option>';
+            
+            companies.forEach(company => {
+                const option = document.createElement('option');
+                option.value = company.name;
+                option.textContent = company.name;
+                dropdown.appendChild(option);
+            });
+        }
+        
+        function showCompanyDropdownError() {
+            const dropdown = document.getElementById('companyFilter');
+            dropdown.innerHTML = '<option value="">-- Error loading companies --</option>';
+            dropdown.disabled = true;
+        }
+        
+        function debounceFilter() {
+            clearTimeout(filterTimeout);
+            filterTimeout = setTimeout(() => {
+                loadEmployeesWithoutObservations(true);
+            }, 500);
+        }
+        
+        async function loadEmployeesWithoutObservations(resetPage = false) {
+            if (resetPage) {
+                currentPage = 0;
+            }
+            
+            const search = document.getElementById('employeeSearch').value;
+            const company = document.getElementById('companyFilter').value;
+            const position = document.getElementById('positionFilter').value;
+            const category = document.getElementById('categoryFilter').value;
+            const startDate = document.getElementById('startDateFilter').value;
+            const endDate = document.getElementById('endDateFilter').value;
+            const sortBy = document.getElementById('sortByFilter').value;
+            const orderBy = document.getElementById('orderByFilter').value;
+            const limit = parseInt(document.getElementById('limitFilter').value);
+            
+            showResult('employeesResult', 'Loading employees...', 'info');
+            
+            try {
+                const params = new URLSearchParams({
+                    limit: limit,
+                    page: currentPage,
+                    sortBy: sortBy,
+                    orderBy: orderBy
+                });
+                
+                if (search) params.append('search', search);
+                if (company) params.append('company', company);
+                if (position) params.append('position', position);
+                if (category) params.append('category', category);
+                if (startDate) params.append('startDate', startDate);
+                if (endDate) params.append('endDate', endDate);
+                
+                const response = await fetch(`${API_BASE}/employees-without-observations?${params}`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    currentEmployeesData = result.data;
+                    totalPages = result.meta.totalPages;
+                    displayEmployeesWithoutObservations(result.data, result.meta, result.statistics);
+                } else {
+                    showResult('employeesResult', `Failed to load data: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                console.error('Load employees error:', error);
+                showResult('employeesResult', `Failed to load data: ${error.message}`, 'error');
+            }
+        }
+        
+        function displayEmployeesWithoutObservations(employees, meta, statistics) {
+            const container = document.getElementById('employeesResult');
+            
+            // Update statistics
+            if (statistics) {
+                document.getElementById('totalEmployeesCount').textContent = statistics.totalAllEmployees;
+                document.getElementById('activeEmployeesCount').textContent = statistics.totalActiveEmployees;
+                document.getElementById('withObservationsCount').textContent = statistics.employeesWithObservations;
+                document.getElementById('withoutObservationsCount').textContent = statistics.employeesWithoutObservations;
+            }
+            
+            if (employees.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12">
+                        <div class="text-green-600 text-lg font-semibold mb-2">🎉 No employees found!</div>
+                        <div class="text-gray-500">All employees have filled their observations or no results match your filters.</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = `
+                <!-- Data Table -->
+                <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Employee Name</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Company</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Position</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+            `;
+            
+            employees.forEach((employee, index) => {
+                const globalIndex = (meta.page * meta.view) + index + 1;
+                const rowClass = index % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+                html += `
+                    <tr class="${rowClass} hover:bg-blue-50 transition-colors">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${globalIndex}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${employee.employeeName || '-'}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${employee.companyName || '-'}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${employee.position || '-'}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getCategoryBadgeClass(employee.category)}">
+                                ${employee.category || 'N/A'}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${employee.statusOnDuty ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                                ${employee.statusOnDuty ? 'Active' : 'Inactive'}
+                            </span>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+            
+            // Add pagination
+            if (meta.totalPages > 1) {
+                html += `
+                    <div class="mt-6 flex justify-between items-center">
+                        <button onclick="changePage(${meta.page - 1})" 
+                                ${meta.page === 0 ? 'disabled' : ''}
+                                class="px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                            Previous
+                        </button>
+                        
+                        <div class="flex space-x-2">
+                `;
+                
+                const startPage = Math.max(0, meta.page - 2);
+                const endPage = Math.min(meta.totalPages - 1, meta.page + 2);
+                
+                for (let i = startPage; i <= endPage; i++) {
+                    html += `
+                        <button onclick="changePage(${i})" 
+                                class="px-3 py-2 text-sm font-medium ${i === meta.page ? 'text-blue-600 bg-blue-50 border border-blue-300' : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-50'} rounded-md">
+                            ${i + 1}
+                        </button>
+                    `;
+                }
+                
+                html += `
+                        </div>
+                        
+                        <button onclick="changePage(${meta.page + 1})" 
+                                ${meta.page >= meta.totalPages - 1 ? 'disabled' : ''}
+                                class="px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                            Next
+                        </button>
+                    </div>
+                `;
+            }
+            
+            container.innerHTML = html;
+        }
+        
+        function changePage(page) {
+            if (page >= 0 && page < totalPages) {
+                currentPage = page;
+                loadEmployeesWithoutObservations();
+            }
+        }
+        
+        function getCategoryBadgeClass(category) {
+            switch(category?.toLowerCase()) {
+                case 'mitra':
+                    return 'bg-blue-100 text-blue-800';
+                case 'project':
+                    return 'bg-purple-100 text-purple-800';
+                case 'crew marine':
+                    return 'bg-cyan-100 text-cyan-800';
+                default:
+                    return 'bg-gray-100 text-gray-800';
+            }
+        }
+        
+        function exportEmployeesToCSV() {
+            if (currentEmployeesData.length === 0) {
+                alert('No data to export');
+                return;
+            }
+            
+            const headers = ['No', 'Employee Name', 'Company', 'Position', 'Category', 'Status'];
+            const csvContent = [headers.join(',')];
+            
+            currentEmployeesData.forEach((employee, index) => {
+                const row = [
+                    index + 1,
+                    `"${employee.employeeName || '-'}"`,
+                    `"${employee.companyName || '-'}"`,
+                    `"${employee.position || '-'}"`,
+                    `"${employee.category || 'N/A'}"`,
+                    `"${employee.statusOnDuty ? 'Active' : 'Inactive'}"`
+                ];
+                csvContent.push(row.join(','));
+            });
+            
+            const csvString = csvContent.join('\n');
+            const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            
+            if (link.download !== undefined) {
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', `employees-without-observations-${new Date().toISOString().split('T')[0]}.csv`);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+        
+        function copyEmployeesToClipboard() {
+            if (currentEmployeesData.length === 0) {
+                alert('No data to copy');
+                return;
+            }
+            
+            const headers = ['No', 'Employee Name', 'Company', 'Position', 'Category', 'Status'];
+            let textContent = headers.join('\t') + '\n';
+            
+            currentEmployeesData.forEach((employee, index) => {
+                const row = [
+                    index + 1,
+                    employee.employeeName || '-',
+                    employee.companyName || '-',
+                    employee.position || '-',
+                    employee.category || 'N/A',
+                    employee.statusOnDuty ? 'Active' : 'Inactive'
+                ];
+                textContent += row.join('\t') + '\n';
+            });
+            
+            navigator.clipboard.writeText(textContent).then(() => {
+                alert('Data copied to clipboard successfully!');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                alert('Failed to copy data to clipboard');
+            });
+        }
+        
+        // Date range helper functions
+        function setDateRangeThisWeek() {
+            const today = new Date();
+            const monday = new Date(today);
+            monday.setDate(today.getDate() - today.getDay() + 1);
+            const sunday = new Date(monday);
+            sunday.setDate(monday.getDate() + 6);
+            
+            document.getElementById('startDateFilter').value = monday.toISOString().split('T')[0];
+            document.getElementById('endDateFilter').value = sunday.toISOString().split('T')[0];
+            loadStatistics();
+            loadEmployeesWithoutObservations(true);
+        }
+        
+        function setDateRangeThisMonth() {
+            const today = new Date();
+            const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+            const lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+            
+            document.getElementById('startDateFilter').value = firstDay.toISOString().split('T')[0];
+            document.getElementById('endDateFilter').value = lastDay.toISOString().split('T')[0];
+            loadStatistics();
+            loadEmployeesWithoutObservations(true);
+        }
+        
+        function setDateRangeLastMonth() {
+            const today = new Date();
+            const firstDay = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+            const lastDay = new Date(today.getFullYear(), today.getMonth(), 0);
+            
+            document.getElementById('startDateFilter').value = firstDay.toISOString().split('T')[0];
+            document.getElementById('endDateFilter').value = lastDay.toISOString().split('T')[0];
+            loadStatistics();
+            loadEmployeesWithoutObservations(true);
+        }
+        
+        function clearDateRange() {
+            document.getElementById('startDateFilter').value = '';
+            document.getElementById('endDateFilter').value = '';
+            loadStatistics();
+            loadEmployeesWithoutObservations(true);
+        }
+        
+        function clearAllFilters() {
+            document.getElementById('employeeSearch').value = '';
+            document.getElementById('companyFilter').value = '';
+            document.getElementById('positionFilter').value = '';
+            document.getElementById('categoryFilter').value = '';
+            document.getElementById('startDateFilter').value = '';
+            document.getElementById('endDateFilter').value = '';
+            document.getElementById('sortByFilter').value = 'employeeName';
+            document.getElementById('orderByFilter').value = 'asc';
+            document.getElementById('limitFilter').value = '10';
+            loadStatistics();
+            loadEmployeesWithoutObservations(true);
+        }
+        
+        function showResult(elementId, message, type) {
+            const element = document.getElementById(elementId);
+            let classes = 'text-center py-8';
+            
+            if (type === 'success') {
+                classes += ' text-green-600';
+            } else if (type === 'error') {
+                classes += ' text-red-600';
+            } else if (type === 'info') {
+                classes += ' text-blue-600';
+            } else {
+                classes += ' text-gray-500';
+            }
+            
+            element.innerHTML = `<div class="${classes}">${message}</div>`;
+        }
+    </script>
+</body>
+</html>

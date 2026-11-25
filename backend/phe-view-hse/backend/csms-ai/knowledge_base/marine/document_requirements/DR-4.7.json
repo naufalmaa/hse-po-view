@@ -1,0 +1,24 @@
+{
+  "requirement_id": "DR-4.7",
+  "category_id": "4.7",
+  "required_documents": [
+    "- Prosedur Pengelolaan Tanggung Jawab Sosial / CSR (kebijakan tertulis yang disahkan oleh pimpinan perusahaan).- Dokumen Rencana Program Kerja CSR Tahunan (master plan tahunan yang memuat tujuan",
+    "sasaran komunitas",
+    "budget/anggaran",
+    "dan timeline pelaksanaan secara jelas).- Evidence Pelaksanaan Program CSR (setiap kegiatan wajib melampirkan berkas lengkap berpasangan: Laporan tertulis kegiatan",
+    "Foto asli pelaksanaan di lapangan",
+    "Rincian biaya/ledger pengeluaran keuangan",
+    "dan Daftar penerima manfaat/tanda terima resmi bertandatangan).- Laporan Pemantauan Berkala Hubungan Masyarakat (pemantauan relasi berkala antara kegiatan operasional/lapangan kontraktor dengan warga sekitar).- Laporan Evaluasi Dampak/Keefektifan Program CSR (laporan analisis kemajuan sosial-ekonomi atau perbaikan fisik fasilitas umum menggunakan metode perbandingan visual sebelum vs sesudah kegiatan / Before-After structural comparison).- Log/Catatan Kasus Keluhan Sosial (catatan riwayat demo",
+    "sengketa lahan",
+    "atau keluhan nelayan/warga sekitar wilayah operasi beserta status tindak lanjut penyelesaiannya).- Bukti Kunjungan Lapangan / Inspeksi Hubungan Sosial (bukti kunjungan rutin tim humas/HSE kontraktor untuk mengevaluasi dampak operasional lapangan langsung terhadap aktivitas warga sekitar)."
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

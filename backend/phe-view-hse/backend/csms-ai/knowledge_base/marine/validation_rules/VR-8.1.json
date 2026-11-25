@@ -1,0 +1,51 @@
+{
+  "rule_id": "VR-8.1",
+  "category_id": "8.1",
+  "validation_methods": [
+    "ocr_image_processing",
+    "semantic_search",
+    "metadata_extraction_nlp",
+    "signature_detection_computer_vision",
+    "date_range_validation",
+    "fuzzy_string_matching_entity"
+  ],
+  "ai_checkpoint_keywords": [
+    "ISO 45001",
+    "ISO 14001",
+    "ISO 9001",
+    "Occupational Health and Safety Management System",
+    "Environmental Management System",
+    "Quality Management System",
+    "Certificate of Approval",
+    "Certificate Schedule",
+    "Expiry Date",
+    "Valid Until",
+    "Issued By",
+    "Accreditation Mark",
+    "Document of Compliance",
+    "DOC",
+    "Safety Management Certificate",
+    "SMC",
+    "ISPS Code",
+    "ISO 22000"
+  ],
+  "document_expiry_check": true,
+  "mandatory_fields": [
+    "AI DETAILED VALIDATION LOGIC:<br>[Check_01_Issuer_Validation]: Cari nama Badan Sertifikasi Eksternal pada dokumen dan lakukan verifikasi silang (cross-reference) terhadap daftar lembaga akreditasi nasional/internasional yang sah dan diakui secara global (seperti KAN",
+    "UKAS",
+    "RvA",
+    "IAS).<br>[Check_02_Certificate_Classification]: Klasifikasikan jenis sertifikat secara otomatis:<br> - Kategori A (K3 Utama): ISO 45001 / Standar Keselamatan setara (Wajib untuk Skor 10)<br> - Kategori B (Lingkungan Utama): ISO 14001 / Standar Lingkungan setara (Wajib untuk Skor 10)<br> - Kategori C (Mutu Pendukung): ISO 9001 / Standar Mutu sejenis<br> - Kategori D (Spesifik Industri): Sertifikat Sektoral (DOC",
+    "SMC",
+    "ISPS",
+    "ISO 22000",
+    "dll.) sesuai profil risiko proyek.<br>[Check_03_Validity_Engine]: Ekstrak tanggal kedaluwarsa (expiry date) dari setiap sertifikat. Bandingkan dengan tanggal penilaian saat ini untuk menghitung sisa masa berlaku. Jika masa berlaku < 30 hari",
+    "tandai otomatis sebagai STATUS_REVISION (Grace Period Check).<br>[Check_04_Entity_Alignment]: Lakukan pencocokan nama organisasi pada sertifikat menggunakan algoritma pencocokan string (fuzzy string matching) terhadap nama kontraktor terdaftar. Jika ada perbedaan nama (misalnya restrukturisasi perusahaan)",
+    "wajib memverifikasi dokumen akta hukum pendukung perubahan nama perusahaan.<br>[Check_05_Integration_Double_Check]: Lakukan validasi kepemilikan ganda (Multiple-Integration Check). Periksa apakah sertifikat Kategori A (K3) DAN Kategori B (Lingkungan) keduanya berstatus aktif secara simultan (Syarat wajib Skor 10)."
+  ],
+  "evaluation_criteria": "AI DETAILED VALIDATION LOGIC:<br>[Check_01_Issuer_Validation]: Cari nama Badan Sertifikasi Eksternal pada dokumen dan lakukan verifikasi silang (cross-reference) terhadap daftar lembaga akreditasi nasional/internasional yang sah dan diakui secara global (seperti KAN, UKAS, RvA, IAS).<br>[Check_02_Certificate_Classification]: Klasifikasikan jenis sertifikat secara otomatis:<br> - Kategori A (K3 Utama): ISO 45001 / Standar Keselamatan setara (Wajib untuk Skor 10)<br> - Kategori B (Lingkungan Utama): ISO 14001 / Standar Lingkungan setara (Wajib untuk Skor 10)<br> - Kategori C (Mutu Pendukung): ISO 9001 / Standar Mutu sejenis<br> - Kategori D (Spesifik Industri): Sertifikat Sektoral (DOC, SMC, ISPS, ISO 22000, dll.) sesuai profil risiko proyek.<br>[Check_03_Validity_Engine]: Ekstrak tanggal kedaluwarsa (expiry date) dari setiap sertifikat. Bandingkan dengan tanggal penilaian saat ini untuk menghitung sisa masa berlaku. Jika masa berlaku < 30 hari, tandai otomatis sebagai STATUS_REVISION (Grace Period Check).<br>[Check_04_Entity_Alignment]: Lakukan pencocokan nama organisasi pada sertifikat menggunakan algoritma pencocokan string (fuzzy string matching) terhadap nama kontraktor terdaftar. Jika ada perbedaan nama (misalnya restrukturisasi perusahaan), wajib memverifikasi dokumen akta hukum pendukung perubahan nama perusahaan.<br>[Check_05_Integration_Double_Check]: Lakukan validasi kepemilikan ganda (Multiple-Integration Check). Periksa apakah sertifikat Kategori A (K3) DAN Kategori B (Lingkungan) keduanya berstatus aktif secara simultan (Syarat wajib Skor 10).",
+  "status_accept": "Dokumen lengkap, sah (diterbitkan badan sertifikasi resmi terakreditasi), serta masa berlaku aktif di atas 30 hari dari tanggal pengajuan.",
+  "status_reject": "Dokumen utama sertifikat (atau bukti kerja sama resmi proses sertifikasi) tidak dilampirkan sama sekali, nama organisasi tidak cocok tanpa surat legalitas pendukung, atau dokumen terbukti tidak valid secara hukum.",
+  "status_revision": "Sertifikat kedaluwarsa, atau masa berlaku tersisa kurang dari 30 hari dari tanggal pengajuan (memicu Grace Period check), atau file terpotong/buram, atau nama entitas memiliki perbedaan karakter kecil tanpa keterangan resmi.",
+  "ai_confidence_threshold": 0.85,
+  "kb_version": "v4"
+}

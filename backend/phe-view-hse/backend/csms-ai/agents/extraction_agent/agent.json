@@ -1,0 +1,5 @@
+{
+  "agent_id": "extraction_agent",
+  "name": "Extraction Agent",
+  "type": "model-agnostic"
+}

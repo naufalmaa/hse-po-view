@@ -1,0 +1,33 @@
+{
+  "requirement_id": "DR-1",
+  "category_id": "1",
+  "required_documents": [
+    "- HSE Plan Proyek ATAU Jadwal Kunjungan Manajemen Resmi (No.Dok: F/QHSE/11",
+    "disahkan Direksi)<br>\n- Prosedur Pelaksanaan MWT / Kunjungan Manajemen <br>\n- Laporan Kunjungan Manajemen / MWT (Form No.Dok: F/QHSE/19",
+    "memuat tanggal",
+    "lokasi/nama kapal",
+    "temuan",
+    "& tanda tangan Senior Manajer/Direktur)<br>\n- Surat Delegasi Wewenang / Delegation of Authority (DOA) (mencantumkan nomor surat dan tanggal kunjungan) <br>\n- Notulen Rapat HSE Level 2 (Form No.Dok: F/QM/18",
+    "bulanan",
+    "agenda: APD",
+    "ITM",
+    "rotasi crew",
+    "Ask For Help)<br>\n- Evidence Program Reward HSE (Laporan Employee Recognition",
+    "BMI Challenge",
+    "sertifikat",
+    "atau bukti penghargaan) <br>\n- Dokumen Sosialisasi / Campaign HSE (Absensi Form F/QM/17",
+    "Foto Kegiatan",
+    "Materi Town Hall bulanan)<br>\n- Evidence Program K3LL Tambahan di luar rencana rutin (Pesan Akhir Tahun Direksi",
+    "New Year Campaign)"
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

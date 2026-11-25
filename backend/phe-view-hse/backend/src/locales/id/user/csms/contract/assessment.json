@@ -1,0 +1,16 @@
+{
+  "assessmentUpdated": "Assessment berhasil diperbarui",
+  "assessmentUpdateFailed": "Gagal memperbarui assessment",
+  "assessmentRetrieved": "Detail assessment berhasil diambil",
+  "assessmentRetrieveFailed": "Gagal mengambil detail assessment",
+  "assessmentsListed": "Daftar assessment berhasil diambil",
+  "assessmentsListFailed": "Gagal menampilkan daftar assessment",
+  "folderIdRequired": "ID folder diperlukan",
+  "parentIdRequired": "ID parent diperlukan",
+  "folderNotFound": "Folder tidak ditemukan",
+  "parentFolderNotFound": "Folder parent tidak ditemukan",
+  "invalidScore": "Score tidak valid. Nilai yang diizinkan: 0, 3, 6, 10",
+  "atLeastOneFieldRequired": "Minimal satu field (status, score, atau note) harus diisi",
+  "unauthorized": "Tidak diotorisasi",
+  "insufficientPermission": "Hanya admin dan user yang dapat mengupdate assessment"
+}

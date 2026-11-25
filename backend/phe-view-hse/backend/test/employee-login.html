@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Karyawan - HSE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e4a8f;
+            --primary-light: #2a5db8;
+            --success: #16a34a;
+            --success-light: #22c55e;
+            --destructive: #dc2626;
+            --background: #f5f7fa;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --radius: 12px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .login-container {
+            background: var(--card);
+            border-radius: 24px;
+            padding: 48px 40px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            box-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.4);
+        }
+
+        .logo svg {
+            width: 40px;
+            height: 40px;
+            color: white;
+        }
+
+        .logo-section h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .logo-section p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 48px 14px 16px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 15px;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 14px;
+            top: 40px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .password-toggle:hover {
+            color: var(--text);
+        }
+
+        .password-toggle svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 16px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px -3px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid rgba(220, 38, 38, 0.2);
+            color: var(--destructive);
+            padding: 12px 16px;
+            border-radius: var(--radius);
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .error-message.show {
+            display: flex;
+        }
+
+        .error-message svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        .footer-link {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .footer-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo-section">
+            <div class="logo">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+            </div>
+            <h1>Login Karyawan</h1>
+            <p>Masukkan HSSE Passport dan password Anda</p>
+        </div>
+
+        <div class="error-message" id="errorMessage">
+            <svg fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            <span id="errorText">Username atau password salah</span>
+        </div>
+
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="hssePassport">HSSE Passport Number</label>
+                <input type="text" id="hssePassport" name="hssePassport" placeholder="Contoh: P230403352" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Masukkan password" required>
+                <button type="button" class="password-toggle" onclick="togglePassword()" title="Tampilkan/sembunyikan password">
+                    <svg id="eyeIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+                <span id="btnText">Masuk</span>
+                <span class="loading-spinner" id="btnSpinner" style="display: none;"></span>
+            </button>
+        </form>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3000/api/auth';
+
+        // Check if already logged in via localStorage only
+        document.addEventListener('DOMContentLoaded', () => {
+            checkLocalAuth();
+        });
+
+        function getRedirectUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('redirect') || 'employee-attendance.html';
+        }
+
+        function checkLocalAuth() {
+            const userData = localStorage.getItem('employeeUser');
+            if (userData) {
+                const user = JSON.parse(userData);
+                if (user.id && user.hssePassportNumber) {
+                    window.location.href = getRedirectUrl();
+                }
+            }
+        }
+
+        async function handleLogin(event) {
+            event.preventDefault();
+
+            const hssePassportNumber = document.getElementById('hssePassport').value.trim();
+            const password = document.getElementById('password').value;
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnSpinner = document.getElementById('btnSpinner');
+            const errorMessage = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+
+            errorMessage.classList.remove('show');
+            submitBtn.disabled = true;
+            btnText.style.display = 'none';
+            btnSpinner.style.display = 'inline-block';
+
+            try {
+                const response = await fetch(`${API_BASE}/sign-in/hsse-passport`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        hssePassportNumber: hssePassportNumber,
+                        password: password
+                    }),
+                    credentials: 'include'
+                });
+
+                const result = await response.json();
+
+                if (result.token && result.user) {
+                    localStorage.setItem('employeeUser', JSON.stringify(result.user));
+                    window.location.href = getRedirectUrl();
+                } else {
+                    errorText.textContent = result.message || 'HSSE Passport atau password salah';
+                    errorMessage.classList.add('show');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                errorText.textContent = 'Gagal terhubung ke server';
+                errorMessage.classList.add('show');
+            } finally {
+                submitBtn.disabled = false;
+                btnText.style.display = 'inline';
+                btnSpinner.style.display = 'none';
+            }
+        }
+
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
+                `;
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

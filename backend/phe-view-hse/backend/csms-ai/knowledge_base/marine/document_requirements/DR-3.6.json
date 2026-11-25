@@ -1,0 +1,25 @@
+{
+  "requirement_id": "DR-3.6",
+  "category_id": "3.6",
+  "required_documents": [
+    "1. SOP Pengendalian Dokumen: wajib memuat tata alur pembuatan",
+    "penomoran kode unit",
+    "mekanisme revisi",
+    "kontrol distribusi salinan (controlled/uncontrolled copy)",
+    "serta metode penarikan dokumen kedaluwarsa (obsolete document) .<br>2. Tabel Master List Dokumen / Listing Prosedur: daftar seluruh SOP/Instruksi Kerja (WI) aktif yang memuat kolom wajib: Nomor Dokumen",
+    "Judul Dokumen",
+    "Rujukan Regulasi K3LL Spesifik (Nomor & Tahun)",
+    "Status Regulasi (Berlaku/Dicabut)",
+    "dan Tanggal/Tahun Review Terakhir SOP\n.<br>3. Sampel SOP Operasional Aktual: berkas asli prosedur operasional guna memverifikasi keselarasan rujukan hukum di dalam bab referensi masing-masing SOP secara langsung\n.<br>4. SOP Identifikasi dan Evaluasi Kepatuhan Peraturan Perundangan K3LL: prosedur tata cara peninjauan hukum baru secara periodik\n."
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

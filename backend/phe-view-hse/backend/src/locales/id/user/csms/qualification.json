@@ -1,0 +1,14 @@
+{
+  "qualificationCreated": "Assessment kualifikasi berhasil dibuat",
+  "qualificationCreateFailed": "Gagal membuat assessment kualifikasi",
+  "qualificationDeleted": "Assessment kualifikasi berhasil dihapus",
+  "qualificationDeleteFailed": "Gagal menghapus assessment kualifikasi",
+  "qualificationNotFound": "Assessment kualifikasi tidak ditemukan",
+  "qualificationUpdated": "Assessment kualifikasi berhasil diperbarui",
+  "qualificationUpdateFailed": "Gagal memperbarui assessment kualifikasi",
+  "qualificationsListed": "Daftar assessment kualifikasi berhasil diambil",
+  "qualificationRetrieved": "Detail assessment kualifikasi berhasil diambil",
+  "unauthorized": "Tidak diotorisasi",
+  "insufficientPermission": "Hanya kontraktor yang dapat membuat assessment kualifikasi",
+  "filesDeleted": "File berhasil dihapus"
+}

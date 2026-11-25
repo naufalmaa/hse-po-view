@@ -1,0 +1,25 @@
+{
+  "user": {
+    "passwordUpdated": "Kata sandi berhasil diperbarui",
+    "passwordUpdateFailed": "Gagal memperbarui kata sandi",
+    "userAdded": "Pengguna berhasil ditambahkan",
+    "userAddFailed": "Gagal menambahkan pengguna",
+    "userDeleted": "Pengguna berhasil dihapus",
+    "userDeleteFailed": "Gagal menghapus pengguna",
+    "userUpdated": "Pengguna berhasil diperbarui",
+    "userUpdateFailed": "Gagal memperbarui pengguna",
+    "userListSuccess": "Daftar pengguna berhasil diambil",
+    "userListFailed": "Gagal menampilkan daftar pengguna",
+    "accountNotFoundAfterChange": "Akun tidak ditemukan setelah perubahan",
+    "userDeleteFailedHasReports": "Gagal menghapus pengguna karena memiliki laporan harian",
+    "userDeleteFailedForeignKey": "Gagal menghapus pengguna karena masih terkait dengan informasi lain di sistem"
+  },
+  "session": {
+    "sessionListSuccess": "Daftar sesi berhasil diambil",
+    "sessionListFailed": "Gagal menampilkan daftar sesi",
+    "sessionRevoked": "Sesi berhasil dicabut",
+    "sessionRevokeFailed": "Gagal mencabut sesi",
+    "allSessionsRevoked": "Semua sesi berhasil dicabut",
+    "allSessionsRevokeFailed": "Gagal mencabut semua sesi"
+  }
+}

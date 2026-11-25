@@ -1,0 +1,103 @@
+# HSE Proview: semua komponen dalam Docker (referensi deploy infra-agnostic).
+# Panduan lengkap: docs/handover/03-DEPLOY-DOCKER.md
+#
+#   cp .env.docker.example .env      # isi nilai <...>
+#   docker compose up -d --build
+#   docker compose run --rm backend node src/scripts/init-data.js     # buat admin awal (sekali)
+#
+# LLM (vLLM/Ollama) TIDAK termasuk: isi LLM_*_ENDPOINT ke server model yang ada.
+name: hse-proview
+
+services:
+  db:
+    image: pgvector/pgvector:pg17        # PostgreSQL 17 + pgvector; ltree/uuid-ossp/pgcrypto bawaan contrib
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    # Port DB tidak dibuka ke luar. Buka hanya bila perlu akses dari host:
+    # ports: ["127.0.0.1:5432:5432"]
+
+  backend:
+    build: ./backend/phe-view-hse/backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      PROTOCOL: ${PROTOCOL:-https}
+      HOST: 0.0.0.0
+      PORT: 5142
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
+      BETTER_AUTH_URL: ${APP_URL}
+      COOKIE_PREFIX: ${COOKIE_PREFIX:-hse_proview}
+      FRONTEND_URL: ${APP_URL}
+      BASE_URL: ${APP_URL}
+      UPLOADS_DIR: /data/uploads
+      CSMS_AI_SERVICE_URL: http://csms-ai:8001
+      CSMS_AI_JOB_STALE_MINUTES: ${CSMS_AI_JOB_STALE_MINUTES:-120}
+      BREVO_API_KEY: ${BREVO_API_KEY:-}
+      EMAIL_FROM_ADDRESS: ${EMAIL_FROM_ADDRESS:-no-reply@example.com}
+      EMAIL_FROM_NAME: ${EMAIL_FROM_NAME:-HSE Proview No-Reply}
+      ADMIN_DEFAULT_EMAIL: ${ADMIN_DEFAULT_EMAIL}
+      ADMIN_DEFAULT_NAME: ${ADMIN_DEFAULT_NAME:-Admin}
+      ADMIN_DEFAULT_PASSWORD: ${ADMIN_DEFAULT_PASSWORD}
+    volumes:
+      - uploads:/data/uploads
+
+  csms-ai:
+    build: ./backend/phe-view-hse/backend/csms-ai
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy       # backend membuat skema tabel lebih dulu
+    environment:
+      CSMS_ENV: production
+      CSMS_AI_HOST: 0.0.0.0
+      CSMS_AI_PORT: 8001
+      CSMS_AI_CONCURRENCY: ${CSMS_AI_CONCURRENCY:-1}
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}?sslmode=disable
+      UPLOADS_DIR: /data/uploads
+      LLM_REASONING_ENDPOINT: ${LLM_REASONING_ENDPOINT}
+      LLM_REASONING_MODEL: ${LLM_REASONING_MODEL:-qwen35}
+      LLM_CONSENSUS_ENDPOINT: ${LLM_CONSENSUS_ENDPOINT}
+      LLM_CONSENSUS_MODEL: ${LLM_CONSENSUS_MODEL:-qwen35}
+      LLM_VISION_ENDPOINT: ${LLM_VISION_ENDPOINT:-}
+      LLM_VISION_MODEL: ${LLM_VISION_MODEL:-qwen3-vl}
+      LLM_TIMEOUT_SECONDS: ${LLM_TIMEOUT_SECONDS:-180}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_FALLBACK_MODEL: ${OPENAI_FALLBACK_MODEL:-gpt-5-mini}
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-}
+      OLLAMA_EMBED_MODEL: ${OLLAMA_EMBED_MODEL:-qllama/bge-large-en-v1.5:latest}
+    volumes:
+      - uploads:/data/uploads            # HARUS folder yang sama dengan backend
+
+  frontend:
+    build:
+      context: ./frontend/phe-view-hse
+      args:
+        VITE_APP_BASE_URL: ${APP_URL}
+        VITE_APP_VARIANT: ${VITE_APP_VARIANT:-}
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "${HTTP_PORT:-8080}:80"          # pasang TLS di reverse proxy/load balancer di depannya
+
+volumes:
+  pgdata:
+  uploads:

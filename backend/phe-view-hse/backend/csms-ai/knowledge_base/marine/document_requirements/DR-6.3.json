@@ -1,0 +1,22 @@
+{
+  "requirement_id": "DR-6.3",
+  "category_id": "6.3",
+  "required_documents": [
+    "- HSE Plan Proyek / Rencana K3LL yang telah disahkan oleh kedua belah pihak",
+    "memuat matriks target KPI Leading & Lagging secara kuantitatif.<br>- Laporan Evaluasi HSE Performance berkala (HSE Monthly Report / Form Evaluasi Kinerja Bulanan) yang ditandatangani basah/digital oleh perwakilan Perusahaan dan Kontraktor.<br>- Risalah Rapat / Minutes of Meeting (MoM) Bulanan antara tim manajemen kantor pusat (office) dan tim lapangan (onboard/field) yang membahas review performa HSE",
+    "evaluasi KPI",
+    "dan status rekomendasi perbaikan.<br>- Risalah Rapat / MoM HSE Meeting antara Manajemen & Pekerja (seperti Safety Talk",
+    "Safety Presentation",
+    "atau Town Hall Meeting bulanan) sebagai bukti komunikasi safety program.<br>- Dokumen Inspeksi Lapangan berkala (Daily/Weekly/Monthly HSE Inspection Checklist) untuk memastikan kesesuaian eksekusi lapangan dengan HSE Plan.<br>- Bukti Akumulasi Jam Kerja Aman (Safe Man Hours / LTI-Free Hours) yang diperbarui secara kumulatif setiap bulan (tercantum dalam Monthly Report atau Dashboard Kinerja)."
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

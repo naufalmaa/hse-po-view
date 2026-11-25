@@ -1,0 +1,32 @@
+export default {
+    pageTitle: "Manajemen Kapal",
+    pageSubtitle: "Kelola armada kapal dan penugasan personel",
+    addVessel: "Tambah Kapal",
+    updateVessel: "Perbarui Kapal",
+    deleteVessel: "Hapus Kapal",
+    vesselName: "Nama Kapal",
+    personnelCount: "Jumlah Personel",
+    vesselNameRequired: "Nama kapal wajib diisi",
+    personnelCountRequired: "Jumlah personel wajib diisi",
+    vessels: "Kapal",
+    personnel: "Personel",
+    deleteConfirmation: "Hapus kapal dan semua datanya. Tindakan ini tidak dapat dibatalkan. Harap konfirmasi dengan hati-hati.",
+    deleteSuccess: "Kapal berhasil dihapus",
+    createSuccess: "Kapal berhasil dibuat",
+    updateSuccess: "Kapal berhasil diperbarui",
+    type: "Tipe Kapal",
+    vesselOnHire: "Vessel On Hire",
+    onHire: "On Hire",
+    offHire: "Off Hire",
+    status: "Status",
+    target: "Target",
+    form: {
+        addTitle: "Tambah Kapal Baru",
+        addDescription: "Silakan isi formulir di bawah ini untuk membuat kapal baru.",
+        updateTitle: "Perbarui Kapal",
+        updateDescription: "Silakan isi formulir di bawah ini untuk memperbarui kapal.",
+        deleteTitle: "Hapus Kapal",
+        deleteDescription: "Apakah Anda yakin ingin menghapus kapal ",
+        deleteQuestionMark: " ?"
+    }
+}

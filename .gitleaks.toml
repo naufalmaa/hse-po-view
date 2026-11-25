@@ -1,0 +1,14 @@
+# Konfigurasi gitleaks (dipakai CI dan hook lokal). Aturan bawaan + pengecualian placeholder dokumentasi.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Placeholder dan contoh di dokumentasi/template env"
+regexes = [
+  '''<[A-Z0-9_]+>''',
+  '''<HASIL_openssl_rand_hex_32>''',
+]
+paths = [
+  '''(^|/)package-lock\.json$''',
+  '''docs/handover/database/(schema\.sql|KAMUS-DATA\.md|ERD\.md)$''',
+]

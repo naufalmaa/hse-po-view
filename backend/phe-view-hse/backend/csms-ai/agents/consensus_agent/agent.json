@@ -1,0 +1,5 @@
+{
+  "agent_id": "consensus_agent",
+  "name": "Consensus Agent",
+  "type": "model-agnostic"
+}

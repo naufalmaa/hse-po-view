@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Manajemen Absensi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e4a8f;
+            --primary-light: #2a5db8;
+            --success: #16a34a;
+            --success-light: #22c55e;
+            --destructive: #dc2626;
+            --info: #0ea5e9;
+            --background: #f5f7fa;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --radius: 12px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+            color: white;
+            padding: 24px 28px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 40px -10px rgba(37, 99, 235, 0.4);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        header p {
+            opacity: 0.9;
+            margin-top: 6px;
+            font-size: 14px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 640px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stat-card {
+            background: var(--card);
+            padding: 24px;
+            border-radius: var(--radius);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card .icon-wrap {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+        }
+
+        .stat-card .icon-wrap.primary { background: rgba(37, 99, 235, 0.1); }
+        .stat-card .icon-wrap.success { background: rgba(22, 163, 74, 0.1); }
+        .stat-card .icon-wrap.info { background: rgba(14, 165, 233, 0.1); }
+
+        .stat-card .icon-wrap svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .stat-card h3 {
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .value {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .stat-card .value.primary { color: var(--primary); }
+        .stat-card .value.success { color: var(--success); }
+        .stat-card .value.info { color: var(--info); }
+
+        /* Main Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .main-grid { grid-template-columns: 1fr; }
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 650px;
+        }
+
+        .card-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-header h2 svg {
+            width: 20px;
+            height: 20px;
+            color: var(--primary);
+        }
+
+        .card-header .count {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .card-body {
+            padding: 16px 20px;
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Search & Filter */
+        .search-box {
+            position: relative;
+            margin-bottom: 12px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 16px 12px 44px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.2s;
+            background: var(--card);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .search-box svg {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            width: 18px;
+            height: 18px;
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .select-wrap {
+            position: relative;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .select-wrap select {
+            width: 100%;
+            padding: 10px 36px 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 13px;
+            font-family: inherit;
+            background: var(--card);
+            cursor: pointer;
+            appearance: none;
+            transition: all 0.2s;
+        }
+
+        .select-wrap select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .select-wrap::after {
+            content: '';
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid var(--text-muted);
+            pointer-events: none;
+        }
+
+        .btn-reset {
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--card);
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: all 0.2s;
+            display: none; /* Hidden by default */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-reset.show {
+            display: flex;
+        }
+
+        .btn-reset:hover {
+            border-color: var(--destructive);
+            color: var(--destructive);
+        }
+
+        /* Employee List */
+        .employee-list {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .employee-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.15s;
+            margin-bottom: 8px;
+            border: 2px solid transparent;
+            background: var(--card);
+        }
+
+        .employee-item:hover { background: var(--background); }
+
+        .employee-item.selected {
+            background: rgba(37, 99, 235, 0.05);
+            border-color: var(--primary);
+        }
+
+        .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .employee-info { flex: 1; min-width: 0; }
+
+        .employee-info h4 {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .category-badge {
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .category-badge.marine { background: rgba(14, 165, 233, 0.1); color: #0284c7; }
+        .category-badge.mitra { background: rgba(22, 163, 74, 0.1); color: #16a34a; }
+        .category-badge.project { background: rgba(147, 51, 234, 0.1); color: #9333ea; }
+
+        .employee-info .details { font-size: 12px; color: var(--text-muted); }
+
+        .employee-info .meta {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .status-on-duty { background: rgba(22, 163, 74, 0.1); color: #16a34a; }
+        .status-off-duty { background: rgba(220, 38, 38, 0.1); color: #dc2626; }
+
+        /* Attendance Card */
+        .attendance-content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .empty-state {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .empty-state svg { width: 64px; height: 64px; opacity: 0.3; margin-bottom: 12px; }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .profile-section .avatar { width: 64px; height: 64px; font-size: 20px; }
+
+        .profile-section h3 { font-size: 18px; font-weight: 600; }
+
+        .profile-section p { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
+        #profileExtraInfo .meta {
+            font-size: 12px;
+            margin-top: 6px;
+            gap: 8px;
+        }
+
+        #profileExtraInfo .meta span span {
+            font-size: 12px !important;
+        }
+
+        .time-display { text-align: center; margin-bottom: 24px; }
+
+        .time-display .label { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+
+        .time-display .time {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'SF Mono', 'Consolas', monospace;
+        }
+
+        .time-display .date { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+
+        .today-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-box {
+            background: var(--background);
+            padding: 16px;
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .stat-box .label { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+
+        .stat-box .value { font-size: 20px; font-weight: 700; color: var(--text); }
+
+        .action-buttons { display: flex; gap: 12px; margin-top: auto; }
+
+        .btn {
+            flex: 1;
+            padding: 14px 24px;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 15px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .btn-checkin {
+            background: var(--success);
+            color: white;
+            box-shadow: 0 4px 15px -3px rgba(22, 163, 74, 0.4);
+        }
+
+        .btn-checkin:hover:not(:disabled) { background: var(--success-light); transform: translateY(-2px); }
+
+        .btn-checkout {
+            background: var(--destructive);
+            color: white;
+            box-shadow: 0 4px 15px -3px rgba(220, 38, 38, 0.4);
+        }
+
+        .btn-checkout:hover:not(:disabled) { transform: translateY(-2px); }
+
+        .btn svg { width: 18px; height: 18px; }
+
+        /* Modal PIN */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal {
+            background: var(--card);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .modal-header { padding: 24px 24px 16px; text-align: center; }
+
+        .modal-header .icon-wrap {
+            width: 48px; height: 48px;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 12px;
+        }
+
+        .modal-header .icon-wrap svg { width: 24px; height: 24px; color: var(--primary); }
+
+        .modal-header h3 { font-size: 20px; font-weight: 600; }
+
+        .modal-body { padding: 0 24px 24px; }
+
+        .modal-body .employee-label { text-align: center; margin-bottom: 16px; }
+
+        .modal-body .employee-name { font-size: 18px; font-weight: 600; margin-top: 8px; text-align: center; }
+
+        .pin-inputs { display: flex; justify-content: center; gap: 12px; margin: 24px 0; }
+
+        .pin-inputs input {
+            width: 56px; height: 56px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .pin-inputs input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .pin-error {
+            display: none; align-items: center; justify-content: center;
+            gap: 8px; color: var(--destructive); font-size: 14px; margin-bottom: 16px;
+        }
+
+        .pin-error svg { width: 18px; height: 18px; }
+
+        .modal-footer { padding: 0 24px 24px; display: flex; gap: 12px; }
+
+        .btn-modal { flex: 1; padding: 14px; border-radius: var(--radius); font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+
+        .btn-cancel { background: var(--card); border: 2px solid var(--border); color: var(--text-muted); }
+
+        .btn-confirm { background: var(--primary); border: none; color: white; }
+
+        .loading-spinner {
+            display: inline-block; width: 18px; height: 18px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%; border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Toast */
+        .toast {
+            position: fixed; bottom: 30px; right: 30px;
+            padding: 16px 24px; border-radius: var(--radius);
+            color: white; font-weight: 500;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(100px); opacity: 0;
+            transition: all 0.3s ease; z-index: 2000;
+        }
+
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast-success { background: var(--success); }
+        .toast-error { background: var(--destructive); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Sistem Manajemen Absensi</h1>
+                <p>Pilih karyawan dan verifikasi PIN untuk absen masuk/keluar</p>
+            </div>
+            <div style="text-align: right;">
+                <div id="currentTime" style="font-size: 24px; font-weight: 700;">--:--:--</div>
+                <div id="currentDate" style="font-size: 14px; opacity: 0.8;">--</div>
+            </div>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card" onclick="filterByStat('all')">
+                <div class="icon-wrap primary">
+                    <svg fill="none" stroke="var(--primary)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                </div>
+                <h3>Total Karyawan</h3>
+                <div class="value primary" id="totalEmployees">0</div>
+            </div>
+            <div class="stat-card" onclick="filterByStat('checkedin')">
+                <div class="icon-wrap success">
+                    <svg fill="none" stroke="var(--success)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <h3>Sudah Masuk</h3>
+                <div class="value success" id="checkedInToday">0</div>
+            </div>
+            <div class="stat-card" onclick="filterByStat('checkedout')">
+                <div class="icon-wrap info">
+                    <svg fill="none" stroke="var(--info)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                </div>
+                <h3>Sudah Pulang</h3>
+                <div class="value info" id="checkedOutToday">0</div>
+            </div>
+        </div>
+
+        <div class="main-grid">
+            <div class="card">
+                <div class="card-header">
+                    <h2><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg> Pilih Karyawan</h2>
+                    <span class="count" id="employeeCount">0 Karyawan</span>
+                </div>
+                <div class="card-body">
+                    <div class="search-box">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        <input type="text" id="searchInput" placeholder="Cari nama atau HSSE Passport..." oninput="filterEmployees()">
+                    </div>
+                    <div class="filter-row">
+                        <div class="select-wrap">
+                            <select id="categoryFilter" onchange="filterEmployees()">
+                                <option value="">Semua Kategori</option>
+                                <option value="crew marine">Marine</option>
+                                <option value="mitra">Mitra</option>
+                                <option value="project">Project</option>
+                            </select>
+                        </div>
+                        <div class="select-wrap">
+                            <select id="subcontractorFilter" onchange="filterEmployees()">
+                                <option value="">Semua Perusahaan</option>
+                            </select>
+                        </div>
+                        <div class="select-wrap">
+                            <select id="statusFilter" onchange="filterEmployees()">
+                                <option value="">Semua Status</option>
+                                <option value="true">Tugas</option>
+                                <option value="false">Libur</option>
+                            </select>
+                        </div>
+                        <button class="btn-reset" id="btnReset" onclick="resetFilters()" title="Reset Filter">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                        </button>
+                    </div>
+                    <div class="employee-list" id="employeeList"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Panel Absensi</h2>
+                </div>
+                <div class="card-body">
+                    <div class="attendance-content">
+                        <div class="empty-state" id="emptyState">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                            <p>Pilih karyawan di sebelah kiri<br>untuk memulai absensi</p>
+                        </div>
+                        <div id="attendanceContent" style="display: none; height: 100%; display: flex; flex-direction: column;">
+                            <div class="profile-section">
+                                <div class="avatar" id="profileAvatar">--</div>
+                                <div style="flex: 1; min-width: 0;">
+                                    <h3 id="profileName">--</h3>
+                                    <p id="profileDetails">--</p>
+                                    <div id="profileExtraInfo"></div>
+                                </div>
+                            </div>
+                            <div class="time-display">
+                                <div class="label">Waktu Sekarang</div>
+                                <div class="time" id="currentTimeAttendance">--:--:--</div>
+                            </div>
+                            <div class="today-stats">
+                                <div class="stat-box">
+                                    <div class="label">JAM MASUK</div>
+                                    <div class="value" id="checkInTime">--:--</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="label">JAM KELUAR</div>
+                                    <div class="value" id="checkOutTime">--:--</div>
+                                </div>
+                            </div>
+                            <div class="action-buttons">
+                                <button class="btn btn-checkin" id="btnCheckIn" onclick="initiateCheckIn()">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
+                                    Absen Masuk
+                                </button>
+                                <button class="btn btn-checkout" id="btnCheckOut" onclick="initiateCheckOut()">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                                    Absen Keluar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="pinModal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="icon-wrap"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg></div>
+                <h3>Masukkan PIN</h3>
+            </div>
+            <div class="modal-body">
+                <div class="employee-label" id="modalActionLabel">Absen</div>
+                <div class="employee-name" id="modalEmployeeName">--</div>
+                <div class="pin-inputs">
+                    <input type="text" inputmode="numeric" maxlength="1" id="pin1" oninput="handlePinInput(1)" onkeydown="handlePinKeydown(1, event)">
+                    <input type="text" inputmode="numeric" maxlength="1" id="pin2" oninput="handlePinInput(2)" onkeydown="handlePinKeydown(2, event)">
+                    <input type="text" inputmode="numeric" maxlength="1" id="pin3" oninput="handlePinInput(3)" onkeydown="handlePinKeydown(3, event)">
+                    <input type="text" inputmode="numeric" maxlength="1" id="pin4" oninput="handlePinInput(4)" onkeydown="handlePinKeydown(4, event)">
+                </div>
+                <div class="pin-error" id="pinError"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg><span id="pinErrorText">PIN salah.</span></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-modal btn-cancel" onclick="closePinModal()">Batal</button>
+                <button class="btn-modal btn-confirm" id="btnConfirmPin" onclick="submitPin()">Konfirmasi</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        const API_BASE = 'http://localhost:3000/api/v1';
+        let employees = [];
+        let selectedEmployee = null;
+        let todayAttendance = null;
+        let currentAction = null;
+        let pinInputs = ['', '', '', ''];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateTime();
+            setInterval(updateTime, 1000);
+            loadSubcontractors();
+            loadEmployees();
+            loadAttendanceList();
+            fetchStats();
+        });
+
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            const dateString = now.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            
+            document.getElementById('currentTime').textContent = timeString;
+            document.getElementById('currentDate').textContent = dateString;
+            const attTime = document.getElementById('currentTimeAttendance');
+            if (attTime) attTime.textContent = timeString;
+        }
+
+        async function loadSubcontractors() {
+            try {
+                const response = await fetch(`${API_BASE}/contractors`);
+                const result = await response.json();
+                if (result.success && result.data) {
+                    const select = document.getElementById('subcontractorFilter');
+                    result.data.forEach(sub => {
+                        const option = document.createElement('option');
+                        option.value = sub.id;
+                        option.textContent = sub.name;
+                        select.appendChild(option);
+                    });
+                }
+            } catch (error) { console.error('Error loading subcontractors:', error); }
+        }
+
+        async function loadEmployees() {
+            try {
+                const response = await fetch(`${API_BASE}/employee/list`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ limit: 1000, page: 0, showDetails: false })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    employees = result.data;
+                    renderEmployeeList(employees);
+                }
+            } catch (error) { console.error('Error loading employees:', error); }
+        }
+
+        async function loadAttendanceList() {
+            try {
+                const today = new Date().toISOString().slice(0, 10);
+                const response = await fetch(`${API_BASE}/attendance/list`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ date_start: today, date_end: today, limit: 1000 })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    window.attendanceMap = {};
+                    result.data.forEach(record => { window.attendanceMap[record.employeeId] = record; });
+                }
+            } catch (error) { console.error('Error loading attendance:', error); window.attendanceMap = {}; }
+        }
+
+        async function fetchStats() {
+            try {
+                const today = new Date().toISOString().slice(0, 10);
+                const attResponse = await fetch(`${API_BASE}/attendance/list`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ date_start: today, date_end: today, limit: 1000 })
+                });
+                const attResult = await attResponse.json();
+                
+                if (attResult.success && attResult.data) {
+                    const checkedIn = attResult.data.filter(r => r.statusAfter === 'on_duty').length;
+                    const checkedOut = attResult.data.filter(r => r.statusAfter === 'off_duty').length;
+                    document.getElementById('checkedInToday').textContent = checkedIn;
+                    document.getElementById('checkedOutToday').textContent = checkedOut;
+                }
+                
+                const empResponse = await fetch(`${API_BASE}/employee/list`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ limit: 1 })
+                });
+                const empResult = await empResponse.json();
+                document.getElementById('totalEmployees').textContent = empResult.meta?.total || 0;
+            } catch (error) { console.error('Error fetching stats:', error); }
+        }
+
+        function filterByStat(type) {
+            const searchInput = document.getElementById('searchInput');
+            resetFilters();
+            if (type === 'checkedin') searchInput.value = 'Sudah Masuk';
+            else if (type === 'checkedout') searchInput.value = 'Sudah Pulang';
+            filterEmployees();
+        }
+
+        function getCategoryLabel(category) {
+            if (!category) return '';
+            const cat = category.toLowerCase();
+            if (cat.includes('marine')) return 'Marine';
+            if (cat === 'mitra') return 'Mitra';
+            if (cat === 'project') return 'Project';
+            return category;
+        }
+
+        function getCategoryInfo(emp) {
+            let info = `<div class="meta">`;
+            if (emp.subContractorName) info += `<span style="display: flex; align-items: center; gap: 4px;"><span style="font-size: 14px; opacity: 0.8;">🏢</span> ${emp.subContractorName}</span>`;
+            if (emp.category?.toLowerCase().includes('marine') && emp.vesselName) {
+                info += `<span style="display: flex; align-items: center; gap: 4px; color: var(--primary); font-weight: 500;"><span style="font-size: 14px; opacity: 0.8;">🚢</span> ${emp.vesselName}</span>`;
+            } else if (emp.category?.toLowerCase() === 'project' && emp.projectName) {
+                info += `<span style="display: flex; align-items: center; gap: 4px; color: #9333ea; font-weight: 500;"><span style="font-size: 14px; opacity: 0.8;">📁</span> ${emp.projectName}</span>`;
+            }
+            info += `</div>`;
+            return info;
+        }
+
+        function getInitials(name) {
+            if (!name) return '--';
+            return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+        }
+
+        function renderEmployeeList(data) {
+            const list = document.getElementById('employeeList');
+            document.getElementById('employeeCount').textContent = `${data.length} Karyawan`;
+            
+            if (data.length === 0) {
+                list.innerHTML = `<div class="empty-state"><p>Tidak ada karyawan ditemukan</p></div>`;
+                return;
+            }
+
+            list.innerHTML = data.map(emp => {
+                const catClass = emp.category?.toLowerCase().includes('marine') ? 'marine' : (emp.category?.toLowerCase() || '');
+                return `
+                <div class="employee-item ${selectedEmployee?.id === emp.id ? 'selected' : ''}" onclick="selectEmployee('${emp.id}')" id="emp-${emp.id}">
+                    <div class="avatar">${getInitials(emp.employeeName)}</div>
+                    <div class="employee-info">
+                        <h4>${emp.employeeName || 'N/A'} <span class="category-badge ${catClass}">${getCategoryLabel(emp.category)}</span></h4>
+                        <div class="details">📇 ${emp.hssePassportNumber || emp.identityNumber || '-'} • ${emp.position || '-'}</div>
+                        ${getCategoryInfo(emp)}
+                    </div>
+                    <span class="status-badge ${emp.statusOnDuty ? 'status-on-duty' : 'status-off-duty'}">
+                        ${emp.statusOnDuty ? 'ON DUTY' : 'OFF DUTY'}
+                    </span>
+                </div>
+            `}).join('');
+        }
+
+        function filterEmployees() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const category = document.getElementById('categoryFilter').value;
+            const subcontractor = document.getElementById('subcontractorFilter').value;
+            const status = document.getElementById('statusFilter').value;
+            
+            // Show/Hide reset button
+            const hasFilters = search || category || subcontractor || status;
+            document.getElementById('btnReset').classList.toggle('show', hasFilters);
+
+            const filtered = employees.filter(emp => {
+                const matchSearch = !search || 
+                    (emp.employeeName?.toLowerCase().includes(search)) ||
+                    (emp.hssePassportNumber?.toLowerCase().includes(search)) ||
+                    (emp.subContractorName?.toLowerCase().includes(search));
+                
+                const matchCategory = !category || emp.category === category;
+                const matchSubcontractor = !subcontractor || emp.subContractorId === subcontractor;
+                const matchStatus = !status || emp.statusOnDuty === (status === 'true');
+                
+                return matchSearch && matchCategory && matchSubcontractor && matchStatus;
+            });
+            renderEmployeeList(filtered);
+        }
+
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('categoryFilter').value = '';
+            document.getElementById('subcontractorFilter').value = '';
+            document.getElementById('statusFilter').value = '';
+            filterEmployees();
+        }
+
+        function selectEmployee(id) {
+            document.querySelectorAll('.employee-item').forEach(item => item.classList.remove('selected'));
+            const item = document.getElementById(`emp-${id}`);
+            if (item) item.classList.add('selected');
+
+            selectedEmployee = employees.find(emp => emp.id === id);
+            todayAttendance = window.attendanceMap ? window.attendanceMap[id] : null;
+
+            document.getElementById('emptyState').style.display = 'none';
+            document.getElementById('attendanceContent').style.display = 'flex';
+
+            document.getElementById('profileAvatar').textContent = getInitials(selectedEmployee.employeeName);
+            document.getElementById('profileName').textContent = selectedEmployee.employeeName;
+            document.getElementById('profileDetails').textContent = `${selectedEmployee.hssePassportNumber || '-'} • ${selectedEmployee.position || '-'}`;
+            document.getElementById('profileExtraInfo').innerHTML = getCategoryInfo(selectedEmployee);
+
+            document.getElementById('checkInTime').textContent = todayAttendance ? formatTime(todayAttendance.createdAt) : '--:--';
+            document.getElementById('checkOutTime').textContent = (todayAttendance && todayAttendance.statusAfter === 'off_duty') ? formatTime(todayAttendance.createdAt) : '--:--';
+
+            updateButtons();
+        }
+
+        function updateButtons() {
+            const btnIn = document.getElementById('btnCheckIn');
+            const btnOut = document.getElementById('btnCheckOut');
+            const hasIn = todayAttendance && todayAttendance.statusAfter === 'on_duty';
+            const hasOut = todayAttendance && todayAttendance.statusAfter === 'off_duty';
+
+            btnIn.style.display = (!hasIn && !hasOut) ? 'flex' : 'none';
+            btnOut.style.display = (hasIn && !hasOut) ? 'flex' : 'none';
+        }
+
+        function initiateCheckIn() { currentAction = 'check-in'; openPinModal(); }
+        function initiateCheckOut() { currentAction = 'check-out'; openPinModal(); }
+
+        function openPinModal() {
+            document.getElementById('modalActionLabel').innerHTML = `<span class="category-badge ${currentAction === 'check-in' ? 'mitra' : 'project'}">${currentAction === 'check-in' ? 'Absen Masuk' : 'Absen Keluar'}</span>`;
+            document.getElementById('modalEmployeeName').textContent = selectedEmployee.employeeName;
+            document.getElementById('pinModal').classList.add('active');
+            document.getElementById('pinError').style.display = 'none';
+            pinInputs = ['', '', '', ''];
+            for (let i = 1; i <= 4; i++) document.getElementById(`pin${i}`).value = '';
+            setTimeout(() => document.getElementById('pin1').focus(), 100);
+        }
+
+        function closePinModal() { document.getElementById('pinModal').classList.remove('active'); }
+
+        function handlePinInput(index) {
+            const input = document.getElementById(`pin${index}`);
+            const val = input.value.replace(/\D/g, '');
+            input.value = val;
+            pinInputs[index - 1] = val;
+            if (val && index < 4) document.getElementById(`pin${index + 1}`).focus();
+        }
+
+        function handlePinKeydown(index, event) {
+            if (event.key === 'Backspace' && !pinInputs[index - 1] && index > 1) document.getElementById(`pin${index - 1}`).focus();
+        }
+
+        async function submitPin() {
+            const pin = pinInputs.join('');
+            if (pin.length !== 4) return;
+
+            const btn = document.getElementById('btnConfirmPin');
+            btn.innerHTML = '<span class="loading-spinner"></span>';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch(`${API_BASE}/attendance/update`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ employeeId: selectedEmployee.id, pin: pin, status: currentAction === 'check-in' ? 'on_duty' : 'off_duty' })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    closePinModal();
+                    showToast('Berhasil!', 'success');
+                    await loadAttendanceList();
+                    await fetchStats();
+                    selectEmployee(selectedEmployee.id);
+                } else {
+                    document.getElementById('pinError').style.display = 'flex';
+                    pinInputs = ['', '', '', ''];
+                    for (let i = 1; i <= 4; i++) document.getElementById(`pin${i}`).value = '';
+                    document.getElementById('pin1').focus();
+                }
+            } catch (error) { showToast('Gagal terhubung ke server', 'error'); }
+            finally { btn.innerHTML = 'Konfirmasi'; btn.disabled = false; }
+        }
+
+        function showToast(msg, type) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.className = `toast toast-${type} show`;
+            setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        function formatTime(iso) {
+            if (!iso) return '--:--';
+            return new Date(iso).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        window.onclick = (e) => { if (e.target === document.getElementById('pinModal')) closePinModal(); };
+    </script>
+</body>
+</html>

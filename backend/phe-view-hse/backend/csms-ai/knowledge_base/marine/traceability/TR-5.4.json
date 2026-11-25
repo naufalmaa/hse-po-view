@@ -1,0 +1,29 @@
+{
+  "category_id": "5.4",
+  "source": {
+    "sheet": "csms",
+    "file": "MARINE-kriteria_penilaian_CSMS_for_AI_rules_v4_rev.xlsx",
+    "row": 21,
+    "columns_extracted": [
+      "element_category",
+      "element",
+      "required_document",
+      "document_format",
+      "evaluation_criteria",
+      "mandatory_fields",
+      "score_0",
+      "score_3",
+      "score_6",
+      "score_10",
+      "status_accept",
+      "status_reject",
+      "status_revision",
+      "validation_method",
+      "ai_checkpoint_keywords",
+      "document_expiry_check",
+      "ai_confidence_threshold",
+      "ai_reasoning_hint",
+      "notes"
+    ]
+  }
+}

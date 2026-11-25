@@ -1,0 +1,37 @@
+{
+  "requirement_id": "DR-3.3",
+  "category_id": "3.3",
+  "required_documents": [
+    "- Prosedur Pelatihan K3LL / Rencana Pelatihan Umum: Mengatur mekanisme",
+    "frekuensi",
+    "identifikasi kebutuhan",
+    "dan jenis pelatihan non-formal/informal.<br>- Prosedur Pelatihan Teknis / Kompetensi Pekerja: Mengatur mekanisme peningkatan keterampilan teknis dan keselamatan kerja terkait kompetensi.<br>- Matriks Kebutuhan Pelatihan (TNA) non-formal Pekerja Kantor: Memuat nama pekerja",
+    "jabatan",
+    "jenis pelatihan K3LL non-formal",
+    "jadwal/target",
+    "status realisasi",
+    "dan % compliance.<br>- Matriks Kebutuhan Pelatihan (TNA) non-formal Pekerja Lapangan/Operasional: Memuat nama pekerja",
+    "jabatan",
+    "jenis pelatihan K3LL non-formal",
+    "jadwal/target",
+    "status realisasi",
+    "dan % compliance.<br>- Bukti Pelaksanaan Pelatihan Non-Formal per Sesi: Mencakup lembar daftar hadir/absensi bertandatangan",
+    "materi sosialisasi/materi briefing",
+    "dan foto dokumentasi pelaksanaan.<br>- Sertifikat Pelatihan K3LL Non-Formal/Informal: E-certificate in-house training",
+    "bukti penyelesaian modul e-learning",
+    "atau bukti kelulusan kelas pelatihan internal.<br>- Bukti Pelaksanaan Pelatihan K3LL Tambahan di luar TNA: Absensi",
+    "materi",
+    "foto",
+    "atau sertifikat untuk pelatihan tambahan non-rutin/campaign khusus (Syarat Skor 10)."
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

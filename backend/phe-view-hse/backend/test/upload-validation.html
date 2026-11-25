@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Validation - Smart Card Observations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="max-w-6xl mx-auto py-8 px-6">
+        <div class="bg-white rounded-lg shadow-lg p-8">
+            <!-- Header -->
+            <div class="border-b border-gray-200 pb-6 mb-8">
+                <h1 class="text-3xl font-bold text-gray-800">Upload Validation Center</h1>
+                <p class="text-gray-600 mt-2">Review and resolve upload errors for Smart Card Observations</p>
+                <div class="mt-4 flex gap-4">
+                    <a href="smart-card-upload-test.html" class="text-blue-600 hover:text-blue-800 underline">← Back to Upload</a>
+                    <button onclick="refreshAllData()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm">
+                        Refresh All Data
+                    </button>
+                </div>
+            </div>
+
+            <!-- Statistics Dashboard -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+                    <div class="text-red-800">
+                        <h3 class="text-lg font-semibold">Error Groups</h3>
+                        <p class="text-3xl font-bold mt-2" id="errorGroupsCount">-</p>
+                        <p class="text-sm text-red-600 mt-1">Require attention</p>
+                    </div>
+                </div>
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+                    <div class="text-yellow-800">
+                        <h3 class="text-lg font-semibold">Total Error Rows</h3>
+                        <p class="text-3xl font-bold mt-2" id="totalErrorRows">-</p>
+                        <p class="text-sm text-yellow-600 mt-1">Individual errors</p>
+                    </div>
+                </div>
+                <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+                    <div class="text-green-800">
+                        <h3 class="text-lg font-semibold">Active Employees</h3>
+                        <p class="text-3xl font-bold mt-2" id="activeEmployeesCount">-</p>
+                        <p class="text-sm text-green-600 mt-1">In database</p>
+                    </div>
+                </div>
+                <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                    <div class="text-purple-800">
+                        <h3 class="text-lg font-semibold">Without Observations</h3>
+                        <p class="text-3xl font-bold mt-2" id="withoutObservationsCount">-</p>
+                        <p class="text-sm text-purple-600 mt-1">Need to fill</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error Groups Section -->
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-semibold text-gray-800">Error Groups</h2>
+                    <div class="flex gap-2">
+                        <button onclick="loadErrors()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm">
+                            Refresh Errors
+                        </button>
+                        <button onclick="bulkResolveAll()" class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded text-sm">
+                            Auto-Resolve All
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Filter Controls -->
+                <div class="bg-white rounded-lg p-4 mb-6 border border-gray-200">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Filter by Error Type:</label>
+                            <select id="errorTypeFilter" onchange="filterErrors()" class="w-full p-2 border border-gray-300 rounded focus:border-blue-500 focus:outline-none">
+                                <option value="">All Types</option>
+                                <option value="Employee Not Found">Employee Not Found</option>
+                                <option value="Validation Error">Validation Error</option>
+                                <option value="Insert Error">Insert Error</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Search Employee Name:</label>
+                            <input type="text" id="employeeNameSearch" onkeyup="filterErrors()" placeholder="Type employee name..." 
+                                   class="w-full p-2 border border-gray-300 rounded focus:border-blue-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Search Company:</label>
+                            <input type="text" id="companyNameSearch" onkeyup="filterErrors()" placeholder="Type company name..." 
+                                   class="w-full p-2 border border-gray-300 rounded focus:border-blue-500 focus:outline-none">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="errorsResult">
+                    <div class="text-center text-gray-500 py-8">Loading errors...</div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://127.0.0.1:3000/api/public';
+        let allErrors = [];
+        let filteredErrors = [];
+        let currentUploadId = null;
+        
+        // Get uploadId from URL parameters
+        function getUploadIdFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('uploadId');
+        }
+        
+        // Load all data on page load
+        window.addEventListener('load', () => {
+            currentUploadId = getUploadIdFromURL();
+            if (currentUploadId) {
+                updateHeaderForSpecificUpload();
+            }
+            refreshAllData();
+        });
+        
+        function updateHeaderForSpecificUpload() {
+            const headerTitle = document.querySelector('h1');
+            const headerDescription = document.querySelector('h1 + p');
+            
+            headerTitle.textContent = 'Upload Validation - Specific Upload';
+            headerDescription.innerHTML = `Review and resolve errors for Upload ID: <strong>${currentUploadId}</strong> 
+                <a href="upload-validation.html" class="ml-2 text-blue-600 hover:text-blue-800 text-sm underline">View All Errors</a>`;
+        }
+        
+        async function refreshAllData() {
+            showLoading();
+            await Promise.all([
+                loadErrors(),
+                loadStatistics()
+            ]);
+        }
+        
+        async function loadErrors() {
+            try {
+                let url = `${API_BASE}/upload-observations/errors`;
+                
+                // Add uploadId filter if present
+                if (currentUploadId) {
+                    url += `?uploadId=${currentUploadId}`;
+                }
+                
+                const response = await fetch(url);
+                const result = await response.json();
+                
+                if (result.success) {
+                    allErrors = result.data;
+                    filteredErrors = [...allErrors];
+                    updateErrorCounts();
+                    displayErrors(filteredErrors);
+                } else {
+                    showError('errorsResult', `Failed to load errors: ${result.error}`);
+                }
+            } catch (error) {
+                console.error('Load errors error:', error);
+                showError('errorsResult', `Failed to load errors: ${error.message}`);
+            }
+        }
+        
+        async function loadStatistics() {
+            try {
+                const response = await fetch(`${API_BASE}/observation-statistics`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    document.getElementById('activeEmployeesCount').textContent = result.data.totalActiveEmployees;
+                    document.getElementById('withoutObservationsCount').textContent = result.data.employeesWithoutObservations;
+                }
+            } catch (error) {
+                console.error('Load statistics error:', error);
+            }
+        }
+        
+        function updateErrorCounts() {
+            document.getElementById('errorGroupsCount').textContent = allErrors.length;
+            const totalRows = allErrors.reduce((sum, group) => sum + group.count, 0);
+            document.getElementById('totalErrorRows').textContent = totalRows;
+        }
+        
+        function filterErrors() {
+            const errorTypeFilter = document.getElementById('errorTypeFilter').value;
+            const employeeNameSearch = document.getElementById('employeeNameSearch').value.toLowerCase();
+            const companyNameSearch = document.getElementById('companyNameSearch').value.toLowerCase();
+            
+            filteredErrors = allErrors.filter(errorGroup => {
+                const matchesType = !errorTypeFilter || errorGroup.errorType === errorTypeFilter;
+                const matchesEmployee = !employeeNameSearch || errorGroup.employeeName.toLowerCase().includes(employeeNameSearch);
+                const matchesCompany = !companyNameSearch || errorGroup.companyName.toLowerCase().includes(companyNameSearch);
+                
+                return matchesType && matchesEmployee && matchesCompany;
+            });
+            
+            displayErrors(filteredErrors);
+        }
+        
+        function displayErrors(errors) {
+            const container = document.getElementById('errorsResult');
+            
+            if (errors.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12">
+                        <div class="text-green-600 text-lg font-semibold mb-2">🎉 No errors found!</div>
+                        <div class="text-gray-500">All uploads have been processed successfully or no filters match.</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = `
+                <div class="mb-4 text-sm text-gray-600">
+                    Showing ${errors.length} error groups (${errors.reduce((sum, g) => sum + g.count, 0)} total error rows)
+                </div>
+            `;
+            
+            errors.forEach((errorGroup, index) => {
+                html += `
+                    <div class="bg-white border border-gray-200 rounded-lg p-6 mb-4 shadow-sm">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex-1">
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+                                    <div>
+                                        <span class="font-medium text-gray-700">Employee:</span>
+                                        <div class="text-gray-900 font-semibold">${errorGroup.employeeName || 'N/A'}</div>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium text-gray-700">Company:</span>
+                                        <div class="text-gray-900">${errorGroup.companyName || 'N/A'}</div>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium text-gray-700">Error Count:</span>
+                                        <div class="text-red-600 font-bold">${errorGroup.count} rows</div>
+                                    </div>
+                                    <div>
+                                        <span class="font-medium text-gray-700">Error Type:</span>
+                                        <div class="text-red-600">${errorGroup.errorType}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ml-4 flex gap-2">
+                                <button onclick="toggleErrorDetails(${index})" 
+                                        class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1 rounded text-xs">
+                                    Details
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div id="errorDetails_${index}" class="hidden mb-4 p-4 bg-gray-50 rounded border">
+                            <div class="text-sm">
+                                <strong>Sample Row Data:</strong>
+                                <pre class="mt-2 text-xs bg-white p-2 rounded border overflow-x-auto">${JSON.stringify(errorGroup.sampleRow, null, 2)}</pre>
+                            </div>
+                        </div>
+                        
+                        ${errorGroup.suggestions && errorGroup.suggestions.length > 0 ? `
+                            <div class="mb-4">
+                                <div class="text-sm font-medium text-gray-700 mb-2">Employee Suggestions:</div>
+                                <div class="text-xs text-gray-600 mb-2">Click to process all ${errorGroup.count} rows with selected employee. Duplicates will be automatically removed.</div>
+                                <div class="flex flex-wrap gap-2">
+                                    ${errorGroup.suggestions.map(suggestion => `
+                                        <button onclick="reprocessGroupWithEmployee('${errorGroup.id}', '${suggestion.id}')" 
+                                                class="bg-blue-100 hover:bg-blue-200 text-blue-800 px-3 py-2 rounded text-sm border border-blue-300 transition-colors">
+                                            ${suggestion.employeeName} @ ${suggestion.companyName}
+                                            <span class="text-blue-600 font-semibold">(${Math.round(suggestion.similarity * 100)}%)</span>
+                                        </button>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                        
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="reprocessGroup('${errorGroup.id}')" 
+                                    class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded text-sm font-medium transition-colors">
+                                Auto-Resolve All (${errorGroup.count} rows)
+                            </button>
+                            <button onclick="searchEmployeeForGroup('${errorGroup.employeeName}', '${errorGroup.companyName}')" 
+                                    class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded text-sm font-medium transition-colors">
+                                Search Employee
+                            </button>
+                            <button onclick="deleteErrorGroup('${errorGroup.id}')" 
+                                    class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded text-sm font-medium transition-colors">
+                                Delete Group
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        function toggleErrorDetails(index) {
+            const detailsDiv = document.getElementById(`errorDetails_${index}`);
+            detailsDiv.classList.toggle('hidden');
+        }
+        
+        async function reprocessGroup(groupId) {
+            if (!confirm('Auto-resolve all rows in this group?')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}/upload-observations/reprocess-group/${groupId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({})
+                });
+                
+                const result = await response.json();
+                showNotification(result.success ? 'success' : 'error', result.message || result.error);
+                
+                if (result.success) {
+                    setTimeout(() => refreshAllData(), 1000);
+                }
+            } catch (error) {
+                showNotification('error', `Failed to reprocess group: ${error.message}`);
+            }
+        }
+        
+        async function reprocessGroupWithEmployee(groupId, employeeId) {
+            if (!confirm('Process all rows in this group with the selected employee?')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}/upload-observations/reprocess-group/${groupId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ employeeId })
+                });
+                
+                const result = await response.json();
+                showNotification(result.success ? 'success' : 'error', result.message || result.error);
+                
+                if (result.success) {
+                    setTimeout(() => refreshAllData(), 1000);
+                }
+            } catch (error) {
+                showNotification('error', `Failed to reprocess group: ${error.message}`);
+            }
+        }
+        
+        async function bulkResolveAll() {
+            if (!confirm('Auto-resolve ALL error groups? This may take some time.')) {
+                return;
+            }
+            
+            showNotification('info', 'Processing all error groups...');
+            
+            for (const errorGroup of allErrors) {
+                try {
+                    await reprocessGroup(errorGroup.id);
+                    await new Promise(resolve => setTimeout(resolve, 100)); // Small delay between requests
+                } catch (error) {
+                    console.error(`Failed to process group ${errorGroup.id}:`, error);
+                }
+            }
+            
+            setTimeout(() => refreshAllData(), 2000);
+        }
+        
+        async function resolveByErrorType(errorType) {
+            const matchingGroups = allErrors.filter(group => group.errorType === errorType);
+            
+            if (matchingGroups.length === 0) {
+                showNotification('info', `No groups found with error type: ${errorType}`);
+                return;
+            }
+            
+            if (!confirm(`Auto-resolve ${matchingGroups.length} groups with error type "${errorType}"?`)) {
+                return;
+            }
+            
+            showNotification('info', `Processing ${matchingGroups.length} groups...`);
+            
+            for (const group of matchingGroups) {
+                try {
+                    await reprocessGroup(group.id);
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                } catch (error) {
+                    console.error(`Failed to process group ${group.id}:`, error);
+                }
+            }
+            
+            setTimeout(() => refreshAllData(), 2000);
+        }
+        
+        async function searchEmployee() {
+            const name = document.getElementById('employeeLookupName').value.trim();
+            const company = document.getElementById('employeeLookupCompany').value.trim();
+            
+            if (!name) {
+                showError('employeeLookupResult', 'Please enter an employee name');
+                return;
+            }
+            
+            // This would require a new API endpoint for employee search
+            // For now, we'll show a placeholder
+            document.getElementById('employeeLookupResult').innerHTML = `
+                <div class="text-gray-600">
+                    <strong>Search Query:</strong><br>
+                    Name: ${name}<br>
+                    ${company ? `Company: ${company}<br>` : ''}
+                    <div class="mt-2 text-xs bg-yellow-50 p-2 rounded border border-yellow-200">
+                        Note: Employee search API endpoint needs to be implemented for full functionality.
+                    </div>
+                </div>
+            `;
+        }
+        
+        function searchEmployeeForGroup(employeeName, companyName) {
+            document.getElementById('employeeLookupName').value = employeeName || '';
+            document.getElementById('employeeLookupCompany').value = companyName || '';
+            searchEmployee();
+            
+            // Scroll to the lookup section
+            document.querySelector('.bg-gray-50:last-child').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        async function deleteErrorGroup(groupId) {
+            if (!confirm('Permanently delete this error group? This action cannot be undone.')) {
+                return;
+            }
+            
+            // This would require a new API endpoint for deleting error groups
+            showNotification('info', 'Delete functionality needs to be implemented');
+        }
+        
+        async function clearAllResolvedErrors() {
+            if (!confirm('Clear all resolved errors from the database? This will permanently remove resolved error records.')) {
+                return;
+            }
+            
+            // This would require a new API endpoint for clearing resolved errors
+            showNotification('info', 'Clear resolved errors functionality needs to be implemented');
+        }
+        
+        async function checkEmployeesWithoutObservations() {
+            window.open('smart-card-upload-test.html#employees', '_blank');
+        }
+        
+        function exportErrorsToCSV() {
+            if (filteredErrors.length === 0) {
+                showNotification('error', 'No errors to export');
+                return;
+            }
+            
+            const headers = ['Employee Name', 'Company Name', 'Error Type', 'Error Count', 'Created At'];
+            const csvContent = [headers.join(',')];
+            
+            filteredErrors.forEach(errorGroup => {
+                const row = [
+                    `"${errorGroup.employeeName || 'N/A'}"`,
+                    `"${errorGroup.companyName || 'N/A'}"`,
+                    `"${errorGroup.errorType}"`,
+                    errorGroup.count,
+                    `"${new Date(errorGroup.createdAt).toISOString()}"`
+                ];
+                csvContent.push(row.join(','));
+            });
+            
+            const csvString = csvContent.join('\n');
+            const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            
+            if (link.download !== undefined) {
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', `upload-errors-${new Date().toISOString().split('T')[0]}.csv`);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+            
+            showNotification('success', 'Errors exported to CSV successfully');
+        }
+        
+        function showLoading() {
+            document.getElementById('errorsResult').innerHTML = `
+                <div class="text-center py-12">
+                    <div class="text-blue-600 text-lg font-semibold mb-2">Loading...</div>
+                    <div class="text-gray-500">Refreshing error data and statistics</div>
+                </div>
+            `;
+        }
+        
+        function showError(elementId, message) {
+            document.getElementById(elementId).innerHTML = `
+                <div class="bg-red-50 border border-red-200 rounded-lg p-4 text-red-800">
+                    <strong>Error:</strong> ${message}
+                </div>
+            `;
+        }
+        
+        function showNotification(type, message) {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg max-w-sm ${
+                type === 'success' ? 'bg-green-100 border border-green-400 text-green-700' :
+                type === 'error' ? 'bg-red-100 border border-red-400 text-red-700' :
+                'bg-blue-100 border border-blue-400 text-blue-700'
+            }`;
+            notification.innerHTML = `
+                <div class="flex justify-between items-start">
+                    <div class="flex-1">${message}</div>
+                    <button onclick="this.parentElement.parentElement.remove()" class="ml-2 text-gray-400 hover:text-gray-600">×</button>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

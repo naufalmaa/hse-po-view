@@ -1,0 +1,36 @@
+{
+  "requirement_id": "DR-3.1",
+  "category_id": "3.1",
+  "required_documents": [
+    "- Bagan Struktur Organisasi Proyek (bagan resmi",
+    "disahkan Direksi/Pimpinan Tertinggi Kontraktor",
+    "mencantumkan nama",
+    "jabatan",
+    "posisi HSE/K3LL",
+    "dan alur pelaporan)<br>- Bagan Struktur Organisasi Perusahaan Induk (Corporate Organigram) resmi disetujui<br>- Dokumen Roles & Responsibility (R&R) tertulis untuk seluruh tingkatan:<br>  1. Top Management (mencantumkan tanggung jawab K3LL eksplisit",
+    "komitmen kebijakan",
+    "dan wewenang alokasi sumber daya)<br>  2. Management/Project Management (mencantumkan fungsi pengawasan",
+    "SWA - Stop Work Authority",
+    "dan pelaksanaan program K3LL)<br>  3. Pekerja Kantor/Staff Support (mencantumkan kepatuhan prosedur dan pelaporan bahaya)<br>  4. Crew Lapangan/Supervisor Teknis (mencantumkan tanggung jawab keselamatan tim",
+    "penggunaan APD",
+    "tanggap darurat",
+    "dan Master Overriding Authority khusus operasi maritim)<br>- Data Karyawan Proyek (Project Employee Roster) lengkap (nama",
+    "jabatan",
+    "status kepegawaian)<br>- Sertifikat Kompetensi K3LL yang masih aktif dan valid milik Penanggung Jawab HSE (seperti AK3 Umum Kemnaker RI",
+    "K3LL SKK Migas",
+    "atau sertifikasi DPA/Designated Person Ashore untuk maritim)<br>- Sertifikat Kompetensi K3LL untuk para Supervisor/Penyelia Lapangan (seperti AK3U",
+    "Basic Safety Training",
+    "Marine Surveyor",
+    "atau setara) untuk pengawasan operasional aman (Syarat Skor 10)"
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

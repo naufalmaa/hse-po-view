@@ -1,0 +1,34 @@
+{
+  "requirement_id": "DR-3.5",
+  "category_id": "3.5",
+  "required_documents": [
+    "1. Prosedur Manajemen Kontraktor/Subkontraktor Tertulis (mencakup kriteria K3LL dalam proses seleksi",
+    "pengawasan",
+    "evaluasi berkala",
+    "dan penanganan kinerja substandar).<br>2. Listing Kontrak Aktif: Tabel pelacak yang memuat informasi minimal: Judul Kontrak",
+    "Nomor Kontrak",
+    "Masa Berlaku",
+    "Nama Kontraktor/Subkontraktor",
+    "dan Jadwal serta Realisasi Siklus CSMS (Penilaian Kualifikasi/Awal [PK]",
+    "Penilaian Berjalan [PB]",
+    "dan Penilaian Akhir [PA]).<br>3. Dokumen Siklus CSMS Lengkap (jika menggunakan subkontraktor):<br>   - Bukti Evaluasi Kualifikasi/Awal (PK): Form penilaian kinerja K3LL pra-kontrak.<br>   - Bukti Evaluasi Berjalan (PB): Form laporan penilaian kinerja K3LL periodik selama masa kontrak.<br>   - Bukti Evaluasi Akhir (PA): Form penilaian kinerja K3LL akhir setelah masa kontrak selesai.<br>4. Surat Pernyataan Bebas Subkontraktor (jika tidak menggunakan subkontraktor): Surat resmi yang disahkan oleh Manajemen Puncak (Direktur Utama/Direktur) di atas meterai yang sah",
+    "menyatakan komitmen pengerjaan proyek 100% menggunakan sumber daya internal tanpa melibatkan pihak ketiga.<br>5. Bukti Otorisasi & Validitas CSMS: Tanda tangan lengkap dari pihak penilai",
+    "pemeriksa",
+    "dan perwakilan mitra kerja pada setiap dokumen evaluasi.<br>6. Bukti Komunikasi Standar K3LL kepada Subkontraktor: Notulen",
+    "absensi kehadiran",
+    "email",
+    "atau materi sosialisasi standar K3LL/kebijakan K3LL kepada subkontraktor.<br>7. Bukti Tindak Lanjut Kinerja: Laporan pemantauan",
+    "umpan balik kinerja",
+    "atau rencana tindakan perbaikan (action plan) jika terdapat subkontraktor yang kinerjanya di bawah standar."
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

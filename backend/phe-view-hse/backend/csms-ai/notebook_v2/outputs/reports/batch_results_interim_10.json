@@ -1,0 +1,285 @@
+{
+  "timestamp": "2026-08-05T15:15:00.957647",
+  "results": [
+    {
+      "category_id": "1",
+      "category_name": "1 Kepemimpinan dan Komitmen",
+      "expected": 10,
+      "original": {
+        "predicted": 0,
+        "confidence": 0.95,
+        "comp_score": 0,
+        "ev_score": 0,
+        "hse_score": 3,
+        "time": 677.97,
+        "docs": 30
+      },
+      "original_correct": 0,
+      "enhanced_large": {
+        "predicted": 0,
+        "confidence": 0.95,
+        "comp_score": 0,
+        "ev_score": 0,
+        "hse_score": 3,
+        "time": 649.47,
+        "docs": 30,
+        "chunks": 379,
+        "relevant_chunks": 15,
+        "embedding_model": "text-embedding-3-large"
+      },
+      "enhanced_large_correct": 0
+    },
+    {
+      "category_id": "2",
+      "category_name": "2 Kebijakan dan Sasaran Strategis K3LL",
+      "expected": 10,
+      "original": {
+        "predicted": 3,
+        "confidence": 0.9,
+        "comp_score": 0,
+        "ev_score": 3,
+        "hse_score": 3,
+        "time": 322.33,
+        "docs": 17
+      },
+      "original_correct": 0,
+      "enhanced_large": {
+        "predicted": 3,
+        "confidence": 0.85,
+        "comp_score": 3,
+        "ev_score": 3,
+        "hse_score": 3,
+        "time": 344.18,
+        "docs": 17,
+        "chunks": 722,
+        "relevant_chunks": 15,
+        "embedding_model": "text-embedding-3-large"
+      },
+      "enhanced_large_correct": 0
+    },
+    {
+      "category_id": "3.1",
+      "category_name": "3.1 Struktur Organisasi untuk Pengelolaan K3LL",
+      "expected": 10,
+      "original": {
+        "predicted": 3,
+        "confidence": 0.95,
+        "comp_score": 0,
+        "ev_score": 3,
+        "hse_score": 3,
+        "time": 268.54,
+        "docs": 8
+      },
+      "original_correct": 0,
+      "enhanced_large": {
+        "predicted": 0,
+        "confidence": 0.95,
+        "comp_score": 0,
+        "ev_score": 0,
+        "hse_score": 0,
+        "time": 260.45,
+        "docs": 8,
+        "chunks": 344,
+        "relevant_chunks": 15,
+        "embedding_model": "text-embedding-3-large"
+      },
+      "enhanced_large_correct": 0
+    },
+    {
+      "category_id": "3.2",
+      "category_name": "3.2 Pelatihan K3LL untuk para Manajer, pengawas (supervisor) dan pemegang jabatan penting K3LL",
+      "expected": 10,
+      "original": {
+        "predicted": 3,
+        "confidence": 0.85,
+        "comp_score": 3,
+        "ev_score": 3,
+        "hse_score": 3,
+        "time": 194.42,
+        "docs": 9
+      },
+      "original_correct": 0,
+      "enhanced_large": {
+        "predicted": 0,
+        "confidence": 0.95,
+        "comp_score": 0,
+        "ev_score": 0,
+        "hse_score": 3,
+        "time": 195.58,
+        "docs": 9,
+        "chunks": 108,
+        "relevant_chunks": 15,
+        "embedding_model": "text-embedding-3-large"
+      },
+      "enhanced_large_correct": 0
+    },
+    {
+      "category_id": "3.3",
+      "category_name": "3.3 Pelatihan K3LL Umum (pada seluruh pekerja dan pihak yang terkait)",
+      "expected": 10,
+      "original": {
+        "predicted": 0,
+        "confidence": 1.0,
+        "comp_score": 0,
+        "ev_score": 0,
+        "hse_score": 0,
+        "time": 67.59,
+        "docs": 4
+      },
+      "original_correct": 0,
+      "enhanced_large": {
+        "predicted": 0,
+        "confidence": 1.0,
+        "comp_score": 0,
+        "ev_score": 0,
+        "hse_score": 0,
+        "time": 67.92,
+        "docs": 4,
+        "chunks": 56,
+        "relevant_chunks": 15,
+        "embedding_model": "text-embedding-3-large"
+      },
+      "enhanced_large_correct": 0
+    },
+    {
+      "category_id": "3.4",
+      "category_name": "3.4 Pemenuhan Kompetensi Teknis dan K3LL",
+      "expected": 10,
+      "original": {
+        "predicted": 0,
+        "confidence": 0.95,
+        "comp_score": 0,
+        "ev_score": 0,
+        "hse_score": 3,
+        "time": 280.8,
+        "docs": 9
+      },
+      "original_correct": 0,
+      "enhanced_large": {
+        "predicted": 0,
+        "confidence": 0.95,
+        "comp_score": 0,
+        "ev_score": 0,
+        "hse_score": 0,
+        "time": 298.45,
+        "docs": 9,
+        "chunks": 511,
+        "relevant_chunks": 15,
+        "embedding_model": "text-embedding-3-large"
+      },
+      "enhanced_large_correct": 0
+    },
+    {
+      "category_id": "3.5",
+      "category_name": "3.5 Pengelolaan K3LL kontraktor (Mitra Kerja)",
+      "expected": 10,
+      "original": {
+        "predicted": 0,
+        "confidence": 0.95,
+        "comp_score": 0,
+        "ev_score": 0,
+        "hse_score": 3,
+        "time": 96.24,
+        "docs": 4
+      },
+      "original_correct": 0,
+      "enhanced_large": {
+        "predicted": 0,
+        "confidence": 0.95,
+        "comp_score": 0,
+        "ev_score": 0,
+        "hse_score": 3,
+        "time": 107.79,
+        "docs": 4,
+        "chunks": 98,
+        "relevant_chunks": 15,
+        "embedding_model": "text-embedding-3-large"
+      },
+      "enhanced_large_correct": 0
+    },
+    {
+      "category_id": "3.6",
+      "category_name": "3.6 Peraturan dan Standar K3LL",
+      "expected": 10,
+      "original": {
+        "predicted": 3,
+        "confidence": 0.85,
+        "comp_score": 3,
+        "ev_score": 3,
+        "hse_score": 3,
+        "time": 322.54,
+        "docs": 14
+      },
+      "original_correct": 0,
+      "enhanced_large": {
+        "predicted": 3,
+        "confidence": 0.6,
+        "comp_score": 3,
+        "ev_score": 3,
+        "hse_score": 3,
+        "time": 334.45,
+        "docs": 14,
+        "chunks": 883,
+        "relevant_chunks": 15,
+        "embedding_model": "text-embedding-3-large"
+      },
+      "enhanced_large_correct": 0
+    },
+    {
+      "category_id": "4.1",
+      "category_name": "4.1 Penilaian dan Pengendalian Risiko",
+      "expected": 6,
+      "original": {
+        "predicted": 3,
+        "confidence": 0.85,
+        "comp_score": 3,
+        "ev_score": 3,
+        "hse_score": 6,
+        "time": 789.71,
+        "docs": 28
+      },
+      "original_correct": 0,
+      "enhanced_large": {
+        "predicted": 3,
+        "confidence": 0.85,
+        "comp_score": 3,
+        "ev_score": 3,
+        "hse_score": 3,
+        "time": 807.71,
+        "docs": 28,
+        "chunks": 916,
+        "relevant_chunks": 15,
+        "embedding_model": "text-embedding-3-large"
+      },
+      "enhanced_large_correct": 0
+    },
+    {
+      "category_id": "4.2",
+      "category_name": "4.2 Bahaya Terhadap Kesehatan Kerja",
+      "expected": 10,
+      "original": {
+        "predicted": 3,
+        "confidence": 0.85,
+        "comp_score": 3,
+        "ev_score": 3,
+        "hse_score": 3,
+        "time": 1401.34,
+        "docs": 36
+      },
+      "original_correct": 0,
+      "enhanced_large": {
+        "predicted": 3,
+        "confidence": 0.85,
+        "comp_score": 3,
+        "ev_score": 3,
+        "hse_score": 3,
+        "time": 1645.95,
+        "docs": 36,
+        "chunks": 2516,
+        "relevant_chunks": 15,
+        "embedding_model": "text-embedding-3-large"
+      },
+      "enhanced_large_correct": 0
+    }
+  ]
+}

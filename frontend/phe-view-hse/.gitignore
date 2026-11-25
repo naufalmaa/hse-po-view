@@ -1,0 +1,16 @@
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+
+yarn.lock
+.idea
+
+src/routeTree.gen.ts
+backend
+.env
+.tanstack
+.history
+uploads
+bun.lock

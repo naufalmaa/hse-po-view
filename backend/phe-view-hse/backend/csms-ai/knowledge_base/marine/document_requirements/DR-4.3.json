@@ -1,0 +1,36 @@
+{
+  "requirement_id": "DR-4.3",
+  "category_id": "4.3",
+  "required_documents": [
+    "- Dokumen HIRADC / Daftar Risiko Keselamatan Kerja: Mencakup identifikasi bahaya",
+    "penilaian risiko awal",
+    "tindakan pengendalian",
+    "penilaian risiko sisa",
+    "dan penanggung jawab (PIC); yang mencakup tahapan mobilisasi",
+    "operasi",
+    "dan demobilisasi/commissioning.<br>- Bukti Sosialisasi HIRADC: Berkas daftar hadir/absensi crew",
+    "materi sosialisasi (slide/brosur)",
+    "dan foto dokumentasi pelaksanaan.<br>- Prosedur Operasional Keselamatan Kerja (SOP & WI): Untuk seluruh aktivitas kerja utama.<br>- Analisis Keselamatan Pekerjaan (Job Safety Analysis - JSA): Untuk aktivitas kerja yang sedang berjalan",
+    "khususnya pekerjaan berisiko tinggi.<br>- Izin Kerja Aman (Permit To Work - PTW): Dokumen izin kerja untuk pekerjaan berisiko tinggi di area berbahaya kapal/proyek (seperti Hot Work",
+    "Cold Work",
+    "Confined Space",
+    "Working at Height",
+    "dll.).<br>- Bukti Kepatuhan Subkontraktor (jika ada): Minimal 1 lembar bukti komitmen K3LL subkontraktor yang diwakili/disetujui oleh kontraktor utama.<br>- Bukti Pelaksanaan Safety Awareness Berkala: Absensi kehadiran + materi + foto kegiatan (seperti Toolbox Meeting harian",
+    "Safety Briefing",
+    "HSE Class",
+    "dll.).<br>- Bukti Pemantauan Keefektifan Program Keselamatan Kerja: Laporan monitoring keselamatan harian/mingguan/bulanan",
+    "statistik jam kerja aman",
+    "audit",
+    "atau checklist inspeksi keselamatan berkala.E12"
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

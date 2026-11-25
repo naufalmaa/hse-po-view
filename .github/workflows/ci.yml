@@ -1,0 +1,139 @@
+# CI HSE Proview: typecheck, unit test, build, skema database, dan pemindaian kredensial.
+# Penjelasan tiap job: docs/handover/09-PENGEMBANGAN.md
+name: CI
+
+on:
+  push:
+    branches: [main, handover]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  secrets:
+    name: Pindai kredensial (gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: gitleaks detect
+        run: |
+          docker run --rm -v "$PWD:/repo" zricethezav/gitleaks:v8.21.2 \
+            detect --source /repo --config /repo/.gitleaks.toml --redact --verbose
+
+  backend:
+    name: Backend (typecheck + test)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend/phe-view-hse/backend
+    env:
+      PUPPETEER_SKIP_DOWNLOAD: "true"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/phe-view-hse/backend/package-lock.json
+      - run: npm ci
+      - run: npx tsc -p tsconfig.json --noEmit
+      - run: npx tsx --test test/csms-definalize-copy.test.ts
+
+  schema:
+    name: schema.sql sama dengan kode
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:pg17
+        env:
+          POSTGRES_USER: ci
+          POSTGRES_PASSWORD: ci
+          POSTGRES_DB: hse_ci
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U ci -d hse_ci" --health-interval 5s --health-timeout 5s --health-retries 20
+    env:
+      PUPPETEER_SKIP_DOWNLOAD: "true"
+      LOG_LEVEL: info
+      POSTGRES_HOST: 127.0.0.1
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: ci
+      POSTGRES_PASSWORD: ci
+      POSTGRES_DB: hse_ci
+      DATABASE_URL: postgresql://ci:ci@127.0.0.1:5432/hse_ci?sslmode=disable
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/phe-view-hse/backend/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install
+        run: |
+          cd backend/phe-view-hse/backend && npm ci
+          pip install asyncpg python-dotenv openpyxl
+      - name: Sinkronisasi skema backend
+        working-directory: backend/phe-view-hse/backend
+        run: NODE_ENV=development npx tsx src/scripts/dump-schema.ts --ensure-only
+      - name: Tabel milik csms-ai
+        working-directory: backend/phe-view-hse/backend/csms-ai
+        run: python -m server.scripts.ensure_schema
+      - name: Dump skema (pg_dump versi server)
+        working-directory: backend/phe-view-hse/backend
+        run: |
+          printf '#!/bin/sh\nexec docker exec -e PGPASSWORD -i %s pg_dump "$@"\n' "${{ job.services.postgres.id }}" > /tmp/pg_dump
+          chmod +x /tmp/pg_dump
+          PG_DUMP=/tmp/pg_dump POSTGRES_HOST=localhost NODE_ENV=development npx tsx src/scripts/dump-schema.ts --dump-only
+      - name: Bandingkan dengan docs/handover/database/schema.sql
+        run: |
+          git diff --exit-code -- docs/handover/database/schema.sql || {
+            echo "::error::schema.sql berbeda dengan hasil kode. Jalankan 'npm run schema:dump' (lihat docs/handover/05-DATABASE.md) dan commit hasilnya."
+            exit 1
+          }
+
+  csms-ai:
+    name: csms-ai (unit test)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend/phe-view-hse/backend/csms-ai
+    env:
+      DATABASE_URL: postgresql://unused:unused@localhost:5432/unused
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: backend/phe-view-hse/backend/csms-ai/requirements.txt
+      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libgl1 libglib2.0-0 unar
+      - run: pip install -r requirements.txt
+      - run: python -m unittest tests.test_rubric tests.test_scoring_rules tests.test_llm_failure tests.test_extraction
+
+  frontend:
+    name: Frontend (typecheck + test + build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend/phe-view-hse
+    env:
+      VITE_APP_BASE_URL: https://ci.invalid
+      CYPRESS_INSTALL_BINARY: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/phe-view-hse/package-lock.json
+      - run: npm ci
+      - run: npx vite build
+      - run: npx tsc --noEmit -p tsconfig.json
+      - run: node --test src/components/pages/csms/contract-management/contract-details/__tests__/copy-drop-utils.test.mts

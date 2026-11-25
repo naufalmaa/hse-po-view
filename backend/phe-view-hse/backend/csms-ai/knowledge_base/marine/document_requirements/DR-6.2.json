@@ -1,0 +1,17 @@
+{
+  "requirement_id": "DR-6.2",
+  "category_id": "6.2",
+  "required_documents": [
+    "- Dokumen HSE Plan Proyek yang mendefinisikan target indikator leading dan lagging secara lengkap.<br>- Laporan Kinerja K3LL Berkala (Laporan Bulanan/HSE Monthly Report) selama masa kontrak/proyek berjalan yang mencakup jam kerja aman proyek.<br>- Notulen Rapat Bulanan (MoM Monthly Meeting) antara manajemen kantor pusat dan tim lapangan untuk mengkomunikasikan isu K3LL dan evaluasi pencapaian rencana strategis.<br>- Notulen Rapat K3LL Manajemen & Pekerja (MoM Safety Meeting / Rapat Komite Keselamatan Kerja).<br>- Laporan Inspeksi Lapangan atau audit internal secara berkala untuk memvalidasi kepatuhan implementasi program K3LL di area kerja.<br>- Dokumen Laporan Statistik Kinerja K3LL Multi-Tahun (Safety Statistics Report) yang mencakup rekapitulasi insiden minimal 5 tahun terakhir."
+  ],
+  "optional_documents": [],
+  "allowed_formats": [
+    "PDF",
+    "DOCX",
+    "XLSX",
+    "IMAGE",
+    "MIXED"
+  ],
+  "minimum_submission_completeness": 0.9,
+  "kb_version": "v4"
+}

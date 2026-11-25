@@ -1,0 +1,30 @@
+/* driver.js popover in SafeView colours (light + dark) */
+.driver-popover.safeview-tour {
+  background: var(--popover, #fff);
+  color: var(--popover-foreground, #111827);
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 12px;
+  max-width: 340px;
+  font-family: inherit;
+}
+.driver-popover.safeview-tour .driver-popover-title { font-size: 15px; font-weight: 600; }
+.driver-popover.safeview-tour .driver-popover-description { font-size: 13px; line-height: 1.5; color: inherit; opacity: .85; }
+.driver-popover.safeview-tour .driver-popover-progress-text { font-size: 11px; opacity: .7; }
+.driver-popover.safeview-tour .driver-popover-footer button {
+  text-shadow: none; border-radius: 8px; padding: 4px 10px; font-size: 12px;
+  background: transparent; color: inherit; border: 1px solid var(--border, #e5e7eb);
+}
+.driver-popover.safeview-tour .driver-popover-next-btn { background: #6d28d9; color: #fff; border-color: #6d28d9; }
+.driver-popover.safeview-tour .driver-popover-arrow-side-top { border-top-color: var(--popover, #fff); }
+.driver-popover.safeview-tour .driver-popover-arrow-side-bottom { border-bottom-color: var(--popover, #fff); }
+.driver-popover.safeview-tour .driver-popover-arrow-side-left { border-left-color: var(--popover, #fff); }
+.driver-popover.safeview-tour .driver-popover-arrow-side-right { border-right-color: var(--popover, #fff); }
+
+/* first login after the feature is enabled: only the tutorial button is highlighted */
+@keyframes safeview-tour-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(109, 40, 217, .55); }
+  70% { box-shadow: 0 0 0 9px rgba(109, 40, 217, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(109, 40, 217, 0); }
+}
+.safeview-tour-pulse { animation: safeview-tour-pulse 1.8s ease-out infinite; outline: 2px solid #7c3aed; }
+@media (prefers-reduced-motion: reduce) { .safeview-tour-pulse { animation: none; } }

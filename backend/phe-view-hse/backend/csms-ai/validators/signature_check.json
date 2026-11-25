@@ -1,0 +1,15 @@
+{
+  "validator_id": "signature_check",
+  "description": "Capabilities for signature_check",
+  "input_fields": [
+    "document_content"
+  ],
+  "output_fields": [
+    "is_valid",
+    "confidence",
+    "reasoning"
+  ],
+  "pass_condition": {
+    "is_valid": true
+  }
+}

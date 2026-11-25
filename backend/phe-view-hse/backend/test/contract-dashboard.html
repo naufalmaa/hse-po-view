@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contract Management Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --background: #f8fafc;
+            --foreground: #0f172a;
+            --card: #ffffff;
+            --card-foreground: #0f172a;
+            --primary: #0ea5e9;
+            --primary-foreground: #f8fafc;
+            --border: #e2e8f0;
+            --radius: 0.5rem;
+        }
+        
+        body {
+            background-color: var(--background);
+            color: var(--foreground);
+            font-family: 'Inter', sans-serif;
+            padding: 0 1rem;
+        }
+        
+        .card {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            min-width: 400px;
+        }
+        
+        .assessment-date-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            background-color: #f8f9fa;
+            border-radius: 0.375rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .assessment-date-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .assessment-date-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .assessment-date-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .assessment-date-type {
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+        
+        .assessment-date-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .card:hover {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transform: translateY(-2px);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+        }
+        
+        .btn-primary:hover {
+            background-color: #0284c7;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border);
+            color: var(--foreground);
+        }
+        
+        .btn-outline:hover {
+            background-color: #f1f5f9;
+        }
+        
+        .input, .select {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background-color: var(--card);
+            transition: border-color 0.2s ease;
+        }
+        
+        .input:focus, .select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+        }
+        
+        /* Line clamp utility */
+        .line-clamp-2 {
+            display: -webkit-box;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        /* Truncate utility */
+        .truncate {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="max-w-8xl mx-auto py-6 px-4 sm:px-8">
+        <div class="mb-8">
+            <h1 class="text-2xl font-bold">Contract Management Dashboard</h1>
+            <p class="text-gray-600 mt-1">Manage contracts and their folder structures</p>
+        </div>
+
+        <!-- Main Dashboard View -->
+        <div id="mainDashboard">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-semibold">All Contracts</h2>
+                <button onclick="showCreateForm()" class="btn btn-primary">
+                    <i class="fas fa-plus-circle"></i>
+                    Create New Contract
+                </button>
+            </div>
+            
+            <div class="card">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex gap-2">
+                            <button onclick="loadContracts()" class="btn btn-outline">
+                                <i class="fas fa-sync-alt"></i>
+                                Refresh
+                            </button>
+                        </div>
+                        <div class="flex gap-2">
+                            <select id="contractorFilter" class="select" style="width: 200px;">
+                                <option value="">All Contractors</option>
+                            </select>
+                            <input type="text" id="contractSearch" placeholder="Search contracts..." class="input" style="width: 200px;">
+                            <button onclick="applyFilters()" class="btn btn-primary">
+                                <i class="fas fa-filter"></i>
+                                Filter
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="contractsList">
+                        <div class="text-center py-8 text-gray-500">
+                            Click "Refresh" to load contracts
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Create Contract Card -->
+    <div id="createOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50" onclick="hideCreateForm()"></div>
+    <div id="createCard" class="fixed inset-0 m-auto w-11/12 max-w-4xl max-h-[90vh] overflow-y-auto bg-white rounded-lg shadow-lg hidden z-50">
+        <div class="p-6">
+            <div class="mb-4">
+                <h2 class="text-xl font-bold">
+                    <i class="fas fa-file-contract text-blue-500"></i>
+                    Create New Contract
+                </h2>
+                <p class="text-gray-600 text-sm mt-1">Fill in the details below to create a new contract</p>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Contractor *</label>
+                    <select id="contractorSelect" class="select w-full">
+                        <option value="">-- Loading contractors... --</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Contract Title *</label>
+                    <input type="text" id="contractTitle" placeholder="Enter contract title..." class="input w-full">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Contract Number *</label>
+                    <input type="text" id="contractNumber" placeholder="Enter contract number..." class="input w-full">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Notes (Optional)</label>
+                    <input type="text" id="contractNote" placeholder="Enter any notes..." class="input w-full">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Start Date *</label>
+                        <input type="date" id="startDate" class="input w-full">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">End Date *</label>
+                        <input type="date" id="endDate" class="input w-full">
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-end gap-2 mt-6">
+                <button onclick="hideCreateForm()" class="btn btn-outline">
+                    Cancel
+                </button>
+                <button onclick="createContract()" class="btn btn-primary">
+                    <i class="fas fa-plus-circle"></i>
+                    Create Contract
+                </button>
+            </div>
+            <div id="createResult" class="mt-4 hidden">
+                <!-- Result will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Edit Contract Card -->
+    <div id="editOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50" onclick="hideEditForm()"></div>
+    <div id="editCard" class="fixed inset-0 m-auto w-11/12 max-w-4xl max-h-[90vh] overflow-y-auto bg-white rounded-lg shadow-lg hidden z-50">
+        <div class="p-6">
+            <div class="mb-4">
+                <h2 class="text-xl font-bold">
+                    <i class="fas fa-edit text-blue-500"></i>
+                    Edit Contract
+                </h2>
+                <p class="text-gray-600 text-sm mt-1">Update the contract details below</p>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Contract Title *</label>
+                    <input type="text" id="editContractTitle" placeholder="Enter contract title..." class="input w-full">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Contract Number *</label>
+                    <input type="text" id="editContractNumber" placeholder="Enter contract number..." class="input w-full">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Notes (Optional)</label>
+                    <input type="text" id="editContractNote" placeholder="Enter any notes..." class="input w-full">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Start Date *</label>
+                        <input type="date" id="editStartDate" class="input w-full">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">End Date *</label>
+                        <input type="date" id="editEndDate" class="input w-full">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Final Assessment Date</label>
+                    <div class="flex gap-2">
+                        <input type="date" id="editFinalAssessmentDate" class="input flex-1">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Ongoing Assessment Dates</label>
+                    <div id="editOngoingAssessmentDatesContainer" class="space-y-2 w-full">
+                        <!-- Ongoing assessment dates will be dynamically added here -->
+                    </div>
+                    <div class="flex items-center gap-2 mt-2">
+                        <input type="date" id="newOngoingAssessmentDate" class="input flex-1">
+                        <button type="button" onclick="addNewOngoingAssessmentDateFromInput()" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-end gap-2 mt-6">
+                <button onclick="hideEditForm()" class="btn btn-outline">
+                    Cancel
+                </button>
+                <button onclick="updateContract()" class="btn btn-primary">
+                    <i class="fas fa-save"></i>
+                    Update Contract
+                </button>
+            </div>
+            <div id="editResult" class="mt-4 hidden">
+                <!-- Result will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Dialog -->
+    <div id="deleteOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50" onclick="hideDeleteConfirmation()"></div>
+    <div id="deleteConfirmationCard" class="fixed inset-0 m-auto w-11/12 max-w-4xl max-h-[90vh] overflow-y-auto bg-white rounded-lg shadow-lg hidden z-50">
+        <div class="p-6">
+            <div class="mb-4">
+                <h2 class="text-xl font-bold text-red-600">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Confirm Deletion
+                </h2>
+                <p class="text-gray-600 text-sm mt-1">Are you sure you want to delete this contract?</p>
+            </div>
+            <div class="mb-4">
+                <p class="text-gray-700">This action will permanently delete the contract and all associated folders and files. This cannot be undone.</p>
+                <p class="mt-2 font-semibold" id="deleteContractTitle"></p>
+            </div>
+            <div class="flex justify-end gap-2">
+                <button onclick="hideDeleteConfirmation()" class="btn btn-outline">
+                    Cancel
+                </button>
+                <button onclick="deleteContract()" class="btn btn-outline text-red-600 hover:text-red-700">
+                    <i class="fas fa-trash"></i>
+                    Delete Contract
+                </button>
+            </div>
+            <div id="deleteResult" class="mt-4 hidden">
+                <!-- Result will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3000/api/public/csms';
+        let viewMode = 'card';
+        let currentContractId = null;
+
+        // Set default dates
+        window.addEventListener('load', () => {
+            const today = new Date();
+            const oneYearFromNow = new Date();
+            oneYearFromNow.setFullYear(today.getFullYear() + 1);
+            
+            document.getElementById('startDate').value = today.toISOString().split('T')[0];
+            document.getElementById('endDate').value = oneYearFromNow.toISOString().split('T')[0];
+            
+            // Load contractors
+            loadContractors();
+            loadContracts({});
+            
+            // Check if we need to open the edit form (from URL parameters)
+            const urlParams = new URLSearchParams(window.location.search);
+            const editContractId = urlParams.get('edit');
+            if (editContractId) {
+                showEditContractForm(editContractId);
+            }
+        });
+
+        async function loadContractors() {
+            try {
+                console.log('Fetching contractors...');
+                const response = await fetch(`${API_BASE}/contractors`);
+                console.log(`Contractors response status: ${response.status}`);
+                const result = await response.json();
+                console.log('Contractors response:', result);
+                
+                if (result.success) {
+                    const select = document.getElementById('contractorSelect');
+                    select.innerHTML = '<option value="">-- Select a contractor --</option>';
+                    
+                    const filterSelect = document.getElementById('contractorFilter');
+                    filterSelect.innerHTML = '<option value="">All Contractors</option>';
+                    
+                    result.data.forEach(contractor => {
+                        const option = document.createElement('option');
+                        option.value = contractor.id;
+                        option.textContent = contractor.name;
+                        select.appendChild(option);
+                        
+                        const filterOption = document.createElement('option');
+                        filterOption.value = contractor.id;
+                        filterOption.textContent = contractor.name;
+                        filterSelect.appendChild(filterOption);
+                    });
+                } else {
+                    document.getElementById('contractorSelect').innerHTML = '<option value="">-- Error loading contractors --</option>';
+                    document.getElementById('contractorFilter').innerHTML = '<option value="">All Contractors</option>';
+                    console.error('Error loading contractors:', result.message);
+                }
+            } catch (error) {
+                console.error('Load contractors error:', error);
+                document.getElementById('contractorSelect').innerHTML = '<option value="">-- Error loading contractors --</option>';
+                document.getElementById('contractorFilter').innerHTML = '<option value="">All Contractors</option>';
+            }
+        }
+
+        function applyFilters() {
+            const search = document.getElementById('contractSearch').value;
+            const contractorId = document.getElementById('contractorFilter').value;
+            const filters = {};
+            
+            if (search) {
+                filters.search = search;
+            }
+            
+            if (contractorId) {
+                filters.subContractorId = [contractorId];
+            }
+            
+            loadContracts(filters);
+        }
+
+        function showCreateForm() {
+            document.getElementById('createOverlay').classList.remove('hidden');
+            document.getElementById('createCard').classList.remove('hidden');
+        }
+
+        function hideCreateForm() {
+            document.getElementById('createOverlay').classList.add('hidden');
+            document.getElementById('createCard').classList.add('hidden');
+            
+            // Reset form
+            document.getElementById('contractorSelect').value = '';
+            document.getElementById('contractTitle').value = '';
+            document.getElementById('contractNumber').value = '';
+            document.getElementById('contractNote').value = '';
+            document.getElementById('createResult').classList.add('hidden');
+        }
+
+        // Update contract (excluding assessment dates)
+        async function updateContract() {
+            if (!window.currentEditContractId) {
+                showResult('editResult', 'No contract selected for update', 'error');
+                return;
+            }
+            
+            const title = document.getElementById('editContractTitle').value.trim();
+            const numberContract = document.getElementById('editContractNumber').value.trim();
+            const note = document.getElementById('editContractNote').value.trim();
+            const startDate = document.getElementById('editStartDate').value;
+            const endDate = document.getElementById('editEndDate').value;
+            
+            // Validate required fields
+            if (!title || !numberContract || !startDate || !endDate) {
+                showResult('editResult', 'Please fill in all required fields', 'error');
+                return;
+            }
+            
+            // Validate date ranges
+            const start = new Date(startDate);
+            const end = new Date(endDate);
+            
+            if (start > end) {
+                showResult('editResult', 'End date must be after start date', 'error');
+                return;
+            }
+            
+            showResult('editResult', 'Updating contract...', 'info');
+            
+            try {
+                // Update the basic contract information (without assessment dates)
+                const response = await fetch(`${API_BASE}/contracts/${window.currentEditContractId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        title,
+                        numberContract,
+                        note,
+                        startDate,
+                        endDate
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showResult('editResult', 'Contract updated successfully', 'success');
+                    // Reload contracts list
+                    await loadContracts({});
+                } else {
+                    showResult('editResult', `Error: ${result.message}`, 'error');
+                }
+            } catch (error) {
+                console.error('Update contract error:', error);
+                showResult('editResult', `Error updating contract: ${error.message}`, 'error');
+            }
+        }
+
+        // Update assessment dates using the new unified API
+        async function updateAssessmentDates() {
+            if (!window.currentEditContractId) {
+                showResult('editResult', 'No contract selected for update', 'error');
+                return;
+            }
+            
+            const finalAssessmentDate = document.getElementById('editFinalAssessmentDate').value;
+            
+            // Collect all ongoing assessment dates
+            const ongoingDates = [];
+            const ongoingDateInputs = document.querySelectorAll('#editOngoingAssessmentDatesContainer input[type="date"]');
+            ongoingDateInputs.forEach(input => {
+                if (input.value) {
+                    ongoingDates.push(input.value);
+                }
+            });
+            
+            showResult('editResult', 'Updating assessment dates...', 'info');
+            
+            try {
+                // Prepare the request body
+                const requestBody = {
+                    contractId: window.currentEditContractId,
+                    nearestOngoingAssessmentDate: ongoingDates
+                };
+                
+                // Only include finalAssessmentDate if it has a value
+                if (finalAssessmentDate) {
+                    requestBody.finalAssessmentDate = finalAssessmentDate;
+                }
+                
+                // Update assessment dates using the unified API
+                const response = await fetch(`${API_BASE}/update-assessment-dates`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showResult('editResult', result.message, 'success');
+                    // Reload contracts list
+                    await loadContracts({});
+                } else {
+                    showResult('editResult', `Error: ${result.message}`, 'error');
+                }
+            } catch (error) {
+                console.error('Update assessment dates error:', error);
+                showResult('editResult', `Error updating assessment dates: ${error.message}`, 'error');
+            }
+        }
+
+        // Add a new ongoing assessment date input field
+        function addOngoingAssessmentDate() {
+            const container = document.getElementById('editOngoingAssessmentDatesContainer');
+            const dateCount = container.querySelectorAll('input[type="date"]').length;
+            
+            const dateDiv = document.createElement('div');
+            dateDiv.className = 'flex items-center gap-2 mb-2';
+            dateDiv.innerHTML = `
+                <input type="date" id="ongoingAssessmentDate-${dateCount}" class="input flex-1">
+                <button type="button" onclick="removeOngoingAssessmentDate(this)" class="btn btn-outline text-red-600">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            
+            container.appendChild(dateDiv);
+        }
+
+        // Add a new ongoing assessment date using the generate-assessment-folder API from input field
+        async function addNewOngoingAssessmentDateFromInput() {
+            const contractId = window.currentEditContractId;
+            if (!contractId) {
+                showResult('editResult', 'No contract selected', 'error');
+                return;
+            }
+            
+            const newDateInput = document.getElementById('newOngoingAssessmentDate');
+            const newDate = newDateInput.value;
+            
+            if (!newDate) {
+                showResult('editResult', 'Please select a date', 'error');
+                return;
+            }
+            
+            // Call the generate-assessment-folder API to create the folder and update contract dates
+            try {
+                showResult('editResult', 'Generating assessment folder...', 'info');
+                
+                const response = await fetch(`${API_BASE}/generate-assessment-folder`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        contractId: contractId,
+                        assessmentType: 'ongoing',
+                        assessmentDate: newDate
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Add the new date to the list of ongoing assessment dates
+                    addOngoingAssessmentDateWithValue(newDate);
+                    
+                    // Clear the input field
+                    newDateInput.value = '';
+                    
+                    // Reload contracts to reflect the updated contract dates
+                    await loadContracts({});
+                    
+                    showResult('editResult', 'Assessment folder generated and contract updated successfully', 'success');
+                } else {
+                    showResult('editResult', `Error: ${result.message}`, 'error');
+                }
+            } catch (error) {
+                console.error('Error generating assessment folder:', error);
+                showResult('editResult', `Error generating assessment folder: ${error.message}`, 'error');
+            }
+        }
+
+        // Add an ongoing assessment date with a specific value
+        function addOngoingAssessmentDateWithValue(value) {
+            const container = document.getElementById('editOngoingAssessmentDatesContainer');
+            const dateCount = container.querySelectorAll('input[type="date"]').length;
+            
+            const dateDiv = document.createElement('div');
+            dateDiv.className = 'flex items-center gap-2 mb-2';
+            dateDiv.innerHTML = `
+                <input type="date" id="ongoingAssessmentDate-${dateCount}" class="input flex-1" value="${value}">
+                <button type="button" onclick="removeOngoingAssessmentDate(this)" class="btn btn-outline text-red-600">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            
+            container.appendChild(dateDiv);
+        }
+
+        // Remove an ongoing assessment date input field and delete the corresponding folder
+        async function removeOngoingAssessmentDate(button) {
+            const dateDiv = button.closest('div');
+            const dateInput = dateDiv.querySelector('input[type="date"]');
+            const dateValue = dateInput.value;
+            
+            if (!dateValue) {
+                // If there's no date value, just remove the field
+                dateDiv.remove();
+                return;
+            }
+            
+            // Get the contract ID
+            const contractId = window.currentEditContractId;
+            if (!contractId) {
+                showResult('editResult', 'No contract selected', 'error');
+                return;
+            }
+            
+            // Confirm deletion
+            if (!confirm(`Are you sure you want to delete this ongoing assessment date: ${new Date(dateValue).toLocaleDateString()}?`)) {
+                return;
+            }
+            
+            try {
+                // First, we need to find the PB folder for this date
+                const foldersResponse = await fetch(`${API_BASE}/contract-folders?contractId=${encodeURIComponent(contractId)}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                const foldersResult = await foldersResponse.json();
+                
+                if (!foldersResult.success) {
+                    showResult('editResult', `Error loading folders: ${foldersResult.message}`, 'error');
+                    return;
+                }
+                
+                // Find the PB folder that matches the date
+                const dateObj = new Date(dateValue);
+                const formattedDate = `${String(dateObj.getDate()).padStart(2, '0')}-${String(dateObj.getMonth() + 1).padStart(2, '0')}-${dateObj.getFullYear()}`;
+                const pbFolder = foldersResult.data.find(folder => 
+                    folder.name && folder.name.endsWith(' - PB') && folder.name.startsWith(formattedDate)
+                );
+                
+                if (!pbFolder) {
+                    // If folder not found, just remove the UI element
+                    dateDiv.remove();
+                    showResult('editResult', 'PB folder not found for this date, UI element removed', 'success');
+                    // Update assessment dates to sync with backend
+                    await updateAssessmentDates();
+                    return;
+                }
+                
+                // Delete the folder using the delete-folder API
+                const response = await fetch(`${API_BASE}/delete-folder?folderId=${pbFolder.id}`, {
+                    method: 'DELETE'
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Remove the UI element
+                    dateDiv.remove();
+                    showResult('editResult', 'Ongoing assessment date deleted successfully', 'success');
+                    // Reload contracts list
+                    await loadContracts({});
+                } else {
+                    showResult('editResult', `Error: ${result.message}`, 'error');
+                }
+            } catch (error) {
+                console.error('Error deleting ongoing assessment date:', error);
+                showResult('editResult', `Error deleting ongoing assessment date: ${error.message}`, 'error');
+            }
+        }
+
+        // Show edit contract form
+        async function showEditContractForm(contractId) {
+            // Store current contract ID
+            window.currentEditContractId = contractId;
+            
+            // Show the edit form
+            document.getElementById('editOverlay').classList.remove('hidden');
+            document.getElementById('editCard').classList.remove('hidden');
+            
+            // Reset form and hide result
+            document.getElementById('editResult').classList.add('hidden');
+            
+            // Clear ongoing assessment dates container
+            document.getElementById('editOngoingAssessmentDatesContainer').innerHTML = '';
+            
+            // Load contract data
+            try {
+                console.log(`Fetching contract data for ID: ${contractId}`);
+                
+                showResult('editResult', 'Loading contract data...', 'info');
+                
+                // First, let's get all contracts to see what's available
+                const allContractsResponse = await fetch(`${API_BASE}/contracts`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({})
+                });
+                
+                const allContractsResult = await allContractsResponse.json();
+                console.log('All contracts response:', allContractsResult);
+                
+                if (allContractsResult.success) {
+                    // Extract data from the response
+                    const data = allContractsResult.data || {};
+                    const contractsArray = data.data || allContractsResult.data || [];
+                    
+                    // Log all available contract IDs for debugging
+                    console.log('Available contract IDs:', contractsArray.map(c => c.id));
+                    
+                    // Find the specific contract (exact match on ID)
+                    const contract = contractsArray.find(c => c.id === contractId);
+                    
+                    if (contract) {
+                        console.log('Found contract:', contract);
+                        
+                        // Populate form fields
+                        document.getElementById('editContractTitle').value = contract.title || '';
+                        document.getElementById('editContractNumber').value = contract.numberContract || '';
+                        document.getElementById('editContractNote').value = contract.note || '';
+                        
+                        if (contract.startDate) {
+                            const startDate = new Date(contract.startDate);
+                            document.getElementById('editStartDate').value = startDate.toISOString().split('T')[0];
+                        } else {
+                            document.getElementById('editStartDate').value = '';
+                        }
+                        
+                        if (contract.endDate) {
+                            const endDate = new Date(contract.endDate);
+                            document.getElementById('editEndDate').value = endDate.toISOString().split('T')[0];
+                        } else {
+                            document.getElementById('editEndDate').value = '';
+                        }
+                        
+                        if (contract.finalAssessmentDate) {
+                            const finalDate = new Date(contract.finalAssessmentDate);
+                            document.getElementById('editFinalAssessmentDate').value = finalDate.toISOString().split('T')[0];
+                        } else {
+                            document.getElementById('editFinalAssessmentDate').value = '';
+                        }
+                        
+                        // Add event listener for final assessment date changes
+                        document.getElementById('editFinalAssessmentDate').addEventListener('change', updateAssessmentDates);
+                        
+                        // Populate ongoing assessment dates
+                        const ongoingDatesContainer = document.getElementById('editOngoingAssessmentDatesContainer');
+                        ongoingDatesContainer.innerHTML = '';
+                        
+                        if (Array.isArray(contract.nearestOngoingAssessmentDate) && contract.nearestOngoingAssessmentDate.length > 0) {
+                            contract.nearestOngoingAssessmentDate.forEach((date, index) => {
+                                let dateValue = '';
+                                if (date) {
+                                    if (typeof date === 'string' && date.length === 10) {
+                                        // Already in YYYY-MM-DD format
+                                        dateValue = date;
+                                    } else {
+                                        // Convert to YYYY-MM-DD format
+                                        const dateObj = new Date(date);
+                                        dateValue = dateObj.toISOString().split('T')[0];
+                                    }
+                                }
+                                
+                                const dateDiv = document.createElement('div');
+                                dateDiv.className = 'flex items-center gap-2 mb-2';
+                                dateDiv.innerHTML = `
+                                    <input type="date" id="ongoingAssessmentDate-${index}" class="input flex-1" value="${dateValue}">
+                                    <button type="button" onclick="removeOngoingAssessmentDate(this)" class="btn btn-outline text-red-600" title="Delete this assessment date">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                `;
+                                
+                                ongoingDatesContainer.appendChild(dateDiv);
+                            });
+                            
+                            // Add event listeners to all ongoing assessment date inputs
+                            const ongoingDateInputs = ongoingDatesContainer.querySelectorAll('input[type="date"]');
+                            ongoingDateInputs.forEach(input => {
+                                input.addEventListener('change', updateAssessmentDates);
+                            });
+                        }
+                        
+                        // Clear any previous error messages
+                        document.getElementById('editResult').classList.add('hidden');
+                    } else {
+                        // Show a more detailed error message with available contracts
+                        const availableIds = contractsArray.map(c => c.id).join(', ');
+                        showResult('editResult', `Error: Contract with ID ${contractId} not found. Available contract IDs: ${availableIds || 'None'}`, 'error');
+                    }
+                } else {
+                    showResult('editResult', `Error loading contract: ${allContractsResult.message}`, 'error');
+                }
+            } catch (error) {
+                console.error('Show edit form error:', error);
+                showResult('editResult', `Error loading contract data: ${error.message}`, 'error');
+            }
+        }
+
+        // Hide edit contract form
+        function hideEditForm() {
+            document.getElementById('editOverlay').classList.add('hidden');
+            document.getElementById('editCard').classList.add('hidden');
+            window.currentEditContractId = null;
+        }
+
+        // Show delete confirmation dialog
+        function showDeleteContractConfirmation(contractId, contractTitle) {
+            // Store current contract ID
+            window.currentDeleteContractId = contractId;
+            
+            // Set contract title in confirmation dialog
+            document.getElementById('deleteContractTitle').textContent = contractTitle;
+            
+            // Show the confirmation dialog
+            document.getElementById('deleteOverlay').classList.remove('hidden');
+            document.getElementById('deleteConfirmationCard').classList.remove('hidden');
+        }
+
+        // Hide delete confirmation dialog
+        function hideDeleteConfirmation() {
+            document.getElementById('deleteOverlay').classList.add('hidden');
+            document.getElementById('deleteConfirmationCard').classList.add('hidden');
+            window.currentDeleteContractId = null;
+        }
+
+        // Delete contract
+        async function deleteContract() {
+            if (!window.currentDeleteContractId) {
+                showResult('deleteResult', 'No contract selected for deletion', 'error');
+                return;
+            }
+            
+            showResult('deleteResult', 'Deleting contract...', 'info');
+            
+            try {
+                console.log(`Deleting contract with ID: ${window.currentDeleteContractId}`);
+                
+                const response = await fetch(`${API_BASE}/contracts/${window.currentDeleteContractId}`, {
+                    method: 'DELETE',
+                });
+                
+                console.log(`Delete response status: ${response.status}`);
+                const result = await response.json();
+                console.log('Delete response:', result);
+                
+                if (result.success) {
+                    showResult('deleteResult', 'Contract deleted successfully', 'success');
+                    
+                    // Hide confirmation dialog after short delay
+                    setTimeout(() => {
+                        hideDeleteConfirmation();
+                        loadContracts(); // Refresh contract list
+                    }, 1500);
+                } else {
+                    showResult('deleteResult', `Error: ${result.message || 'Failed to delete contract'}`, 'error');
+                }
+            } catch (error) {
+                console.error('Delete contract error:', error);
+                showResult('deleteResult', `Error: ${error.message || 'Failed to delete contract'}`, 'error');
+            }
+        }
+
+        function showResult(elementId, message, type) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            let bgColor = 'bg-blue-100 text-blue-800';
+            if (type === 'error') {
+                bgColor = 'bg-red-100 text-red-800';
+            } else if (type === 'success') {
+                bgColor = 'bg-green-100 text-green-800';
+            }
+            
+            element.innerHTML = `
+                <div class="p-4 rounded ${bgColor}">
+                    ${message}
+                </div>
+            `;
+            element.classList.remove('hidden');
+        }
+
+        function showContractDetail(contractId, contractTitle) {
+            // Redirect to detail page (only pass ID, title will be fetched from API)
+            window.location.href = `contract-detail.html?id=${contractId}`;
+        }
+
+        async function createContract() {
+            const contractorId = document.getElementById('contractorSelect').value;
+            const title = document.getElementById('contractTitle').value.trim();
+            const numberContract = document.getElementById('contractNumber').value.trim();
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const note = document.getElementById('contractNote').value.trim();
+            
+            if (!contractorId || !title || !numberContract || !startDate || !endDate) {
+                showResult('createResult', 'Please fill in all required fields', 'error');
+                return;
+            }
+
+            showResult('createResult', 'Creating contract...', 'info');
+            
+            try {
+                const createData = { 
+                    contractorId,
+                    title,
+                    numberContract,
+                    startDate,
+                    endDate,
+                    note: note || null
+                };
+                
+                console.log('Sending create data:', createData);
+                
+                const response = await fetch(`${API_BASE}/create-contract`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(createData)
+                });
+                
+                console.log(`Create response status: ${response.status}`);
+                const result = await response.json();
+                console.log('Create response:', result);
+                
+                if (result.success) {
+                    showResult('createResult', `Success: Contract created with ID ${result.data.id}`, 'success');
+                    
+                    // Reset form after short delay
+                    setTimeout(() => {
+                        hideCreateForm();
+                        loadContracts(); // Refresh contract list
+                    }, 1500);
+                } else {
+                    showResult('createResult', `Error: ${result.message || 'Failed to create contract'}`, 'error');
+                }
+            } catch (error) {
+                console.error('Create contract error:', error);
+                showResult('createResult', `Error: ${error.message || 'Failed to create contract'}`, 'error');
+            }
+        }
+
+        async function loadContracts(filters = {}) {
+            showResult('contractsList', 'Loading contracts...', 'info');
+            
+            try {
+                console.log('Fetching contracts with filters:', filters);
+                const response = await fetch(`${API_BASE}/contracts`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(filters)
+                });
+                console.log(`Contracts response status: ${response.status}`);
+                const result = await response.json();
+                console.log('Contracts response:', result);
+                
+                // Debug: Log the actual response
+                console.log('API Response:', result);
+                
+                if (result.success) {
+                    // Extract data and overallMetrics from the response
+                    const data = result.data || {};
+                    const contractsArray = data.data || result.data || [];
+                    const overallMetrics = data.overallMetrics || result.overallMetrics;
+                    
+                    // Display contracts with overall metrics
+                    displayContracts(contractsArray, overallMetrics);
+                } else {
+                    showResult('contractsList', `Error: ${result.message || 'Unknown error'}`, 'error');
+                }
+            } catch (error) {
+                console.error('Load contracts error:', error);
+                showResult('contractsList', `Error: ${error.message || 'Failed to load contracts'}`, 'error');
+            }
+        }
+
+        function displayContracts(contracts, overallMetrics) {
+            const container = document.getElementById('contractsList');
+            
+            // Check if contracts is an array
+            if (!Array.isArray(contracts)) {
+                container.innerHTML = `
+                    <div class="text-center py-8">
+                        <div class="text-red-500">Error loading contracts data</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Create HTML for overall metrics if provided
+            let metricsHtml = '';
+            if (overallMetrics) {
+                // Calculate completion rate based on actual assessment dates
+                // Count total assessments based on the actual dates in each contract
+                let totalAssessments = 0;
+                contracts.forEach(contract => {
+                    // Count ongoing assessments based on nearestOngoingAssessmentDate array
+                    if (contract.nearestOngoingAssessmentDate && Array.isArray(contract.nearestOngoingAssessmentDate)) {
+                        totalAssessments += contract.nearestOngoingAssessmentDate.length;
+                    }
+                    // Count final assessment if finalAssessmentDate exists
+                    if (contract.finalAssessmentDate) {
+                        totalAssessments += 1;
+                    }
+                });
+                const completedAssessments = overallMetrics.ongoingAssessmentsCompleted + overallMetrics.finalAssessmentsCompleted;
+                const completionRate = totalAssessments > 0 ? Math.round((completedAssessments / totalAssessments) * 100) : 0;
+                
+                metricsHtml = `
+                    <div class="mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
+                        <h3 class="font-semibold text-lg text-gray-800 mb-3">Assessment Dashboard Metrics</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                                <div class="flex items-center">
+                                    <div class="p-3 rounded-full bg-blue-100 mr-4">
+                                        <i class="fas fa-tasks text-blue-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-600">Penilaian Berjalan</p>
+                                        <p class="text-xl font-bold text-blue-600">${overallMetrics.ongoingAssessmentsCompleted}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                                <div class="flex items-center">
+                                    <div class="p-3 rounded-full bg-green-100 mr-4">
+                                        <i class="fas fa-flag-checkered text-green-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-600">Penilaian Akhir</p>
+                                        <p class="text-xl font-bold text-green-600">${overallMetrics.finalAssessmentsCompleted}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                                <div class="flex items-center">
+                                    <div class="p-3 rounded-full bg-purple-100 mr-4">
+                                        <i class="fas fa-clipboard-list text-purple-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-600">Total Penilaian</p>
+                                        <p class="text-xl font-bold text-purple-600">${completedAssessments}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                                <div class="flex items-center">
+                                    <div class="p-3 rounded-full bg-amber-100 mr-4">
+                                        <i class="fas fa-percentage text-amber-600"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-600">Completion Rate</p>
+                                        <p class="text-xl font-bold text-amber-600">
+                                            ${completionRate}%
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            if (contracts.length === 0) {
+                container.innerHTML = metricsHtml + `
+                    <div class="text-center py-8">
+                        <div class="text-gray-500">No contracts found</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Create card layout for contracts
+            let cardsHtml = `
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            `;
+            
+            contracts.forEach((contract, index) => {
+                // Format dates
+                const startDate = contract.startDate ? new Date(contract.startDate).toLocaleDateString() : 'N/A';
+                const endDate = contract.endDate ? new Date(contract.endDate).toLocaleDateString() : 'N/A';
+                
+                // Get contractor info - prioritize name over ID
+                const contractorName = contract.contractorName || contract.contractor?.name || 'N/A';
+                const contractorId = contract.contractorId || contract.contractor?.id || 'N/A';
+                const contractorDisplay = contractorName !== 'N/A' ? contractorName : 
+                                (contractorId !== 'N/A' ? `ID: ${contractorId.substring(0, 8)}...` : 'N/A');
+                
+                // Get metrics
+                const ongoingCompleted = contract.metrics?.ongoingAssessmentsCompleted || 0;
+                const finalCompleted = contract.metrics?.finalAssessmentsCompleted || 0;
+                
+                // Calculate completion percentage based on actual assessment dates
+                // Each date in nearestOngoingAssessmentDate counts as 1 assessment, plus 1 for final assessment
+                const totalOngoingAssessments = (contract.nearestOngoingAssessmentDate && Array.isArray(contract.nearestOngoingAssessmentDate)) ? 
+                    contract.nearestOngoingAssessmentDate.length : 0;
+                const totalFinalAssessments = contract.finalAssessmentDate ? 1 : 0;
+                const totalPossible = totalOngoingAssessments + totalFinalAssessments;
+                const completed = ongoingCompleted + finalCompleted;
+                const completionPercentage = totalPossible > 0 ? Math.round((completed / totalPossible) * 100) : 0;
+
+                cardsHtml += `
+                    <div class="card hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-lg font-semibold text-gray-900 line-clamp-2 cursor-pointer" 
+                                        title="${contract.title}" 
+                                        onclick="showContractDetail('${contract.id}')">
+                                        ${contract.title}
+                                    </h3>
+                                    <p class="text-sm text-gray-500 mt-1 truncate" title="${contract.numberContract}">${contract.numberContract}</p>
+                                    <p class="text-xs text-gray-400 mt-1">ID: ${contract.id.substring(0, 8)}...</p>
+                                </div>
+                                <div class="flex space-x-1 ml-2">
+                                    <button onclick="showEditContractForm('${contract.id}')" class="text-gray-500 hover:text-blue-600" title="Edit Contract">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button onclick="showDeleteContractConfirmation('${contract.id}', '${contract.title}')" class="text-gray-500 hover:text-red-600" title="Delete Contract">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <div class="flex items-start mb-3">
+                                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mt-1">
+                                        <i class="fas fa-building text-blue-600 text-sm"></i>
+                                    </div>
+                                    <div class="ml-3 flex-1 min-w-0">
+                                        <p class="text-xs text-gray-500">Contractor</p>
+                                        <p class="text-sm font-medium text-gray-900 truncate" title="${contractorName !== 'N/A' ? contractorName : contractorId}">${contractorDisplay}</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start mb-3">
+                                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mt-1">
+                                        <i class="fas fa-calendar text-green-600 text-sm"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-xs text-gray-500">Period</p>
+                                        <p class="text-sm font-medium text-gray-900">${startDate} to ${endDate}</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-4">
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm font-medium text-gray-700">Progress</span>
+                                        <span class="text-sm font-medium text-gray-700">${completionPercentage}%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                                        <div class="bg-blue-600 h-2 rounded-full" style="width: ${Math.min(completionPercentage, 100)}%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-2 gap-3 mt-4">
+                                    <div class="bg-blue-50 rounded-lg p-3 text-center">
+                                        <p class="text-xs text-blue-600 mb-1">Penilaian Berjalan</p>
+                                        <p class="text-xl font-bold text-blue-700">${ongoingCompleted}</p>
+                                    </div>
+                                    <div class="bg-green-50 rounded-lg p-3 text-center">
+                                        <p class="text-xs text-green-600 mb-1">Penilaian Akhir</p>
+                                        <p class="text-xl font-bold text-green-700">${finalCompleted}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button onclick="showContractDetail('${contract.id}')" class="w-full btn btn-primary">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cardsHtml += `
+                </div>
+            `;
+            
+            container.innerHTML = metricsHtml + cardsHtml;
+        }
+    
+        // Prompt for editing final assessment date
+        async function promptEditFinalAssessmentDate(contractId, currentDate) {
+            // Prompt user for new date
+            const newDate = prompt(`Enter new date for final assessment (current: ${new Date(currentDate).toLocaleDateString()}):`, new Date(currentDate).toISOString().split('T')[0]);
+            
+            if (!newDate) {
+                return; // User cancelled
+            }
+            
+            // Validate date format
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(newDate)) {
+                alert('Invalid date format. Please use YYYY-MM-DD format.');
+                return;
+            }
+            
+            // Call API to update the date
+            await updateFinalAssessmentDate(contractId, newDate);
+        }
+
+        // Prompt for editing ongoing assessment date
+        async function promptEditOngoingAssessmentDate(contractId, currentDate) {
+            // Prompt user for new date
+            const newDate = prompt(`Enter new date for ongoing assessment (current: ${new Date(currentDate).toLocaleDateString()}):`, new Date(currentDate).toISOString().split('T')[0]);
+            
+            if (!newDate) {
+                return; // User cancelled
+            }
+            
+            // Validate date format
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(newDate)) {
+                alert('Invalid date format. Please use YYYY-MM-DD format.');
+                return;
+            }
+            
+            // Call API to update the date
+            await updateOngoingAssessmentDate(contractId, currentDate, newDate);
+        }
+
+        // Delete ongoing assessment date using the delete-folder API
+        async function deleteOngoingAssessmentDate(contractId, assessmentDate) {
+            // This function is kept for backward compatibility but now uses the improved UI
+            // Find the corresponding input field and trigger the remove function
+            const ongoingDateInputs = document.querySelectorAll('#editOngoingAssessmentDatesContainer input[type="date"]');
+            for (const input of ongoingDateInputs) {
+                if (input.value === assessmentDate) {
+                    const button = input.nextElementSibling;
+                    if (button && button.classList.contains('btn')) {
+                        await removeOngoingAssessmentDate(button);
+                        return;
+                    }
+                }
+            }
+            
+            // If not found in UI, show an error
+            showResult('editResult', 'Assessment date not found in the form', 'error');
+        }
+
+        // Edit assessment date (deprecated - keeping for backward compatibility)
+        async function editAssessmentDate(contractId, assessmentDate, assessmentType) {
+            // For now, we'll just show an alert - in a real implementation, you would show a modal to edit the date
+            alert(`Edit assessment date: ${new Date(assessmentDate).toLocaleDateString()} (${assessmentType})`);
+            // You would implement the actual edit functionality here
+        }
+
+        // Delete assessment date (deprecated - keeping for backward compatibility)
+        async function deleteAssessmentDate(contractId, assessmentDate, assessmentType) {
+            if (assessmentType === 'PA') {
+                alert('Final assessment date cannot be deleted. You can only clear the date value.');
+            } else {
+                // For PB dates, use the new delete functionality
+                await deleteOngoingAssessmentDate(contractId, assessmentDate);
+            }
+        }
+    </script>
+</body>
+</html>
